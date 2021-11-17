@@ -1,0 +1,9 @@
+.message_success {
+  background: #90bdb5 !important;
+  color: black !important;
+}
+
+.message_fail {
+  background: #b75155 !important;
+  color: white !important; 
+}

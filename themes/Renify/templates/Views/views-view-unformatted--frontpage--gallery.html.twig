@@ -1,0 +1,18 @@
+<section id="category" class="">
+  <div class="row">
+    <div class="gallery__wrap" data-aos="fade-up">
+      <div class="col-full about-desc">
+        <h2 class="display-2">Interesting Place</h2>
+      </div>
+      <div class="gallery__photos">
+        <div class="col-full slick-slider gallery__photos__slide">
+         {% if rows -%}
+          {% for row in rows %}
+            {{row.content}}
+          {% endfor %}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

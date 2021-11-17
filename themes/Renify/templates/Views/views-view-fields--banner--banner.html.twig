@@ -1,0 +1,36 @@
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set shortext = fields.field_short_text.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="{{image}}"  data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+     <div class="shadow-overlay"></div>
+     <div class="home-content">
+         <div class="row home-content__main">
+             <div class="home-content__left">
+                  <h1>{{ title }}</h1>
+                  <h3>{{ shortext }}</h3>
+                 <div class="home-content__btn-wrap">
+                     <a href="#body" class="btn btn--stroke--reverse btn--big home-content__btn smoothscroll">
+                         Explore
+                     </a>
+                 </div>
+             </div> <!-- end home-content__left-->
+         </div> <!-- end home-content__main -->
+         <ul class="home-content__social">
+             <li>
+                <a href="#." class="share-fb" data-pageid="{{link}}"  data-title="{{title}}" >Facebook</a>
+            </li>
+             <li>
+                <a href="#." class="share-twitter" data-pageid="{{link}}" data-title="{{title}}">twitter</a>
+            </li>
+             <li>
+                <a href="#." class="share-insta" data-pageid="{{link}}" data-title="{{title}}">Instagram</a>
+            </li>
+         </ul>
+     </div> <!-- end home-content -->
+     <a href="#body" class="home-scroll smoothscroll">
+         <span class="home-scroll__text">Scroll</span>
+         <span class="home-scroll__icon"></span>
+     </a>
+ </section>

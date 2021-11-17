@@ -1,0 +1,48 @@
+{# {% set form_token = element.form_token['#markup'] %}
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set mail     = element.mail['#markup'] %}
+{% set message  = element.message['#markup'] %}
+{% set submit   = element.actions['#markup'] %}
+
+<section id="col-1r" class="col-1r">
+  <div class="center mt-6">
+   <h2 class="display-2">Message Us</h2>
+  </div>
+  <div class="row">
+    <div class="col-six tab-full">
+      <form{{ attributes }}>
+        {{ build_id }}
+        {{ form_id }}
+        {{form_token}}
+        {% if not logged_in %}
+          <div>
+            <label for="sampleInput">E-mail</label>
+            {{ mail }}
+          </div>
+        {% endif %}
+
+        <label for="exampleMessage">Message</label>
+        {{message}}
+
+        <div class="g-recaptcha" data-size="normal" data-tabindex="10" data-sitekey={{sitekey}}></div>
+
+        <div class="message-wrapper">
+          {{submit}}
+        </div>
+      </form>
+    </div>
+    <div class="col-six tab-full">
+      <h3>About Renify</h3>
+      <aside class="pull-quote">
+        <blockquote>
+          <p>Mabuhay !!! Contact Us for more information and Grow youre small business with the help of
+            automated process through our services.
+            Its a free Service just to showcase our 1st Sari-Sari Booking Soon to Open
+          </p>
+        </blockquote>
+      </aside>
+    </div>
+  </div>
+</section>
+ #}

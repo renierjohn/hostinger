@@ -1,0 +1,28 @@
+{% for type, messages in message_list %}
+    {% if messages|length > 1 %}
+          {% if type == 'error' %}
+            <section id="col-1r" class="col-1r message_fail">
+          {% else %}
+            <section id="col-1r" class="col-1r message_success">
+          {% endif %}
+        <ul>
+          {% for message in messages %}
+            <li>
+              {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+    {% else %}
+      {% if type == 'error' %}
+        <section id="col-1r" class="col-1r message_fail">
+      {% else %}
+        <section id="col-1r" class="col-1r message_success">
+      {% endif %}
+        <div class="row">
+          <div class="col-six tab-full">
+              {{ messages|first }}
+    {% endif %}
+        </div>
+      </div>
+  </section>
+{% endfor %}

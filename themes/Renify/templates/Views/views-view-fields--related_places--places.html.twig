@@ -1,0 +1,14 @@
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set id       = fields.nid.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set lazy_img = '/themes/Renify/images/lazy/lazy.jpg' %}
+
+<div class="gallery__slide related_place_number">
+  <a href={{link}} target="_blank">
+    <img src={{lazy_img}} data-src={{image}} class="img-fluid lazy" alt={{title}}>
+    <div class="nearby-place">
+      <h3 class="base_color">{{ title }}</h3>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,5 @@
+tracker:
+  js:
+    js/tracker.js: {}
+  dependencies:
+    - core/jquery  

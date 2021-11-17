@@ -1,0 +1,8 @@
+{% set lazy_img    = '/themes/Renify/images/lazy/lazy.jpg' %}
+{% for item in items %}
+  <div class="gallery__slide">
+    <a href={{ item.content }} target="_blank">
+      <img src={{lazy_img}} data-src={{ item.content }} class="img-fluid lazy" alt="">
+    </a>
+  </div>
+{% endfor %}

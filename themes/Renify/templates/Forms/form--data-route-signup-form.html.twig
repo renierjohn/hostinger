@@ -1,0 +1,19 @@
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set email    = element.signup.email['#markup'] %}
+{% set captcha  = element.signup.captcha['#markup'] %}
+{% set submit   = element.signup.submit['#markup'] %}
+
+<div class="col-full footer__subscribe end">
+  <div class="subscribe-form register-form-wrapper">
+    <form{{attributes}}>
+      {{build_id}}
+      {{form_id}}
+      {{captcha}}
+      <div id="mc-form" class="group" novalidate="true" >
+          {{email}}
+          {{submit}}
+      </div>
+    </form>
+  </div>
+</div>

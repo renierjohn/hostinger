@@ -1,0 +1,59 @@
+<?php
+
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\views\Views;
+use Drupal\Core\Site\Settings;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use GuzzleHttp\Exception\ClientException;
+
+function data_router_form_alter(&$form,&$form_state,&$form_id){
+  if($form_id == 'user_login_form'){
+    $form['actions']['submit']['#attributes'] =  [
+      'class' => ['btn btn--stroke full-width'],
+    ];
+    $form['actions']['submit']['#submit'][] =  'login_redirect';
+    $form['#validate'][] = 'validate_captcha';
+  }
+
+  if($form_id == 'devel_admin_settings_form'){}
+
+  if($form_id == 'node_places_form'){
+    $form['status']['widget']['value']['#default_value'] = FALSE;
+  }  
+}
+
+function login_redirect($form,$form_state){
+  $input    = $form_state->getUserInput();
+  $name     = $input['name'];
+  $pass     = $input['pass'];
+  $user     = \Drupal::service('entity_type.manager')->getStorage('user')->loadByProperties(['name' => $name]);
+  user_login_finalize(reset($user));
+  $url = Url::fromRoute('<front>');
+  $form_state->setRedirectUrl($url);
+  \Drupal::messenger()->addMessage('Welcome '.$name);
+}
+
+
+
+function validate_captcha($form,$form_state){
+  $input   = $form_state->getUserInput();
+  $token   = $input['g-recaptcha-response'];
+  if(empty($token)){
+    return $form_state->setErrorByName('captcha','Warning Please use Captcha');
+  }
+
+  $response = \Drupal::service('data_router.account')->setToken($token)->checkCaptcha();
+  if($response == false){
+    return $form_state->setErrorByName('captcha','Sorry , Youre Captcha was expired. Please Login again');
+  }
+}
+
+ function data_router_theme($existing, $type, $theme, $path){
+    return [
+      'result' => [
+        'variables' => ['data' => NULL],
+      ],
+    ];
+ } 

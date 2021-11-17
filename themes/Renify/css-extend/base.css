@@ -1,0 +1,65 @@
+/* override defaults */
+body {
+    color: #1a1a1a !important;
+    font-size: 100% !important;
+    background-color: #f9f9f9!important;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    background: none !important;
+    color: unset !important;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #eee;
+    border-collapse: collapse;
+}
+
+thead > tr{
+    border-bottom: unset;
+}
+
+a {
+    border-bottom: unset;
+    color: unset;
+}
+
+a:hover {
+    border-bottom: unset;
+}
+
+a:active {
+    color: unset;
+    border-bottom-style: unset;
+}
+
+a:focus {
+    color: unset;
+    border-bottom-style: unset;
+}
+
+.pager__item {
+    padding: unset;
+    font-size: unset;
+    display: flex;
+}
+
+/* override page */
+#page {
+    background: unset;
+}
+#main-wrapper {
+    background: unset;
+}
+
+p {
+  margin: unset;
+}

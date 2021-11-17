@@ -1,0 +1,15 @@
+{
+  "name": "Renify",
+  "short_name": "Renify",
+  "start_url": "/home",
+  "display": "standalone",
+  "background_color": "#fdfdfd",
+  "theme_color": "#d33b33",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/themes/Renify/favicon.ico",
+      "type": "image/ico", "sizes": "256x256"
+    }
+  ]
+}

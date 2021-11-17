@@ -1,0 +1,163 @@
+{% set map         = content.field_google_map.0['#context'].value %}
+{% set description = content.field_description.0['#text'] %}
+{% set gallery     = content.field_thumbnails %}
+{% set youtube     = content.field_youtube.0['#url'].uri %}
+{% set category    = content.field_category.0['#title'] %}
+{% set youtube_img = content.field_banner_image.0['#markup'] %}
+{% set nearby      = content.field_nearby_place.0['#plain_text'] %}
+{% set date        = node.created.value|format_date('y M o') %}
+{% set title       = node.title.value|raw|striptags %}
+{% set lazy_img    = '/themes/Renify/images/lazy/lazy.jpg' %}
+{% set id          = node.id|raw|striptags|raw %}
+
+{% set next        = pagination.next %}
+{% set prev        = pagination.prev %}
+
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+{{ attach_library('renify/video') }}
+
+{{ drupal_view('banner','banner',id) }}
+
+<section id="body" class="main-wrapper">
+    <div class="wrapper-header">
+    <div class="inner">
+      <h2>{{ label }}</h2>
+      <div class="row half-bottom">
+        <div class="col-twelve">
+          <ul class="stats-tabs">
+            <li>
+              <a href="#preloader" class="smoothscroll">{{ category }}<em>Category</em><a>
+            </li>
+            <li>
+              <a href="#preloader" class="smoothscroll"><span id="view_count" class="{{id}}"></span><em>View(s)</em></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Content -->
+  <div class="wrapper">
+    <div class="inner">
+      <h3 class="major"><h5 style="display:inline-block;">Posted : </h5> <i>{{ date }}</i> </h3>
+       <div class="content-social">
+        <ul>
+          <li>
+            <a href="#." class="share-fb" data-pageid="{{url}}" data-id="" data-title="{{title}}"
+              ><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          </li>
+          <li>
+            <a href="#." class="share-twitter" data-pageid="{{url}}" data-id="" data-title="{{title}}">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#." class="share-insta" data-pageid="{{url}}" data-title="{{title}}">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+          {{ description|raw }}
+      </div>
+    </div>
+    <div class="content-social">
+      <ul>
+        <li>
+          <a href="#." class="share-fb" data-pageid="{{url}}" data-id="" data-title="{{title}}"
+            ><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a href="#." class="share-twitter" data-pageid="{{url}}" data-id="" data-title="{{title}}">
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#." class="share-insta" data-pageid="{{url}}" data-title="{{title}}">
+            <i class="fab fa-instagram" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- Pagination  -->
+<section id="pagination" class="s-styles">
+  <div class="row half-bottom ">
+    {% if prev %}
+      <div class="col-six inline-grid">
+        <a href="{{prev}}" class="btn btn--stroke--reverse overflow"><i class="fa fa-arrow-left"></i>Prev</a>
+      </div>
+    {% endif %}
+    {% if next %}
+      <div class="col-six inline-grid">
+        <a href="{{next}}" class="btn btn--stroke--reverse overflow">Next<i class="fa fa-arrow-right"></i></a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+<!-- Maps  -->
+<section id="col-1r" class="col-1r">
+  <div class="row">
+    <div class="col-six tab-full">
+        <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=60025&amp;height=600&amp;hl=en&amp;q={{map}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+        </iframe>
+    </div>
+    <div class="col-six tab-full center">
+      <h3>Nearby Place</h3>
+      <div class="row gallery__photos">
+        <div class="col-full slick-slider map__photos__slide">
+          {{ drupal_view('related_places','places',nearby,id) }}
+        </div>
+      </div>
+        <button type="button" class="slick-prev btn btn--stroke related_place_btn">Prev</button>
+        <button type="button" class="slick-next btn btn--stroke related_place_btn">Next</button>
+    </div>
+  </div>
+</section>
+<!--Gallery  -->
+<section id="gallery" class="gallery">
+  <div class="gallery__wrap" data-aos="fade-up">
+    <div class="row">
+      <div class="col-full testimonials-header">
+        <h2 class="display-2">GALLERY</h2>
+      </div>
+    </div>
+    <div class="row gallery__photos">
+      <div class="col-full slick-slider gallery__photos__slide">
+        {{gallery}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--FORM  -->
+{{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
+
+<!--video  -->
+<section id="video" class="video">
+  <div class="row">
+    <div id="video-bg" class="col-full video-bg" style="background-image: url({{youtube_img}})">
+    <div  class="shadow-overlay"></div>
+        <a
+        class="btn-video"
+        href={{youtube}}
+        data-lity
+        >
+        <span class="video-icon"></span>
+      </a>
+      <div class="stats">
+        <div class="item-stats">
+          <span class="item-stats__num">
+            {{ title }}
+          </span>
+          <span class="item-stats__title">
+            Video
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

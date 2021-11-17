@@ -1,0 +1,33 @@
+#gallery{
+  background: #eaeaea;
+  padding-bottom: 10rem;
+}
+#category{
+  background: #eaeaea;
+  padding-bottom: 10rem;
+}
+.gallery__wrap{
+  padding: 0 0 10rem 0;
+}
+
+.gallery__photos{
+  padding: 0;
+}
+.gallery__photos img{
+  height: 282px;
+  max-height: 480px;
+  width: 100%;
+}
+.gallery{
+  text-align: center;
+}
+
+.gallery a {
+  width: 100%;
+  height: 180px;
+  /* display: inline-block;
+  overflow: hidden;
+  margin: 4px 6px; */
+  box-shadow: 0 0 4px -1px #000;
+}
+

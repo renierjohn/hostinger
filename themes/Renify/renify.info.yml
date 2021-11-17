@@ -1,0 +1,24 @@
+name: renify
+type: theme
+description: 'Renify Theme'
+package: Renify
+
+libraries:
+  - renify/base
+
+base theme: false
+
+regions:
+  header: 'Header'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  page_top: 'Page top'
+  content: 'Content'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+  footer: 'Footer'
+
+core_version_requirement: ^9 || ^10
+version: '1.x'
+project: 'drupal'
+datestamp: 1620214265

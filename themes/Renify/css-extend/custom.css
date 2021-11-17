@@ -1,0 +1,362 @@
+/* breadcrums override */
+.l-breadcrumb .l-breadcrumb__list li:after {
+    content: url(/themes/mitutoyo/images/common/arrow.svg);
+}
+.l-breadcrumb .l-breadcrumb__list li:last-child:after {
+    content: none;
+}
+
+/* product details */
+.c-products-table__accent-cel {
+    background: #fff5ec !important;
+}
+
+.c-pager__item{
+    font-size: 18px !important;
+    padding-bottom: 5px !important;
+    display: flex !important;
+}
+
+.c-pager__arrow {
+    display: flex !important;
+}
+
+.c-products-table__wrap.is-scroll tbody th, .c-products-table__wrap.is-scroll thead th {
+    background-color: #fff !important;
+}
+
+.c-products-detail-gallery .item:after{
+  background-image: url(/themes/mitutoyo/images/common/ico-zoom-s.svg) !important;
+}
+
+
+@media print, screen and (min-width:768px) {
+    .c-products-list-item[href]:hover {
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+/* overall top */
+.overall_top{
+  max-width: 1260px;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.overall_child{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.large_child_terms{
+  width: calc(100% / 4);
+  padding: 1em;
+}
+
+/* product hierarchy */
+.banner_btm .c-campaign-bnr-l {
+  margin-top: 80px;
+  margin: 80px auto;
+}
+
+/* product detail */
+.c-products-detail-meta__head .labelarea .label-new{
+    background-image: url(/themes/mitutoyo/images/common/ico-new-large.svg) !important;
+}
+
+.c-modal__close{
+  background-image: url(/themes/mitutoyo/images/common/ico-close.svg);
+}
+
+/* News Details */
+.news-detail__contents ul {
+  margin-bottom: unset;
+}
+
+.news-detail__contents table th {
+  background-color: #f2f2f2 !important;
+  vertical-align: middle;
+}
+
+/* Domestic List Location icon */
+.c-nav-local__link-icon--headoffice:before{
+    background-image:url(/images/common/ico-headoffice-m.svg) !important;
+}
+
+.c-nav-local__link-icon--research:before{
+    background-image: url(/images/common/ico-research-development-m.svg) !important;
+}
+
+.c-nav-local__link-icon--production:before{
+    background-image: url(/images/common/ico-production-m.svg) !important;
+}
+
+.c-nav-local__link-icon--sales:before{
+    background-image: url(/images/common/ico-sales-service-m.svg) !important;
+}
+
+.c-nav-local__link-icon--solutioncenter:before{
+    background-image: url(/images/common/ico-m3-solution-center-l.png) !important;
+}
+
+.c-nav-local__link-icon--measurement:before{
+    background-image: url(/images/common/ico-measurement-l.png) !important;
+}
+
+.c-nav-local__link-icon--calibration:before{
+    background-image: url(/images/common/ico-calibration-m.svg) !important;
+}
+
+.c-headline-icon--headoffice:before{
+    background-image: url(/images/common/ico-headoffice-l.svg) !important;
+}
+
+.c-headline-icon--research:before{
+    background-image: url(/images/common/ico-research-development-l.svg) !important;
+}
+
+.c-headline-icon--production:before{
+    background-image: url(/images/common/ico-production-l.svg) !important;
+}
+
+.c-headline-icon--sales:before{
+    background-image: url(/images/common/ico-sales-service-l.svg) !important;
+}
+
+.c-headline-icon--solutioncenter:before{
+    background-image: url(/images/common/ico-m3-solution-center-l.png) !important;
+}
+
+.c-headline-icon--measurement:before{
+    background-image: url(/images/common/ico-measurement-l.png) !important;
+}
+
+.c-headline-icon--calibration:before{
+    background-image: url(/images/common/ico-calibration-l.svg) !important;
+}
+
+h3.c-network-indexlist-item__ttl{
+    margin: 0 !important;
+}
+
+.c-relation-link__btn svg{
+    bottom: unset !important;
+}
+
+p.c-network-indexlist-item__address{
+    margin: 0 !important;
+}
+
+.downloads-parts_list-search__contents table th{
+    background-color: #f2f2f2 !important;
+    vertical-align: middle;
+}
+
+.c-modal__close{
+    background-image: url(/images/common/ico-close.svg) !important;
+}
+
+/* [data-sc-table=el]:before{
+    content:url(/images/common/ico-scroll-x.svg) !important;
+} */
+
+.tablewrap td{
+    vertical-align: middle;
+}
+
+/* Footer Overide CSS */
+.site-footer {
+    background: #3e403f !important;
+}
+/* End of Footer CSS */
+
+/* Header Overide CSS */
+#header {
+    background-color: white !important;
+    background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%) !important;
+}
+/* End of Header CSS */
+
+.is_logged {
+    top: 78px;
+}
+
+.admin_logged_in {
+    margin-right: 3% !important;
+    width: unset !important;
+    min-width: unset !important;
+}
+
+.admin_hide {
+    position: fixed !important;
+    top: 178px !important;
+}
+
+/* Domestic Location Details */
+.c-navslider{
+  margin-top: 70px;
+}
+
+.c-network-table{
+  margin-top: 80px;
+}
+
+a.size-middle {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.layout-main{
+  margin-top: 0;
+}
+
+.c-downloadlink__item{
+  padding: 24px 40px 24px 24px;
+}
+/* End of Domestic Location Details */
+
+/* Overriding core bartik css (elements.css) that puts margins on header elements */
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+.c-linkbtns {
+  margin-top: 30px;
+}
+
+.event .c-relatedinfo {
+  margin-top: 75px;
+}
+/* End of overriding core bartik css (elements.css) */
+
+/* Dashboard Margin*/
+.content-menu-box h2,
+.content-type-box h2{
+    margin: 1em 0 0.5em;
+}
+
+ul {
+  padding: 0;
+}
+
+/*this is for pick-up services page*/
+.c-pickup-table thead tr {
+  background: #f2f2f2 !important; 
+}
+.c-pickup-table tbody th{
+  background:#fff !important;
+  vertical-align: middle;
+}
+.c-pickup-table__wrap.is-scroll thead th{
+background-color: #f2f2f2 !important;  
+}
+/*end of pick-up services page*/
+
+
+/*this is for business trip service page */
+.c-onsite-table thead {
+  background-color: #f2f2f2 !important;
+}
+
+.l-page.onsite .c-relatedinfo {
+  margin-bottom: 80px;
+  padding: 24px 32px 40px;
+}
+
+.c-onsite-table tbody th {
+ vertical-align: middle;
+}
+.c-orange-frame-btn__box{
+  width: 260px;
+}
+.c-orange-frame-btn:hover{
+  border: 2px solid #f47836 !important;
+}
+
+
+
+/* end of business trip service page */
+
+/* START MITU_DEV-263: Product Large Classification */
+.c-products-migrationlinks__link.category01{
+  background-image: url(/images/products/category/category_thumb01-2x.jpg);
+}
+
+.c-products-migrationlinks__link.category02{
+  background-image: url(/images/products/category/category_thumb02-2x.jpg);
+}
+
+.c-products-migrationlinks__link.category03{
+  background-image: url(/images/products/category/category_thumb03-2x.jpg);
+}
+
+.c-products-migrationlinks__link.category04{
+  background-image: url(/images/products/category/category_thumb04-2x.jpg);
+}
+
+.c-products-migrationlinks__link.category05{
+  background-image: url(/images/products/category/category_thumb05-2x.jpg);
+}
+/* END MITU_DEV-263: Product Large Classification */
+
+/* End of overriding core bartik css (elements.css) */
+
+/* Mitutoyo Report  */
+/* /best-practices/report/ */
+
+#mitsutoyo-report .contents-box {
+  margin-top: 80px;
+}
+
+#mitsutoyo-report .c-headlinebox-line {
+  padding-bottom: 0;
+}
+
+/* End of Mitutoyo Report */
+
+/* Message from CEO */
+/* /corporate/message/ */
+
+#message-from-president .c-title-img {
+  margin-top: 68px;
+}
+
+#message-from-president .c-title-m {
+  margin-top: 66px;
+}
+
+#message-from-president .c-main-text-m:not(:first-of-type){
+  margin-top: 25px;
+}
+
+/* End of Message from CEO */
+
+/* M3 Solution Center Utsunomiya */
+/* /exhibitions-and-events/m3-solution-centers/utsunomiya */
+
+#event ul, ol{
+  padding: 0;
+}
+
+/* End of M3 Solution Center Utsunomiya */
+
+/* Flow and Notes */
+/* /school/flow-and-notes */
+
+@media print, screen and (min-width: 768px){
+  #school .c-title {
+    font-size: 39px;
+    letter-spacing: 1px;
+  }
+}
+
+#school [data-accordion=el]{
+  margin-top: 72px;
+}
+
+#school ol ol, ul ul{
+  padding: 0;
+}
+
+/* End of Flow and Notes */

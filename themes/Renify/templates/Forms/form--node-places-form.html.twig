@@ -1,0 +1,58 @@
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_token = element.form_token['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+
+{% set category      = element.field_category['#markup'] %}
+{% set short_text    = element.field_short_text['#markup'] %}
+{% set description   = element.field_description['#markup'] %}
+{% set category      = element.field_category['#markup'] %}
+{% set cover_photo   = element.field_banner_image['#markup'] %}
+{% set gallery       = element.field_thumbnails['#markup'] %}
+{% set youtube       = element.field_youtube['#markup'] %}
+{% set nearby_place  = element.field_nearby_place['#markup'] %}
+{% set map           = element.field_google_map['#markup'] %}
+
+{% set submit   = element.actions['#markup'] %}
+
+{% set title = element.title['#markup'] %}
+<section class="main-wrapper" id="body" style="margin-top:12rem;">
+  <div class="center mt-6">
+    <h2 class="display-2">Create Youre Own Place</h2>
+      <p class="lead">
+          Contribute Us <br> Create youre own story and share to the community
+      </p>
+  </div>
+  <div class="wrapper-header">
+    <div class="inner">
+    <form{{attributes}}>
+      {{build_id}}
+      {{form_id}}
+      {{form_token}}
+      
+      {{category}}
+      
+      {{title}}
+
+      <h4>Cover Photo</h4>
+      {{cover_photo}}
+
+      {{short_text}}
+
+      <h4>Details</h4>
+      {{description}}
+
+      <h4>Gallery</h4>
+      {{gallery}}
+
+      {{nearby_place}}
+
+      {{map}}
+
+      {{youtube}}
+
+      <h6 class="display-4">Click Preview to See the teporary display . <br>Once you submit it will review from moderator and published youre content</h6>
+      {{submit}}
+    </form>
+    </div>
+  </div>
+</section>
