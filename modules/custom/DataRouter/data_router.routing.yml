@@ -1,0 +1,31 @@
+data_router.verify:
+  path: '/verify/{token}'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\LoginController::verify'
+    _title: 'Verify Page'
+  requirements:
+    _access : 'TRUE'
+
+data_router.track_views:
+  path: '/api/count/views'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\TrackerController::getViewCount'
+    _title: 'Views'
+  requirements:
+    _access : 'TRUE'
+
+data_router.batch:
+  path: '/api/batch'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\BatchProcess::run'
+    _title: 'Batch'
+  requirements:
+    _access : 'TRUE'
+
+data_router.google:
+  path: '/google'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\LoginController::google'
+    _title: 'Authenticating'
+  requirements:
+    _access : 'TRUE'

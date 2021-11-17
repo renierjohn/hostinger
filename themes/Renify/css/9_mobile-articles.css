@@ -1,0 +1,147 @@
+@media only screen and (max-width:1024px) {
+  .articles .item-feature__text {
+    height: 25vh;
+  }
+}
+@media only screen and (max-width:800px) {
+  .articles{
+    padding-top: 7rem;
+    padding-bottom: 0;
+  }
+  .articles .features img{
+    width: 100%;
+  }
+  .gallery__photos{
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .wrapper{
+    height: inherit;
+  }
+  .main-wrapper .wrapper-header .inner{
+    width: auto;
+    text-align: center;
+  }
+   .wrapper .inner{
+    padding: 1rem 5%;
+    position: relative;
+    top: -14rem;
+  }
+  .maps-wrapper{
+    padding-bottom: 5rem;
+    background: #fefefe;
+  }
+  
+  #video .row{
+    margin:0;
+    padding:0;
+    width: 100%;
+  }
+  .g-recaptcha{
+    padding-left: 4rem;
+    padding-bottom: 1rem;
+  }
+
+  #message-form{
+    margin-bottom: 55%;
+  }
+  .nearby-place{
+    top: -4rem;
+  }
+
+  .wrapper:after {
+    top: 0rem;
+  }
+
+  .content-social{
+    position: relative;
+    top: -14rem;
+  }
+}
+
+@media only screen and (max-width:425px) {
+    
+    .main-wrapper h2{
+      margin: 0;
+    }
+    h3 {
+      margin-top: 0;
+    }
+    #category{
+      padding: 1rem 0 10rem;
+    }
+    .display-1{
+      font-size: 3.8rem;
+      margin-bottom: 0;
+    }
+    .display-2{
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+    p.lead{
+      font-size: 1.7rem;
+      margin-bottom: 0;
+    }
+    .about-desc{
+      margin-top: 1rem;
+    }
+    .articles{
+      padding-top: 0;
+    }
+    .articles .features{
+      margin: 0;
+      padding: 0;
+    }
+    .articles .features .item-feature{
+      padding: 0;
+      margin: 2rem .5rem;
+    }
+    .item-feature-image{
+      height: 30vh;
+    }
+    .articles .item-feature__text{
+      height: 12vh;
+    }
+    .item-title{
+      font-size: 1.7rem;
+      margin: 1rem 0 0 0;
+    }
+    .item-date{
+      font-size: 1rem;
+    }
+    .btn-effect{
+      font-size: 1rem;
+      border: 1px solid #ff565d;
+    }
+    .gallery__wrap{
+      padding: 0 0 1rem 0;
+    }
+
+    #col-1r {
+      padding: 1rem 2rem;
+    }
+    
+    #message-form{
+      padding-left: 3rem;
+      padding-right: 1rem;
+    }
+
+    .pull-quote blockquote p{
+      font-size: 1.6rem;
+      line-height: 1.9;
+    }
+    /*.btn--stroke--reverse{
+      display: inline;
+    }*/
+    .btn--big{
+      padding: 1rem 3rem;
+    }
+    #video{
+      padding: 0;
+    }
+    .video-wrapper{
+      padding-top: 4rem;
+    }
+  }
+}

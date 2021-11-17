@@ -1,0 +1,47 @@
+base:
+  css:
+    theme:
+      css/style.css: {}
+      css/vendor.css: {}
+      css/main.css: {}
+      css/header.css: {}
+      css/footer.css: {}
+      css/contents.css: {}
+      css/gallery.css: {}
+      css/status_message.css: {}
+      css/8_mobile.css: {}
+      css/9_mobile-articles.css: {}
+      css/base.css.map: {}
+      css/vendor.css.map: {}
+      css/main.css.map: {}
+  js:
+    js/jquery.lazy.min.js: {}
+    js/jquery.lazy.plugins.min.js: {}
+    js/modernizr.js: {}
+    js/plugins.js: {}
+    js/pace.min.js: {}
+    js/main.js: {}
+    js/custom.js: {}
+    js/ajax.js: {}
+    js/aos.js.map: {}
+  dependencies:
+    - core/jquery
+
+video :
+  css:
+    theme:
+      css/video.css: { preprocess: false }
+login :
+  css:
+    theme:
+      css/login.css: { preprocess: false }
+
+base-extend:
+  css:
+    theme:
+      css-extend/base.css: {}
+      css-extend/style.css: {}
+  js:
+    js/bundle.js: {}
+  dependencies:
+    - core/jquery

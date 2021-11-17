@@ -1,0 +1,63 @@
+<?php
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function renify_preprocess(&$variables, $hook){
+  $variables['user_profile'] = '/sites/default/files/profile/r.png';
+  $variables['sitekey']      = \Drupal::service('data_router.account')->getCapchaSiteKey();
+  $current_user              = \Drupal::currentUser();
+  if($current_user->isAuthenticated()) {
+    $uid          = $current_user->id();
+    $user         = \Drupal\user\Entity\User::load($uid);
+    $user_profile = $user->user_picture->getValue();
+    if(empty($user_profile)){
+      return $variables;
+    }
+
+    $fid = $user_profile[0]['target_id'];
+    $uri = \Drupal\file\Entity\File::load($fid);
+    $uri = $uri->get('uri')->getValue();
+    if(!empty($uri)){
+      $uri = $uri[0]['value'];
+      $uri = str_replace('public://','/sites/default/files/public/',$uri);
+      $variables['user_profile'] = $uri;
+    }
+  }
+  return $variables;
+}
+
+function renify_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
+}
+
+function renify_preprocess_node(&$variables){
+  $node   = $variables['node'];
+  $nid    = $node->id();
+  $bundle = $node->bundle();
+  
+  if($bundle == 'messages' || $bundle == 'config' ){
+    if (\Drupal::currentUser()->id() != 1) {
+      $response = new RedirectResponse('/404');
+      return $response->send();
+    }
+  }
+  
+  $result = \Drupal::service('data_router.aliases_path')->setID($nid)->getContentPagination();
+  $variables['pagination'] = $result;
+}
+
+function renify_preprocess_block(&$variables){
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $variables['node_title'] = $node->getTitle();
+    $variables['node_url']   = $node->path->getValue()[0]['alias'];
+  }
+}
+
+function renify_preprocess_html(&$variables){
+  if(\Drupal::service('path.matcher')->isFrontPage()){
+    $variables['head_title']['title'] = 'Renify';
+  }
+}

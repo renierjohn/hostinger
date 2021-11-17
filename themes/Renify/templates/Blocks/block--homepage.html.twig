@@ -1,0 +1,33 @@
+{% set title      = content.field_title.0['#context']['value'] %}
+{% set image      = content.field_banner_image.0['#markup'] %}
+{% set short_text = content.field_short_text.0['#context']['value'] %}
+{% set btn_text   = content.field_button_text.0['#context']['value'] %}
+{% set btn_link   = content.field_short_text.0['#url'].uri %}
+
+{% block content %}
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src={{ image }} data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+      <div class="shadow-overlay"></div>
+      <div class="home-content">
+          <div class="row home-content__main">
+              <div class="home-content__left">
+                    <h1>{{ title }}</h1>
+                    <h3>{{ short_text }}</h3>
+                  <div class="home-content__btn-wrap">
+                      <a href="#body" class="btn btn--stroke--reverse btn--big home-content__btn smoothscroll">
+                          {{ btn_text }}
+                      </a>
+                  </div>
+              </div> <!-- end home-content__left-->
+          </div> <!-- end home-content__main -->
+          <ul class="home-content__social">
+              <li><a href="#." class="share-fb" data-pageid="/" data-title="Renify">Facebook</a></li>
+              <li><a href="#." class="share-twitter" data-pageid="/" data-title="Renify">twitter</a></li>
+              <li><a href="#." data-pageid="" data-id="" data-title="">Instagram</a></li>
+          </ul>
+      </div> <!-- end home-content -->
+      <a href="#body" class="home-scroll smoothscroll">
+          <span class="home-scroll__text">Scroll</span>
+          <span class="home-scroll__icon"></span>
+      </a>
+  </section>
+{% endblock %}

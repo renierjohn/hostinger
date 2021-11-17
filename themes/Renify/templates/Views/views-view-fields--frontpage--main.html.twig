@@ -1,0 +1,42 @@
+{% set id       = fields.nid.content|raw|striptags|trim %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set body     = fields.field_description.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+{% set category = fields.field_category.content|raw|striptags %}
+{% set date     = fields.changed.content|raw|striptags %}
+{% set lazy_img = '/themes/Renify/images/lazy/lazy.jpg' %}
+
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+
+<div class="col-block item-article item-feature" >
+  <div class="card">
+    <div class="views">
+      <a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"> </span> view(s)</a>
+    </div>
+    <div class="item-feature-image">
+      <img src={{lazy_img}} data-src={{image}} class="img-fluid lazy" alt={{title}}>
+    </div>
+    <div class="item-feature__text">
+      <h3 class="item-title">{{title}}</h3>
+      <h5 class="item-date"><i class="fa fa-calendar"></i>{{date}}</h5>
+      <p>
+        {{body}}
+      </p>
+    </div>
+    <div class="article-social">
+      <ul>
+        <li><i class="fa fa-share"></i></li>
+        <li><a href="#." class="share-fb" data-pageid="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#." class="share-twitter" data-pageid="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#." class="share-insta" data-pageid="{{url}}" data-title="{{title}}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+        <li class="pull-right"><a href="#." ><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <!-- <li class="pull-right"><a href="#." ><i class="fa fa-comment"></i>2M Comments</a></li> -->
+      </ul>
+      <a href={{link}} class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-eye"></i> Explore</a>
+      <!-- <a href="#." class="like"><i class="fa fa-thumbs-up"></i><?= $this->e($value['summary']['likes'])?> Like</a>
+      <a href="#." class="unlike"><i class="fa fa-thumbs-down"></i><?= $this->e($value['summary']['likes'])?> Fine</a> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+services:
+  data_router.account:
+    class: Drupal\data_router\Service\AccountService
+    arguments:
+      - '@entity_type.manager'
+      - '@data_router.mail'
+
+  data_router.mail:
+    class: Drupal\data_router\Service\MailService
+    arguments:
+      - '@entity_type.manager'
+
+  # theme.negotiator.data_router:
+  #   class: Drupal\data_router\Theme\ImceOverrideTheme
+  #   tags:
+  #     - { name: theme_negotiator, priority: -50 }
+
+  data_router.tracker:
+    class: Drupal\data_router\EventSubscriber\ResponseHook
+    arguments:
+      - '@entity_type.manager'
+      - '@current_route_match'
+      - '@tempstore.private'
+      - '@state'
+    tags:
+      - { name: event_subscriber }
+
+  data_router.aliases_path:
+    class: Drupal\data_router\Service\AliasService
+    arguments:
+      - '@entity_type.manager'

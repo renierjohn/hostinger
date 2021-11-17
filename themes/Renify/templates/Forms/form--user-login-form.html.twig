@@ -1,0 +1,40 @@
+{{ attach_library('renify/login') }}
+
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set name     = element.name['#markup'] %}
+{% set password = element.pass['#markup'] %}
+{% set submit   = element.actions['#markup'] %}
+
+<section id="login" class="login top-header">
+    <div class="login__left">
+      <div class="login__wrapper">
+          <form{{attributes}}>
+            {{ build_id }}
+            {{ form_id }}
+            <div class="form-group">
+                <label for="InputEmail" class="mb-0" required="true">Username</label>
+                {{name}}
+            </div>
+            <div class="form-group">
+                <label for="InputPassword" class="mb-0" required="true">Password</label>
+                {{password}}
+              </div>
+
+              <div class="submit-wrapper">
+                    <div class="g-recaptcha" data-size="normal" data-tabindex="10" data-sitekey={{sitekey}}></div>
+                    {{submit}}
+                    <hr>
+                    <a href="#." class="btn btn--stroke full-width" id="login-google" target="blank"><i class="fab fa-google"></i> Login w/ Google</a>
+                    {# <a href="#." class="btn btn--stroke full-width" id="login-facebook"><i class="fab fa-facebook"></i> Login w/ FB</a> #}
+                    <a href="/user/password" class="btn btn--stroke--reverse full-width" id="home"><i class="fas fa-key"></i>Change Password</a>
+                    <a href="/" class="btn btn--stroke--reverse full-width" id="home"><i class="fas fa-home"></i>Home</a>
+              </div>
+          </form>
+      </div>
+    </div>
+    <div class="login__right" style="background-image:url('/themes/Renify/images/logo.png')">
+        <div class="login__overlay"></div>
+    </div>
+</section>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=376061863589278&autoLogAppEvents=1" nonce="CZDh6vaT"></script>

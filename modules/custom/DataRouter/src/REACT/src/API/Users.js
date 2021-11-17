@@ -1,0 +1,1 @@
+const USER = '/api/user';
