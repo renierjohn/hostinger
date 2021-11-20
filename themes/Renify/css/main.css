@@ -2094,8 +2094,8 @@ input::-moz-focus-inner {
   -ms-transform: translate3d(0, 200%, 0);
   transform: translate3d(0, 200%, 0);
   position: fixed;
-  bottom: 32px;
-  left: 1rem;
+  bottom: 28px;
+  left: 28px;
 }
 
 .go-top a,
