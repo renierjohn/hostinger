@@ -3,15 +3,19 @@
 namespace Drupal\data_router\Service;
 
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Database\Connection;
 
 class AliasService
 {
   protected $entityTypeManager;
 
+  protected $database;
+
   protected $id;
 
-  public function __construct(EntityTypeManager $entityTypeManager){
+  public function __construct(EntityTypeManager $entityTypeManager,Connection $database){
     $this->entityTypeManager = $entityTypeManager;
+    $this->database          = $database;
   }
 
   public function setID($id){
@@ -28,7 +32,10 @@ class AliasService
     $node   = $entity->getStorage('node');
     $alias  = $entity->getStorage('path_alias');
     $nid    = $node->getQuery();
-    $nids   = $nid->condition('type','places')->execute();
+    $nids   = $nid->condition('type','places')
+                  ->condition('field_category',[1,4,3],'IN')
+                  ->condition('status',1)
+                  ->execute();
     $nids   = array_values($nids);
     $temp   = [];
 
