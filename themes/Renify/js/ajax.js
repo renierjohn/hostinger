@@ -1,4 +1,5 @@
 (function($) {
+  var domain = 'https://renifysite.com';
   "use strict";
   $('.add-to-cart').bind('click', function(e) {
     var pid = $(this).attr('data-id');
@@ -169,7 +170,7 @@
               method: 'share',
               title: title,
               description: title,
-              href: 'https://renify.store'+pageid,
+              href: domain+pageid,
             },
             function(response) {
               if (response && !response.error_code) {
@@ -189,7 +190,7 @@
         if(title.length == 0){
           title = 'Renify'
         }
-        window.open('http://www.twitter.com/share?url=https://renify.store'+pageid+'&t='+title,'sharer','toolbar=0,status=0,width=626,height=436');
+        window.open('http://www.twitter.com/share?url='+domain+pageid+'&t='+title,'sharer','toolbar=0,status=0,width=626,height=436');
         return false;
     });
 
@@ -209,7 +210,7 @@
     var scope         = "https://www.googleapis.com/auth/userinfo.email";
     var scope_nolink  = "openid profile email";
     var clientID      = "902176944767-2ul1lh81t998833bmnsjah6sg2k9e9p2.apps.googleusercontent.com";
-    var redirect_url  = "https://renify.store/google";
+    var redirect_url  = domain+"/google";
     var map_id = "8ebbb0159f03160b";
     var state  = "12345678987654321";
     var promt  = "select_account";
