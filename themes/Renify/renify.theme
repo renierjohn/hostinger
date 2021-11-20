@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 function renify_preprocess(&$variables, $hook){
-  $variables['user_profile'] = '/sites/default/files/profile/r.png';
+  $variables['user_profile'] = '/sites/default/files/public/profile/r.png';
   $variables['sitekey']      = \Drupal::service('data_router.account')->getCapchaSiteKey();
   $current_user              = \Drupal::currentUser();
   if($current_user->isAuthenticated()) {
