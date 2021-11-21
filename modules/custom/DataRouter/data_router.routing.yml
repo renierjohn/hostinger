@@ -29,3 +29,11 @@ data_router.google:
     _title: 'Authenticating'
   requirements:
     _access : 'TRUE'
+
+data_router.qr:
+  path: '/scan'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\QRController::scan'
+    _title: 'QR Scanner'
+  requirements:
+    _access : 'TRUE'

@@ -1,0 +1,7 @@
+.qr{
+	text-align: center;
+}
+
+#qr_image img{
+	display: inline-block !important;
+}

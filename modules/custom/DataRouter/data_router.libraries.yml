@@ -3,3 +3,15 @@ tracker:
     js/tracker.js: {}
   dependencies:
     - core/jquery  
+
+qr:
+  css:
+    theme:
+      css/qr.css: {}
+  js:
+    js/qr_decoder.js: {}
+    js/qr_encoder.js: {}
+    js/qr_controller.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
