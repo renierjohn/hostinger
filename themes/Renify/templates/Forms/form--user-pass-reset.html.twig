@@ -1,0 +1,19 @@
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set submit   = element.actions['#markup'] %}
+
+<section class="main-wrapper simple" id="body">
+  <div class="wrapper-header">
+    <div class="inner">
+    <h2>Please Click Login Button to reset Password</h2>
+    <form{{attributes}}>
+     {{ build_id }}
+     {{ form_id }}
+        <div class="submit-wrapper">
+          {{submit}}
+          <span><a class="btn btn--stroke--reverse" href="/" id="home">Home</a></span>
+        </div>
+    </form>
+    </div>
+  </div>
+</section>
