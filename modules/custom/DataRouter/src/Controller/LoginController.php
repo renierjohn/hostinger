@@ -55,8 +55,7 @@ class LoginController extends ControllerBase {
        \Drupal::messenger()->addMessage('Welcome '.$name);
      }
 
-     $redirect =  new RedirectResponse('/');
-     return $redirect->send();
+     return new RedirectResponse('/');
   }
 
   public function google(){
