@@ -5,6 +5,7 @@ namespace Drupal\data_router\Service;
 use GuzzleHttp\Client;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\data_router\Service\MailService;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class AccountService
 {
@@ -18,6 +19,8 @@ class AccountService
 
   protected $mailer;
 
+  protected $request;
+    
   const DEFAULT_PASS  = 'abcd1234';
 
   const PATTERN_LINK = '{{link}}';
@@ -28,9 +31,12 @@ class AccountService
 
   const CONFIGS_PATH  = 'private://auth/config.json';
 
-  public function __construct(EntityTypeManager $entityTypeManager,MailService $mailer){
+  const DOMAIN        = '';
+
+  public function __construct(EntityTypeManager $entityTypeManager,MailService $mailer,RequestStack $request){
     $this->entityTypeManager = $entityTypeManager;
     $this->mailer            = $mailer;
+    $this->request           = $request->getCurrentRequest();
   }
 
   public function setEmail($email){
@@ -89,7 +95,7 @@ class AccountService
       ];
     }
     $token = md5(mt_rand(0, 1000) . time());
-    $tokn = 'https://www.renify.store/verify/'.$token;
+    $tokn  = $this->request->getHttpHost().'/verify/'.$token;
     $pass  = self::DEFAULT_PASS;
     $name  = explode('@',$email)[0];
 

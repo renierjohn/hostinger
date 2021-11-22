@@ -4,6 +4,7 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@data_router.mail'
+      - '@request_stack'
 
   data_router.mail:
     class: Drupal\data_router\Service\MailService
