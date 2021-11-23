@@ -61,3 +61,10 @@ function renify_preprocess_html(&$variables){
     $variables['head_title']['title'] = 'Renify';
   }
 }
+
+function renify_preprocess_menu(&$variables){
+  if(!\Drupal::service('path.matcher')->isFrontPage()){
+    $variables['menus'][] = ['url' => '#gallery','title'=>'Gallery'];
+    $variables['menus'][] = ['url' => '#video','title'=>'Video'];
+  }
+}

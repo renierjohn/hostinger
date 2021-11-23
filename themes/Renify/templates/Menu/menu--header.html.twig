@@ -1,4 +1,4 @@
-<div class="row">
+ <div class="row">
   <div class="header-logo">
     <a class="site-logo" href="/">
       <img src="/themes/Renify/favicon.ico" alt="Homepage" />
@@ -12,6 +12,14 @@
             {{ link(item.title, item.url, { 'class': '' }) }}
           </li>
         {% endfor %}
+    {% endif %}
+
+        {% for menu in menus %}
+          <li>
+            <a href="{{menu.url}}">{{menu.title}}</a>
+          </li>
+        {% endfor %}
+
         {% if logged_in %}
           <li>
             <a href="/myplace">My Places</a>
@@ -19,9 +27,12 @@
           <li>
             <a href="/node/add/places">Add Place</a>
           </li>
+        {% else %} 
+          <li>
+            <a href="#signup">Signup</a>
+          </li>
         {% endif %}
       </ul>
-    {% endif %}
 
     {% if logged_in %}
       <div class="header-cta">
