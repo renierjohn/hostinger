@@ -8,6 +8,13 @@
     var outputData      = document.getElementById("outputData");
     var detect          = document.getElementsByTagName('input')
    
+    $('#qr_download').hide();
+    $('#qr_download').click(function(){
+      download();
+    });
+
+    startWebcam();
+
     function drawLine(begin, end, color) {
       canvas.beginPath();
       canvas.moveTo(begin.x, begin.y);
@@ -16,7 +23,6 @@
       canvas.strokeStyle = color;
       canvas.stroke();
     }
-    startWebcam();
 
     function startWebcam(){
         // Use facingMode: environment to attemt to get the front camera on phones
@@ -62,6 +68,7 @@
           canvasElement.hidden = true;
           video.hidden = true;
           detect[0].value = '0';
+          $('#qr_download').show();
         } else {
           outputMessage.hidden            = false;
           outputData.parentElement.hidden = true;
@@ -71,6 +78,14 @@
       if(detect[0].value == '1'){
         requestAnimationFrame(render);
       }
+    }
+
+    function download(){
+      var qr = $('#qr_image').find('img').attr('src')
+      var a  = document.createElement('a');
+      a.href = qr;
+      a.download = "my_qrcode.png";
+      a.click();
     }
 
 })(jQuery, Drupal);
