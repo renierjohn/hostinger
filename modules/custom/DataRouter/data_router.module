@@ -59,7 +59,7 @@ function send_email_edit(&$form,&$form_state){
 function sendEmail($type,$email){
   $node =  \Drupal::service('entity_type.manager')
           ->getStorage('node')
-          ->loadByProperties(['type'=>'config','field_config_name'=>'add_data']);
+          ->loadByProperties(['type'=>'config','field_config_name'=>$type]);
   $node    = array_values($node)[0];
   $message = $node->field_message->value;
   $subject = $node->field_subject->value;
