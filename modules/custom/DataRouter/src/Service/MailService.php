@@ -92,7 +92,7 @@ class MailService
     $mailer->setFrom($email_from,$from_name);
     $mailer->Subject = $subject;
     $mailer->AddAddress($email);
-    // $bcc ?  $mailer->addBCC($bcc): '';
+    $bcc ?  $mailer->addBCC($bcc): '';
     // $mailer->CharSet       = 'ISO-2022-JP';
     // $mailer->Encoding      = "7bit";
     // $mailer->Body = mb_convert_encoding($body, "ISO-2022-JP-MS", "UTF-8");
