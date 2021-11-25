@@ -21,8 +21,56 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
 
   if($form_id == 'node_places_form'){
     $form['status']['widget']['value']['#default_value'] = FALSE;
-  }  
+    $form['actions']['submit']['#submit'][] = 'send_email_add';
+  }
+
+  if($form_id == 'node_places_edit_form'){
+    $form['actions']['submit']['#submit'][] = 'send_email_edit';
+  }
 }
+
+function send_email_add(&$form,&$form_state){
+  $values = $form_state->getValues();
+  $url    = $values['path'][0]['alias'];
+  $nid    = $values['nid'];
+
+  // $roles = array_values($user->getRoles());
+  $user  = \Drupal::currentUser();
+  $email = $user->getEmail();
+
+  $type  = 'add_data';
+  sendEmail($type,$email);
+
+}
+
+function send_email_edit(&$form,&$form_state){
+  $values = $form_state->getValues();
+  $url    = $values['path'][0]['alias'];
+  $nid    = $values['nid'];
+  $status = $values['status'];
+  
+  $user  = \Drupal::currentUser();
+  $email = $user->getEmail();
+
+  $type  = 'edit_data';
+  sendEmail($type,$email);
+}
+
+function sendEmail($type,$email){
+  $node =  \Drupal::service('entity_type.manager')
+          ->getStorage('node')
+          ->loadByProperties(['type'=>'config','field_config_name'=>'add_data']);
+  $node    = array_values($node);
+  $message = $node->field_message->value;
+  $subject = $node->field_subject->value;
+
+  return \Drupal::service('data_router.mail')
+          ->setMail($email)
+          ->setSubject($subject)
+          ->setMessage($message)
+          ->send();
+}
+
 
 function login_redirect($form,$form_state){
   $input    = $form_state->getUserInput();
