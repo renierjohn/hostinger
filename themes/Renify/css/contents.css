@@ -503,3 +503,8 @@
 .col-1r .slick-dots{
   display: none !important;
 }
+
+.block-1-2 h4{
+  margin-bottom: 6rem;
+  margin-top: 0.6rem;
+}

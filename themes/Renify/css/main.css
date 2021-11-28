@@ -2376,6 +2376,10 @@ input::-moz-focus-inner {
   align-items: center;
 }
 
+.message-form-no-margin{
+  margin-bottom: 0 !important;
+}
+
 @media only screen and (max-width:800px) {
   .overflow{
     overflow: scroll;
