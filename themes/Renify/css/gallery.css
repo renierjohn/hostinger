@@ -31,3 +31,6 @@
   box-shadow: 0 0 4px -1px #000;
 }
 
+.gallery__photos h6{
+  margin-top: 1rem;
+}

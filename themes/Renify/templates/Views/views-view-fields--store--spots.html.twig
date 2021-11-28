@@ -1,0 +1,10 @@
+{% set title    = fields.title.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+
+<div class="gallery__slide">
+  <a href="{{link}}">
+    <img src="/themes/Renify/images/lazy/lazy.jpg" data-src="{{image}}" class="img-fluid lazy" alt="{{title}}">
+  </a>
+  <h6>{{title}}</h6>
+</div>

@@ -46,6 +46,21 @@
         {% endfor %}
       {% endif %}
   </div>
+</section>
+
+<section id="category">
+      <div class="gallery__wrap" data-aos="fade-up">
+        <div class="row">
+          <div class="col-full about-desc">
+            <h2 class="display-2">See Also</h2>
+          </div>
+        </div>
+        <div class="row gallery__photos">
+          <div class="col-full slick-slider gallery__photos__slide">
+               {{ drupal_view('store', 'spots') }}
+          </div>
+        </div>
+      </div>
 </section>  
 
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
