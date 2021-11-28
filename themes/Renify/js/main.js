@@ -181,10 +181,10 @@
             centerMode: true,
             dots: true,
             infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 2,
+            slidesToShow: 3,
+            slidesToScroll: 1,
             pauseOnFocus: false,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 1000,
             responsive: [
                 {
                     breakpoint: 1001,
