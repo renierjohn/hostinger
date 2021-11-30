@@ -1,0 +1,25 @@
+services:
+  plugin.manager.importer:
+    class: Drupal\csv_importer\Plugin\ImporterManager
+    parent: default_plugin_manager
+
+  csv_importer.parser:
+    class: Drupal\csv_importer\Parser
+    arguments: ['@entity_type.manager']
+
+  csv_importer.entity:
+    class: Drupal\csv_importer\Service\EntityService
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@language_manager'
+      - '@request_stack'
+
+  csv_importer.logger:
+    class: Drupal\csv_importer\Service\LoggerService
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@language_manager'
+      - '@request_stack'
+       
