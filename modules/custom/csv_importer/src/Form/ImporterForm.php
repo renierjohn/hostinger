@@ -166,7 +166,7 @@ class ImporterForm extends FormBase {
   
     $form['importer']['status'] = [
       '#type' => 'select',
-      '#title' => $this->t('Choose Status ( Export Only )'),
+      '#title' => $this->t('Choose Status (Export Only)'),
       '#options' => [
         'all' => t('All'),
         '1'   => t('Published (1)'),
