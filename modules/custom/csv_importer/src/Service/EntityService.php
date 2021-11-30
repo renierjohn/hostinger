@@ -76,6 +76,8 @@ class EntityService {
 
   const ENTITY_IMAGE  = 'image';
 
+  const ENTITY_LINK   = 'link';
+
   const ENTITY_TERM   = 'taxonomy_term';
 
   const ENTITY_NODE   = 'node';
@@ -217,16 +219,6 @@ class EntityService {
     $uri_s   = explode(self::SEPARATOR,$uri_s);    
     $entity  = $this->entityTypeManager->getStorage('file');
     foreach ($uri_s as $urix) {      
-      // $uri     = str_replace('sites/default/files/','public://',$urix); 
-      // $fid     = $entity->getQuery()->condition('uri',$uri)->execute();
-    
-      // if(empty($fid)){
-      //   $status['missing_uri'][] = $urix;       
-      // }
-      // else{
-      //   $status['fid'][] = reset($fid);
-      // }
-
       $uri = str_replace('sites/default/files/','public://',$urix);
       $uri = str_replace('/sites/default/files/','public://',$uri); 
       if(file_exists($uri)){
@@ -285,59 +277,7 @@ class EntityService {
     return array_values($terms);
   }
 
-  /**
-  * Used By ExportCSV Controller
-  * node array
-  * @return array field label => value
-  */
-  // public function loadAllCompare(){
-  //   $contents        = [];
-  //   $lang_interface  = $this->language_interface;
-  //   $entity_type     = $this->entity_type;
-  //   $langcode        = $this->langcode;
-  //   $ids             = $this->ids;
-  //   $items           = $this->items;
-  //   $current_language = $this->current_language;
-  //   if(empty($ids)){
-  //     return FALSE;
-  //   }
-
-  //   $language = $lang_interface->getLanguage($langcode);
-  //   $lang_interface->setConfigOverrideLanguage($language);
-    
-  //   $nodes    = $this->entityTypeManager->getStorage($entity_type)->loadMultiple($ids);
-  //   foreach ($nodes as $node) {
-  //     if($node->hasTranslation($langcode)){
-  //       $tmp       = [];
-  //       $labels    = $node->getFieldDefinitions();
-  //       $content   = $node->getTranslation($langcode)->toArray();
-  //       $bundle    = $content['type'][0]['target_id'];
-  //       $valid_fields  = $this->getValidFields($bundle);
-  //       $valid_fields  = $this->appendItemFields($valid_fields,$items,$labels);
-  //       // $valid_fields  = $this->appendCatalogField($valid_fields,$bundle);
-  //       $valid_fields[] = 'catalog'; // append catalog at the last part        
-  //       foreach ($valid_fields as $valid_field) {
-  //         if($valid_field == 'catalog'){
-  //           $catalog = $this->getCatalog($content,$bundle);
-  //           if(!empty($catalog)){
-  //             $catalog = $this->getDomain().$catalog;
-  //           }
-  //           $tmp['Catalog'] = $catalog;
-  //           continue;
-  //         }
-  //         $fields     = $content[$valid_field];
-  //         $fields     = $this->preprocessFields($fields,$labels[$valid_field],$langcode);
-  //         $labels_key = $labels[$valid_field]->getLabel();
-  //         $bom        = chr(239).chr(187).chr(191);
-  //         $tmp[$bom.$labels_key] = '"'.$bom.$fields.'"';
-  //       }
-  //       $contents[] = $tmp;   
-  //     }
-  //   }
-
-  //   return $contents;
-  // }
-
+ 
   /**
   * Export only . Used by BatchExport.php ,used from admin config page
   * node array
@@ -469,7 +409,7 @@ class EntityService {
           $tmp_url   = str_replace('public://', $full_path.'/', $tmp_url);
           $urls[]    = $tmp_url;
       }
-      return implode(',',$urls);
+      return implode(self::SEPARATOR,$urls);
     }
 
     if($type == self::ENTITY_TERM){
@@ -503,12 +443,17 @@ class EntityService {
         $node = $node->hasTranslation($langcode) ?  $node->getTranslation($langcode) : $node;
         $result[] = $node->getTitle();
       }
+
       return implode(self::SEPARATOR,$result);
     }
 
     $tmp = [];
     foreach ($fields as $val) {
-      $tmp[] = $val['value'];
+      $tmp_val = !empty($val['value']) ? $val['value'] : FALSE;
+      if(empty($tmp_val)){
+        $tmp_val = !empty($val['uri']) ? $val['uri'] : FALSE;
+      }
+      $tmp[] = $tmp_val;
     }
 
     return implode(self::SEPARATOR,$tmp);
@@ -532,50 +477,10 @@ class EntityService {
     return array_merge($valid_fields,$tmp_fields);
   }
 
-   /**
-   * @param  $validfields   - fix , array of mahine_names
-   * @param  @items - dynamic , machine_names that visible from coloumn
-   * @return merge arrays
-   * */ 
-  // private function appendCatalogField($valid_fields,$bundle){
-  //    $table_fields   = LabelProvider::getTableFIeld();
-  //    $valid_fields[] = $table_fields['catalog'][$bundle];
-  //    return $valid_fields;
-  // }
-
   private function getDomain(){
     $request   = $this->request;
     $domain    = $request->getHttpHost();
     $scheme    = $request->getScheme();
     return $scheme.'://'.$domain;
   }
-
-//   private function getCatalog($content,$bundle){
-//     $entity = $this->entityTypeManager;
-   
-//     $series = LabelProvider::getTableFIeld()['catalog'][$bundle];
-//     $tid    = $content[$series] ? $content[$series][0]['target_id'] : FALSE;
-//     if(empty($tid)){
-//       return FALSE;
-//     }
-//     $series = $entity->getStorage('taxonomy_term')->load($tid);
-//     if(empty($series)){
-//       return FALSE;
-//     }
-//     $series  = $series->toArray();
-//     $fid     = $series[self::CATALOG_FIELD] ? $series[self::CATALOG_FIELD][0]['target_id'] : FALSE; 
-//     if(empty($fid)){
-//       return FALSE;
-//     }
-//     $file = $entity->getStorage('file')->load($fid);
-//     if(empty($file)){
-//       return FALSE;
-//     }
-//     $file_name = $file->getFilename();
-//     $file_url  = $file->getFileUri();
-//     $file_url  = str_replace('public://','/',$file_url);
-//     $file_size = $file->getSize();
-//     $file_size = number_format($file_size/1000, 2, '.', '').' Kb';
-//     return $file_url;    
-//   }
 }
