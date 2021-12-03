@@ -137,6 +137,10 @@
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
 
 <!--video  -->
+{% if youtube is empty %}
+  {% set youtube = 'https://youtu.be/OIyWjRQztVY' %}
+{% endif %}
+
 <section id="video" class="video">
   <div class="row">
     <div id="video-bg" class="col-full video-bg" style="background-image: url({{youtube_img}})">
