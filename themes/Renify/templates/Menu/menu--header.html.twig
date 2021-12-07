@@ -16,7 +16,7 @@
 
         {% for menu in menus %}
           <li>
-            <a href="{{menu.url}}">{{menu.title}}</a>
+            <a href="{{menu.url}}/">{{menu.title}}</a>
           </li>
         {% endfor %}
 
@@ -36,7 +36,7 @@
 
     {% if logged_in %}
       <div class="header-cta">
-        <a href="/user/logout" class="btn btn--primary header-cta__btn padding--left--0">
+        <a href="/user/logout/" class="btn btn--primary header-cta__btn padding--left--0">
           <ul>
             <li>
               <img src='{{user_profile}}'  class="img-no-radius" alt="...">
@@ -49,7 +49,7 @@
       </div>
     {% else %}
       <div class="header-cta">
-        <a href="/user/login" class="btn btn--stroke--reverse header-cta__btn"><i class="fas fa-user"></i>Login Now</a>
+        <a href="/user/login/" class="btn btn--stroke--reverse header-cta__btn"><i class="fas fa-user"></i>Login Now</a>
       </div>
     {% endif %}
   </nav> 
