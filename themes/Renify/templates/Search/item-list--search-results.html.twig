@@ -1,0 +1,32 @@
+<section id="body" class="articles">
+    <div class="container">
+          <div class="row">
+            {% if items %}
+                {% for item in items %}
+                    {% set value = item.value['#result'] %}
+                    {% if value.type == 'Places' %}
+                        {% if value.node.field_banner_image.entity is empty %}
+                            {% set image = '/themes/Renify/images/logo.png' %}
+                        {% else %}
+                            {% set image = file_url(value.node.field_banner_image.entity.fileuri) %}
+                        {% endif %}
+                        <div class="col-full">
+                        <a href="{{value.link}}/" title="" class="search-items-link">
+                        <div class="search-items">
+                            <img src="{{image}}" alt="" class="search-img">
+                            <div class="search-detail">
+                              <h2>{{value.title}}</h2>
+                              <div class="search-detail-desc">
+                                {{value.node.field_description.value|raw}}
+                              </div>  
+                            </div>
+                        </div>
+                        </a>
+                        </div>
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+          </div>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+{% set current  = current %}
+{% set pager    = items.pages %}
+{% set first    = items.first.href %}
+{% set previous = items.previous.href %}	
+{% set next     = items.next.href %}
+{% set last     = items.last.href %}	
+
+
+<section id="pagination" class="search-pagination">
+      <div class="container">
+			<ul>
+				{% if first %}
+					<li>
+						<a href="{{first}}" title="">First</a>
+					</li>
+				{% endif %}
+				{% if previous %}
+					<li>
+						<a href="{{previous}}" title="">Prev</a>
+					</li>
+				{% endif %}
+				{% for key,page in pager %}
+					<li>
+						{% if current == key %}
+							<a href="{{page.href}}" title="{{key}}" class="active">{{key}}</a>
+						{% else %}
+							<a href="{{page.href}}" title="{{key}}">{{key}}</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+				{% if next %}
+					<li>
+						<a href="{{next}}" title="">Next</a>
+					</li>
+				{% endif %}
+				{% if last %}
+					<li>
+						<a href="{{last}}" title="">Last</a>
+					</li>
+				{% endif %}
+			</ul>
+      </div>
+</section>	

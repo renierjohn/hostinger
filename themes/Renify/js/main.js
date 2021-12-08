@@ -296,6 +296,11 @@
 
     };
 
+    var trunc8 = function(){
+        $('.search-detail-desc').trunk8({
+            lines: 4
+        });
+    }
 
     /* Back to Top
     * ------------------------------------------------------ */
@@ -363,7 +368,10 @@
         ssAOS();
         ssBackToTop();
         // ssAjaxChimp();
-
     })();
+    
+    window.onload = function(){
+        trunc8();
+    }
 
 })(jQuery);

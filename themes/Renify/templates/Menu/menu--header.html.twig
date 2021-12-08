@@ -19,7 +19,7 @@
             <a href="{{menu.url}}/">{{menu.title}}</a>
           </li>
         {% endfor %}
-
+        
         {% if logged_in %}
           <li>
             <a href="/myplace">My Places</a>
@@ -28,10 +28,18 @@
             <a href="/node/add/places">Add Place</a>
           </li>
         {% else %} 
-          <li>
+          <li> 
             <a href="#signup">Signup</a>
           </li>
         {% endif %}
+        <li>
+          <div>
+            <form action="/search/result/" method="get" accept-charset="utf-8" class="search-form">
+              <input type="text"   name="keys" placeholder="Search" class="input">
+              <input type="submit" name="" value="Search" class="submit">
+            </form>
+           </div>  
+        </li>
       </ul>
 
     {% if logged_in %}

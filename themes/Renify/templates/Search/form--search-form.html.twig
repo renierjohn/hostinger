@@ -1,0 +1,31 @@
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set token    = element.form_token['#markup'] %}
+{% set submit   = element.basic.submit %}
+{% set input    = element.basic.keys %}
+
+<section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="/themes/Renify/images/logo.png" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+  <div class="header-mini-title center">
+    {% if form_title %}
+      <h2>Search Result for {{ form_title }}</h2>
+    {% else %}
+      <h2>Please Input Keyword</h2>
+    {% endif %}
+  </div>
+</section>
+
+<section id="body" class="articles">
+  <div class="container">
+    <div class="row">
+    	<form{{attributes}}>
+             {{ build_id }}
+             {{ form_id }}
+             {{ token }}
+             {{ input}}
+            <div class="submit-wrapper">
+              {{submit}}
+            </div>
+        </form>
+    </div>
+  </div>
+</section>

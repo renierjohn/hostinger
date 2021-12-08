@@ -226,11 +226,22 @@
 .header-cta ul{
   list-style-type: none;
   display: flex;
+  margin-bottom: 0;
 }
+
 .header-cta img{
   width: 50px;
   height: 48px;
 }
+
 .img-no-radius{
   border-radius: 0 !important;
+}
+
+.header-mini-title{
+  margin-top: 12rem;
+}
+
+.header-mini-title h2{
+  color: #aeaeae;
 }

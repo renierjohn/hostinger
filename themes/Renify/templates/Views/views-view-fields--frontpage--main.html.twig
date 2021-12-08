@@ -21,9 +21,11 @@
     <div class="item-feature__text">
       <h3 class="item-title">{{title}}</h3>
       <h5 class="item-date"><i class="fa fa-calendar"></i>{{date}}</h5>
-      <p>
-        {{body}}
-      </p>
+      <div class="search-detail-desc">
+        <p>
+        {{body|striptags}}
+        </p>
+      </div>
     </div>
     <div class="article-social">
       <ul>

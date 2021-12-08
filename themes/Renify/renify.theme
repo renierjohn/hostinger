@@ -62,11 +62,31 @@ function renify_preprocess_html(&$variables){
   if(\Drupal::service('path.matcher')->isFrontPage()){
     $variables['head_title']['title'] = 'Renify';
   }
+  if(\Drupal::service('current_route_match')->getRouteName() == 'search.view_node_search'){
+    $title = \Drupal::request()->query->get('keys');
+    if(empty($title)){
+      $variables['head_title']['title'] = 'No Result | Renify';
+    }
+    else{
+      $variables['head_title']['title'] = $title.' | Renify';
+    }
+    $variables['form_title'] = $title;
+  }
 }
 
 function renify_preprocess_menu(&$variables){
   if(!\Drupal::service('path.matcher')->isFrontPage()){
-    $variables['menus'][] = ['url' => '#gallery','title'=>'Gallery'];
-    $variables['menus'][] = ['url' => '#video','title'=>'Video'];
+    // $variables['menus'][] = ['url' => '#gallery','title'=>'Gallery'];
+    // $variables['menus'][] = ['url' => '#video','title'=>'Video'];
+  }
+}
+
+function renify_preprocess_form(&$variables){
+  if(\Drupal::service('current_route_match')->getRouteName() == 'search.view_node_search'){
+    $title = \Drupal::request()->query->get('keys');
+    if(empty($title)){
+      $title = 'None';
+    }
+    $variables['form_title'] = $title;
   }
 }

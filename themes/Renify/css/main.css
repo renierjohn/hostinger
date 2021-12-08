@@ -31,7 +31,7 @@ body {
  * ## links
  * ------------------------------------------------------------------- */
 a {
-  color: #2945ac;
+  color: #a5443e;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
@@ -244,7 +244,7 @@ mark {
 }
 
 hr {
-  border: solid #eaeaea;
+  border: solid #2d3a69;
   border-width: 1px 0 0;
   clear: both;
   margin: 2.4rem 0 1.6rem;
@@ -645,17 +645,19 @@ form,
  * # home
  *
  * ------------------------------------------------------------------- */
-/* .s-home {
-  display: table;
-  width: 100%;
-  min-height: 788px;
-  background-color: transparent;
-  position: relative;
-} */
+
 .s-home {
   display: table;
   width: 100%;
   min-height: 788px;
+  /* background-color: #e06e6e2b; */
+  position: relative;
+}
+
+.s-home-mini {
+  display: table;
+  width: 100%;
+  min-height: 25vh;
   /* background-color: #e06e6e2b; */
   position: relative;
 }
@@ -2378,6 +2380,114 @@ input::-moz-focus-inner {
 
 .message-form-no-margin{
   margin-bottom: 0 !important;
+}
+
+.cart{
+    position: relative;
+    top: 1rem;
+    padding-right: 1rem;
+}
+
+.cart a:hover{
+  color: #fefefe;
+}
+
+.cart .badge{
+  font-size: 1.5rem;
+  position: relative;
+  right: 5px;
+  top: -10px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.search-form{
+  display: flex;
+  margin-bottom: 0;
+  padding: 0;
+  padding-right: 4rem;
+}
+
+.search-form input{
+  height: 4rem;
+  margin: 0;
+  padding: 0 1rem;
+  line-height: 4rem;
+  background: transparent !important;
+  border: 0.15rem solid #ff565d;
+}
+
+.search-form input.input{
+  color: white !important;
+}
+
+.search-form input.submit{
+    color: #ff565d;
+    margin-left: 1rem;
+}
+
+.search-items{
+  display: flex;
+}
+
+
+.search-items img{
+  max-width: 30rem;
+  width: 30rem;
+  padding: 1rem;
+}
+
+.search-items .search-detail{
+  padding: 1rem;
+}
+
+.search-items-link{
+  color: #000000;
+}
+
+.search-items-link:hover{
+  color: #a5443e !important;
+}
+
+.search-items-link h2:hover{
+  color: #a5443e !important;
+}
+
+.search-items-link img:hover{
+  opacity: .5;
+   -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-pagination{
+  background-color: #eaeaea;
+  padding: 1rem 0;
+}
+
+.search-pagination div{
+  margin-left: 50%;
+  margin-right: 50%;
+}
+
+.search-pagination ul{
+  list-style: none;
+  display: flex;
+}
+
+.search-pagination ul li a{
+  margin: 1rem;
+  padding: 0 0.5rem;
+}
+
+.search-pagination ul li a.active{
+  background-color: #3e5b61;
+  color: white;
+}
+
+.search-form{
+  padding:1rem;
+  margin: 1rem;
 }
 
 @media only screen and (max-width:800px) {

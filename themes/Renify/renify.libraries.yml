@@ -24,6 +24,7 @@ base:
     js/custom.js: {}
     js/ajax.js: {}
     js/aos.js.map: {}
+    js/trunc8.js: {}
   dependencies:
     - core/jquery
 
