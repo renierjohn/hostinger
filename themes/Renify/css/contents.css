@@ -22,7 +22,7 @@
 .articles .article-social {
   font-size: 1.6rem;
   color: rgba(0, 0, 0, 0.4);
-  padding: 0 1rem;
+  padding: 12rem 1rem 1rem 1rem;
 }
 .articles .article-social ul {
   text-decoration: none;
@@ -57,7 +57,25 @@
 .card img{
   width: 100%;
 }
-  
+
+.card img:hover{
+    opacity: 0.6;
+    filter: alpha(opacity=30);
+    /*transform: scale(1.3);*/
+    transition: .2s ease-in-out;
+}
+
+.card ul{
+  list-style: decimal;
+  padding: 0;
+  margin: 0;
+  padding-left: 2rem;
+}
+
+.card .btn{
+  min-width: 100%;
+}  
+
 .item-feature-image{
   height: 40vh;
 }

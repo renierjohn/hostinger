@@ -1,0 +1,38 @@
+{% set lazy_img    = '/themes/Renify/themes/renify/images/lazy/lazy.jpg' %}
+{% set id          = node.id|raw|striptags|raw %}
+{% set title       = node.title.value|raw|striptags %}
+
+{% set description = content.field_description.0['#text'] %}
+{% set summary     = content.field_table_summary.0['#text'] %}
+
+{% set ticket_link = content.field_table_ticket_link.0['#text'] %}
+
+{% set route_name = content.field_table_route %}
+{% set route_time = content.field_table_time %}
+
+
+ <div class="col-six">
+  <table>
+    <caption>{{title}}</caption>
+    <thead>
+      <tr>
+        <th>Route</th>
+        <th>Departure</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{% for key,name in route_name['#items'] %}
+	      <tr>
+	        <td>{{name.value}}</td>
+	        <td>{{route_time[key]['#context'].value}}</td>
+	      </tr>
+		{% endfor %}
+    </tbody>
+  </table>
+  {% if ticket_link %}
+  	<a href="{{ticket_link}}" class="btn btn--stroke">Find Tickets<i class="fa fa-arrow-up"></i></a>
+  {% endif %}
+  {% if summary %}
+  	<h12>*{{summary}}</h12>
+  {% endif %}
+</div>

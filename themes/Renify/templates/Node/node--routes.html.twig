@@ -1,0 +1,126 @@
+{% set lazy_img    = '/themes/Renify/themes/renify/images/lazy/lazy.jpg' %}
+{% set id          = node.id|raw|striptags|raw %}
+{% set title       = node.title.value|raw|striptags %}
+{% set banner      = content.field_banner_image.0['#markup'] %}
+{% set description = content.field_description.0['#text'] %}
+{% set galleries   = content.field_thumbnails %}
+
+{% set route_orign = content.field_route_origin %}
+{% set route_dest  = content.field_route_destination %}
+{% set route_class = content.field_route_class %}
+{% set route_price = content.field_route_price %}
+
+{% set route_tables = content.field_tx_table_route %}
+{# 
+{% set category    = content.field_category.0['#title'] %}
+{% set nearby      = content.field_nearby_place.0['#plain_text'] %}
+{% set date        = node.created.value|format_date('y M o') %} #}
+
+<style type="text/css">
+	#message-form{
+		margin-bottom: 0;
+	}
+</style>
+
+<section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="{{banner}}" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+  <div class="header-mini-title center">
+    <h2>{{title}}</h2>
+  </div>
+</section>
+
+{{ drupal_view('frontpage', 'block_1') }}
+
+{# {{kint(route_tables['#items'][0].entity.id)}} #}
+<!-- MAIN CONTENTS -->
+    <section id="body" class="articles"  max-pager="">
+      <div class="row" >
+        <div class="col-full">
+	        <table>
+	            <caption>{{title}} SCHEDULES & FARES</caption>
+	            <thead>
+	              <tr>
+	                <th>Origin</th>
+	                <th>Destination</th>
+	                <th>Class</th>
+	                <th>Price</th>
+	              </tr>
+	            </thead>
+	            <tbody>
+	            	{% for key,origin in route_orign['#items'] %}
+			              <tr>
+			                <td>{{origin.value}}</td>
+			                <td>{{route_dest[key]['#context'].value}}</td>
+			                <td>{{route_class[key]['#context'].value}}</td>
+			                <td>{{route_price[key]['#context'].value}}</td>
+			              </tr>
+	            	{% endfor %}
+	            </tbody>
+	        </table>
+
+	        <div class="gallery__wrap aos-init aos-animate" data-aos="fade-up">
+	            <div class="gallery__photos">
+	              <div class="col-full slick-slider thumb__slider">
+	              	{% for gallery in galleries['#items'] %}
+	              		{% set img = gallery.entity.uri.value|replace({'public://':'/sites/default/files/public/'}) %}
+	                  <div class="gallery__slide">
+	                    <a href="#">
+	                      <img src="{{lazy_img}}" data-src="{{img}}" class="img-fluid lazy" alt="">
+	                    </a>
+	                  </div>
+	              	{% endfor %}
+	              </div>
+	            </div>
+	        </div>
+        </div>
+      </div>
+
+      <div class="row">
+      	{% for node in route_tables['#items'] %}
+      		{{ drupal_entity('node',node.entity.id, 'full') }}
+      	{% endfor %}
+
+      </div>
+    </section>
+
+<!-- RELATED ROUTES -->
+    <section id="category" class="">
+      <div class="row">
+        <div class="gallery__wrap" data-aos="fade-up">
+          <div class="col-full about-desc">
+            <h2 class="display-2">Other Routes</h2>
+          </div>
+          <div class="gallery__photos">
+            <div class="col-full slick-slider gallery__photos__slide">
+                <div class="gallery__slide">
+                  <a href="#">
+                    <img src="/themes/renify/images/lazy/lazy.jpg" data-src="/themes/renify/images/ceres.jpg" class="img-fluid lazy" alt="">
+                  </a>
+                </div>
+                <div class="gallery__slide">
+                  <a href="#">
+                    <img src="/themes/renify/images/lazy/lazy.jpg" data-src="/themes/renify/images/rsl.png" class="img-fluid lazy" alt="">
+                  </a>
+                </div>
+                <div class="gallery__slide">
+                  <a href="#">
+                    <img src="/themes/renify/images/lazy/lazy.jpg" data-src="/themes/renify/images/jam.png" class="img-fluid lazy" alt="">
+                  </a>
+                </div>
+                <div class="gallery__slide">
+                  <a href="#">
+                    <img src="/themes/renify/images/lazy/lazy.jpg" data-src="/themes/renify/images/rs1.png" class="img-fluid lazy" alt="">
+                  </a>
+                </div>
+                <div class="gallery__slide">
+                  <a href="#">
+                    <img src="/themes/renify/images/lazy/lazy.jpg" data-src="/themes/renify/images/jam.png" class="img-fluid lazy" alt="">
+                  </a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+{{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}

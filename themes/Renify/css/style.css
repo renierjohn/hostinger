@@ -72,6 +72,10 @@ h1 {
   margin: 0.67em 0;
 }
 
+h12 {
+  font-size: 12px;
+}
+
 figcaption,
 figure,
 main {

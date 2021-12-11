@@ -351,14 +351,39 @@ img.pull-left {
  * ## tables
  * ------------------------------------------------------------------- */
 table {
-  border-width: 0;
+  border-width: 1px;
   width: 100%;
   max-width: 100%;
   font-family: "Nunito Sans", sans-serif;
   border-collapse: collapse;
+  text-align: left;
 }
 
-th,
+table caption{
+  font-size: 20px;
+}
+
+thead{
+  background-color: #fefefe;
+}
+
+thead tr{
+  border: solid black 2px;
+  background-color: black;
+}
+
+th{
+  border: solid white 1px ;
+  color: white;
+  padding: 3px;
+}
+
+td{
+  border: solid black 1px ;
+  padding: 3px;
+}
+
+/*th,
 td {
   padding: 1.6rem 3.2rem 1.5rem;
   text-align: left;
@@ -384,7 +409,7 @@ td:last-child {
 .table-responsive {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-}
+}*/
 
 
 /* -------------------------------------------------------------------
@@ -1263,6 +1288,7 @@ button.btn--stroke--reverse:hover {
   background: transparent !important;
   border: 0.2rem solid #ff565d;
   color: #ff565d;
+  /*display: block;*/
 }
 
 .btn--pill,

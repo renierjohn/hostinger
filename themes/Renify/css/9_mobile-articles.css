@@ -59,6 +59,10 @@
     top: -14rem;
   }
 
+  .articles ul{
+    font-size: 12px;
+  }
+
 }
 
 @media only screen and (max-width:425px) {
@@ -97,12 +101,14 @@
     .articles .features .item-feature{
       padding: 0;
       margin: 2rem .5rem;
+      min-width: 200px;
     }
     .item-feature-image{
       height: 30vh;
     }
     .articles .item-feature__text{
       height: 12vh;
+      display: contents;
     }
     .item-title{
       font-size: 1.7rem;
@@ -136,7 +142,7 @@
       display: inline;
     }*/
     .btn--big{
-      padding: 1rem 3rem;
+      padding: 4px;
     }
     #video{
       padding: 0;
@@ -146,7 +152,7 @@
     }
 
     .card{
-      max-width: 20rem;
+      max-width: 200px;
     } 
   }
 }
