@@ -8,8 +8,6 @@
     "use strict";
     $ = jQuery;
 
-    $('.search-detail-desc').hide();
-
     var cfg = {
         scrollDuration : 800, // smoothscroll duration
         mailChimpURL   : 'https://facebook.us8.list-manage.com/subscribe/post?u=cdb7b577e41181934ed6a6a44&amp;id=e6957d85dc'   // mailchimp url
@@ -360,7 +358,7 @@
    /* Initialize
     * ------------------------------------------------------ */
     (function clInit() {
-
+        jQuery('.search-detail-desc').hide();
         ssPreloader();
         ssMenuOnScrolldown();
         ssMobileMenu();

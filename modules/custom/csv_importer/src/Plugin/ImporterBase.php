@@ -330,7 +330,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
               }
               
               if(!empty($entity_content)){
-                 \Drupal::service('headless.file')->registerDeletedItems($entity_content); // register the deleted items for realtime update
+                 // \Drupal::service('headless.file')->registerDeletedItems($entity_content); // register the deleted items for realtime update
                  $entity_content->delete();
                  $date = date("F d,Y h:i:s A");
                  $file = fopen('private://deleted_content_logs.txt','a');
