@@ -50,6 +50,8 @@ class EntityService {
 
   protected $handlerSettings;
 
+  protected $machine_name;
+
   protected $entity_type = 'node';
 
   const UNSET_FIELDS = ['bundle','uuid','vid','type','revision_timestamp','description',
@@ -58,19 +60,13 @@ class EntityService {
                         'revision_translation_affected','path','moderation_state','content_translation_source',
                         'content_translation_outdated','menu_link',
                         'parent','revision_id','revision_created','revision_user','revision_log_message','weight','content_translation_uid','content_translation_created','metatag'
-                      ];
-
-  const FIELD_MIDDLE_CATGRY = [
-      'connector'                   => 'field_con_middle_category',
-      'saw_devices'                 => 'field_saw_middle_category',
-      'power_semiconductor_devices' => 'field_pow_middle_category',
-      'crystal_devices'             => 'field_cry_middle_category',
-      'capacitors'                  => 'field_cap_middle_category'
-    ];                    
+                      ];          
+  
+  const REFERENCE    = [
+    'field_tx_table_route' => ['type'=>'table_routes','node'=>'field_table_bus_name','name'=>'bus_name'],
+  ];
 
   const DEFAULT_LANGCODE =  'ja';
-
-  const ENTITY_MEDIA  = 'media';
 
   const ENTITY_FILE   = 'file';
 
@@ -86,8 +82,9 @@ class EntityService {
 
   const PUBLIC_PATH   = '/sites/default/files/';
 
-  const SEPARATOR     = ',';
+  const SEPARATOR     = ';';
 
+  const SEPARATOR_MULTI = '|';
   /**
    * DataProviderService constructor.
    *
@@ -158,6 +155,11 @@ class EntityService {
     return $this;
   }
 
+  public function setMachineName($machine_name){
+    $this->machine_name = $machine_name;
+    return $this;
+  }
+
   
   /**
    * @param only for import csv , can detect multiple title for taxonomy and node
@@ -168,18 +170,18 @@ class EntityService {
     $names       = $this->names;
     $entity_type = $this->entity_type; 
     $handler     = $this->handlerSettings; // array ['key'=>'value']
+    $machine_name= $this->machine_name;
     $status      = ['mismatch_name'=>[],'id'=>[]];
     if(empty($names)){
       return FALSE;
     }
-    $names   = explode(self::SEPARATOR,$names);    
+    $names   = explode(self::SEPARATOR_MULTI,$names);    
     
     $entity  = $this->entityTypeManager->getStorage($entity_type);    
     
     $handler = reset($handler);
-
+    $ids = [];
     foreach ($names as $name) {            
-
       if($entity_type == 'taxonomy_term'){ // detect from taxonomy name
           $id = $entity->getQuery()
             ->condition('name',$name,'=')
@@ -188,20 +190,28 @@ class EntityService {
       }
       
       if($entity_type == 'node'){ // detect from node title
-        $id = $entity->getQuery()
-          ->condition('title',$name,'=')
-          ->condition('type',$handler)
-          ->execute();    
+          if(in_array($machine_name,array_keys(self::REFERENCE))){
+            $node_field = self::REFERENCE[$machine_name]['node'];
+            $vid        = self::REFERENCE[$machine_name]['name'];
+            $type       = self::REFERENCE[$machine_name]['type'];
+            $tid = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery()->condition('vid',$vid)->condition('name',$name)->execute();
+            $tid = reset($tid);
+            $id  = $this->entityTypeManager->getStorage('node')->getQuery()->condition('type',$type)->condition($node_field,$tid)->execute();
+            $ids = array_values($id);
+          }
+          else{
+            $id = $entity->getQuery()->condition('title',$name,'=')->condition('type',$handler)->execute();
+              if(!empty($id)){
+                  $ids[] = $id;
+              }
+          }
       }
 
-      if(empty($id)){
+      if(empty($ids)){
         $status['mismatch_name'][] = $name;       
       }
-      else{
-        $status['id'][] = reset($id);
-      }
     }
-
+    $status['id'] = $ids;
     return $status;
   }
 
@@ -216,7 +226,7 @@ class EntityService {
     if(empty($uri_s)){
       return FALSE;
     }
-    $uri_s   = explode(self::SEPARATOR,$uri_s);    
+    $uri_s   = explode(self::SEPARATOR_MULTI,$uri_s);    
     $entity  = $this->entityTypeManager->getStorage('file');
     foreach ($uri_s as $urix) {      
       $uri = str_replace('sites/default/files/','public://',$urix);
@@ -316,7 +326,7 @@ class EntityService {
                   continue;
               }
           }         
-          $tmp[$machine_name.'|'.$labels[$machine_name]->getLabel()] = $this->preprocessFields($value,$labels[$machine_name],$langcode,$is_external);
+          $tmp[$machine_name.'|'.$labels[$machine_name]->getLabel()] = $this->preprocessFields($value,$labels[$machine_name],$langcode,$is_external,$machine_name);
         }
         $contents[] = $tmp;
       }
@@ -375,7 +385,7 @@ class EntityService {
    * @param $labels , field difinition from single field
    * @return string value 
    * */ 
-  private function preprocessFields($fields,$labels,$langcode,$is_external = TRUE){  
+  private function preprocessFields($fields,$labels,$langcode,$is_external = TRUE,$machine_name = false){  
     $full_path = $this->getDomain();
     $settings  = [];
     if($is_external == FALSE){
@@ -409,7 +419,7 @@ class EntityService {
           $tmp_url   = str_replace('public://', $full_path.'/', $tmp_url);
           $urls[]    = $tmp_url;
       }
-      return implode(self::SEPARATOR,$urls);
+      return implode(self::SEPARATOR_MULTI,$urls);
     }
 
     if($type == self::ENTITY_TERM){
@@ -426,13 +436,14 @@ class EntityService {
         $term = $term->hasTranslation($langcode) ?  $term->getTranslation($langcode) : $term;
         $result[] = $term->getName();
       }
-      return implode(self::SEPARATOR,$result);
+      return implode(self::SEPARATOR_MULTI,$result);
     }
 
     if($type == self::ENTITY_NODE){
       $nid          = [];
       $status_names = [];
       $result       = [];
+      $results      = [];
 
       foreach ($fields as $val) {
         $nid[] = $val['target_id'];
@@ -441,10 +452,22 @@ class EntityService {
       $nodes = $this->entityTypeManager->getStorage(self::ENTITY_NODE)->loadMultiple($nid);      
       foreach ($nodes as $node) {
         $node = $node->hasTranslation($langcode) ?  $node->getTranslation($langcode) : $node;
-        $result[] = $node->getTitle();
+        if(in_array($machine_name,array_keys(self::REFERENCE))){
+            $node_field = self::REFERENCE[$machine_name]['node'];
+            $tid  = $node->$node_field[0]->target_id;
+            $name = $this->entityTypeManager->getStorage(self::ENTITY_TERM)->load($tid)->getName();
+            $results[$tid] = $name;
+        }
+        else{
+          $result[] = $node->getTitle();
+        }
       }
 
-      return implode(self::SEPARATOR,$result);
+      if(!empty($results)){
+        $result = array_values($results);
+      }
+
+      return implode(self::SEPARATOR_MULTI,$result);
     }
 
     $tmp = [];
@@ -456,7 +479,7 @@ class EntityService {
       $tmp[] = $tmp_val;
     }
 
-    return implode(self::SEPARATOR,$tmp);
+    return implode(self::SEPARATOR_MULTI,$tmp);
   }
 
     /**

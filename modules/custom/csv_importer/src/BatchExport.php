@@ -51,6 +51,7 @@ class BatchExport {
 
     public function process($nids,$filename,$langcode,$entity_type,$translatable,&$context) {
         $limit       = 100;
+        $SEPARATOR   = ';';
         $entity      = \Drupal::service('csv_importer.entity');
         $contents    = $entity->ids($nids)->setTranslatable($translatable)->entityType($entity_type)->langcode($langcode)->loadAll();
         $total_row   = count($contents);
@@ -69,7 +70,7 @@ class BatchExport {
           $header = \Drupal::service('state')->get('csv_file_header_state');
           if($header == 1){
             $temp_header = [];
-            fputcsv($csv_file,array_keys($contents[0]));
+            fputcsv($csv_file,array_keys($contents[0]),$SEPARATOR);
             $header = \Drupal::service('state')->set('csv_file_header_state',0);
           }
         }
@@ -86,7 +87,7 @@ class BatchExport {
         }
         $result = range( $min , $max );
         foreach ($contents as $key => $content) {
-          fputcsv($csv_file,$content);
+          fputcsv($csv_file,$content,$SEPARATOR);
           $row  = $key;
           $context['results'][] = 'row # '.($row);
           $context['sandbox']['progress']++;

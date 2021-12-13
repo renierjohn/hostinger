@@ -5,14 +5,22 @@
 </style>
 {{ drupal_view('frontpage', 'block_1') }}
 
+
 <section id="body" class="articles"  max-pager="">
   <div class="row section-header has-bottom-sep" >
-    <div class="col-full">
+    <div class="col-six">
       <h1 class="display-1">
         List of Places
       </h1>
       <p class="lead">
         Read the latest articles that you want to discover
+      </p>
+    </div>
+    <div class="col-six">
+       <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5xugp0tbqem&amp;m=7&amp;c=ff0000&amp;cr1=ffffff&amp;f=ubuntu&amp;l=0" async="async"></script>
+      
+      <p class="lead">
+        Youre Current Locaion
       </p>
     </div>
     {{ view.header.area_text_custom.content }}

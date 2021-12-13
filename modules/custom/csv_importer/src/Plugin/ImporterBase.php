@@ -50,6 +50,9 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
 
   protected $csv;
 
+  const SEPARATOR       = ';';
+
+  const SEPARATOR_MULTI = '|';
   /**
    * Constructs ImporterBase object.
    *
@@ -234,8 +237,8 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
   public function getTotalRow(&$filename){
     $csv = fopen($filename,'r');
     $row = 0;
-    $header = fgetcsv($csv,10000);
-    while(fgetcsv($csv,10000)) {
+    $header = fgetcsv($csv,10000,self::SEPARATOR);
+    while(fgetcsv($csv,10000,self::SEPARATOR)) {
       $row++;
     }
     fclose($csv);
@@ -264,7 +267,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
     
     $csv_file_handler = fopen($filename,'r');
     $row = 0;
-    while ($data = fgetcsv($csv_file_handler)) {
+    while ($data = fgetcsv($csv_file_handler,10000,self::SEPARATOR)) {
       if($row >= $start_offset && $row <= $end_offset ){
         $fields_arrs[] = array_combine($header,$data);   
       }
@@ -372,8 +375,8 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
                 
                   $normal_field   = TRUE; // detect if field is not entity referenced
                   
-                  if($cardinality > 1){ // detect if the field is multiple values
-                    $tmp_multiple_field = explode(',',$field_arr_value);
+                  if($cardinality > 1 || $cardinality == -1){ // detect if the field is multiple values
+                    $tmp_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
                   }
 
                   if($field_type == 'entity_reference_revisions'){ // skip if field type is paragraph
@@ -408,7 +411,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
                       $normal_field = FALSE;
                       $target_type      = $field_settings['target_type'];
                       $handlerSettings  = $field_settings['handler_settings']['target_bundles']; // array ['key'=>'value','key1'=>'value1']
-                      $name_status      = \Drupal::service('csv_importer.entity')->setHandlerSettings($handlerSettings)->entityType($target_type)->setNames($field_arr_value)->getIDFromNames();
+                      $name_status      = \Drupal::service('csv_importer.entity')->setHandlerSettings($handlerSettings)->entityType($target_type)->setNames($field_arr_value)->setMachineName($field_arr_key)->getIDFromNames();
                       if(!empty($name_status['mismatch_name'])){
                         /** LOGGER */
                         $missing_files = implode(',',$name_status['mismatch_name']); 
@@ -427,7 +430,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
                     // $field_arr_value = explode(',',$field_arr_value); // detect if multiple id 
                   }
 
-                  if($normal_field == TRUE && !empty($tmp_multiple_field) && $cardinality > 1){ // store the normal values as an array
+                  if($normal_field == TRUE && !empty($tmp_multiple_field) && ($cardinality > 1  || $cardinality == -1) ){ // store the normal values as an array
                     $field_arr_value = $tmp_multiple_field;
                   }
 
