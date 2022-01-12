@@ -2499,6 +2499,7 @@ input::-moz-focus-inner {
 .search-pagination ul{
   list-style: none;
   display: flex;
+  justify-content: center;
 }
 
 .search-pagination ul li a{

@@ -91,36 +91,11 @@
           </div>
           <div class="gallery__photos">
             <div class="col-full slick-slider gallery__photos__slide">
-                <div class="gallery__slide">
-                  <a href="#">
-                    <img src="{{lazy_img}}" data-src="/themes/Renify/images/ceres.jpg" class="img-fluid lazy" alt="">
-                  </a>
-                </div>
-                <div class="gallery__slide">
-                  <a href="#">
-                    <img src="{{lazy_img}}" data-src="/themes/Renify/images/rsl.png" class="img-fluid lazy" alt="">
-                  </a>
-                </div>
-                <div class="gallery__slide">
-                  <a href="#">
-                    <img src="{{lazy_img}}" data-src="/themes/Renify/images/jam.png" class="img-fluid lazy" alt="">
-                  </a>
-                </div>
-                <div class="gallery__slide">
-                  <a href="#">
-                    <img src="{{lazy_img}}" data-src="/themes/Renify/images/rs1.png" class="img-fluid lazy" alt="">
-                  </a>
-                </div>
-                <div class="gallery__slide">
-                  <a href="#">
-                    <img src="{{lazy_img}}" data-src="/themes/Renify/images/jam.png" class="img-fluid lazy" alt="">
-                  </a>
-                </div>
+                {{ drupal_view('routes','relatedroute') }}
             </div>
           </div>
         </div>
       </div>
     </section>
-
 
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}

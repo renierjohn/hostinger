@@ -1,0 +1,32 @@
+{% set id       = fields.nid.content|raw|striptags %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+{% set ticket   = fields.field_ticket_link_list.content|raw %}  
+{% set lazy_img = '/themes/Renify/themes/renify/images/lazy/lazy.jpg' %}
+
+{# {{ kint(ticket) }} #}
+<div class="col-block item-article item-feature" >
+  <div class="card">
+    <div class="views">
+      <a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a>
+    </div>
+    <div class="item-feature-image">
+      <img src="{{lazy_img}}" data-src="{{image}}" class="img-fluid lazy" alt="">
+    </div>
+    <div class="item-feature__text">
+      <h3 class="item-title"><i class="fas fa-shuttle-van"></i>{{ title }}</h3>
+      <h5 class="item-ticket"><i class="fas fa-bus"></i><a href="https://book.renifysite.com" title=""> Find Tickets</a></h5>
+        {{ticket}}
+    </div>
+    <div class="article-social">
+      <ul>
+        <li><i class="fa fa-share"></i></li>
+        <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#." class="share-twitter" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
+        <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+      </ul>
+      <a href="{{link}}" class="btn btn--stroke--reverse btn-effect btn--big"><i class="far fa-map"></i> Find Schedules</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+  <!-- HEADER -->
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="/themes/Renify/images/route.jpg" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+    <div class="shadow-overlay"></div>
+    <div class="home-content">
+        <div class="row home-content__main">
+            <div class="home-content__left">
+                  <h1>Routes</h1>
+                  <h3>ITS MORE FUN IN THE PHILIPPINES</h3>
+                <div class="home-content__btn-wrap">
+                    <a href="https://book.renifysite.com/" class="btn btn--stroke--reverse btn--big home-content__btn ">
+                        Find Tickets
+                    </a>
+                </div>
+            </div> <!-- end home-content__left-->
+        </div> <!-- end home-content__main -->
+        <ul class="home-content__social">
+            <li><a href="#." class="share-fb" data-pageid="/" data-title="Renify">Facebook</a></li>
+            <li><a href="#." class="share-twitter" data-pageid="/" data-title="Renify">twitter</a></li>
+            <li><a href="#." data-pageid="" data-id="" data-title="">Instagram</a></li>
+        </ul>
+    </div> <!-- end home-content -->
+    <a href="#body" class="home-scroll ">
+        <span class="home-scroll__text">Scroll</span>
+        <span class="home-scroll__icon"></span>
+    </a>
+</section>
+    <!-- END HEADER -->
+
+{{ drupal_view('frontpage', 'block_1') }}
+
+<section id="body" class="articles"  max-pager="">
+  <div class="row section-header has-bottom-sep" >
+    <div class="col-full">
+      <h1 class="display-1">
+        Route Guides For You
+      </h1>
+      <p class="lead">
+        Search Youre Travel Plan and Dont Forget To Explore
+      </p>
+    </div>
+  </div> 
+  <!-- end section-header -->
+  <div class="row features block-1-3 block-tab-full" data-aos="fade-in">
+      {% if rows -%}
+        {% for row in rows %}
+          {{row.content}}
+        {% endfor %}
+      {% endif %}
+  </div>
+</section>
+
+{{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
