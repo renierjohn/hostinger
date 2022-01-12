@@ -179,14 +179,14 @@ class EntityService {
     
     $entity  = $this->entityTypeManager->getStorage($entity_type);    
     
-    $handler = reset($handler);
+    // $handler = reset($handler);
     $ids = [];
     foreach ($names as $name) {            
       if($entity_type == 'taxonomy_term'){ // detect from taxonomy name
-          $id = $entity->getQuery()
+          $ids = $entity->getQuery()
             ->condition('name',$name,'=')
             ->condition('vid',$handler)
-            ->execute();    
+            ->execute();
       }
       
       if($entity_type == 'node'){ // detect from node title
