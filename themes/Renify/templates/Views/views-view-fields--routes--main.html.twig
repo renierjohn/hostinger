@@ -1,11 +1,13 @@
-{% set id       = fields.nid.content|raw|striptags %}
+{% set id       = fields.nid.content|raw|striptags|trim %}
 {% set title    = fields.title.content|raw|striptags %}
 {% set image    = fields.field_banner_image.content|raw|striptags %}
 {% set link     = fields.view_node.content|raw|striptags %}
 {% set ticket   = fields.field_ticket_link_list.content|raw %}  
 {% set lazy_img = '/themes/Renify/images/lazy/bus.svg' %}
 
-{# {{ kint(ticket) }} #}
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+
 <div class="col-block item-article item-feature" >
   <div class="card">
     <div class="views">
@@ -14,10 +16,12 @@
     <div class="item-feature-image">
       <img src="{{lazy_img}}" data-src="{{image}}" class="img-fluid lazy" alt="">
     </div>
-    <div class="item-feature__text">
+    <div class="item-feature__text route-block">
       <h3 class="item-title"><i class="fas fa-shuttle-van"></i>{{ title }}</h3>
-      <h5 class="item-ticket"><i class="fas fa-bus"></i><a href="https://book.renifysite.com" title=""> Find Tickets</a></h5>
-        {{ticket}}
+      {% if ticket %}
+          <h5 class="item-ticket"><i class="fas fa-bus"></i><a href="https://book.renifysite.com" title=""> Find Tickets</a></h5>
+            {{ticket}}
+      {% endif %}
     </div>
     <div class="article-social">
       <ul>

@@ -527,3 +527,7 @@
   margin-bottom: 6rem;
   margin-top: 0.6rem;
 }
+
+.card .item-feature__text{
+  padding-top: 2rem;
+}

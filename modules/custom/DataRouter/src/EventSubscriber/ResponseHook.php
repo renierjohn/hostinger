@@ -51,7 +51,7 @@ class ResponseHook implements EventSubscriberInterface {
 
   const COOKIE_KEY          = 't';
 
-  const VALID_CONTENT_TYPES = ['places'];
+  const VALID_CONTENT_TYPES = ['places','routes'];
 
   const TRACKER_PREFIX      = 'track_';
 

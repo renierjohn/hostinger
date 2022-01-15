@@ -19,8 +19,6 @@ class TrackerController extends ControllerBase {
 
   const COOKIE_KEY          = 't';
 
-  const VALID_CONTENT_TYPES = ['places'];
-
   const TRACKER_PREFIX      = 'track_';
 
   public function __construct(State $state,RequestStack $request) {
