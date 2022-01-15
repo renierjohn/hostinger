@@ -53,6 +53,8 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
   const SEPARATOR       = ';';
 
   const SEPARATOR_MULTI = '|';
+
+  const LINK_DELIMITER  = '^';
   /**
    * Constructs ImporterBase object.
    *
@@ -428,6 +430,17 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
                         continue;
                       } 
                     // $field_arr_value = explode(',',$field_arr_value); // detect if multiple id 
+                  }
+
+                  if($field_type == 'link'){
+                    $normal_field = FALSE;
+                    $link_value = [];
+                    $link_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
+                    foreach ($link_multiple_field as $tmp_multiple_field_key => $tmp_multiple_field_value){
+                      $tmp_multiple_field_value = explode(self::LINK_DELIMITER,$tmp_multiple_field_value);
+                      $link_value[] = ['title'=>$tmp_multiple_field_value[0],'uri'=>$tmp_multiple_field_value[1]];
+                    }
+                    $field_arr_value = $link_value;
                   }
 
                   if($normal_field == TRUE && !empty($tmp_multiple_field) && ($cardinality > 1  || $cardinality == -1) ){ // store the normal values as an array

@@ -49,7 +49,7 @@ class BatchExport {
       $this->status = $status;
     }
 
-    public function process($nids,$filename,$langcode,$entity_type,$translatable,&$context) {
+    public function runExport($nids,$filename,$langcode,$entity_type,$translatable,&$context) {
         $limit       = 100;
         $SEPARATOR   = ';';
         $entity      = \Drupal::service('csv_importer.entity');
@@ -129,7 +129,7 @@ class BatchExport {
     $index        = 0;
     $limit        = $this->limit;
     $process      = [];
-    $process['operations']['filename'] = $filename;
+    // $process['operations']['filename'] = $filename;
     /** ovverwrite the file and set initial state for adding header*/
     $csv_file     = fopen($filename, 'w+');
     fclose($csv_file);
@@ -149,11 +149,12 @@ class BatchExport {
         break;
       }
       $process['operations'][] = [
-        [$this,'process'],
+        [$this,'runExport'],
         [$ids,$filename,$langcode,$entity_type,$translatable]
       ];
       $index += $limit;
-    }    
+    }
+
     $process['finished'] = [$this, 'batch_finished'];
     batch_set($process);
   }

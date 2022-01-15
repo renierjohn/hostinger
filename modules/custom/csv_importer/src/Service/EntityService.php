@@ -84,7 +84,10 @@ class EntityService {
 
   const SEPARATOR     = ';';
 
+  const LINK_DELIMITER   = '^';
+
   const SEPARATOR_MULTI = '|';
+
   /**
    * DataProviderService constructor.
    *
@@ -260,7 +263,7 @@ class EntityService {
     // if(!empty($mid)){
     //    $query->condition(self::FIELD_MIDDLE_CATGRY[$content_type],$mid);
     // }
-    if(!empty($status) || $status == '0'){
+    if(!empty($status) || $status === '0'){
        $query->condition('status',$status);
     }  
 
@@ -399,8 +402,8 @@ class EntityService {
     if($labels){
       $settings  = $labels->getSettings();
     }
-
     $type      = isset($settings['target_type']) ? $settings['target_type'] : FALSE;
+
     /** start condition for pdf image*/ 
     if($type == self::ENTITY_FILE || $type == self::ENTITY_IMAGE){
       $fid  = [];
@@ -467,6 +470,15 @@ class EntityService {
         $result = array_values($results);
       }
 
+      return implode(self::SEPARATOR_MULTI,$result);
+    }
+
+
+    if($labels->getType() == self::ENTITY_LINK){
+      $result      = [];
+      foreach ($fields as $val) {
+        $result[] = $val['title'].self::LINK_DELIMITER.$val['uri']; 
+      }
       return implode(self::SEPARATOR_MULTI,$result);
     }
 
