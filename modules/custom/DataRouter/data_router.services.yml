@@ -31,3 +31,8 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@database'
+
+  data_router.ajaxroute:
+    class: Drupal\data_router\Service\AjaxRoute
+    arguments:
+      - '@entity_type.manager'

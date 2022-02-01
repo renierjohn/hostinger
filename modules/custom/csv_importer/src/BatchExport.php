@@ -156,6 +156,11 @@ class BatchExport {
     }
 
     $process['finished'] = [$this, 'batch_finished'];
-    batch_set($process);
+    if(!empty($process['operations'])){
+      batch_set($process);
+    }
+    else{
+      \Drupal::messenger()->addError('No Contents');
+    }
   }
 }

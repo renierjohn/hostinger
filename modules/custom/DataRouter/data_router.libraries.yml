@@ -4,6 +4,13 @@ tracker:
   dependencies:
     - core/jquery  
 
+sched:
+  js:
+    js/sched.js: {}
+  dependencies:
+    - core/jquery  
+
+
 qr:
   css:
     theme:

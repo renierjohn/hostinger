@@ -37,7 +37,7 @@ function renify_preprocess_node(&$variables){
   $nid    = $node->id();
   $bundle = $node->bundle();
   
-  if($bundle == 'messages' || $bundle == 'config' ){
+  if($bundle == 'messages' || $bundle == 'config' || $bundle == 'special_route' || $bundle == 'table_routes'){
     if (\Drupal::currentUser()->id() != 1) {
       $response = new RedirectResponse('/404');
       return $response->send();
@@ -89,4 +89,8 @@ function renify_preprocess_form(&$variables){
     }
     $variables['form_title'] = $title;
   }
+}
+
+function renify_preprocess_views_view_unformatted(&$variables){
+  $variables['ajaxform'] = \Drupal::service('data_router.ajaxroute')->getRouteLists();
 }

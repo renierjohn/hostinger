@@ -670,6 +670,12 @@ form,
  * # home
  *
  * ------------------------------------------------------------------- */
+ .index-home{
+    display: table;
+    width: 100%;
+    min-height: 788px;
+    position: relative;
+ }
 
 .s-home {
   display: table;
