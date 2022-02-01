@@ -232,8 +232,8 @@ class EntityService {
     $uri_s   = explode(self::SEPARATOR_MULTI,$uri_s);    
     $entity  = $this->entityTypeManager->getStorage('file');
     foreach ($uri_s as $urix) {      
-      $uri = str_replace('sites/default/files/','public://',$urix);
-      $uri = str_replace('/sites/default/files/','public://',$uri); 
+      $uri = str_replace('sites/default/files/public/','public://',$urix);
+      $uri = str_replace('/sites/default/files/public/','public://',$uri); 
       if(file_exists($uri)){
         $fid     = $entity->getQuery()->condition('uri',$uri)->execute();
         if(empty($fid)){
