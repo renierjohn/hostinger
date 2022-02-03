@@ -2523,6 +2523,10 @@ input::-moz-focus-inner {
   margin: 1rem;
 }
 
+.route_select{
+  display: block !important;
+}
+
 @media only screen and (max-width:800px) {
   .overflow{
     overflow: scroll;
