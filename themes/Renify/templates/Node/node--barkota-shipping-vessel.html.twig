@@ -1,0 +1,122 @@
+{% set lazy_img    = '/themes/Renify/images/lazy/bus.svg' %}
+{% set id          = node.id|raw|striptags|raw|trim %}
+{% set title       = node.title.value|raw|striptags %}
+{% set banner      = content.field_banner_image.0['#markup'] %}
+{% set code        = content.field_code %}
+{% set uuid        = content.field_uuid.0['#context'].value %}
+{% set name        = content.field_display_name %}
+{% set route_orign = content.field_vessel_origin['#items'] %}	
+{% set route_dest  = content.field_vessel_destination['#items'] %}
+
+{# {% set description = content.field_description.0['#text'] %} #}
+
+
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+{{ attach_library('data_router/barkota') }}
+
+<input type="hidden" name="uuid" value="{{uuid}}">
+
+
+<section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="{{banner}}" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+  <div class="header-mini-title center">
+    <h2>{{title}}</h2>
+  </div>
+</section>
+
+{{ drupal_view('frontpage', 'block_1') }}
+
+<section id="body" class="articles"  max-pager="">
+    <div class="row section-header has-bottom-sep" >
+        <div class="col-full">
+          <h1 class="display-1">
+            Schedules And Fares
+          </h1>
+          <p class="lead">
+            Search Youre Travel Plan and Dont Forget To Explore
+          </p>
+        </div>
+    </div> <!-- end section-header -->
+
+{# Search By Date #}
+  <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+        <div class="col-block">
+          <h2>Search By Date</h2>
+          <div class="select-date">
+              <div class="carousel slick-initialized slick-slider">
+                <div class="slick-list">
+                  <div class="selected-date-wrap ajax_date" style="opacity: 1; width: 1050px; transform: translate3d(0px, 0px, 0px);">
+
+
+                  </div>
+                </div>
+              </div>
+         </div>
+       </div>
+     </div>
+
+ {# Seach By Route #}
+	<div class="row features block-1-3 block-tab-full route_select" data-aos="fade-in">
+        <div class="col-block">
+          <h3>Origin</h3>
+      		<select class="select-origin" style="width: 100%;">
+				{% for item in route_orign %}
+					{% if item.entity.field_id.value == 93 %}
+						<option value="{{item.entity.field_id.value}}" selected>{{item.entity.name.value}}</option>
+					{% else %}
+						<option value="{{item.entity.field_id.value}}">{{item.entity.name.value}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+      	</div>
+      	<div class="col-block">
+          <h3>Destination</h3>
+      		<select class="select-dest" style="width: 100%;">
+				{% for item in route_dest %}
+					{% if item.entity.field_id.value == 102 %}
+						<option value="{{item.entity.field_id.value}}" selected>{{item.entity.name.value}}</option>
+					{% else %}
+						<option value="{{item.entity.field_id.value}}">{{item.entity.name.value}}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+      	</div>
+      	<div class="col-block" style="width: 100%;">
+            <h3 style="
+              display: none;
+              padding: 1rem;
+              background-color: #e0574f;
+              "
+              class="ajax-message" >
+              SORRY NO AVAILABLE SCHEDULE
+            </h3>
+        </div>
+  </div>
+
+  <div class="row features block-1-1 block-tab-full" data-aos="fade-in">
+        <div class="">
+          <table>
+            <caption>Rates & Schedules</caption>
+            <caption class="ajax_table_origin"><i>from</i></caption>
+            <caption class="ajax_table_dest"><i>to</i></caption>
+            <thead>
+              <tr>
+                <th>Vessel</th>
+                <th>Departure</th>
+                <th>Duration</th>
+                <th>Accomodations</th>
+              </tr>
+            </thead>
+            <tbody class="ajax_schedules">
+              <tr>
+                <td> --- </td>
+                <td> --- </td>
+                <td> --- </td>
+                <td> --- </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+</section>

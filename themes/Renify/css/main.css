@@ -2527,12 +2527,52 @@ input::-moz-focus-inner {
   display: block !important;
 }
 
+.selected-date.disabled{
+  background-color: #c7464b40;
+  color: #ffffff99;
+}
+
+.selected-date.active {
+  background: #dedede;
+  color: #388192;
+}
+
+.selected-date {
+  transition: .5s;
+  border-left: 1px solid #dedede;
+  text-align: center;
+  padding: 10px 0;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+.selected-date-wrap{
+    height: 12vh;
+    display: flex;
+}
+
+.slick-prev,.slick-next{
+  padding: 0 2rem;
+  background-color: #d2d2d2;
+}
+
+.slick-prev i , .slick-next i{
+  position: relative;
+  top: 4rem;
+}
+
 @media only screen and (max-width:800px) {
   .overflow{
     overflow: scroll;
   }
 
   .user-reset-pass{
+    display: block;
+  }
+
+  .selected-date-wrap{
+    height: auto;
     display: block;
   }
   

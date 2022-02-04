@@ -22,4 +22,11 @@ services:
       - '@entity_field.manager'
       - '@language_manager'
       - '@request_stack'
-       
+  
+  csv_importer.remote:
+    class: Drupal\csv_importer\Service\RemoteRequestService
+    arguments:
+      - '@request_stack'
+      - '@http_client'
+      - '@state'
+      - '@config.factory'

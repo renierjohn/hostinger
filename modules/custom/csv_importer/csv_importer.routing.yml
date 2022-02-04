@@ -6,6 +6,14 @@ csv_importer.form:
   requirements:
     _permission: 'administer site configuration'
 
+csv_importer.barkota:
+  path: '/admin/config/development/barkota'
+  defaults:
+    _form: '\Drupal\csv_importer\Form\BarkotaForm'
+    _title: 'Import Barkota'
+  requirements:
+    _permission: 'administer site configuration'
+
 # csv_importer.export:
 #   path: '/api/export/csv'
 #   defaults:
@@ -15,10 +23,10 @@ csv_importer.form:
 #   requirements:
 #     _access: 'TRUE'
 
-csv_importer.compare:
-  path: '/compare/export/csv'
-  defaults:
-    _controller: '\Drupal\csv_importer\Controller\ExportCSVController::compare'
-    _title: 'Export CSV'
-  requirements:
-    _access: 'TRUE'
+# csv_importer.compare:
+#   path: '/compare/export/csv'
+#   defaults:
+#     _controller: '\Drupal\csv_importer\Controller\ExportCSVController::compare'
+#     _title: 'Export CSV'
+#   requirements:
+#     _access: 'TRUE'

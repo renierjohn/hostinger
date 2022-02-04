@@ -10,6 +10,11 @@ sched:
   dependencies:
     - core/jquery  
 
+barkota:
+  js:
+    js/brkta.js: {}
+  dependencies:
+    - core/jquery
 
 qr:
   css:

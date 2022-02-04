@@ -3,3 +3,9 @@ csv_importer.form:
   description: 'Import/Export data from CSV.'
   parent: system.admin_config_system
   route_name: csv_importer.form
+
+csv_importer.barkota:
+  title:  Import Barkota data
+  description: 'ImportBarkota data'
+  parent: system.admin_config_system
+  route_name: csv_importer.barkota

@@ -54,7 +54,7 @@ function renify_preprocess_block(&$variables){
   $variables['node_url']   = '/';
   if ($node instanceof \Drupal\node\NodeInterface) {
     $variables['node_title'] = $node->getTitle();
-    $variables['node_url']   = $node->path->getValue()[0]['alias'];
+    $variables['node_url']   = !empty($node->path->getValue()[0]) ? $node->path->getValue()[0]['alias'] : '/node/'.$node->id();
   }
 }
 
