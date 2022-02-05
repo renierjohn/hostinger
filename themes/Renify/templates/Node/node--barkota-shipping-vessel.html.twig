@@ -32,9 +32,9 @@
             </div> <!-- end home-content__left-->
         </div> <!-- end home-content__main -->
         <ul class="home-content__social">
-            <li><a href="#." class="share-fb" data-pageid="{{id}}" data-title="{{title}}">Facebook</a></li>
-            <li><a href="#." class="share-twitter" data-pageid="{{id}}" data-title="{{title}}">twitter</a></li>
-            <li><a href="#." data-pageid="" data-id="{{id}}" data-title="{{title}}">Instagram</a></li>
+            <li><a href="#." class="share-fb" data-pageid="{{url}}" data-title="{{title}}">Facebook</a></li>
+            <li><a href="#." class="share-twitter" data-pageid="{{url}}" data-title="{{title}}">twitter</a></li>
+            <li><a href="#." data-pageid="{{url}}" data-id="{{url}}" data-title="{{title}}">Instagram</a></li>
         </ul>
     </div> <!-- end home-content -->
     <a href="#body" class="home-scroll ">
@@ -148,6 +148,13 @@
       </div>
       <div class="gallery__photos">
         <div class="col-full slick-slider gallery__photos__slide">
+            <div class="gallery__slide">
+              <a href="/vessel/cocaliong/">
+                <img src="/themes/Renify/images/lazy/ship.svg" data-src="/sites/default/files/public/ship.jpg" class="img-fluid lazy" alt="cocaliong" >
+              </a>
+              <h6>Colcaliong Shipping Line</h6>
+            </div>
+
             {{ drupal_view('barkota_lists','related') }}
         </div>
       </div>
