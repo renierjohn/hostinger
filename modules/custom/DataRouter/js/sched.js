@@ -3,6 +3,7 @@
   init();
   
   $('.select-origin').change(function(){
+    $('.features').css({'opacity':.1});
     var origin = $('.select-origin').find(":selected").text();
     var dest = $('.select-dest').find(":selected").text();
     $('.ajax-message').hide();
@@ -10,6 +11,7 @@
   })
 
   $('.select-dest').change(function(){
+    $('.features').css({'opacity':.1});
     var origin = $('.select-origin').find(":selected").text();
     var dest   = $('.select-dest').find(":selected").text();
     $('.ajax-message').hide();
@@ -29,6 +31,7 @@
       });
     }else{
       $('.ajax-message').show();
+      $('.features').css({'opacity':1});
     }
   }
 
@@ -50,6 +53,7 @@
 
     $('.ajax_schedules').html(template_schedule)
     $('.ajax_rates').html(template_rates)
+    $('.features').css({'opacity':1});
   }
 
   function init(){

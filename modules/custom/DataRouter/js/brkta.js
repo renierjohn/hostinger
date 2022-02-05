@@ -5,6 +5,7 @@
 
   // select origin
   $('.select-origin').change(function(){
+  	$('.features').css({'opacity':0.1})
   	var date   = $('.selected-date.active').attr('date');
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
@@ -15,6 +16,7 @@
 
   // select destination
   $('.select-dest').change(function(){
+  	$('.features').css({'opacity':0.1})
   	var date   = $('.selected-date.active').attr('date');
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
@@ -111,6 +113,7 @@
     $('.ajax_schedules').html(template_schedule)
     $('.ajax_table_origin').html(ajax_table_origin)
     $('.ajax_table_dest').html(ajax_table_dest)
+    $('.features').css({'opacity':1});
   }
 
   function renderDate(data){
@@ -128,9 +131,9 @@
                 				</div>`;
   	});
   	$('.ajax_date').html(template_date);
-  	// $('body').append(refresh());
   	init_slick();
   	init_date_selectors();
+  	$('.features').css({'opacity':1});
   }
 
   function convertDate(date){
@@ -185,6 +188,7 @@
 	  		$('.ajax-message').show();
 	  		return;
 	  	}
+	  	$('.features').css({'opacity':0.1})
 	  	$('.selected-date').removeClass('active');
 	  	$(this).addClass('active');
 
