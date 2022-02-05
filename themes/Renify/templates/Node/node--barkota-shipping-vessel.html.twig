@@ -17,11 +17,30 @@
 
 <input type="hidden" name="uuid" value="{{uuid}}">
 
-
-<section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="{{banner}}" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
-  <div class="header-mini-title center">
-    <h2>{{title}}</h2>
-  </div>
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="{{banner}}" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+    <div class="shadow-overlay"></div>
+    <div class="home-content">
+        <div class="row home-content__main">
+            <div class="home-content__left">
+                  <h1>{{title}}s</h1>
+                  <h3>Travel While You Can</h3>
+                <div class="home-content__btn-wrap">
+                    <a href="#body" class="btn btn--stroke--reverse btn--big home-content__btn ">
+                        Find Schedules
+                    </a>
+                </div>
+            </div> <!-- end home-content__left-->
+        </div> <!-- end home-content__main -->
+        <ul class="home-content__social">
+            <li><a href="#." class="share-fb" data-pageid="{{id}}" data-title="{{title}}">Facebook</a></li>
+            <li><a href="#." class="share-twitter" data-pageid="{{id}}" data-title="{{title}}">twitter</a></li>
+            <li><a href="#." data-pageid="" data-id="{{id}}" data-title="{{title}}">Instagram</a></li>
+        </ul>
+    </div> <!-- end home-content -->
+    <a href="#body" class="home-scroll ">
+        <span class="home-scroll__text">Scroll</span>
+        <span class="home-scroll__icon"></span>
+    </a>
 </section>
 
 {{ drupal_view('frontpage', 'block_1') }}
@@ -118,5 +137,20 @@
           </table>
         </div>
     </div>
+</section>
 
+{# RELATED VESSEL #}
+<section id="category" class="">
+  <div class="row">
+    <div class="gallery__wrap" data-aos="fade-up">
+      <div class="col-full about-desc">
+        <h2 class="display-2">Try Other Vessels</h2>
+      </div>
+      <div class="gallery__photos">
+        <div class="col-full slick-slider gallery__photos__slide">
+            {{ drupal_view('barkota_lists','related') }}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

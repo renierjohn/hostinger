@@ -1,0 +1,13 @@
+{% set id       = fields.nid.content|raw|striptags %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags %}
+{% set lazy_img = '/themes/Renify/images/lazy/ship.svg' %}
+
+<div class="col-block item-article item-feature">
+  <div class="card" style="height:12vh">
+    <a href="{{link}}" title="">
+      <img src="{{lazy_img}}" data-src="{{image}}" class="img-fluid lazy" alt="{{title}}" style="height:100%">
+    </a>
+  </div>
+</div>
