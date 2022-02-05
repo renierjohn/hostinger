@@ -381,6 +381,7 @@ th{
 td{
   border: solid black 1px ;
   padding: 3px;
+  text-align: center;
 }
 
 /*th,
