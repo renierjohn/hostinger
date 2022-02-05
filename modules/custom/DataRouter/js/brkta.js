@@ -84,8 +84,8 @@
   function renderTable(data){
     var template_schedule = ``;
     var template_rates    = ``;
-    var ajax_table_origin = `<i>from</i> `+data[0].voyage.port.origin;
-    var ajax_table_dest   = `<i>to</i> `+data[0].voyage.port.destination;
+    var ajax_table_origin = `<i>from</i><br>`+data[0].voyage.port.origin;
+    var ajax_table_dest   = `<i>to</i><br>`+data[0].voyage.port.destination;
 
     data.forEach(function(dat){
     	if(dat.accommodations.length > 0){

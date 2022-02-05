@@ -7,6 +7,8 @@
 {% set name        = content.field_display_name %}
 {% set route_orign = content.field_vessel_origin['#items'] %}	
 {% set route_dest  = content.field_vessel_destination['#items'] %}
+{% set default_origin = content.field_field_origin_default['#items'][0].entity.field_id.value %}
+{% set default_dest   = content.field_field_destination_default['#items'][0].entity.field_id.value %}
 
 {# {% set description = content.field_description.0['#text'] %} #}
 
@@ -80,7 +82,7 @@
           <h3>Origin</h3>
       		<select class="select-origin" style="width: 100%;">
 				{% for item in route_orign %}
-					{% if item.entity.field_id.value == 93 %}
+					{% if item.entity.field_id.value == default_origin %}
 						<option value="{{item.entity.field_id.value}}" selected>{{item.entity.name.value}}</option>
 					{% else %}
 						<option value="{{item.entity.field_id.value}}">{{item.entity.name.value}}</option>
@@ -92,7 +94,7 @@
           <h3>Destination</h3>
       		<select class="select-dest" style="width: 100%;">
 				{% for item in route_dest %}
-					{% if item.entity.field_id.value == 102 %}
+					{% if item.entity.field_id.value == default_dest %}
 						<option value="{{item.entity.field_id.value}}" selected>{{item.entity.name.value}}</option>
 					{% else %}
 						<option value="{{item.entity.field_id.value}}">{{item.entity.name.value}}</option>
@@ -139,6 +141,7 @@
     </div>
 </section>
 
+<h1>{{default_origin['#items'][0].entity.field_id.value}}</h1>
 {# RELATED VESSEL #}
 <section id="category" class="">
   <div class="row">
