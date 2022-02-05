@@ -105,4 +105,7 @@
         $(this).css('width','18rem');
         $(this).html(loader)
     });
+
+  $('.route_list').trunk8({lines:6})
+
   }(jQuery));

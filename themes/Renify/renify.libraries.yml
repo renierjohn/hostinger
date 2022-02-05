@@ -17,14 +17,14 @@ base:
   js:
     js/jquery.lazy.min.js: {}
     js/jquery.lazy.plugins.min.js: {}
+    js/trunc8.js: {}
+    js/aos.js.map: {}
     js/modernizr.js: {}
     js/plugins.js: {}
     js/pace.min.js: {}
     js/main.js: {}
     js/custom.js: {}
     js/ajax.js: {}
-    js/aos.js.map: {}
-    js/trunc8.js: {}
   dependencies:
     - core/jquery
 

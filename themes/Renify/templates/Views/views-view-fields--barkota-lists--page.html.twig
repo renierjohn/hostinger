@@ -1,0 +1,42 @@
+{% set id       = fields.nid.content|raw|striptags|trim %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set default_route = fields.field_vessel_origin.content %}
+{% set default_origin = fields.field_field_origin_default.content %}
+{% set default_dest   = fields.field_field_destination_default.content %}
+
+{% set link     = fields.view_node.content|raw|striptags %}
+{% set lazy_img = '/themes/Renify/images/lazy/ship.svg' %}
+
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+
+<div class="col-block item-article item-feature" >
+  <div class="card">
+    <div class="views">
+      <a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a>
+    </div>
+    <div class="item-feature-image">
+      <img src="{{lazy_img}}" data-src="{{image}}" class="img-fluid lazy" alt="">
+    </div>
+    <div class="item-feature__text route-block">
+      <h3 class="item-title"><i class="fas fa-shuttle-van"></i>{{ title|raw }}</h3>
+      <em class="item-ticket"><i class="fas fa-ship"></i><a href="#" title="">Latest Route</a></em>
+      {% if default_origin %}
+        <em>{{default_origin}} <i class="fas fa-arrow-right"></i> {{default_dest}}</em>
+      {% endif %}
+      <div class="route_list">
+          {{default_route}}
+      </div>
+    </div>
+    <div class="article-social">
+      <ul>
+        <li><i class="fa fa-share"></i></li>
+        <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#." class="share-twitter" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
+        {# <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li> #}
+      </ul>
+      <a href="{{link}}" class="btn btn--stroke--reverse btn-effect btn--big"><i class="far fa-map"></i> Find Schedules</a>
+    </div>
+  </div>
+</div>
