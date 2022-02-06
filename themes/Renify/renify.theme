@@ -48,6 +48,18 @@ function renify_preprocess_node(&$variables){
   $variables['pagination'] = $result;
 }
 
+function renify_preprocess_taxonomy_term(&$variables){
+  $term    = $variables['term'];
+  $tid     = $term->id();
+  $bundle  = $term->bundle();
+  if($bundle == 'bus_name' || $bundle == 'category' || $bundle == 'location' || $bundle == 'route_vessels'){
+    if (\Drupal::currentUser()->id() != 1) {
+      $response = new RedirectResponse('/404');
+      return $response->send();
+    }
+  }
+}
+
 function renify_preprocess_block(&$variables){
   $node = \Drupal::routeMatch()->getParameter('node');
   $variables['node_title'] = 'Renify';
