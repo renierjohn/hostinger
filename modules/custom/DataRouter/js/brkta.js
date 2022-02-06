@@ -5,10 +5,13 @@
 
   // select origin
   $('.select-origin').change(function(){
-  	$('.features').css({'opacity':0.1})
   	var date   = $('.selected-date.active').attr('date');
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
+    if(origin == dest){
+    	return;
+    }
+  	$('.features').css({'opacity':0.1})
     $('.ajax-message').hide();
     getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
@@ -16,11 +19,14 @@
 
   // select destination
   $('.select-dest').change(function(){
-  	$('.features').css({'opacity':0.1})
   	var date   = $('.selected-date.active').attr('date');
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
     $('.ajax-message').hide();
+    if(origin == dest){
+    	return;
+    }
+  	$('.features').css({'opacity':0.1})
     getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
   })
@@ -188,13 +194,16 @@
 	  		$('.ajax-message').show();
 	  		return;
 	  	}
-	  	$('.features').css({'opacity':0.1})
-	  	$('.selected-date').removeClass('active');
-	  	$(this).addClass('active');
 
 	  	var date   = $(this).attr('date');
 	  	var origin = $('.select-origin').find(":selected").val();
 			var dest   = $('.select-dest').find(":selected").val();
+			if(origin == dest){
+    		return;
+    	}
+	  	$('.features').css({'opacity':0.1})
+	  	$('.selected-date').removeClass('active');
+	  	$(this).addClass('active');
 			$('.ajax-message').hide();
 			getID(origin,dest,date);
 	  })
