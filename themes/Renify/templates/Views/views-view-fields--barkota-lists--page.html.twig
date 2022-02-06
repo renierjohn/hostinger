@@ -26,7 +26,11 @@
         <em>{{default_origin}} <i class="fas fa-arrow-right"></i> {{default_dest}}</em>
       {% endif %}
       <div class="route_list">
+        {% if default_route %}
           {{default_route}}
+        {% else %}
+          <em>NO Available Schedule at this moment</em>
+        {% endif %}
       </div>
     </div>
     <div class="article-social">
@@ -34,9 +38,14 @@
         <li><i class="fa fa-share"></i></li>
         <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
         <li><a href="#." class="share-twitter" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
-        {# <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li> #}
+        <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
       </ul>
-      <a href="{{link}}" class="btn btn--stroke--reverse btn-effect btn--big"><i class="far fa-map"></i> Find Schedules</a>
+      {% if default_route %}
+        {% set label = '<i class="fas fa-ship"></i> Find Schedules' %}
+      {% else %}
+        {% set label = '<i class="far fa-map"></i> More Details' %}
+      {% endif %}
+      <a href="{{link}}" class="btn btn--stroke--reverse btn-effect btn--big">{{label|raw}}</a>
     </div>
   </div>
 </div>

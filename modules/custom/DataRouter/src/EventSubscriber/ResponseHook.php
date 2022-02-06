@@ -51,7 +51,7 @@ class ResponseHook implements EventSubscriberInterface {
 
   const COOKIE_KEY          = 't';
 
-  const VALID_CONTENT_TYPES = ['places','routes'];
+  const VALID_CONTENT_TYPES = ['places','routes','barkota_shipping_vessel'];
 
   const TRACKER_PREFIX      = 'track_';
 
@@ -99,12 +99,20 @@ class ResponseHook implements EventSubscriberInterface {
         $this->temp_store->get(self::MODULE)->set(self::TEMP_PRIVATE,$id);
       }
     }
+    if($routeName == 'view.cocaliong.main'){
+      $cookies    = $request->cookies;
+      if(!empty($cookies)){
+        $cookies  = $cookies->all();
+      }
+      $id = $this->processCookie($cookies,'CCL');
+      $this->temp_store->get(self::MODULE)->set(self::TEMP_PRIVATE,$id);
+    }
   }
 
   public function setCookie(FilterResponseEvent $event){
     $routeMatch = $this->routeMatch;
     $routeName  = $routeMatch->getRouteName();
-    if($routeName == 'entity.node.canonical'){
+    if($routeName == 'entity.node.canonical' || $routeName ==  'view.cocaliong.main'){
       $id       = $this->temp_store->get(self::MODULE)->get(self::TEMP_PRIVATE);
       if(!empty($id)){
         $response = $event->getResponse();
