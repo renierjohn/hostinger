@@ -1,6 +1,7 @@
 {% set lazy_img    = '/themes/Renify/images/lazy/bus.svg' %}
 {% set id          = node.id|raw|striptags|raw|trim %}
 {% set title       = node.title.value|raw|striptags %}
+{% set description = content.field_description%}
 {% set banner      = content.field_banner_image.0['#markup'] %}
 {% set code        = content.field_code %}
 {% set uuid        = content.field_uuid.0['#context'].value %}
@@ -139,8 +140,11 @@
           </table>
         </div>
   </div>
-  <div class="row features block-1-1 block-tab-full" >
+  <div class="row center" >
     <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>
+  </div>
+  <div class="row features block-1-1 block-tab-full" >
+      {{description|raw}}
   </div>
 </section>
 {# RELATED VESSEL #}
