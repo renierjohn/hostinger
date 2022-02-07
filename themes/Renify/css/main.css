@@ -2528,17 +2528,17 @@ input::-moz-focus-inner {
   display: block !important;
 }
 
-.selected-date.disabled{
+.selected-date.disabled,.selected-weather.disabled{
   background-color: #c7464b40;
   color: #ffffff99;
 }
 
-.selected-date.active {
+.selected-date.active ,.selected-weather.active{
   background: #dedede;
   color: #388192;
 }
 
-.selected-date {
+.selected-date,.selected-weather {
   transition: .5s;
   border-left: 1px solid #dedede;
   text-align: center;
@@ -2548,7 +2548,7 @@ input::-moz-focus-inner {
   cursor: pointer;
 }
 
-.selected-date-wrap{
+.selected-date-wrap,.selected-weather-wrap{
     height: 12vh;
     display: flex;
 }
