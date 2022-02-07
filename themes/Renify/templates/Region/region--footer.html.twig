@@ -1,18 +1,12 @@
 <div id="donate-button-container" style="background-color: #f5f5f5;text-align: center;">
   <h6 style="padding-top: 3rem;">Donate</h6>
   <div id="donate-button"></div>
-  <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-  <script>
-    PayPal.Donation.Button({
-    env:'production',
-    hosted_button_id:'8HJE95B2XYQKJ',
-    image: {
-    src:'https://pics.paypal.com/00/s/YzE3YWI4OWMtMDM1NC00MzNjLTg3MmYtOTY4YjBhMzA2ZTlj/file.PNG',
-    alt:'Donate with PayPal button',
-    title:'PayPal - The safer, easier way to pay online!',
-    }
-    }).render('#donate-button');
-    </script>
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+  <input type="hidden" name="hosted_button_id" value="97JR4UFJLF2HG" />
+  <input type="image" src="https://pics.paypal.com/00/s/Y2JhMzRkMWYtOGM4Ni00Njg0LWJlYWYtZTE4NGZlN2M0YWM4/file.PNG" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+  <img alt="" border="0" src="https://www.paypal.com/en_PH/i/scr/pixel.gif" width="1" height="1" />
+  </form>
+
 </div>
 
 <footer class="s-footer footer" id="signup">
