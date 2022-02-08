@@ -16,6 +16,13 @@ barkota:
   dependencies:
     - core/jquery
 
+weather:
+  js:
+    js/weather.js: {}
+  dependencies:
+    - core/jquery
+
+
 qr:
   css:
     theme:

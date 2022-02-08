@@ -17,6 +17,7 @@
 {{ attach_library('core/drupal') }}
 {{ attach_library('data_router/tracker') }}
 {{ attach_library('data_router/barkota') }}
+{{ attach_library('data_router/weather') }}
 
 <input type="hidden" name="uuid" value="{{uuid}}">
 
@@ -60,6 +61,19 @@
         </div>
     </div> <!-- end section-header -->
 
+<!-- WEATHER DISPLAY -->
+     {#  <div class="weather">
+          <a class="weatherwidget-io" href="https://forecast7.com/en/10d32123d89/cebu-city/" data-label_1="CEBU CITY" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-days="7" data-theme="original" >CEBU CITY WEATHER</a>
+      </div> #}
+
+<div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+  <div class="col-block">
+    <div class="selected-weather-wrap" style="opacity: 1; width: 1050px; transform: translate3d(0px, 0px, 0px);">      
+    
+    </div>
+   </div>
+ </div>
+
 {# Search By Date #}
   <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
         <div class="col-block">
@@ -96,9 +110,9 @@
       		<select class="select-dest" style="width: 100%;">
 				{% for item in route_dest %}
 					{% if item.entity.field_id.value == default_dest %}
-						<option value="{{item.entity.field_id.value}}" selected>{{item.entity.name.value}}</option>
+						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}" selected>{{item.entity.name.value}}</option>
 					{% else %}
-						<option value="{{item.entity.field_id.value}}">{{item.entity.name.value}}</option>
+						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}">{{item.entity.name.value}}</option>
 					{% endif %}
 				{% endfor %}
 			</select>
