@@ -84,6 +84,8 @@ class BarkotaForm extends FormBase {
   const TYPE_ROUTE        = 'type_route';
 
   const TYPE_VESSEL_ROUTE = 'type_vessel_route';
+
+  const TYPE_COORDINATE   = 'type_coordinate';
   /**
    * ImporterForm class constructor.
    *
@@ -154,7 +156,7 @@ class BarkotaForm extends FormBase {
     $form['importer']['entity_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose entity type'),
-      '#required' => TRUE,
+      // '#required' => TRUE,
       '#options' => $this->getEntityTypeOptions(),
       '#weight' => 0,
       '#ajax' => [
@@ -182,6 +184,13 @@ class BarkotaForm extends FormBase {
       '#button_type' => 'primary',
       '#value' => t('Import'),
       '#submit' => array('::importDATA'),
+    ];
+
+    $form['export'] = [
+      '#type' => 'submit',
+      '#button_type' => 'primary',
+      '#value' => t('Load Coordinates'),
+      '#submit' => array('::loadCoordinates'),
     ];
 
     return $form;
@@ -277,6 +286,25 @@ class BarkotaForm extends FormBase {
     // migrate data code to importDATA() function
   }
 
+  public function loadCoordinates(array &$form, FormStateInterface $form_state){
+    $query = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery();
+    $query->condition('vid','route_vessels');
+    $query->condition('status',1);
+    $tids = $query->execute();
+    $tids = array_values($tids);
+
+    $import_type = self::TYPE_COORDINATE;
+    $entity_type = '';
+    $bundle      = '';    
+    foreach($tids as $data){
+        $process['operations'][] = [
+             [$this, 'importByBatchFile'],[$data,$import_type,$entity_type,$bundle]
+        ];               
+    }
+       
+     $process['finished'] = [$this, 'finished'];
+     batch_set($process); 
+  }
    /**
    * {@inheritdoc}
    * - this function is for importing csv files
@@ -343,6 +371,10 @@ class BarkotaForm extends FormBase {
 
       if($import_type == self::TYPE_VESSEL_ROUTE){
         $this->importVesselWithRoute($data);
+      }
+
+      if($import_type == self::TYPE_COORDINATE){
+        $this->importCoordinates($data);
       }
 
 	    $context['sandbox']['progress']++ ;
@@ -458,7 +490,7 @@ class BarkotaForm extends FormBase {
         $dests_tid[] = reset($tid);
       }
     }
-// ksm($origins_tid,$dests_tid);
+
     $node->set('field_vessel_origin',$origins_tid);
     $node->set('field_vessel_destination',$dests_tid);
     if(!empty($origins_tid) || !empty($dests_tid)){
@@ -479,6 +511,22 @@ class BarkotaForm extends FormBase {
       return array_values($ids);
   }
 
+  private function importCoordinates($tid){
+      $term  = $this->entityTypeManager->getStorage('taxonomy_term')->load($tid);
+      $place = $term->getName();
+      $url   = 'http://api.openweathermap.org/geo/1.0/direct?q='.$place.',PH&appid=61db22cd24465140efa9d76bce707bc9';
+      $contents = \Drupal::service('csv_importer.remote')->remoteRequestCurl('GET',$url,[]);
+      if(empty($contents)){
+        return FALSE;
+      }
+      $lat = $contents[0]['lat'];
+      $lng = $contents[0]['lon'];
+
+      $term->set('field_lat',$lat);
+      $term->set('field_lng',$lng);
+      $term->save();
+      return TRUE;
+  }
 
 
 }
