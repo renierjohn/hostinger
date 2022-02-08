@@ -41,7 +41,7 @@
             // for hero content animations
             $("html").removeClass('ss-preload');
             $("html").addClass('ss-loaded');
-
+            $("body").show();
         });
     };
 
