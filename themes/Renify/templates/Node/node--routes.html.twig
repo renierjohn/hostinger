@@ -79,7 +79,9 @@
 
       <div class="row features block-1-2 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
       	{% for node in route_tables['#items'] %}
-      		{{ drupal_entity('node',node.entity.id, 'full') }}
+      		{% if node %}
+      			{{ drupal_entity('node',node.entity.id, 'full') }}
+      		{% endif %}
       	{% endfor %}
 
       </div>
