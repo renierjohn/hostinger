@@ -24,7 +24,7 @@
    /* Preloader
     * -------------------------------------------------- */
     var ssPreloader = function() {
-
+        $("body").show();
         $("html").addClass('ss-preload');
 
         // $WIN.on('load', function() {
@@ -33,7 +33,7 @@
             // $('html, body').animate({ scrollTop: 0 }, 'normal');
 
             // will first fade out the loading animation
-            $("body").show();
+            
             $("#loader").fadeOut("slow", function() {
                 // will fade out the whole DIV that covers the website.
                 $("#preloader").delay(300).fadeOut("slow");
