@@ -37,10 +37,11 @@ function renify_preprocess_node(&$variables){
   $nid    = $node->id();
   $bundle = $node->bundle();
   
-  if($bundle == 'messages' || $bundle == 'config' || $bundle == 'special_route' || $bundle == 'table_routes'){
+  if($bundle == 'messages' || $bundle == 'config'){
     if (\Drupal::currentUser()->id() != 1) {
       $response = new RedirectResponse('/404');
       return $response->send();
+      // \Drupal::service('request_stack')->getCurrentRequest()->query->set('destination', '/404');
     }
   }
   
