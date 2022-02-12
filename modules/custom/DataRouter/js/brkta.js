@@ -1,5 +1,7 @@
 (function($) {
-  "use strict";
+  // "use strict";
+  // init_slick();
+  // return
   main_init();
   init_date_selectors();
 
@@ -13,8 +15,9 @@
     }
   	$('.features').css({'opacity':0.1})
     $('.ajax-message').hide();
-    getID(origin,dest,date);
+    // getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
+	  updateQuery(origin,dest,getCurrentDate());
   })
 
   // select destination
@@ -27,8 +30,9 @@
     	return;
     }
   	$('.features').css({'opacity':0.1})
-    getID(origin,dest,date);
+    // getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
+    updateQuery(origin,dest,getCurrentDate());
   })
 
   function getID(origin,dest,date){
@@ -36,7 +40,7 @@
 		var settings = {
 			  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/search/bylocation",
 			  "method": "POST",
-			  "timeout": 0,
+			  // "timeout": 0,
 			  "headers": {
 			    "Content-Type": "application/json"
 			  },
@@ -64,7 +68,7 @@
 		var settings = {
 		  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/available-dates/passageandcargo",
 		  "method": "POST",
-		  "timeout": 0,
+		  // "timeout": 0,
 		  "headers": {
 		    "Content-Type": "application/json"
 		  },
@@ -206,6 +210,7 @@
 	  	$(this).addClass('active');
 			$('.ajax-message').hide();
 			getID(origin,dest,date);
+			updateQuery(origin,dest,date);
 	  })
  	}
 
@@ -216,12 +221,101 @@
 
  	  var currentDate = new Date()
 	  var date = currentDate.toISOString().split('T')[0]
-		  
+
   	var origin = $('.select-origin').find(":selected").val();
 	  var dest   = $('.select-dest').find(":selected").val();
+
+	  origin =  getParameterByName('o')  != null ? getParameterByName('o') : origin;
+	  dest   =  getParameterByName('d')  != null ? getParameterByName('d') : dest;
+	  date   =  getParameterByName('dt') != null ? getParameterByName('dt') : date;
+
+
 	  getID(origin,dest,date);
 	  getDateRange(origin,dest,date);
+
+	  $('.select-origin option[value="'+origin+'"]').attr('selected','selected');
+	  $('.select-dest option[value="'+dest+'"]').attr('selected','selected');
+ 		
  	}
+
+
+ 	function updateQuery(o,d,dt){
+ 		   window.history.replaceState({
+            path:''
+        }, "", '?o='+o+'&d='+d+'&dt='+dt);
+ 	}
+
+ 	function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	}
+
+	$('.share-clipboard').on('click', function(e) {
+		  $(".tooltip").show();
+		  
+		  var text = window.location.href;
+		  var sampleTextarea = document.createElement("textarea");
+	    document.body.appendChild(sampleTextarea);
+	    sampleTextarea.value = text; //save main text in it
+	    sampleTextarea.select(); //select textarea contenrs
+	    document.execCommand("copy");
+	    document.body.removeChild(sampleTextarea);
+	    
+	    $(".tooltip").delay(300).fadeOut("slow");
+	});
+
+	$('.share-dynamic-fb').on('click', function(e) {
+      var u = location.href;
+      var t = document.title;
+      
+      if(title.length == 0){
+          title = 'Renify'
+      }
+
+      $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+        FB.init({
+          appId: '376061863589278', //replace with your app ID
+          version: 'v8.0'
+        });
+        FB.ui({
+              method: 'share',
+              title: t,
+              description: t,
+              href: u,
+            },
+            function(response) {
+              if (response && !response.error_code) {
+                alert('Posting completed.');
+              } else {
+                alert('Error while posting.');
+              }
+          });
+      });
+    });
+
+    $('.share-dynamic-twitter').on('click', function(e) {
+        var title  = $(this).attr('data-title');
+        var u = location.href;
+        var t = document.title;
+        if(t.length == 0){
+          t = 'Renify'
+        }
+        window.open('http://www.twitter.com/share?url='+u+'&t='+t,'sharer','toolbar=0,status=0,width=626,height=436');
+        return false;
+    });
+
+    $('.share-insta').on('click', function(e) {
+        var u = location.href;
+        var t = document.title;
+        window.open("https://www.instagram.com/renify_renier", "_blank", "location=yes");
+        return false;
+    });
+
+
 
 }(jQuery));
 

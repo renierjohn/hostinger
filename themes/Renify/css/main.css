@@ -2587,6 +2587,17 @@ input::-moz-focus-inner {
   top: 4rem;
 }
 
+.tooltip {
+  display: none;
+  color: aliceblue;
+  background: #279127c7;
+  padding: 10px;
+  position: relative;
+  z-index: 1000;
+  left: -27px;
+  border-radius: 15px;
+}
+
 @media only screen and (max-width:800px) {
   .overflow{
     overflow: scroll;
