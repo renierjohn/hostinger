@@ -15,7 +15,7 @@
     }
   	$('.features').css({'opacity':0.1})
     $('.ajax-message').hide();
-    // getID(origin,dest,date);
+    getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
 	  updateQuery(origin,dest,getCurrentDate());
   })
@@ -30,7 +30,7 @@
     	return;
     }
   	$('.features').css({'opacity':0.1})
-    // getID(origin,dest,date);
+    getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
     updateQuery(origin,dest,getCurrentDate());
   })
@@ -272,8 +272,8 @@
       var u = location.href;
       var t = document.title;
       
-      if(title.length == 0){
-          title = 'Renify'
+      if(t.length == 0){
+          t = 'Renify'
       }
 
       $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
@@ -298,7 +298,6 @@
     });
 
     $('.share-dynamic-twitter').on('click', function(e) {
-        var title  = $(this).attr('data-title');
         var u = location.href;
         var t = document.title;
         if(t.length == 0){
