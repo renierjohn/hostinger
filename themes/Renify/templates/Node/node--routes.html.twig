@@ -35,7 +35,7 @@
 
 <!-- MAIN CONTENTS -->
     <section id="body" class="articles"  max-pager="">
-      <div class="row" >
+      <div class="row features block-1-1 block-tab-full route_select" data-aos="fade-in">
         <div class="col-full">
           <a href="#preloader" class="smoothscroll">
 	        <table>
@@ -60,13 +60,13 @@
 	            </tbody>
 	        </table>
 
-	        <div class="gallery__wrap aos-init aos-animate" data-aos="fade-up">
+	        <div class="row features block-1-1 block-tab-full route_select" data-aos="fade-in">
 	            <div class="gallery__photos">
-	              <div class="col-full slick-slider thumb__slider">
+	              <div class="col-full route__slider">
 	              	{% for gallery in galleries['#items'] %}
 	              		{% set img = gallery.entity.uri.value|replace({'public://':'/sites/default/files/public/'}) %}
-	                  <div class="gallery__slide">
-	                    <a href="#">
+	                  <div class="">
+	                    <a href="{{img}}">
 	                      <img src="{{lazy_img}}" data-src="{{img}}" class="img-fluid lazy" alt="">
 	                    </a>
 	                  </div>
@@ -77,10 +77,12 @@
         </div>
       </div>
 
-      <div class="row features block-1-2 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+      <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
       	{% for node in route_tables['#items'] %}
       		{% if node %}
-      			{{ drupal_entity('node',node.entity.id, 'full') }}
+      			<div class="col-full">
+      				{{ drupal_entity('node',node.entity.id, 'full') }}
+      			</div>
       		{% endif %}
       	{% endfor %}
 

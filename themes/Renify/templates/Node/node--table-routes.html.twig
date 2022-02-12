@@ -11,28 +11,26 @@
 {% set route_time = content.field_table_time %}
 
 
-<div class="col-block">
-  <table>
-    <caption>{{title}}</caption>
-    <thead>
+<table>
+  <caption>{{title}}</caption>
+  <thead>
+    <tr>
+      <th>Route</th>
+      <th>Departure</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for key,name in route_name['#items'] %}
       <tr>
-        <th>Route</th>
-        <th>Departure</th>
+        <td>{{name.value}}</td>
+        <td>{{route_time[key]['#context'].value}}</td>
       </tr>
-    </thead>
-    <tbody>
-    	{% for key,name in route_name['#items'] %}
-	      <tr>
-	        <td>{{name.value}}</td>
-	        <td>{{route_time[key]['#context'].value}}</td>
-	      </tr>
-		{% endfor %}
-    </tbody>
-  </table>
-  {% if ticket_link %}
-  	<a href="{{ticket_link}}" class="btn btn--stroke">Find Tickets<i class="fa fa-arrow-up"></i></a>
-  {% endif %}
-  {% if summary %}
-  	<h12>*{{summary}}</h12>
-  {% endif %}
-</div>
+	{% endfor %}
+  </tbody>
+</table>
+{% if ticket_link %}
+	<a href="{{ticket_link}}" class="btn btn--stroke">Find Tickets<i class="fa fa-arrow-up"></i></a>
+{% endif %}
+{% if summary %}
+	<h12>*{{summary}}</h12>
+{% endif %}
