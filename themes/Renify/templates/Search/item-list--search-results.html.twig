@@ -1,21 +1,28 @@
-<section id="body" class="articles">
+<section id="body" class="articles search-result-wrapper">
     <div class="container">
           <div class="row">
             {% if items %}
                 {% for item in items %}
                     {% set value = item.value['#result'] %}
-                    {% if value.type == 'Places' %}
-                        {% if value.node.field_banner_image.entity is empty %}
+                    
+                    {% if value.type == 'Table Routes'  %}
+                        {% set continue = true %}
+                    {% endif %}
+
+                    {% if (value.type == 'Places' ) or (value.type == 'Routes') or (value.type == 'Barkota Shipping Vessel')  %}
+                        {% if value.node.field_banner_image.entity.fileuri is empty %}
                             {% set image = '/themes/Renify/images/logo.png' %}
                         {% else %}
-                            {% set image = file_url(value.node.field_banner_image.entity.fileuri) %}
+                            {% if value.node.field_banner_image.entity.fileuri %}
+                                {% set image = file_url(value.node.field_banner_image.entity.fileuri) %}
+                            {% endif %}
                         {% endif %}
                         <div class="col-full">
                         <a href="{{value.link}}/" title="" class="search-items-link">
                         <div class="search-items">
                             <img src="{{image}}" alt="" class="search-img">
                             <div class="search-detail">
-                              <h2>{{value.title}}</h2>
+                              <h3>{{value.title}}</h3>
                               <div class="search-detail-desc">
                                 {{value.node.field_description.value|raw}}
                               </div>  
