@@ -46,11 +46,9 @@
       <div class="col-block">
         <h2>Search By Date</h2>
         <div class="select-date">
-
-                <div class="selected-date-wrap ajax_date" style="opacity: 1; width: 100%; display:flex">
+            <div class="selected-date-wrap cocaliong-wrap ajax_date" style="display: flex;">
                     
-                    
-                </div>
+            </div>
        </div>
      </div>
   </div>
@@ -71,15 +69,24 @@
       	<div class="col-block">
           <h3>Destination</h3>
       		<select class="select-dest" style="width: 100%;">
-				{% for item in ajaxform.dest %}
-					{% if item == 'Dumaguete City' %}
-						<option value="{{item}}" selected>{{item}}</option>
-					{% else %}
-						<option value="{{item}}">{{item}}</option>
-					{% endif %}
-				{% endfor %}
-			</select>
+    				{% for item in ajaxform.dest %}
+    					{% if item == 'Dumaguete City' %}
+    						<option value="{{item}}" selected>{{item}}</option>
+    					{% else %}
+    						<option value="{{item}}">{{item}}</option>
+    					{% endif %}
+    				{% endfor %}
+    			</select>
       	</div>
+        <div class="col-block">
+          <h3>Share Youre Schedule</h3>
+          <ul style="display: flex;list-style: none;">
+              <li><div class="share-dynamic-fb btn btn--stroke--reverse btn--big"><i class="fab fa-facebook"></i></div></li>
+              <li><div class="share-dynamic-twitter btn btn--stroke--reverse  btn--big"><i class="fab fa-twitter"></i></div></li>
+              <li><div  class="share-clipboard btn btn--stroke--reverse  btn--big"><i class="fa fa-copy"></i></div></li>
+              <li><em class="tooltip">Copied</em></li>
+          </ul>
+        </div>
       	<div class="col-block" style="width: 100%;">
             <h3 style="
               display: none;

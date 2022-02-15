@@ -2546,6 +2546,7 @@ input::-moz-focus-inner {
   background: #fff;
   position: relative;
   cursor: pointer;
+  width: inherit;
 }
 
 .selected-date-wrap{
@@ -2596,6 +2597,18 @@ input::-moz-focus-inner {
   z-index: 1000;
   left: -27px;
   border-radius: 15px;
+}
+
+.cocaliong-wrap{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: scroll;
+  opacity: 1;
+}
+
+.cocaliong-wrap .ajax_date_list{
+  width: 10rem;
 }
 
 @media only screen and (max-width:800px) {

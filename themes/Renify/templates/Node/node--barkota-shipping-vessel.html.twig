@@ -108,14 +108,14 @@
       	<div class="col-block">
           <h3>Destination</h3>
       		<select class="select-dest" style="width: 100%;">
-				{% for item in route_dest %}
-					{% if item.entity.field_id.value == default_dest %}
-						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}" selected>{{item.entity.name.value}}</option>
-					{% else %}
-						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}">{{item.entity.name.value}}</option>
-					{% endif %}
-				{% endfor %}
-			</select>
+    				{% for item in route_dest %}
+    					{% if item.entity.field_id.value == default_dest %}
+    						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}" selected>{{item.entity.name.value}}</option>
+    					{% else %}
+    						<option value="{{item.entity.field_id.value}}" lat="{{item.entity.field_lat.value}}" lng="{{item.entity.field_lng.value}}">{{item.entity.name.value}}</option>
+    					{% endif %}
+    				{% endfor %}
+    			</select>
       	</div>
         <div class="col-block">
           <h3>Share Youre Schedule</h3>

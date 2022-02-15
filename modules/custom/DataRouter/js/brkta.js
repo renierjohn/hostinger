@@ -303,7 +303,9 @@
         if(t.length == 0){
           t = 'Renify'
         }
-        window.open('http://www.twitter.com/share?url='+u+'&t='+t,'sharer','toolbar=0,status=0,width=626,height=436');
+        // window.open('http://www.twitter.com/share?url='+u+'&t='+t,'sharer','toolbar=0,status=0,width=626,height=436');
+        window.open('http://www.twitter.com/share?url='+u+'&t='+t,'sharer',`menubar=no,
+             toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600`);
         return false;
     });
 

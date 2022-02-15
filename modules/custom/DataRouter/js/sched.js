@@ -306,5 +306,67 @@
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
+  $('.share-clipboard').on('click', function(e) {
+      $(".tooltip").show();
+      
+      var text = window.location.href;
+      var sampleTextarea = document.createElement("textarea");
+      document.body.appendChild(sampleTextarea);
+      sampleTextarea.value = text; //save main text in it
+      sampleTextarea.select(); //select textarea contenrs
+      document.execCommand("copy");
+      document.body.removeChild(sampleTextarea);
+      
+      $(".tooltip").delay(300).fadeOut("slow");
+  });
+
+
+  $('.share-dynamic-fb').on('click', function(e) {
+      var u = location.href;
+      var t = document.title;
+      
+      if(t.length == 0){
+          t = 'Renify'
+      }
+
+      $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+        FB.init({
+          appId: '376061863589278', //replace with your app ID
+          version: 'v8.0'
+        });
+        FB.ui({
+              method: 'share',
+              title: t,
+              description: t,
+              href: u,
+            },
+            function(response) {
+              if (response && !response.error_code) {
+                alert('Posting completed.');
+              } else {
+                alert('Error while posting.');
+              }
+          });
+      });
+    });
+
+    $('.share-dynamic-twitter').on('click', function(e) {
+        var u = location.href;
+        var t = document.title;
+        if(t.length == 0){
+          t = 'Renify'
+        }
+        
+        window.open('http://www.twitter.com/share?url='+u+'&t='+t,'sharer',`menubar=no,
+             toolbar=yes,resizable=yes,scrollbars=yes,height=600,width=600`);
+        return false;
+    });
+
+    $('.share-insta').on('click', function(e) {
+        var u = location.href;
+        var t = document.title;
+        window.open("https://www.instagram.com/renify_renier", "_blank", "location=yes");
+        return false;
+    });
 
 }(jQuery));
