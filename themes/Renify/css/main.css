@@ -2611,6 +2611,17 @@ input::-moz-focus-inner {
   width: 10rem;
 }
 
+.short-text{
+  padding: 0;
+  margin: 3rem;
+  text-align: center;
+}
+
+.short-text h2{
+  color: #aeaeae;
+  margin: 2rem;
+}
+
 @media only screen and (max-width:800px) {
   .overflow{
     overflow: scroll;
