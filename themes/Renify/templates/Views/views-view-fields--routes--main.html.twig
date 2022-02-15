@@ -3,6 +3,7 @@
 {% set image    = fields.field_banner_image.content|raw|striptags %}
 {% set link     = fields.view_node.content|raw|striptags %}
 {% set ticket   = fields.field_ticket_link_list.content|raw %}  
+{% set routes   = fields.field_tx_table_route.content %}
 {% set lazy_img = '/themes/Renify/images/lazy/bus.svg' %}
 
 {{ attach_library('core/drupal') }}
@@ -16,14 +17,17 @@
     <div class="item-feature-image">
       <img src="{{lazy_img}}" data-src="{{image}}" class="img-fluid lazy" alt="">
     </div>
-    <div class="item-feature__text route-block">
+    <div class="item-feature__text route-block" style="height:auto;">
       <h3 class="item-title"><i class="fas fa-shuttle-van"></i>{{ title }}</h3>
       {% if ticket %}
           <h5 class="item-ticket"><i class="fas fa-bus"></i><a href="https://book.renifysite.com" title=""> Find Tickets</a></h5>
             {{ticket}}
       {% endif %}
     </div>
-    <div class="article-social">
+    <div class="search-detail-route" style="height:26vh; padding:0 1rem">
+      {{routes}}
+    </div>
+    <div class="article-social" style="padding:1rem">
       <ul>
         <li><i class="fa fa-share"></i></li>
         <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
