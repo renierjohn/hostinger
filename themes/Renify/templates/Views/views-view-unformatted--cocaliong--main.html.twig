@@ -1,6 +1,7 @@
 {{ attach_library('core/drupal') }}
 {{ attach_library('data_router/tracker') }}
 {{ attach_library('data_router/sched') }}
+{{ attach_library('data_router/weather') }}
 
 <section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="/sites/default/files/public/ship.jpg" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
         <div class="shadow-overlay"></div>
@@ -41,6 +42,15 @@
           </p>
         </div>
     </div> <!-- end section-header -->
+
+    <!-- WEATHER DISPLAY -->
+    <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+      <div class="col-block" style="width: 100%;overflow: auto;">
+        <div class="selected-weather-wrap" style="opacity: 1;">      
+         
+        </div>
+      </div>
+    </div>
 
   <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
       <div class="col-block">
