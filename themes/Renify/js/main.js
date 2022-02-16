@@ -346,6 +346,10 @@
         $('.search-detail-desc').trunk8({
             lines: 4
         });
+
+        $('.search-detail-route').trunk8({
+            lines: 6
+        });
     }
 
     /* Back to Top
