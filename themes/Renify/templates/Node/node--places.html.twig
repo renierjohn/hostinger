@@ -17,7 +17,30 @@
 {{ attach_library('data_router/tracker') }}
 {{ attach_library('renify/video') }}
 
+<!-- BREADCRUMB -->
+{% set link = '/store/' %}
+{% set category_name = 'Store' %}
+
+{% if category != 'Store' %}
+  {% set link = '/' %}
+{% endif %}
+
 {{ drupal_view('banner','banner',id) }}
+
+<section id="breadcrumb" class="breadcrumb">
+    <div class="cont_principal">
+        <div class="cont_breadcrumbs">
+          <div class="cont_breadcrumbs_3">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="{{link}}">{{category}}</a></li>
+              <li><a href="#">{{title}}</a></li>
+            </ul>
+            </div>  
+        </div>
+    </div>
+</section>
+
 
 <section id="body" class="main-wrapper">
     <div class="wrapper-header">

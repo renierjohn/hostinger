@@ -31,6 +31,21 @@
   </div>
 </section>
 
+<!-- BREADCRUMB -->
+<section id="breadcrumb" class="breadcrumb">
+    <div class="cont_principal">
+        <div class="cont_breadcrumbs">
+          <div class="cont_breadcrumbs_3">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/routes/">Bus Routes</a></li>
+              <li><a href="#">{{title}}</a></li>
+            </ul>
+            </div>  
+        </div>
+    </div>
+</section>
+
 {{ drupal_view('frontpage', 'block_1') }}
 
 <!-- MAIN CONTENTS -->
@@ -60,7 +75,7 @@
 	            </tbody>
 	        </table>
 
-	        <div class="row features block-1-1 block-tab-full route_select" data-aos="fade-in">
+	        <div class="row  block-1-1 block-tab-full " data-aos="fade-in">
 	            <div class="gallery__photos">
 	              <div class="col-full route__slider">
 	              	{% for gallery in galleries['#items'] %}

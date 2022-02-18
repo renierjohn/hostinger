@@ -11,6 +11,7 @@ base:
       css/status_message.css: {}
       css/8_mobile.css: {}
       css/9_mobile-articles.css: {}
+      css/breadcrumb.css: {}
       css/base.css.map: {}
       css/vendor.css.map: {}
       css/main.css.map: {}

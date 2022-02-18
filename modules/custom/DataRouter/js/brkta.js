@@ -157,11 +157,6 @@
 		return date.toISOString().split('T')[0];
   }
 
-  function refresh(){
-  	var path = '/modules/custom/DataRouter/js/brkta.js';
-  	return `<script src=`+path+`></script>`
-  }
-
   function init_slick(){
   	if($('.ajax_date').hasClass('date-initialized') == true){
   		$('.selected-date-wrap').slick('unslick');
