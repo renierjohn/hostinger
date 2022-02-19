@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-  <head>
-    <link rel="manifest" href="https://renify.store/manifest.json" />
-    <meta name="author" content="Renify">
-    <meta name="google-signin-client_id" content="1=902176944767=web=ad381ae4a5fb011a80054a.apps.googleusercontent.com">
-    <title>{{ head_title|safe_join(' | ') }}</title>
-    <head-placeholder token="{{ placeholder_token }}">    
+
+<head>
+  <link rel="manifest" href="https://renify.store/manifest.json" />
+  <meta name="author" content="Renify">
+  <meta name="google-signin-client_id" content="1=902176944767=web=ad381ae4a5fb011a80054a.apps.googleusercontent.com">
+  <title>{{ head_title|safe_join(' | ') }}</title>
+  <head-placeholder token="{{ placeholder_token }}">
     <css-placeholder token="{{ placeholder_token }}">
     <js-placeholder token="{{ placeholder_token }}">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZS04MBV0Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4ZS04MBV0Z');
-  </script>
-  </head>
-  <body style="display:none;">
-    {{ page_top }}
-    {{ page }}
-    {{ page_bottom }}
-    <js-bottom-placeholder token="{{ placeholder_token }}">
-  </body>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163503291-2"></script>
+        
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', 'UA-163503291-2');
+        </script>
+</head>
+
+<body style="display:none;">
+  {{ page_top }}
+  {{ page }}
+  {{ page_bottom }}
+  <js-bottom-placeholder token="{{ placeholder_token }}">
+</body>
+
 </html>
