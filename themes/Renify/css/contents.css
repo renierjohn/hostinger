@@ -531,14 +531,28 @@
   padding-top: 2rem;
 }
 
+.related-routes{
+  display: block;
+}
+
+.related-routes .col-block{
+  max-width: 40rem;
+  padding: 0;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
 .image-wrapper{
   height: 300px;
+  text-align: center;
 }
 
 .image-wrapper img{
   padding: 1rem;
   opacity: 1;  
   object-fit: contain;
+  height: 100%;
 }
 
 .image-wrapper img:hover{
@@ -548,7 +562,6 @@
 
 .image-wrapper span{
   position: relative;
-  left: 13rem;
   top: -12rem;
   background-color: #eaeaea;
   padding: 1rem;

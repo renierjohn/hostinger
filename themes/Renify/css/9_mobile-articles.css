@@ -66,9 +66,25 @@
 }
 
 @media only screen and (max-width:425px) {
+    .related-routes{
+      display: flex !important;
+      margin-top: 0;
+    }
+
+    .related-routes .col-block{
+      width: 20rem;
+    }
+
     .image-wrapper{
       height: auto;  
+      font-size: 1.5rem;
+      width: inherit;
     }
+
+    .image-wrapper span{
+      top: auto;
+    }
+
     .main-wrapper h2{
       margin: 0;
     }
@@ -134,6 +150,7 @@
     #message-form{
       padding-left: 3rem;
       padding-right: 1rem;
+      margin-bottom: 24rem !important;
     }
 
     .pull-quote blockquote p{

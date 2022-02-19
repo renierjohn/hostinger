@@ -1,17 +1,18 @@
-{% set map         = content.field_google_map.0['#context'].value %}
-{% set description = content.field_description.0['#text'] %}
-{% set gallery     = content.field_thumbnails %}
-{% set youtube     = content.field_youtube.0['#url'].uri %}
-{% set category    = content.field_category.0['#title'] %}
-{% set youtube_img = content.field_banner_image.0['#markup'] %}
-{% set nearby      = content.field_nearby_place.0['#plain_text'] %}
-{% set date        = node.created.value|format_date('y M o') %}
-{% set title       = node.title.value|raw|striptags %}
-{% set lazy_img    = '/themes/Renify/images/lazy/lazy.jpg' %}
-{% set id          = node.id|raw|striptags|raw %}
+{% set hasCocaliong = content.field_has_cocaliong_route.0['#markup'] %}
+{% set map          = content.field_google_map.0['#context'].value %}
+{% set description  = content.field_description.0['#text'] %}
+{% set gallery      = content.field_thumbnails %}
+{% set youtube      = content.field_youtube.0['#url'].uri %}
+{% set category     = content.field_category.0['#title'] %}
+{% set youtube_img  = content.field_banner_image.0['#markup'] %}
+{% set nearby       = content.field_nearby_place.0['#plain_text'] %}
+{% set date         = node.created.value|format_date('y M o') %}
+{% set title        = node.title.value|raw|striptags %}
+{% set lazy_img     = '/themes/Renify/images/lazy/lazy.jpg' %}
+{% set id           = node.id|raw|striptags|raw %}
 
-{% set next        = pagination.next %}
-{% set prev        = pagination.prev %}
+{% set next         = pagination.next %}
+{% set prev         = pagination.prev %}
 
 {{ attach_library('core/drupal') }}
 {{ attach_library('data_router/tracker') }}
@@ -40,7 +41,6 @@
         </div>
     </div>
 </section>
-
 
 <section id="body" class="main-wrapper">
     <div class="wrapper-header">
@@ -105,6 +105,7 @@
     </div>
   </div>
 </section>
+
 <!-- Pagination  -->
 <section id="pagination" class="s-styles">
   <div class="row half-bottom ">
@@ -138,6 +139,30 @@
         <button type="button" class="slick-prev btn btn--stroke related_place_btn">Prev</button>
         <button type="button" class="slick-next btn btn--stroke related_place_btn">Next</button>
     </div>
+
+    <!-- ROUTES -->
+    <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+        <div class="col-block">
+          <h2>Want to Go {{title}} ?</h2>
+          <p>Try to Search Schedule Here</p>
+        </div>
+     </div>
+    
+    {% if routes_relation %}
+      <div class="row related-routes features block-1-3 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">   
+            {% for route_relation in routes_relation %}
+              <div class="col-block">
+                <div class="image-wrapper">
+                      <a href="{{route_relation.link}}" title="{{route_relation.title}}">
+                        <img src="{{route_relation.image}}" class="img-fluid lazy" alt="{{route_relation.title}}">
+                      <span>{{route_relation.title}}</span>
+                      </a>
+                  </div>
+               </div>
+            {% endfor %}
+      </div>
+    {% endif %}
+
   </div>
 </section>
 <!--Gallery  -->

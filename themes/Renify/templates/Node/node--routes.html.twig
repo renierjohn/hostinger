@@ -11,10 +11,9 @@
 {% set route_price = content.field_route_price %}
 
 {% set route_tables = content.field_tx_table_route %}
-{# 
-{% set category    = content.field_category.0['#title'] %}
-{% set nearby      = content.field_nearby_place.0['#plain_text'] %}
-{% set date        = node.created.value|format_date('y M o') %} #}
+
+{% set next         = pagination.next %}
+{% set prev         = pagination.prev %}
 
 {{ attach_library('core/drupal') }}
 {{ attach_library('data_router/tracker') }}
@@ -107,11 +106,27 @@
 	    </div>
 
 	    <div class="row block-1-1 block-tab-full" style="padding:0 1rem">
-      <h3>About {{title}}</h3>
-        {{description|raw}}
-    </div> 
+	    	{% if description.0 %}
+        		<h3>About {{title}}</h3>
+	          {{description|raw}}
+	      {% endif %}   
+    	</div>
+  	</section>
 
-    </section>
+  	<section id="pagination" class="s-styles">
+		  <div class="row half-bottom ">
+		    {% if prev %}
+		      <div class="col-six inline-grid">
+		        <a href="{{prev}}" class="btn btn--stroke--reverse overflow"><i class="fa fa-arrow-left"></i>Prev</a>
+		      </div>
+		    {% endif %}
+		    {% if next %}
+		      <div class="col-six inline-grid">
+		        <a href="{{next}}" class="btn btn--stroke--reverse overflow">Next<i class="fa fa-arrow-right"></i></a>
+		      </div>
+		    {% endif %}
+		  </div>
+		</section>
 
 <!-- RELATED ROUTES -->
     <section id="category" class="">

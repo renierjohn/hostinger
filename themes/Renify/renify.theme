@@ -47,7 +47,7 @@ function renify_preprocess_node(&$variables){
   }
 
   if($bundle == 'places'){
-    $routes_relation = \Drupal::service('data_router.aliases_path')->setBundle($bundle)->getRoutesRelation();
+    $routes_relation = \Drupal::service('data_router.aliases_path')->setNode($node)->getRoutesRelation();
   }
 
   $result = \Drupal::service('data_router.aliases_path')->setID($nid)->setBundle($bundle)->getContentPagination();

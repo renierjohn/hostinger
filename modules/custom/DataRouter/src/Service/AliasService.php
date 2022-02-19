@@ -15,6 +15,8 @@ class AliasService
 
   protected $bundle;
 
+  protected $node;
+
   public function __construct(EntityTypeManager $entityTypeManager,Connection $database){
     $this->entityTypeManager = $entityTypeManager;
     $this->database          = $database;
@@ -27,6 +29,11 @@ class AliasService
 
   public function setBundle($bundle){
     $this->bundle = $bundle;
+    return $this;
+  }
+
+  public function setNode($node){
+    $this->node = $node;
     return $this;
   }
 
@@ -103,10 +110,50 @@ class AliasService
 
   public function getRoutesRelation(){
     $entity = $this->entityTypeManager;
-    $node   = $entity->getStorage('node');
-    $nid    = $node->getQuery();
-    $bundle = $this->bundle;
-    return FALSE;
+    $node   = $this->node;
+    $e      = $entity->getStorage('node');
+    $query  = $e->getQuery();
+    $nid    = $node->id();
+    $bundle = $node->bundle();
+    
+    $hasCocaliong  = $node->field_has_cocaliong_route->value;
+    $bus_routes    = $node->field_tx_table_route;
+    $vessel_routes = $node->field_vessel_destination;
+
+    $list = [];
+    if($hasCocaliong == '1'){
+     $list[] = [
+        'title' => 'Cocaliong',
+        'image' => '/sites/default/files/public/barkot/ship.jpg',
+        'link'  => '/vessel/cocaliong/',
+     ]; 
+    }
+    
+    foreach ($bus_routes as $bus_route) {
+      $list[] = [
+        'title' => $bus_route->entity->getTitle(),
+        'image' => $bus_route->entity->field_banner_image->entity->uri->value ? str_replace('public://','/sites/default/files/public/',$bus_route->entity->field_banner_image->entity->uri->value) : '/sites/default/files/favicon.ico' ,
+        'link'  => $bus_route->entity->path->alias.'/'
+      ];
+    }
+
+    $query->condition('type','barkota_shipping_vessel');
+    $or = $query->orConditionGroup();
+    foreach ($vessel_routes as $vessel_route) {
+      $id = $vessel_route->entity->id();
+      $or->condition('field_vessel_destination',$id);
+    }
+    $query->condition($or);
+    $nids    = $query->execute();
+    $vessels = $e->loadMultiple($nids);
+    foreach ($vessels as $vessel) {
+      $list[] = [
+        'title' => $vessel->getTitle(),
+        'image' => $vessel->field_banner_image->entity->uri->value ? str_replace('public://','/sites/default/files/public/',$vessel->field_banner_image->entity->uri->value) : '/sites/default/files/favicon.ico' ,
+        'link'  => $vessel->path->alias.'/'
+      ];
+    }
+    return $list;
   }
 
 }
