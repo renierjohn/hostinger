@@ -137,14 +137,23 @@ class AliasService
       ];
     }
 
+
+    if(empty($vessel_routes->entity)){
+      return $list;
+    }  
     $query->condition('type','barkota_shipping_vessel');
     $or = $query->orConditionGroup();
     foreach ($vessel_routes as $vessel_route) {
       $id = $vessel_route->entity->id();
       $or->condition('field_vessel_destination',$id);
+      
     }
     $query->condition($or);
     $nids    = $query->execute();
+
+    if(empty($nids)){
+      return $list;
+    }
     $vessels = $e->loadMultiple($nids);
     foreach ($vessels as $vessel) {
       $list[] = [
