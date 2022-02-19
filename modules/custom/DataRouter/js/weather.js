@@ -79,10 +79,20 @@
 				var time = convertDate(dat.dt)[4];
 
 				var hour = time.split(':')[0];
+
 				var ampm = 'AM';
 				if(hour > 12){
 					hour = hour - 12;
 					ampm = 'PM';
+				}
+				
+				if(hour == 12){
+					ampm = 'PM';
+				}
+
+				if(hour == '00'){
+					hour = 12;
+					ampm = 'AM';
 				}
 
 				template +=`<div class="selected-weather `+active+`"style="background-image: url('/themes/Renify/images/weather/`+dat.weather[0].main+`.gif');background-repeat: no-repeat;background-size: cover;color: white;width:15rem">
@@ -94,8 +104,7 @@
 			                </div>`
 					          	          
   		});
- console.log(template);
-  		
+
   		$('.selected-weather-wrap').html('')
   		$('.selected-weather-wrap').html(template);
   		$('.selected-weather').css({'opacity':1});

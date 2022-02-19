@@ -13,6 +13,8 @@ class AliasService
 
   protected $id;
 
+  protected $bundle;
+
   public function __construct(EntityTypeManager $entityTypeManager,Connection $database){
     $this->entityTypeManager = $entityTypeManager;
     $this->database          = $database;
@@ -23,20 +25,32 @@ class AliasService
     return $this;
   }
 
+  public function setBundle($bundle){
+    $this->bundle = $bundle;
+    return $this;
+  }
+
+  private function getNids(){
+    $entity = $this->entityTypeManager;
+    $node   = $entity->getStorage('node');
+    $nid    = $node->getQuery();
+    $nids   = $nid->condition('type',$this->bundle)
+                  // ->condition('field_category',[1,4,3],'IN')
+                  ->condition('status',1)
+                  ->execute();
+    return array_values($nids);
+  }
+
   public function getContentPagination(){
     $entity = $this->entityTypeManager;
     $id     = $this->id;
+    
     if(empty($id)){
       return FALSE;
     }
-    $node   = $entity->getStorage('node');
+
     $alias  = $entity->getStorage('path_alias');
-    $nid    = $node->getQuery();
-    $nids   = $nid->condition('type','places')
-                  ->condition('field_category',[1,4,3],'IN')
-                  ->condition('status',1)
-                  ->execute();
-    $nids   = array_values($nids);
+    $nids   = $this->getNids();
     $temp   = [];
 
     foreach ($nids as $key => $nid) {
@@ -85,6 +99,14 @@ class AliasService
       }
     }
     return $temp;
+  }
+
+  public function getRoutesRelation(){
+    $entity = $this->entityTypeManager;
+    $node   = $entity->getStorage('node');
+    $nid    = $node->getQuery();
+    $bundle = $this->bundle;
+    return FALSE;
   }
 
 }

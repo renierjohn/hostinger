@@ -36,7 +36,8 @@ function renify_preprocess_node(&$variables){
   $node   = $variables['node'];
   $nid    = $node->id();
   $bundle = $node->bundle();
-  
+  $result = [];
+  $routes_relation = [];
   if($bundle == 'messages' || $bundle == 'config'){
     if (\Drupal::currentUser()->id() != 1) {
       $response = new RedirectResponse('/404');
@@ -44,9 +45,15 @@ function renify_preprocess_node(&$variables){
       // \Drupal::service('request_stack')->getCurrentRequest()->query->set('destination', '/404');
     }
   }
+
+  if($bundle == 'places'){
+    $routes_relation = \Drupal::service('data_router.aliases_path')->setBundle($bundle)->getRoutesRelation();
+  }
+
+  $result = \Drupal::service('data_router.aliases_path')->setID($nid)->setBundle($bundle)->getContentPagination();
+  $variables['pagination']      = $result;
+  $variables['routes_relation'] = $routes_relation;
   
-  $result = \Drupal::service('data_router.aliases_path')->setID($nid)->getContentPagination();
-  $variables['pagination'] = $result;
 }
 
 function renify_preprocess_taxonomy_term(&$variables){
