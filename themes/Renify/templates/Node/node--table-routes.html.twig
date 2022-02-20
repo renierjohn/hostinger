@@ -3,7 +3,7 @@
 {% set title       = node.title.value|raw|striptags %}
 
 {% set description = content.field_description.0['#text'] %}
-{% set summary     = content.field_table_summary.0['#text'] %}
+{% set summary     = content.field_table_summary.0 %}
 
 {% set ticket_link = content.field_table_ticket_link.0 %}
 
