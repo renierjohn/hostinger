@@ -147,21 +147,33 @@
 .wrapper--black:after {
   background-color: #121619;
 }
-.wrapper:before,
+.wrapper:before
+{
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  content: "";
+  display: block;
+  height: 12rem;
+  position: relative;
+  width: 100%;
+  margin-bottom: -15rem;
+  left: 0;
+  top: -12rem;
+}
+
+
 .wrapper:after {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   content: "";
   display: block;
-  height: 6.5em;
+  height: 12rem;
   position: relative;
   width: 100%;
+  margin-top: -15rem;
 }
 
-.wrapper:before {
-  left: 0;
-  top: -6.5em;
-}
+
 
 .wrapper:after {
   -moz-transform: scaleY(-1);
@@ -189,8 +201,8 @@
 
 .wrapper .inner {
   position: relative;
-  top: -19rem;
-  padding: 7rem 15%;
+  top: auto;
+  padding: 0rem 12%;
   margin: 0 auto;
   width: 100%;
   color: #3d4051;

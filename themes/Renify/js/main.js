@@ -257,23 +257,11 @@
         });
         $('.map__photos__slide').slick({
             arrows: false,
-            dots: false,
+            dots: true,
             infinite: true,
-            slidesToShow: 1,
+            slidesToShow: 2,
             slidesToScroll: 1,
-            pauseOnFocus: false,
-            autoplaySpeed: 1500,
-            fade: true,
-            cssEase: 'linear',
-            responsive: [
-                {
-                    breakpoint: 1001,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
+            centerMode: true,
         });
 
         $('.slick-prev').click(function(){ 
