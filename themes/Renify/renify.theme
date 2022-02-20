@@ -39,11 +39,7 @@ function renify_preprocess_node(&$variables){
   $result = [];
   $routes_relation = [];
   if($bundle == 'messages' || $bundle == 'config'){
-    if (\Drupal::currentUser()->id() != 1) {
-      $response = new RedirectResponse('/404');
-      return $response->send();
-      // \Drupal::service('request_stack')->getCurrentRequest()->query->set('destination', '/404');
-    }
+    
   }
 
   if($bundle == 'places'){
@@ -57,15 +53,7 @@ function renify_preprocess_node(&$variables){
 }
 
 function renify_preprocess_taxonomy_term(&$variables){
-  $term    = $variables['term'];
-  $tid     = $term->id();
-  $bundle  = $term->bundle();
-  if($bundle == 'bus_name' || $bundle == 'category' || $bundle == 'location' || $bundle == 'route_vessels'){
-    if (\Drupal::currentUser()->id() != 1) {
-      $response = new RedirectResponse('/404');
-      return $response->send();
-    }
-  }
+  
 }
 
 function renify_preprocess_block(&$variables){

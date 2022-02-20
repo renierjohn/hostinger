@@ -6,6 +6,7 @@
 {% set category     = content.field_category.0['#title'] %}
 {% set youtube_img  = content.field_banner_image.0['#markup'] %}
 {% set nearby       = content.field_nearby_place.0['#plain_text'] %}
+{% set booking_link = content.field_table_ticket_link.0 %}
 {% set date         = node.created.value|format_date('y M o') %}
 {% set title        = node.title.value|raw|striptags %}
 {% set lazy_img     = '/themes/Renify/images/lazy/lazy.jpg' %}
@@ -82,6 +83,11 @@
           </li>
         </ul>
       </div>
+      {% if booking_link %}
+        <div>
+          <a href="{{booking_link}}" class="btn btn--stroke" target="blank"><i class="fa fa-book"></i> Book Here <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+        </div>
+      {% endif %}
       <div>
           {{ description|raw }}
       </div>
