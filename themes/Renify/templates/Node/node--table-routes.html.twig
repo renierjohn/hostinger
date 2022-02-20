@@ -5,7 +5,7 @@
 {% set description = content.field_description.0['#text'] %}
 {% set summary     = content.field_table_summary.0['#text'] %}
 
-{% set ticket_link = content.field_table_ticket_link.0['#text'] %}
+{% set ticket_link = content.field_table_ticket_link.0 %}
 
 {% set route_name = content.field_table_route %}
 {% set route_time = content.field_table_time %}
@@ -29,7 +29,7 @@
   </tbody>
 </table>
 {% if ticket_link %}
-	<a href="{{ticket_link}}" class="btn btn--stroke">Find Tickets<i class="fa fa-arrow-up"></i></a>
+	<a href="{{ticket_link}}" class="btn btn--stroke"><i class="fa fa-book"></i> Book Here</a>
 {% endif %}
 {% if summary %}
 	<h12>*{{summary}}</h12>
