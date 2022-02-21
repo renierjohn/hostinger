@@ -13,6 +13,7 @@ base:
       css/9_mobile-articles.css: {}
       css/breadcrumb.css: {}
       css/tab.css: {}
+      css/modal.css: {}
       css/base.css.map: {}
       css/vendor.css.map: {}
       css/main.css.map: {}
