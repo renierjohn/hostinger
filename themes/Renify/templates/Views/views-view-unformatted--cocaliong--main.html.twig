@@ -126,58 +126,76 @@
 
 
   	<div class="row features block-1-2 block-tab-full" data-aos="fade-in">
-      <div class="col-block">
-        <table>
-            <caption>Schedules</caption>
-            <thead>
-              <tr>
-                <th>Vessel</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-              </tr>
-            </thead>
-            <tbody class="ajax_schedules">
-            </tbody>
-        </table>
+      <div class="tab-wrap">
+        <input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
+        <label for="tab1">Schedules & Rates</label>
+        <input type="radio" id="tab2" name="tabGroup1" class="tab">
+        <label for="tab2">Comments</label>
+        <input type="radio" id="tab3" name="tabGroup1" class="tab">
+        <label for="tab3">Book Here</label>
+        
+        <div class="tab__content">
+          <div class="col-block">
+              <table>
+                  <caption>Schedules</caption>
+                  <thead>
+                    <tr>
+                      <th>Vessel</th>
+                      <th>Departure</th>
+                      <th>Arrival</th>
+                    </tr>
+                  </thead>
+                  <tbody class="ajax_schedules">
+                  </tbody>
+              </table>
+          </div>
+
+          <div class="col-block"> 
+              <table>
+                  <caption>Rates</caption>
+                  <thead>
+                    <tr>
+                      <th>Vessel</th>
+                      <th>Accomodation</th>
+                      <th>Rooms</th>
+                      <th>Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody class="ajax_rates">
+                 </tbody>
+              </table>
+          </div>  
+        </div>
+        <div class="tab__content">
+          <p>Comming Soon</p>
+        </div>
+        <div class="tab__content">
+          <p>Comming Soon</p>
+        </div>
       </div>
-
-      <div class="col-block"> 
-        <table>
-            <caption>Rates</caption>
-            <thead>
-              <tr>
-                <th>Vessel</th>
-                <th>Accomodation</th>
-                <th>Rooms</th>
-                <th>Rate</th>
-              </tr>
-            </thead>
-            <tbody class="ajax_rates">
-           </tbody>
-        </table>
-    </div>
-
-    <div class="col-block">
-    	{% for item in ajaxform.content %}
-			<input type="hidden" name="{{item.origin}} {{item.dest}}" value="{{item.id}}">
-		{% endfor %}
-    </div>
+      <div class="col-block">
+      	{% for item in ajaxform.content %}
+  			<input type="hidden" name="{{item.origin}} {{item.dest}}" value="{{item.id}}">
+  		{% endfor %}
+      </div>
   </div>
 
     <div class="row center" >
         <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>
     </div>
 
-    <div class="row block-1-1 block-tab-full" style="padding:0 1rem">
-      <h3>About Cocaliong</h3>
-        <p>As we enter the 21st century, a new global economy draws routes ever closer. Competition leads to improvement just when your competitors think it is safe to do business. It’s certainly important for COKALIONG SHIPPING LINES, INC. to improve its services and integrate the latest technology in the industry to sustain a competitive advantage over the others. But nothing takes precedence over satisfying its customers.
-      Welcome
-      Cokaliong Shipping Lines
-      As we enter the 21st century, a new global economy draws routes ever closer. Competition leads to improvement just when your competitors think it is safe to do business. It’s certainly important for COKALIONG SHIPPING LINES, INC. to improve its services and integrate the latest technology in the industry to sustain a competitive advantage over the others. But nothing takes precedence over satisfying its customers.
-      We began to realize better ways to use resources. We face challenges and opportunities that are worthy of our collective talents and intellectual resources. It’s important to remember- that what builds companies is the ability to deliver new ideas again and again. We have to think positively and adopt a “can do” attitude. We have to look at adversities as opportunities.
-      Thanks to a well-considered strategy of expansion and diversification, COKALIONG SHIPPING LINES, INC. is the only medium-sized shipping company that is into containerization. The project intends to keep abreast with the developments in the world of transportation. Better service is achieved by extending our existing facilities or fleet. With great enthusiasm and far-reaching ambition, we want to offer the most reliable and efficient services to our Customers.
-        </p>
-    </div> 
+    <div class="row block-1-1 block-tab-full" >
+        <div class="col-block">
+          <h3>About Cocaliong Shipping Lines</h3>
+          <p>As we enter the 21st century, a new global economy draws routes ever closer. Competition leads to improvement just when your competitors think it is safe to do business. It’s certainly important for COKALIONG SHIPPING LINES, INC. to improve its services and integrate the latest technology in the industry to sustain a competitive advantage over the others. But nothing takes precedence over satisfying its customers.
+              Welcome
+              Cokaliong Shipping Lines
+              As we enter the 21st century, a new global economy draws routes ever closer. Competition leads to improvement just when your competitors think it is safe to do business. It’s certainly important for COKALIONG SHIPPING LINES, INC. to improve its services and integrate the latest technology in the industry to sustain a competitive advantage over the others. But nothing takes precedence over satisfying its customers.
+              We began to realize better ways to use resources. We face challenges and opportunities that are worthy of our collective talents and intellectual resources. It’s important to remember- that what builds companies is the ability to deliver new ideas again and again. We have to think positively and adopt a “can do” attitude. We have to look at adversities as opportunities.
+              Thanks to a well-considered strategy of expansion and diversification, COKALIONG SHIPPING LINES, INC. is the only medium-sized shipping company that is into containerization. The project intends to keep abreast with the developments in the world of transportation. Better service is achieved by extending our existing facilities or fleet. With great enthusiasm and far-reaching ambition, we want to offer the most reliable and efficient services to our Customers.
+          </p>
+        </div>
+    </div>
 
     
     <div class="row features block-1-1 block-tab-full" >
