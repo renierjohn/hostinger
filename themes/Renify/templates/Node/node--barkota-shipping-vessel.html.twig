@@ -97,7 +97,7 @@
           <div class="select-date">
               <div class="carousel slick-initialized slick-slider">
                 <div class="slick-list">
-                  <div class="selected-date-wrap ajax_date" style="opacity: 1; width: 1050px; transform: translate3d(0px, 0px, 0px);">
+                  <div class="selected-date-wrap ajax_date" style="opacity: 1;transform: translate3d(0px, 0px, 0px);">
 
 
                   </div>
@@ -157,29 +157,41 @@
   </div>
 
   <div class="row features block-1-1 block-tab-full" data-aos="fade-in">
-        <div class="">
-          <table>
-            <caption>Rates & Schedules</caption>
-            <caption class="ajax_table_origin"><i>from</i></caption>
-            <caption class="ajax_table_dest"><i>to</i></caption>
-            <thead>
-              <tr>
-                <th>Vessel</th>
-                <th>Departure</th>
-                <th>Duration</th>
-                <th>Accomodations</th>
-              </tr>
-            </thead>
-            <tbody class="ajax_schedules">
-              <tr>
-                <td> --- </td>
-                <td> --- </td>
-                <td> --- </td>
-                <td> --- </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="tab-wrap">
+          <input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
+          <label for="tab1">Rates & Schedules</label>
+          <input type="radio" id="tab2" name="tabGroup1" class="tab">
+          <label for="tab2">Book</label>
+          <input type="radio" id="tab3" name="tabGroup1" class="tab">
+       
+          <div class="tab__content">
+              <table>
+                <caption class="ajax_table_origin"><i>from</i></caption>
+                <caption class="ajax_table_dest"><i>to</i></caption>
+                <thead>
+                  <tr>
+                    <th>Vessel</th>
+                    <th>Departure</th>
+                    <th>Duration</th>
+                    <th>Accomodations</th>
+                  </tr>
+                </thead>
+                <tbody class="ajax_schedules">
+                  <tr>
+                    <td> --- </td>
+                    <td> --- </td>
+                    <td> --- </td>
+                    <td> --- </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          
+          <div class="tab__content">
+            <p>Comming Soon</p>
+          </div>
+     
+      </div> 
   </div>
   <div class="row center" >
     <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>

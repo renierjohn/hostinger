@@ -199,7 +199,7 @@
         var title  = $(this).attr('data-title');
         var u = location.href;
         var t = document.title;
-        window.open("https://www.instagram.com/renify_renier", "_blank", "location=yes");
+        window.open("https://www.instagram.com/renify_official", "_blank", "location=yes");
         return false;
     });
 

@@ -130,7 +130,6 @@
     .articles .features .item-feature{
       padding: 0;
       margin: 2rem .5rem;
-      min-width: 200px;
     }
     .item-feature-image{
       height: 30vh;
@@ -182,7 +181,7 @@
     }
 
     .card{
-      max-width: 200px;
+      max-width: 300px;
     } 
   }
 }

@@ -2526,6 +2526,15 @@ input::-moz-focus-inner {
 
 .route_select{
   display: block !important;
+  margin-bottom: 2rem !important;
+}
+
+.route_select .selected-date-wrap{
+  width: 1024px;
+}
+
+.route_select h2{
+  margin-top: 0;
 }
 
 .selected-date.disabled,.selected-weather.disabled{
