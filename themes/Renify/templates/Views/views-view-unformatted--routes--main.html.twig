@@ -43,26 +43,26 @@
 {{ drupal_view('frontpage', 'block_1') }}
 
 <section id="body" class="articles center" >
-    <ins class="bookingaff" data-aid="2227822" data-target_aid="2227822" data-prod="banner" data-width="200" data-height="200" data-lang="en">
-        <!-- Anything inside will go away once widget is loaded. -->
-            <a href="//www.booking.com?aid=2227822">Booking.com</a>
-    </ins>
-    <script type="text/javascript">
-        (function(d, sc, u) {
-          var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = u + '?v=' + (+new Date());
-          p.parentNode.insertBefore(s,p);
-          })(document, 'script', '//cf.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-    </script>
+    <div class="row center">
+            <ins class="bookingaff" data-aid="2227825" data-target_aid="2227825" data-prod="banner" data-width="468" data-height="60">
+          <a href="//www.booking.com?aid=2227825">Booking.com</a>
+         </ins>
+        <script type="text/javascript">
+                (function(d, sc, u) {
+                  var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+                  s.type = 'text/javascript';
+                  s.async = true;
+                  s.src = u + '?v=' + (+new Date());
+                  p.parentNode.insertBefore(s,p);
+                  })(document, 'script', '//cf.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+                </script>
+        </div>
 </section>
 
 <section id="body" class="articles"  max-pager="">
   <div class="row section-header has-bottom-sep" >
     <!-- MODAL -->
       <div class="col-full">
-        <label class="btn" for="modal-1">Check Travel Requirements</label>
         <input class="modal-state" id="modal-1" type="checkbox"  style="display: none;" />
         <div class="modal">
           <label class="modal__bg" for="modal-1"></label>
@@ -77,6 +77,7 @@
       <h1 class="display-1">
         Route Guides For You
       </h1>
+      <label class="btn btn--stroke" for="modal-1">Check Travel Requirements</label>
       <p class="lead">
         Search Youre Travel Plan and Dont Forget To Explore
       </p>
@@ -94,19 +95,20 @@
 
 
 <section id="body" class="articles center" >
-    <ins class="bookingaff" data-aid="2227824" data-target_aid="2227824" data-prod="banner" data-width="200" data-height="200">
-        <!-- Anything inside will go away once widget is loaded. -->
-            <a href="//www.booking.com?aid=2227824">Booking.com</a>
-    </ins>
-    <script type="text/javascript">
-        (function(d, sc, u) {
-          var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = u + '?v=' + (+new Date());
-          p.parentNode.insertBefore(s,p);
-          })(document, 'script', '//cf.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-    </script>
+    <div class="row center">
+            <ins class="bookingaff" data-aid="2227825" data-target_aid="2227825" data-prod="banner" data-width="468" data-height="60">
+          <a href="//www.booking.com?aid=2227825">Booking.com</a>
+         </ins>
+        <script type="text/javascript">
+                (function(d, sc, u) {
+                  var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+                  s.type = 'text/javascript';
+                  s.async = true;
+                  s.src = u + '?v=' + (+new Date());
+                  p.parentNode.insertBefore(s,p);
+                  })(document, 'script', '//cf.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+                </script>
+        </div>  
 </section>
 
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}

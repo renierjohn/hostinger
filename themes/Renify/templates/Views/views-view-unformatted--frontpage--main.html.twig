@@ -18,7 +18,6 @@
   <div class="row section-header has-bottom-sep" >
       <!-- MODAL -->
       <div class="col-full">
-        <label class="btn" for="modal-1">Check Travel Requirements</label>
         <input class="modal-state" id="modal-1" type="checkbox"  style="display: none;" />
         <div class="modal">
           <label class="modal__bg" for="modal-1"></label>
@@ -33,6 +32,7 @@
       <h1 class="display-1">
         Find Schedules And Fares
       </h1>
+      <label class="btn btn--stroke" for="modal-1"><i class="fa fa-lightbulb"></i> Check Travel Requirements</label>
       <div class="row features block-1-3 block-tab-full" data-aos="fade-in">
         <div class="col-block item-article item-feature">
             <div class="card" style="height:12vh">
@@ -43,7 +43,7 @@
         </div>
          {{ drupal_view('barkota_lists','main') }}
       </div>
-      <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big">More Schedules</a>
+      <a href="/vessel/" class="btn btn--stroke btn-effect btn--big">More Schedules</a>
     </div>
   </div>
 </section>
