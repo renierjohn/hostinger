@@ -11,6 +11,7 @@
 {% set title        = node.title.value|raw|striptags %}
 {% set lazy_img     = '/themes/Renify/images/lazy/lazy.jpg' %}
 {% set id           = node.id|raw|striptags|raw %}
+{% set path        = node.path.0.alias %}
 
 {% set next         = pagination.next %}
 {% set prev         = pagination.prev %}
@@ -28,6 +29,10 @@
 {% endif %}
 
 {{ drupal_view('banner','banner',id) }}
+
+{% if youtube is empty %}
+  {% set youtube = 'https://youtu.be/OIyWjRQztVY' %}
+{% endif %}
 
 <section id="breadcrumb" class="breadcrumb">
     <div class="cont_principal">
@@ -53,6 +58,9 @@
               <a href="#preloader" class="smoothscroll">{{ category }}<em>Category</em><a>
             </li>
             <li>
+              <a href="#comment" class="smoothscroll"><span class="fb-comments-count" data-href="https://renifysite.com{{path}}"></span><em>Comments</em></a>
+            </li>
+            <li>
               <a href="#preloader" class="smoothscroll"><span id="view_count" class="{{id}}"></span><em>View(s)</em></a>
             </li>
           </ul>
@@ -63,7 +71,18 @@
 <!-- Content -->
   <div class="wrapper">
     <div class="inner">
-      <h3 class="major"><h5 style="display:inline-block;">Posted : </h5> <i>{{ date }}</i> </h3>
+      <h3 class="major"><h5 style="display:inline-block;">Posted : </h5> <i>{{ date }}</i> 
+            <div class="fb-like" 
+                data-href="https://renifysite.com{{path}}" 
+                data-width="" 
+                data-layout="button_count" 
+                data-action="like" 
+                data-size="small" 
+                data-lazy="true"
+                data-share="true"
+                style="float:right;"
+                >
+            </div></h3>
        <div class="content-social">
         <ul>
           <li>
@@ -89,34 +108,40 @@
       {% endif %}
       
       <div class="tab-wrap">
-          <input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
-          <label for="tab1">Details</label>
-          <input type="radio" id="tab2" name="tabGroup1" class="tab">
-          <label for="tab2">Comments</label>
+          <input type="radio" id="tab1" name="tabGroup1" class="tab" >
+            <label for="tab1">Details</label>
+
+          <input type="radio" id="tab2" name="tabGroup1" class="tab" checked>
+            <label for="tab2">Comments</label>
+          
           <input type="radio" id="tab3" name="tabGroup1" class="tab">
-          <label for="tab3">Map Location</label>
+            <label for="tab3">Map Location</label>
+          
           <input type="radio" id="tab4" name="tabGroup1" class="tab">
-          <label for="tab4">Nearby Place</label>
+            <label for="tab4">Video</label>
+         
           <div class="tab__content">
             <h3>About {{title}}</h3>
             {{ description|raw }}
           </div>
+
           <div class="tab__content">
-            <p>Comming Soon</p>
+            <div class="fb-comments" id="comment" data-href="https://renifysite.com{{path}}"  data-width="" data-numposts="10"></div>
           </div>
+
           <div class="tab__content">
             <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=60025&amp;height=600&amp;hl=en&amp;q={{map}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
           </div>
+
           <div class="tab__content">
-            <div class="row gallery__photos">
-              <h3>Explore Other Place</h3>
-              <div class="col-full slick-slider map__photos__slide">
-                {{ drupal_view('related_places','places',id,nearby) }}
+              <div class="col-full video-bg" style="background-image: url({{youtube_img}}); margin-top:0;">
+                <a class="btn-video" href={{youtube}} data-lity>
+                  <span class="video-icon"></span>
+                </a>
               </div>
-            </div>
           </div>
-      </div>   
-    </div>
+       </div> 
+    </div>   
 
     <div class="content-social">
       <ul>
@@ -203,9 +228,6 @@
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
 
 <!--video  -->
-{% if youtube is empty %}
-  {% set youtube = 'https://youtu.be/OIyWjRQztVY' %}
-{% endif %}
 
 <section id="video" class="video">
   <div class="row">
