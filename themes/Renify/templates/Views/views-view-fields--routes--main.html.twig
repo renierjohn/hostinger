@@ -1,7 +1,7 @@
 {% set id       = fields.nid.content|raw|striptags|trim %}
 {% set title    = fields.title.content|raw|striptags %}
 {% set image    = fields.field_banner_image.content|raw|striptags %}
-{% set link     = fields.view_node.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags|trim %}
 {% set ticket   = fields.field_ticket_link_list.content|raw %}  
 {% set routes   = fields.field_tx_table_route.content %}
 {% set lazy_img = '/themes/Renify/images/lazy/bus.svg' %}
@@ -32,7 +32,8 @@
         <li><i class="fa fa-share"></i></li>
         <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
         <li><a href="#." class="share-twitter" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
-        <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <li class="pull-right"><a href="{{link}}"><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <li class="pull-right"><a href="{{link}}#comment"><i class="fa fa-comment"></i> <span class="fb-comments-count" data-href="https://renifysite.com{{link}}"></span> Comments</a></li>
       </ul>
       <a href="{{link}}/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="far fa-map"></i> Find Schedules</a>
     </div>

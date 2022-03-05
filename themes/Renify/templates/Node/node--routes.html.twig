@@ -1,6 +1,6 @@
 {% set lazy_img    = '/themes/Renify/images/lazy/bus.svg' %}
 {% set id          = node.id|raw|striptags|raw|trim %}
-{% set path 			 = node.path.0.alias %}
+{% set path 			 = node.path.0.alias ~ '/' %}
 {% set title       = node.title.value|raw|striptags %}
 {% set banner      = content.field_banner_image.0['#markup'] %}
 {% set description = content.field_description.0['#text'] %}

@@ -2,7 +2,7 @@
 {% set title    = fields.title.content|raw|striptags %}
 {% set body     = fields.field_description.content|raw|striptags %}
 {% set image    = fields.field_banner_image.content|raw|striptags %}
-{% set link     = fields.view_node.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags|trim %}
 {% set category = fields.field_category.content|raw|striptags %}
 {% set date     = fields.changed.content|raw|striptags %}
 {% set lazy_img = '/themes/Renify/images/lazy/lazy.jpg' %}
@@ -33,7 +33,8 @@
         <li><a href="#." class="share-fb" data-pageid="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
         <li><a href="#." class="share-twitter" data-pageid="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
         <li><a href="#." class="share-insta" data-pageid="{{url}}" data-title="{{title}}"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-        <li class="pull-right"><a href="#." ><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <li class="pull-right"><a href="{{link}}" ><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <li class="pull-right"><a href="{{link}}#comment"><i class="fa fa-comment"></i> <span class="fb-comments-count" data-href="https://renifysite.com{{link}}"></span> Comments</a></li>
         <!-- <li class="pull-right"><a href="#." ><i class="fa fa-comment"></i>2M Comments</a></li> -->
       </ul>
       <a href={{link}} class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-eye"></i> Explore</a>

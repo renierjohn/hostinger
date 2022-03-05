@@ -11,7 +11,7 @@
 {% set title        = node.title.value|raw|striptags %}
 {% set lazy_img     = '/themes/Renify/images/lazy/lazy.jpg' %}
 {% set id           = node.id|raw|striptags|raw %}
-{% set path        = node.path.0.alias %}
+{% set path        = node.path.0.alias ~ '/' %}
 
 {% set next         = pagination.next %}
 {% set prev         = pagination.prev %}
