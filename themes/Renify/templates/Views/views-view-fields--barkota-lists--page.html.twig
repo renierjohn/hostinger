@@ -5,7 +5,7 @@
 {% set default_origin = fields.field_field_origin_default.content %}
 {% set default_dest   = fields.field_field_destination_default.content %}
 
-{% set link     = fields.view_node.content|raw|striptags %}
+{% set link     = fields.view_node.content|raw|striptags|trim %}
 {% set lazy_img = '/themes/Renify/images/lazy/ship.svg' %}
 
 {{ attach_library('core/drupal') }}
@@ -39,6 +39,7 @@
         <li><a href="#." class="share-fb" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-facebook"></i></a></li>
         <li><a href="#." class="share-twitter" data-pageid="#" data-id="{{link}}" data-title="{{title}}"><i class="fab fa-twitter"></i></a></li>
         <li class="pull-right"><a href="#."><i class="fa fa-eye"></i> <span id="view_count" class="{{id}}"></span> view(s)</a></li>
+        <li class="pull-right"><a href="{{link}}#comment"><i class="fa fa-comment"></i> <span class="fb-comments-count" data-href="https://renifysite.com{{link}}"></span> Comments</a></li>
       </ul>
       {% if default_route %}
         {% set label = '<i class="fas fa-ship"></i> Find Schedules' %}
