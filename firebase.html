@@ -54,6 +54,31 @@
 	</section>
 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/renify-4299a.appspot.com/o/bus%2F4.jpg?alt=media" alt=""> -->
 
+
+<section id="fb">
+  <div class="row">
+    
+    <div class="col-full fb--login">
+      <div class="fb-head">
+        <h4>Recent Posts: <a href="" title=""><i class="fab fa-facebook"></i> Renify</a> Page</h4>
+        <span><h5><a href="" title=""> Click Here</a> <i>to Display Youre Post Below</i><br>Share Youre Travel Experience</h5></span>
+      </div>
+      <div class="fb-div">
+      </div>
+     </div>  
+    
+    <div class="col-full fb--logout">
+      <div>
+        <div class="center">
+          <img src="../images/lazy/fb-bg.png" alt="">
+          <a href="" title="" class="btn btn--stroke"><i class="fab fa-facebook"></i> Login to See Recent Posts</a>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</section>
+
 <style type="text/css">
 	.image{
 		display: flex;
@@ -88,38 +113,254 @@
 	.comment-text textarea{
 		width: 100%;
 	}
+
+	#fb{
+	background-color: aliceblue;
+	padding-top: 1rem;
+}
+
+.fb-div{
+	display: flex;
+}
+
+.fb-div .card{
+	width: 1080px;
+	margin: 1rem;
+}
+
+.fb-div .card img{
+	height: 30rem;
+}
+
+.fb-div .card .fb-user img{
+  height: 100%;
+  width: 4rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+.fb-div p{
+	padding: .5rem;
+}
+
+.fb-user{
+	display: flex;
+}
+
+.fb-user h6{
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 18px;
+}
+
+.fb-head span{
+	direction: rtl;
+}
+
+.fb-head h5{
+	margin: 0;
+	padding: 0;
+}
+
+.fb--logout img{
+	opacity: .3;
+}
+
+.fb--logout a{
+ 	position: relative;
+  	top: -40rem;
+  	background: #000000 !important;
+	border: 0.2rem solid #000000;
+	color: #ffffff;
+}
+
+.fb--logout a:hover{
+	background: transparent !important;
+	border: 0.2rem solid #000000;
+	color: #000000;
+}
+
+@media only screen and (max-width:400px) {
+	.fb-div{
+		display: flex;
+		overflow-x: scroll;
+	}
+
+   .fb-user{
+		display: block;
+	}
+
+	.fb-user h6{
+		top: -14px;
+		left: 10px;
+	}
+
+	.fb--logout a{
+		top: -15rem;
+	}
+ }
+
 	</style>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
+		// $(document).ready(function() {
   
-		    FB.init({
-		      appId: '376061863589278',
-		      version: 'v13.0' // or v2.1, v2.2, v2.3, ...
-		    });     
-		    $('#loginbutton,#feedbutton').removeAttr('disabled');
-		    FB.getLoginStatus(updateStatusCallback);
-		  });
+		//     FB.init({
+		//       appId: '376061863589278',
+		//       version: 'v13.0' // or v2.1, v2.2, v2.3, ...
+		//     });     
+		//     $('#loginbutton,#feedbutton').removeAttr('disabled');
+		//     FB.getLoginStatus(updateStatusCallback);
+		//   });
 
 
-		function updateStatusCallback(data){
-			console.log(data);
-			if(data.status == 'connected'){
-				FB.api(
-					  '/renify.official/feed',
-					  'GET',
-					  {"fields":"message,full_picture,shares,likes,comments,from{id,name}","limit":"4"},
-					  function(response) {
-					  	response.data.forEach(function(data){
-								var message = data
-								$('.fb-feed ul').append(`<li>`+ data.message +
-									`<img src=`+data.full_picture+`>`+
-									`likes` + data.likes +
-									`</li>`);
-							})
-							$('.fb-next').html(`<a href='`+response.paging.next+`'>NEXT</a>`)
-					  }
-					);
-			}
-		}
+		// function updateStatusCallback(data){
+		// 	console.log(data);
+		// 	if(data.status == 'connected'){
+		// 		FB.api(
+		// 			  '/renify.official/feed',
+		// 			  'GET',
+		// 			  {"fields":"message,full_picture,shares,likes,comments,from{id,name}","limit":"4"},
+		// 			  function(response) {
+		// 			  	response.data.forEach(function(data){
+		// 						var message = data
+		// 						$('.fb-feed ul').append(`<li>`+ data.message +
+		// 							`<img src=`+data.full_picture+`>`+
+		// 							`likes` + data.likes +
+		// 							`</li>`);
+		// 					})
+		// 					$('.fb-next').html(`<a href='`+response.paging.next+`'>NEXT</a>`)
+		// 			  }
+		// 			);
+		// 	}
+		// }
+
+			$(document).ready(function() {
+  
+	    FB.init({
+	      appId: '376061863589278',
+	      version: 'v13.0'
+	    });     
+	    // $('#loginbutton,#feedbutton').removeAttr('disabled');
+    	FB.getLoginStatus(updateStatusCallback);
+  });
+
+  function updateStatusCallback(data){
+  	if(data.status == 'connected'){
+  		$('.fb--login').show();
+  		$('.fb--logout').hide();
+
+  		FB.api(
+			  '/renify.official/feed',
+			  'GET',
+			  {"fields":"message,full_picture,shares,likes,comments,from{username,picture{cache_key,height,width,url}},to{username,picture{cache_key,height,width,url}}","limit":"4"},
+			  function(response) {
+			      render(response)
+			  }
+			);
+  	}
+  	else{
+  		$('.fb--login').hide();
+  		$('.fb--logout').show();
+  	}
+  }
+
+  function render(response){
+  	if(response){
+  		var template = ``;
+  		var user = to != null ? to : from;
+
+  		response.data.forEach(function(data){
+  			template += `
+		  			<div class="card">
+		            <div>
+		                <img src="`+data.full_picture+`">
+		                <p>`+data.message+`</p>
+		            </div>
+		            <div class="fb-user">
+		              <img src="`+user.data.picture.data.url+`" alt="image">
+		              <h6>`+user.data.username+`</h6>
+		            </div>
+		          </div>`;
+
+  		});
+			$('.fb-div').append(template);
+  	}
+  }
+
+	var	mock_data = 
+	{
+  "data": [
+    {
+      "message": "test post",
+      "full_picture": "https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/275414934_5239682106050688_4169053699565844716_n.jpg?stp=dst-jpg_s720x720&_nc_cat=103&ccb=1-5&_nc_sid=de0e5b&_nc_eui2=AeFLGAyod8909ObQxQ0aHqTZnmtJXdIEJkuea0ld0gQmS6JVgrclUglvpn7gG9EktqsMNsrPOPP8rj0Fvc0edBV_&_nc_ohc=ww8eXipF2HIAX8SXS3Q&_nc_ht=scontent.fceb2-1.fna&edm=AO-AMGsEAAAA&oh=00_AT_30nFKjs9f6P_OTchzNNwTfPZB7CKL73XqBHMdr-iDTg&oe=622A57DF",
+      "to": {
+        "data": [
+          {
+            "username": "renify.official",
+            "picture": {
+              "data": {
+                "cache_key": "102877257978084:ec572f7088f32e7f4ecfa435e7598c4d",
+                "height": 50,
+                "width": 50,
+                "url": "https://scontent.fceb2-1.fna.fbcdn.net/v/t1.6435-1/87022104_102877257978084_6120434804614758400_n.jpg?stp=cp0_dst-jpg_p50x50&_nc_cat=101&ccb=1-5&_nc_sid=dbb9e7&_nc_eui2=AeE7gGLP5C-NAUDirwjrhaodmxFlHy6C4fSbEWUfLoLh9IT5sH2xU_epAwG65HqJMHG7ahS4WM65IlvCHGP0G66o&_nc_ohc=zGKGrfLNv4EAX9gob_-&_nc_ht=scontent.fceb2-1.fna&edm=AO-AMGsEAAAA&oh=00_AT_cz3cHHRHrh5Iyc6Wr4fqil-ICe_E5hd7yVmWEz8H8gA&oe=6248F29D"
+              }
+            },
+            "id": "102875864644890"
+          }
+        ]
+      },
+      "id": "102875864644890_481353993463740"
+    },
+    {
+      "message": "Want to Travel Here ? NO PROBLEM
+
+Visit https://renifysite.com/",
+      "full_picture": "https://scontent.fmnl25-3.fna.fbcdn.net/v/t39.30808-6/275249280_480704850195321_7460960228932582329_n.jpg?stp=dst-jpg_s720x720&_nc_cat=109&ccb=1-5&_nc_sid=110474&_nc_eui2=AeECvNo3jXXnFSfmGIhSHJQwA_liGENglPMD-WIYQ2CU83tngqtRYgrsFDR4hBwPBeTJ8UTHS47axaZhpF71-c_l&_nc_ohc=cNja78TVOpcAX8FHztp&_nc_ht=scontent.fmnl25-3.fna&edm=AO-AMGsEAAAA&oh=00_AT9IpbZzQeYRtRGDDziFEAknGtt4M2jKXO-Yxd4sCEejgQ&oe=622A45E9",
+      "from": {
+        "username": "renify.official",
+        "picture": {
+          "data": {
+            "cache_key": "102877257978084:ec572f7088f32e7f4ecfa435e7598c4d",
+            "height": 50,
+            "width": 50,
+            "url": "https://scontent.fceb2-1.fna.fbcdn.net/v/t1.6435-1/87022104_102877257978084_6120434804614758400_n.jpg?stp=cp0_dst-jpg_p50x50&_nc_cat=101&ccb=1-5&_nc_sid=dbb9e7&_nc_eui2=AeE7gGLP5C-NAUDirwjrhaodmxFlHy6C4fSbEWUfLoLh9IT5sH2xU_epAwG65HqJMHG7ahS4WM65IlvCHGP0G66o&_nc_ohc=zGKGrfLNv4EAX9gob_-&_nc_ht=scontent.fceb2-1.fna&edm=AO-AMGsEAAAA&oh=00_AT_cz3cHHRHrh5Iyc6Wr4fqil-ICe_E5hd7yVmWEz8H8gA&oe=6248F29D"
+          }
+        },
+        "id": "102875864644890"
+      },
+      "id": "102875864644890_480704813528658"
+    },
+    {
+      "message": "Trip to Sandbar Island
+
+Want to go here? Visit Us
+https://renifysite.com/vessel/cocaliong/
+https://renifysite.com/vessel/trans-asia-shipping-lines/",
+      "full_picture": "https://scontent.fmnl25-4.fna.fbcdn.net/v/t39.30808-6/275265172_480156506916822_6735202657083675365_n.jpg?stp=dst-jpg_p180x540&_nc_cat=107&ccb=1-5&_nc_sid=110474&_nc_eui2=AeG_33ZY6mpGqcP_AYj2WwM_wiqeeH5wrPPCKp54fnCs8-mGxSSAoIb3TQJVNZFW_DyBa0NJLms7FibNYAO5T1nF&_nc_ohc=fRJN4gCFsd0AX_335OO&_nc_ht=scontent.fmnl25-4.fna&edm=AO-AMGsEAAAA&oh=00_AT9qQNb5Z4CV26WjaXc9grphtZjcNmACQtizdosi1QSAPw&oe=6229D9F0",
+      "from": {
+        "username": "renify.official",
+        "picture": {
+          "data": {
+            "cache_key": "102877257978084:ec572f7088f32e7f4ecfa435e7598c4d",
+            "height": 50,
+            "width": 50,
+            "url": "https://scontent.fceb2-1.fna.fbcdn.net/v/t1.6435-1/87022104_102877257978084_6120434804614758400_n.jpg?stp=cp0_dst-jpg_p50x50&_nc_cat=101&ccb=1-5&_nc_sid=dbb9e7&_nc_eui2=AeE7gGLP5C-NAUDirwjrhaodmxFlHy6C4fSbEWUfLoLh9IT5sH2xU_epAwG65HqJMHG7ahS4WM65IlvCHGP0G66o&_nc_ohc=zGKGrfLNv4EAX9gob_-&_nc_ht=scontent.fceb2-1.fna&edm=AO-AMGsEAAAA&oh=00_AT_cz3cHHRHrh5Iyc6Wr4fqil-ICe_E5hd7yVmWEz8H8gA&oe=6248F29D"
+          }
+        },
+        "id": "102875864644890"
+      },
+      "id": "102875864644890_480156486916824"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUjBhdzN0eDdUOTJ2S0VwaHhEUVIxb0kzNXgyM1hFcTQ0VkFwbUUyTzlFTWxTUUxTNmtTNUtZAVkNKZAjAzY29QcThGbm8xZA2hieF9Nem9GdDlfQWctd0t0WVJMRU9HOWc2Q0pyaUdBQkxYS3F0UUF6VHhoZAXhvbmZAoMENLSkVrcnNX",
+      "after": "QVFIUmJCd3JBaG9RTU1TS3g3LVgxQllJWXlBOXlLNGFsWjBDV1kxMHJjQU9KVjZAZARExMNUN4T1oxV2FIUUlpOWtDWjFLYnFsd3YwU0xMTHhOaV8yVkZATQU9sb1M3UFFJajFudk1td2dmdlVBdUNhdi1pd0ZACZAlhWMEJFSUIwTVFsY2ha"
+    },
+    "next": "https://graph.facebook.com/v12.0/102875864644890/feed?access_token=EAAFWBrnK9ZA4BAAeIz2NN6Rw9t2JcEr50aKFIupQZAdzTk5n2isQPA4FZBUhTsKL4uCWZCdrJqo9uuSvcaaP3aYKr09AA7jdMc5anfZCWQ5HImKzLBIEZAOCPscggM6nUMtqswAM2g8gzjFl3AFqIM9Y314ouMqSTsAaEjwlMviOAlDfDsjEIR8FaSeKEKQgJdDvgRBGikmQXEbfB6cYT4TE0BCRHb5kgZD&pretty=0&fields=message%2Cfull_picture%2Cshares%2Clikes%2Ccomments%2Cfrom%7Busername%2Cpicture%7Bcache_key%2Cheight%2Cwidth%2Curl%7D%7D%2Cto%7Busername%2Cpicture%7Bcache_key%2Cheight%2Cwidth%2Curl%7D%7D&limit=4&after=QVFIUmJCd3JBaG9RTU1TS3g3LVgxQllJWXlBOXlLNGFsWjBDV1kxMHJjQU9KVjZAZARExMNUN4T1oxV2FIUUlpOWtDWjFLYnFsd3YwU0xMTHhOaV8yVkZATQU9sb1M3UFFJajFudk1td2dmdlVBdUNhdi1pd0ZACZAlhWMEJFSUIwTVFsY2ha"
+  }
+}
+
 	</script>
