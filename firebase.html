@@ -41,6 +41,15 @@
 		</div>
 
 	</section>
+
+	<section>
+		<div class="fb-feed">
+			
+		</div>
+		<div class="fb-next">
+			
+		</div>
+	</section>
 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/renify-4299a.appspot.com/o/bus%2F4.jpg?alt=media" alt=""> -->
 
 <style type="text/css">
@@ -93,5 +102,22 @@
 
 		function updateStatusCallback(data){
 			console.log(data);
+			if(data.status == 'connected'){
+				FB.api(
+					  '/renify.official/feed',
+					  'GET',
+					  {"fields":"message,full_picture,shares,likes,comments,from{id,name}","limit":"4"},
+					  function(response) {
+					  	response.data.forEach(function(data){
+								var message = data
+								$('.fb-feed ul').append(`<li>`+ data.message +
+									`<img src=`+data.full_picture+`>`+
+									`likes` + data.likes +
+									`</li>`);
+							})
+							$('fb-next').html(`<a href='`+response.paging.next+`'>NEXT</a>`)
+					  }
+					);
+			}
 		}
 	</script>
