@@ -65,6 +65,9 @@
       </div>
       <div class="fb-div">
       </div>
+      <div class="fb-load-more center">
+        <a href="#." class="btn btn--stroke" title="">LOAD MORE</a>
+      </div>
      </div>  
     
     <div class="col-full fb--logout">
@@ -237,12 +240,12 @@
 		// }
 
 	$(document).ready(function() {  
-	    // FB.init({
-	    //   appId: '376061863589278',
-	    //   version: 'v13.0'
-	    // });     
-    	// FB.getLoginStatus(updateStatusCallback);
-    	render(mock_data);
+	    FB.init({
+	      appId: '376061863589278',
+	      version: 'v13.0'
+	    });     
+    	FB.getLoginStatus(updateStatusCallback);
+    	// render(mock_data);
     	// console.log(mock_data)
   });
 
@@ -266,6 +269,16 @@
   		$('.fb--logout').show();
   	}
   }
+
+  $('.fb-load-more a').click(function(){
+		var url = $(this).attr('link');
+		$.ajax({
+        'url' : url,
+        'type': 'GET',
+        'success' : function(response) {
+          render(response)
+     });
+	})
 
   function render(response){
   	// console.log(response)
