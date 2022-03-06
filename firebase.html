@@ -245,8 +245,6 @@
 	      version: 'v13.0'
 	    });     
     	FB.getLoginStatus(updateStatusCallback);
-    	// render(mock_data);
-    	// console.log(mock_data)
   });
 
   function updateStatusCallback(data){
@@ -260,7 +258,7 @@
 			  'GET',
 			  {"fields":"message,full_picture,shares,likes,comments,from{username,picture{cache_key,height,width,url}},to{username,picture{cache_key,height,width,url}}","limit":"4"},
 			  function(response) {
-			      render(response)
+			      render(response);
 			  }
 			);
   	}
@@ -276,9 +274,10 @@
         'url' : url,
         'type': 'GET',
         'success' : function(response) {
-          render(response)
+          render(response);
+         } 
      });
-	})
+	});
 
   function render(response){
   	// console.log(response)
