@@ -17,6 +17,17 @@
 		FB.getLoginStatus(updateStatusCallback);
 	})
 
+	$('.fb-load-more a').click(function(){
+		var url = $(this).attr('link');
+		$.ajax({
+        'url' : url,
+        'type': 'GET',
+        'success' : function(response) {
+          render(response);
+         } 
+     });
+	})
+
   function updateStatusCallback(data){
   	if(data.status == 'connected'){
   		$('.fb--login').show();
@@ -58,6 +69,7 @@
 
   		});
 			$('.fb-div').append(template);
+			$('.fb-load-more a').attr('link',response.paging.next);
   	}
   }
 
