@@ -1,0 +1,97 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FIREBASE</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.7/firebase-compat.min.js" integrity="sha512-NY4zb1EAHf2eHfdqMPvmu6YiSbn2e3vtY+OQkD2sK1CNKZojrA9kQkTMz5VJP0Tbc7SpDeiGKHQCxTBVK62sWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.7/firebase-storage-compat.min.js" integrity="sha512-QRt27Bkfum1YIw/C1dn37Ps+iNml2AsktmpYMM25zQMtZGiL079jfDJ4VXOeQKn7yKyo3Zb2aPZatOS03+2BKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+  <script src="https://connect.facebook.net/en_US/sdk.js" ></script>
+</head>
+
+<body>
+  <section>
+		  <input type="file" name="file_to_upload" id="file_to_upload" multiple>
+		  <hr>
+		  <input type="button" value="Upload To Server" id="upload_file_button">
+		 	<hr>
+			<p id="file_name"></p>
+			   <progress id="progress_bar" value="10" max="100" style="width:400px;"></progress>
+			<p id="progress_status"></p>
+  </section>
+	<section>
+		<div class="image">
+			<img src="http://hostinger.dd/themes/Renify/images/lazy/01.jpg" data-name="bus/4.jpg" alt="">
+			<img src="http://hostinger.dd/themes/Renify/images/lazy/01.jpg" data-name="bus/ss.jpg" alt="">
+			<img src="http://hostinger.dd/themes/Renify/images/lazy/01.jpg" data-name="place/POBLACION DISTRICT 1.jpg" alt="">
+		</div>
+	</section>
+
+	<section>
+		<div class="comment">
+			<ul>
+				<li>Comment 1 <span><i>X</i></span></li>
+				<li>Comment 2 <span><i>X</i></span></li>
+			</ul>
+			<div class="comment-text">
+				<textarea></textarea>
+				<input type="submit" name="Comment" value="Comment" id="comment_btn">
+			</div>
+		</div>
+
+	</section>
+<!-- <img src="https://firebasestorage.googleapis.com/v0/b/renify-4299a.appspot.com/o/bus%2F4.jpg?alt=media" alt=""> -->
+
+<style type="text/css">
+	.image{
+		display: flex;
+	}
+	.image img{
+		width: 10rem;
+		margin: 1rem;
+	}
+	.comment{
+		border-color: black;
+		border-width: 1px;
+		border-style: solid;
+		padding: 1rem;
+	}
+	.comment ul li{
+		border-color: black;
+		border-width: 1px;
+		border-style: solid;
+		margin: 1rem;
+		padding: 1rem;
+	}
+
+	.comment span{
+		padding: 1rem;
+		background-color: brown;
+		border-radius: 50%;
+	}
+	
+	.comment-text{
+		text-align: center;
+	}
+	.comment-text textarea{
+		width: 100%;
+	}
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+  
+		    FB.init({
+		      appId: '376061863589278',
+		      version: 'v13.0' // or v2.1, v2.2, v2.3, ...
+		    });     
+		    $('#loginbutton,#feedbutton').removeAttr('disabled');
+		    FB.getLoginStatus(updateStatusCallback);
+		  });
+
+
+		function updateStatusCallback(data){
+			console.log(data);
+		}
+	</script>
