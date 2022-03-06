@@ -269,9 +269,9 @@
   	console.log(response)
   	if(response){
   		var template = ``;
-  		var user = to != null ? to : from;
 
   		response.data.forEach(function(data){
+  			var user = data.to != null ? data.to : data.from;
   			template += `
 		  			<div class="card">
 		            <div>
