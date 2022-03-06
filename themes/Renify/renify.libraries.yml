@@ -14,6 +14,7 @@ base:
       css/breadcrumb.css: {}
       css/tab.css: {}
       css/modal.css: {}
+      css/fb.css: {}
       css/base.css.map: {}
       css/vendor.css.map: {}
       css/main.css.map: {}
@@ -28,6 +29,7 @@ base:
     js/main.js: {}
     js/custom.js: {}
     js/ajax.js: {}
+    js/fb.js: {}
   dependencies:
     - core/jquery
 
