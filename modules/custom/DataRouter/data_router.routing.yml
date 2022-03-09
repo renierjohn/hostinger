@@ -37,3 +37,11 @@ data_router.qr:
     _title: 'QR Scanner'
   requirements:
     _access : 'TRUE'
+
+data_router.page_hook:
+  path: '/pagehook'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\FacebookHook::page_hook'
+    _title: 'Page Hook'
+  requirements:
+    _access : 'TRUE'    
