@@ -4,6 +4,7 @@ namespace Drupal\data_router\Controller;
 
 use Drupal\Core\State\State;
 use Drupal\Core\Render\HtmlResponse;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,7 +45,9 @@ class FacebookHook extends ControllerBase {
     $hub_mode         = $request['hub_mode'] ? $request['hub_mode'] : FALSE; 
     $hub_verify_token = $request['hub_verify_token'] ? $request['hub_verify_token'] : FALSE;
     $hub_challenge    = $request['hub_challenge'] ? $request['hub_challenge'] : FALSE;
-    return new JsonResponse([$hub_challenge]);
+    // return new JsonResponse([$hub_challenge]);
+    Cache::invalidateTags(['route_match']);
+    return new HtmlResponse($hub_challenge);
   }
 
   private function log($message){
