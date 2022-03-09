@@ -46,7 +46,7 @@ class FacebookHook extends ControllerBase {
     $hub_verify_token = $request['hub_verify_token'] ? $request['hub_verify_token'] : FALSE;
     $hub_challenge    = $request['hub_challenge'] ? $request['hub_challenge'] : FALSE;
     // return new JsonResponse([$hub_challenge]);
-    Cache::invalidateTags(['route_match']);
+    Cache::invalidateTags(['route_match','rendered']);
     return new HtmlResponse($hub_challenge);
   }
 
