@@ -41,7 +41,10 @@ class FacebookHook extends ControllerBase {
   public function page_hook() {
     $request    = $this->request->query->all();
     $this->log(json_encode($request));
-    return new HtmlResponse(439232543);
+    $hub_mode = $request['hub_mode']; 
+    $hub_verify_token = $request['hub_verify_token'];
+    $hub_challenge = $request['hub_challenge'];
+    return new HtmlResponse($hub_challenge);
     // return new JsonResponse([439232543]);
   }
 
