@@ -3,6 +3,7 @@
 namespace Drupal\data_router\Controller;
 
 use Drupal\Core\State\State;
+use Drupal\Core\Render\HtmlResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -40,7 +41,8 @@ class FacebookHook extends ControllerBase {
   public function page_hook() {
     $request    = $this->request->query->all();
     $this->log(json_encode($request));
-    return new JsonResponse($request);
+    return new HtmlResponse(439232543);
+    // return new JsonResponse([439232543]);
   }
 
   private function log($message){
