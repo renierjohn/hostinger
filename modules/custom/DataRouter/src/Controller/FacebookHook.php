@@ -42,9 +42,9 @@ class FacebookHook extends ControllerBase {
   public function page_hook() {
     $request    = $this->request->query->all();
     $this->log(json_encode($request));
-    $hub_mode         = !empty($request['hub_mode']) ? $request['hub_mode'] : FALSE; 
-    $hub_verify_token = !empty($request['hub_verify_token']) ? $request['hub_verify_token'] : FALSE;
-    $hub_challenge    = !empty($request['hub_challenge']) ? $request['hub_challenge'] : FALSE;
+    $hub_mode         = !empty($request['hub_mode']) ? $request['hub_mode'] : ''; 
+    $hub_verify_token = !empty($request['hub_verify_token']) ? $request['hub_verify_token'] : '';
+    $hub_challenge    = !empty($request['hub_challenge']) ? $request['hub_challenge'] : '';
     // return new JsonResponse([$hub_challenge]);
     Cache::invalidateTags(['route_match','rendered']);
     return new HtmlResponse($hub_challenge);
