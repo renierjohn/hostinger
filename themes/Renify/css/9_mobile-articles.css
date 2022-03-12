@@ -160,7 +160,7 @@
     #message-form{
       padding-left: 3rem;
       padding-right: 1rem;
-      margin-bottom: 24rem !important;
+      margin-bottom: 0 !important;
     }
 
     .pull-quote blockquote p{

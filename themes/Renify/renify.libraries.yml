@@ -1,4 +1,5 @@
 base:
+  version: 1.1
   css:
     theme:
       css/style.css: {}
@@ -34,6 +35,7 @@ base:
     - core/jquery
 
 video :
+  version: 1.1
   css:
     theme:
       css/video.css: { preprocess: false }
