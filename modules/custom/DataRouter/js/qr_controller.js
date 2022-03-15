@@ -127,6 +127,7 @@
           detect[0].value = '0';
           $('#qr_download').show();
           $('.qr_hash').val(code.data);
+          $('.modal').remove();
         } else {
           outputMessage.hidden            = false;
           outputData.parentElement.hidden = true;
