@@ -68,8 +68,9 @@
       $('.student-lists').prepend(template)
       $('.img-wrapper').show('fast')
     }
-
-    // startWebcam();
+    $('.qr_camera').click(function(){
+      startWebcam();
+    })
 
     function drawLine(begin, end, color) {
       canvas.beginPath();
