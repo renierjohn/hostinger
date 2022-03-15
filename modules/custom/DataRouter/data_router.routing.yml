@@ -38,7 +38,7 @@ data_router.qr:
   requirements:
     _access : 'TRUE'
 
-data_router.page_hook:
+data_router.fb_page_hook:
   path: '/pagehook'    
   defaults:
     _controller: '\Drupal\data_router\Controller\FacebookHook::page_hook'
@@ -46,4 +46,14 @@ data_router.page_hook:
   requirements:
     _access : 'TRUE'
   options:
-    no_cache: 'TRUE'  
+    no_cache: 'TRUE'
+
+data_router.fb_feed:
+  path: '/pagehook'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\FacebookHook::getFeeds'
+    _title: 'FB Page Feed'
+  requirements:
+    _access : 'TRUE'
+  options:
+    no_cache: 'TRUE'        
