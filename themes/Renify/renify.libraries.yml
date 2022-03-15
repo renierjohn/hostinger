@@ -30,7 +30,6 @@ base:
     js/main.js: {}
     js/custom.js: {}
     js/ajax.js: {}
-    js/fb.js: {}
   dependencies:
     - core/jquery
 

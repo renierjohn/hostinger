@@ -36,3 +36,8 @@ services:
     class: Drupal\data_router\Service\AjaxRoute
     arguments:
       - '@entity_type.manager'
+
+  data_router.student:
+    class: Drupal\data_router\Service\StudentService
+    arguments:
+      - '@entity_type.manager'    

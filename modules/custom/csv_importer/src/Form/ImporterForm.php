@@ -296,7 +296,7 @@ class ImporterForm extends FormBase {
     $options = [''=>'Select'];
     foreach ($plugin_definitions as $definition) {
       $entity_type = $definition['entity_type'];
-      if($entity_type == 'node' || $entity_type == 'taxonomy_term'){
+      if($entity_type == 'node' || $entity_type == 'taxonomy_term' || $entity_type == 'user'){
         if ($this->entityTypeManager->hasDefinition($entity_type)) {
           $entity = $this->entityTypeManager->getDefinition($entity_type);
           $options[$entity_type] = $entity->getLabel();
@@ -537,107 +537,5 @@ class ImporterForm extends FormBase {
     $response =  new BinaryFileResponse($outputFilepath, 200,$headers,true);
     $response->send();exit();
   }
-
-  private function getMiddleCategoryOptions(){
-    $entity = $this->entityTypeManager;
-    $terms  = $entity->getStorage('taxonomy_term')->loadByProperties(['vid'=>self::MIDDLE_CATEGORY]);
-    $tmp = [];
-    $tmp['all'] = 'All';
-    foreach ($terms as $term) {
-      $tmp[$term->id()] = $term->getName();
-    }
-    return $tmp;
-  }
-
-  private function getSmallCategoryOptions(){
-    $entity = $this->entityTypeManager;
-    $terms  = $entity->getStorage('taxonomy_term')->loadByProperties(['vid'=>self::SMALL_CATEGORY]);
-    $tmp = [];
-    $tmp['all'] = 'All';
-    foreach ($terms as $term) {
-      $tmp[$term->id()] = $term->getName();
-    }
-    return $tmp;
-  }
-
-  // private function alterRegisterState($tid,$bundle,$vid){
-  //   $state      = $this->state;
-  //   $is_running = $state->get(self::STATE_KEY_JSON_TMP_STATUS);
-  //   if($is_running == TRUE){
-  //     $state_key = self::STATE_KEY_JSON_TMP_DATA;
-  //   }
-  //   else{
-  //     $state_key = self::STATE_KEY_JSONFILE;
-  //   } 
-  //   if(empty($tid)){
-  //     return FALSE;
-  //   }
-
-  //   $tids  = $state->get($state_key);
-  //   $tids  = json_decode($tids,TRUE);    
-    
-  //   $data = [
-  //     'bundle' => $bundle,
-  //     'vid'    => $vid
-  //   ];
-  //   if(empty($tids)){
-  //     $STATE_KEY_JSONFILE = json_encode([$tid => $data]);
-  //     return $state->set($state_key,$STATE_KEY_JSONFILE);
-  //   }
-
-  //   if(empty($tids[$tid])){
-  //     $tids[$tid] = $data;
-  //     $STATE_KEY_JSONFILE = json_encode($tids);
-  //     return $state->set($state_key,$STATE_KEY_JSONFILE);
-  //   }
-
-  //   if(in_array($tid,array_keys($tids))){
-  //     $tids[$tid] = $data;
-  //     $STATE_KEY_JSONFILE  = json_encode($tids);
-  //     return $state->set($state_key,$STATE_KEY_JSONFILE); 
-  //   }
-
-  //   return TRUE;
-  // }
-
-  // private function getValidCategory(&$entity_type_bundle){
-  //   $entity = $this->entityTypeManager;
-  //   $mids   = $this->getMiddleCategoryOptions();
-  //   $sids   = $this->getSmallCategoryOptions();
-  //   $valid_content_types = array_keys(self::FIELD_MIDDLE_CATGRY);
-  //   $tmp_ids = [
-  //     self::MIDDLE_CATEGORY => [],
-  //     self::SMALL_CATEGORY  => [],
-  //   ];
-    
-  //   if(!in_array($entity_type_bundle,$valid_content_types)){
-  //     return $tmp_ids;
-  //   }
-
-  //   unset($mids['all']);
-  //   unset($sids['all']);
-
-  //   foreach($mids as $mid => $name){
-  //     $nids = $entity->getStorage('node')->getQuery()
-  //                 ->condition('type',$entity_type_bundle)
-  //                 ->condition(self::FIELD_MIDDLE_CATGRY[$entity_type_bundle],$mid)
-  //                 ->execute();
-  //     if(!empty($nids)){
-  //       $tmp_ids[self::MIDDLE_CATEGORY][] = $mid;
-  //     }      
-  //   }
-
-  //   foreach($sids as $sid => $name){
-  //     $nids = $entity->getStorage('node')->getQuery()
-  //                 ->condition('type',$entity_type_bundle)
-  //                 ->condition(self::FIELD_SMALL_CATGRY[$entity_type_bundle],$sid)
-  //                 ->execute();
-
-  //     if(!empty($nids)){
-  //       $tmp_ids[self::SMALL_CATEGORY][] = $sid;
-  //     }      
-  //   }
-  //   return $tmp_ids;
-  // }
 
 }

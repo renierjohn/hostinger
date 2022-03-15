@@ -106,5 +106,8 @@ function validate_captcha($form,$form_state){
       'qr' => [
         'variables' => ['data' => NULL],
       ],
+      'student' => [
+        'variables' => ['data' => NULL],
+      ],
     ];
  } 

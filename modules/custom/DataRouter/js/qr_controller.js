@@ -1,4 +1,4 @@
-(function ($, Drupal) {
+(function ($) {
     var video           = document.createElement("video");
     var canvasElement   = document.getElementById("canvas");
     var canvas          = canvasElement.getContext("2d");
@@ -13,7 +13,63 @@
       download();
     });
 
-    startWebcam();
+    $('.qr_submit').click(function(){
+      var hash    =  $('.qr_hash').val();
+      var request = true; 
+      console.log(hash)
+
+      $('.qr_hash_list').each(function(){
+       var hash_list = $(this).val();
+        if(hash_list == hash && hash.length > 0){
+          request = false;
+        }
+      })
+
+      if(request == false){
+        alert('already scanned')
+        return;
+      }
+
+      $.ajax({
+        'url' : '/api/student/?qr='+hash ,
+        'type': 'GET',
+        'success' : function(data) {
+          console.log(data);
+          if(data.status == false){
+            alert('NO DATA');
+            return;
+          }
+          addStudentList(data);
+        }
+      });
+    });
+
+    function addStudentList(data){
+      template = `<div class="img-wrapper" style="display:none;">
+                    <div class="block-1-2">
+                      <div class="col-block">
+                        <input type="hidden" class="qr_hash_list"  name="qr_hash" value=`+data.data.hash+`>
+                        <img src="`+data.data.image+`" alt="">
+                      </div>
+                      <div class="col-block">
+                        <div class="row">
+                          <p>`+data.data.name+`</p>
+                        </div>
+                        <div class="row">
+                          <p>Grade 9</p>
+                        </div>
+                        <div class="row">
+                          <p>`+data.data.ts+`</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  `
+
+      $('.student-lists').prepend(template)
+      $('.img-wrapper').show('fast')
+    }
+
+    // startWebcam();
 
     function drawLine(begin, end, color) {
       canvas.beginPath();
@@ -69,6 +125,7 @@
           video.hidden = true;
           detect[0].value = '0';
           $('#qr_download').show();
+          $('.qr_hash').val(code.data);
         } else {
           outputMessage.hidden            = false;
           outputData.parentElement.hidden = true;
@@ -88,4 +145,5 @@
       a.click();
     }
 
-})(jQuery, Drupal);
+
+})(jQuery);

@@ -27,6 +27,7 @@ qr:
   css:
     theme:
       css/qr.css: {}
+      css/student.css: {}
   js:
     js/qr_decoder.js: {}
     js/qr_encoder.js: {}

@@ -48,6 +48,23 @@ data_router.fb_page_hook:
   options:
     no_cache: 'TRUE'
 
+data_router.student_api:
+  path: '/api/student'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::getData'
+    _title: 'Student Data'
+  requirements:
+    _role : 'authenticated'
+
+data_router.student_page:
+  path: '/student'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::page'
+    _title: 'Student Data'
+  requirements:
+    _access : 'TRUE'
+
+
 # data_router.fb_feed:
 #   path: '/pagehook'    
 #   defaults:
