@@ -1,4 +1,6 @@
-(function ($) {
+(function ($,Drupal,drupalSettings) {
+    console.log(Drupal);
+    console.log(drupalSettings);
     var video           = document.createElement("video");
     var canvasElement   = document.getElementById("canvas");
     var canvas          = canvasElement.getContext("2d");
@@ -54,10 +56,6 @@
         requestUSer(hash)
     });
 
-    $('.qr_submit').click(function(){
-      var hash =  $('.qr_hash').val();
-      requestUSer(hash)
-    });
 
     function requestUSer(hash){
       var request = true; 
@@ -97,32 +95,6 @@
           ts    : data.data.ts,
       })
     }
-
-    // function addStudentList(data){
-    //   template = `<div class="img-wrapper" style="display:none;">
-    //                 <div class="block-1-2">
-    //                   <div class="col-block">
-    //                     <input type="hidden" class="qr_hash_list"  name="qr_hash" value=`+data.data.hash+`>
-    //                     <img src="`+data.data.image+`" alt="">
-    //                   </div>
-    //                   <div class="col-block">
-    //                     <div class="row">
-    //                       <p>`+data.data.name+`</p>
-    //                     </div>
-    //                     <div class="row">
-    //                       <p>Grade 9</p>
-    //                     </div>
-    //                     <div class="row">
-    //                       <p>`+data.data.ts+`</p>
-    //                     </div>
-    //                   </div>
-    //                 </div>
-    //               </div>  `
-
-    //   $('.student-lists').prepend(template)
-    //   $('.img-wrapper').show('fast')
-    // }
-
 
     function addStudentListInit(data){
       var hash   = data.hash;
@@ -249,4 +221,4 @@
       return String(date.getMonth()+1) + '-' + String(date.getDate()) + '-' + String(date.getFullYear());
     }
 
-})(jQuery);
+})(jQuery,Drupal,drupalSettings);
