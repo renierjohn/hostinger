@@ -7,17 +7,61 @@
     var outputMessage   = document.getElementById("outputMessage");
     var outputData      = document.getElementById("outputData");
     var detect          = document.getElementsByTagName('input')
-   
+    
+    ///////////////////////////////////////////
+    // FIREBASE
+    //////////////////////////////////////////
+    const conf = {
+      databaseURL: "https://renify-4299a-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "renify-4299a",
+      storageBucket: "renify-4299a.appspot.com",
+      messagingSenderId: "1015330568672",
+      appId: "1:1015330568672:web:897e11bc1006692e6cd385",
+    };
+
+    firebase.initializeApp(conf);
+    var firestore = firebase.firestore();
+    var date   = getCurrentDate();
+    var ref  = firestore.collection('students').doc('elementary').collection(date);
+
+    ref.onSnapshot((doc) => {
+          doc.docs.forEach((data)=>{
+            addStudentListInit(data.data());
+          })
+    });
+
+
     $('#qr_download').hide();
     $('#qr_download').click(function(){
       download();
     });
 
-    $('.qr_submit').click(function(){
-      var hash    =  $('.qr_hash').val();
-      var request = true; 
-      console.log(hash)
+    $('.qr_hash_generate').keyup(function(e){
+      if(e.keyCode == 13){$(this).trigger("enterKey");}
+    });
 
+    $('.qr_hash_generate').bind("enterKey",function(e){
+        var hash = $(this).val() 
+        new QRCode(document.getElementById('qr_image_result'),hash);
+    });
+
+    $('.qr_hash').keyup(function(e){
+      if(e.keyCode == 13){$(this).trigger("enterKey");}
+    });
+
+    $('.qr_hash').bind("enterKey",function(e){
+        var hash = $(this).val() 
+        requestUSer(hash)
+    });
+
+    $('.qr_submit').click(function(){
+      var hash =  $('.qr_hash').val();
+      requestUSer(hash)
+    });
+
+    function requestUSer(hash){
+      var request = true; 
+      
       $('.qr_hash_list').each(function(){
        var hash_list = $(this).val();
         if(hash_list == hash && hash.length > 0){
@@ -39,27 +83,77 @@
             alert('NO DATA');
             return;
           }
-          addStudentList(data);
+          saveToFireStore(data);
         }
       });
-    });
+    }
 
-    function addStudentList(data){
+    function saveToFireStore(data){
+      var unique_id = data.data.hash
+      ref.doc(unique_id).set({
+          hash  : unique_id,
+          image : data.data.image,
+          name  : data.data.name,
+          ts    : data.data.ts,
+      })
+    }
+
+    // function addStudentList(data){
+    //   template = `<div class="img-wrapper" style="display:none;">
+    //                 <div class="block-1-2">
+    //                   <div class="col-block">
+    //                     <input type="hidden" class="qr_hash_list"  name="qr_hash" value=`+data.data.hash+`>
+    //                     <img src="`+data.data.image+`" alt="">
+    //                   </div>
+    //                   <div class="col-block">
+    //                     <div class="row">
+    //                       <p>`+data.data.name+`</p>
+    //                     </div>
+    //                     <div class="row">
+    //                       <p>Grade 9</p>
+    //                     </div>
+    //                     <div class="row">
+    //                       <p>`+data.data.ts+`</p>
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               </div>  `
+
+    //   $('.student-lists').prepend(template)
+    //   $('.img-wrapper').show('fast')
+    // }
+
+
+    function addStudentListInit(data){
+      var hash   = data.hash;
+      var render = true;
+      $('.qr_hash_list').each(function(){
+       var hash_list = $(this).val();
+        if(hash_list == hash && hash.length > 0){
+          render = false;
+        }
+      })
+
+      if(render == false){
+        console.log('already render'+data.name);
+        return;
+      }
+
       template = `<div class="img-wrapper" style="display:none;">
                     <div class="block-1-2">
                       <div class="col-block">
-                        <input type="hidden" class="qr_hash_list"  name="qr_hash" value=`+data.data.hash+`>
-                        <img src="`+data.data.image+`" alt="">
+                        <input type="hidden" class="qr_hash_list"  name="qr_hash" value=`+data.hash+`>
+                        <img src="`+data.image+`" alt="">
                       </div>
                       <div class="col-block">
                         <div class="row">
-                          <p>`+data.data.name+`</p>
+                          <p>`+data.name+`</p>
                         </div>
                         <div class="row">
                           <p>Grade 9</p>
                         </div>
                         <div class="row">
-                          <p>`+data.data.ts+`</p>
+                          <p>`+data.ts+`</p>
                         </div>
                       </div>
                     </div>
@@ -68,6 +162,7 @@
       $('.student-lists').prepend(template)
       $('.img-wrapper').show('fast')
     }
+
     $('.qr_camera').click(function(){
       startWebcam();
     })
@@ -119,7 +214,8 @@
           outputData.innerText            = code.data;
 
           new QRCode(document.getElementById("qr_image"),code.data);
-          
+          new QRCode(document.getElementById('qr_image_result'),code.data);
+
           canvasElement.height = 0;
           canvasElement.width  = 0;
           canvasElement.hidden = true;
@@ -128,6 +224,7 @@
           $('#qr_download').show();
           $('.qr_hash').val(code.data);
           $('.modal').remove();
+          requestUSer(code.data)
         } else {
           outputMessage.hidden            = false;
           outputData.parentElement.hidden = true;
@@ -147,5 +244,9 @@
       a.click();
     }
 
+    function getCurrentDate(){
+      var date = new Date();
+      return String(date.getMonth()+1) + '-' + String(date.getDate()) + '-' + String(date.getFullYear());
+    }
 
 })(jQuery);
