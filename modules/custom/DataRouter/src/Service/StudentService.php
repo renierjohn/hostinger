@@ -33,7 +33,9 @@ class StudentService
 
     $data = [
       'hash'  => $user->field_qr->value,
-      'name'  => $user->name->value, 
+      'level' => $user->field_level->value,
+      'gender'=> $user->field_gender->value,
+      'name'  => $user->name->value,
       'image' => $this->getUrl($user->user_picture->target_id),
       'ts'    => date("Y-m-d h:i A",time()),
       'hour'  => date("h",time()),
@@ -41,10 +43,6 @@ class StudentService
       'ampm'  => date("A",time()),
     ];
     return $data;
-  }
-
-  public function generateHash(){
-
   }
 
   private function getUrl($fid){
@@ -55,6 +53,10 @@ class StudentService
     $uri =  $file->getFileUri();
     $uri = str_replace('public://', '/sites/default/files/public/',$uri);
     return $uri;
+  }
+
+  public function generateHash($name){
+    return 'renify-'.md5($name);
   }
 
 }

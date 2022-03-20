@@ -105,8 +105,9 @@ class BatchUserExport {
   	  	'mail' => $user->mail->value,
   	  	'field_gender' => $user->field_gender->value,
   	  	'field_level'  => $user->field_level->value,
-  	  	'roles'        => $user->roles->target_id,
   	  	'user_picture' => !empty($user->user_picture->entity) ? $user->user_picture->entity->getFileUri() : '',
+        'qr_code'      => $user->field_qr->value,
+  	  	'roles'        => $user->roles->target_id,
   	  ];
   	  $contents[] = $fields;
   	}

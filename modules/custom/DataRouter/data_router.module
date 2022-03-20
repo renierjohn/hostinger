@@ -8,6 +8,18 @@ use Drupal\Core\Site\Settings;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use GuzzleHttp\Exception\ClientException;
 
+
+function data_router_preprocess_page(&$variables){
+   $json = file_get_contents('private://auth/firebase.json');
+   $conf = json_decode($json,TRUE);
+
+   $roles = \Drupal::currentUser()->getRoles();
+   if(!in_array('administrator',$roles) && !in_array('moderator',$roles) ){
+    unset($conf['apiKey']);
+   }
+   $variables['#attached']['drupalSettings']['firebase'] = $conf;
+} 
+
 function data_router_form_alter(&$form,&$form_state,&$form_id){
   if($form_id == 'user_login_form'){
     $form['actions']['submit']['#attributes'] =  [
@@ -27,6 +39,16 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
   if($form_id == 'node_places_edit_form'){
     $form['actions']['submit']['#submit'][] = 'send_email_edit';
   }
+
+  if($form_id == 'user_register_form'){
+    $form['#validate'][] = 'updateHash';
+  }
+}
+
+function updateHash(&$form,&$form_state){
+  $name = $form_state->getValues()['name'];
+  $hash = \Drupal::service('data_router.student')->generateHash($name);
+  $form_state->setValue('field_qr',[['value' => $hash]]);
 }
 
 function send_email_add(&$form,&$form_state){
