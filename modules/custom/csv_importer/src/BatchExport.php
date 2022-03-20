@@ -41,14 +41,6 @@ class BatchExport {
         $this->translatable = $translatable;
     }
 
-    public function setMiddleCategory($mids){
-      $this->mids = $mids;
-    }
-
-    public function setStatus($status){
-      $this->status = $status;
-    }
-
     public function runExport($nids,$filename,$langcode,$entity_type,$translatable,&$context) {
         $limit       = 100;
         $SEPARATOR   = ';';
@@ -123,13 +115,12 @@ class BatchExport {
     $entity_type  = $this->entity_type;
     $translatable = $this->translatable;
     $status       = $this->status;
-    // $mids         = $this->mids;
     $filename     = 'public://'.$content_type.'_'.$langcode.'.csv';
 
     $index        = 0;
     $limit        = $this->limit;
     $process      = [];
-    // $process['operations']['filename'] = $filename;
+
     /** ovverwrite the file and set initial state for adding header*/
     $csv_file     = fopen($filename, 'w+');
     fclose($csv_file);

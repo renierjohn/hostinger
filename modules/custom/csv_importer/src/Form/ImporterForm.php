@@ -18,6 +18,8 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\csv_importer\BatchExport;
+use Drupal\csv_importer\BatchUserImport;
+use Drupal\csv_importer\BatchUserExport;
 
 /**
  * Provides CSV importer form.
@@ -72,37 +74,10 @@ class ImporterForm extends FormBase {
    */
   protected $state;
 
-  const FIELD_MIDDLE_CATGRY = [
-      'connector'                   => 'field_con_middle_category',
-      'saw_devices'                 => 'field_saw_middle_category',
-      'power_semiconductor_devices' => 'field_pow_middle_category',
-      'crystal_devices'             => 'field_cry_middle_category',
-      'capacitors'                  => 'field_cap_middle_category'
-  ];
-
-  const FIELD_SMALL_CATGRY = [
-      'connector'                   => 'field_con_small_category',
-      'saw_devices'                 => 'field_saw_series',
-      'power_semiconductor_devices' => 'field_pow_small_category',
-      'crystal_devices'             => 'field_cry_series',
-      'capacitors'                  => 'field_cap_series'
-  ]; 
-
-  const VALID_ENITY_TYPE = ['connector','saw_devices','power_semiconductor_devices','crystal_devices','capacitors','small_product_category','middle_product_category']; 
-
   const BTN_STATE   = 'importer_form_btn_state_missing';
 
   const MISSING_URL = 'csv_import_missing_file_url';
 
-  const MIDDLE_CATEGORY = 'middle_product_category';
-
-  const SMALL_CATEGORY  = 'small_product_category';
-
-  const STATE_KEY_JSONFILE    = 'json_file_state';  
-  
-  const STATE_KEY_JSON_TMP_STATUS    = 'json_file_state_tmp';
-
-  const STATE_KEY_JSON_TMP_DATA      = 'json_file_state_data';
   /**
    * ImporterForm class constructor.
    *
@@ -219,19 +194,6 @@ class ImporterForm extends FormBase {
         ];
       }
 
-      // $form['importer']['delimiter'] = [
-      //   '#type' => 'select',
-      //   '#title' => $this->t('Choose delimiter'),
-      //   '#options' => [
-      //     ',' => ',',
-      //     '~' => '~',
-      //     ';' => ';',
-      //     ':' => ':',
-      //   ],
-      //   '#default_value' => ',',
-      //   '#required' => TRUE,
-      //   '#weight' => 10,
-      // ];
     }
 
     $form['importer']['csv'] = [
@@ -269,7 +231,6 @@ class ImporterForm extends FormBase {
     $form['download_missing_file'] = [
       '#type'     => 'submit',
       '#value'    => t('Download Missing Files'),
-      // '#disabled' => $btn_state ? FALSE : TRUE,
       '#submit'   => ['::downloadMissingFileCSV'],
     ];
 
@@ -325,9 +286,7 @@ class ImporterForm extends FormBase {
 
       if ($types && is_array($types)) {
         foreach ($types as $type) {
-          // if( in_array($type->id(),self::VALID_ENITY_TYPE) ){
             $options[$type->id()] = $type->label();
-          // }          
         }
       }
     }
@@ -435,33 +394,21 @@ class ImporterForm extends FormBase {
    * - this function is for importing csv files
    */
   public function importCSVData(array &$form, FormStateInterface $form_state) {
-    // \Drupal::service('state')->set(self::BTN_STATE,0);
     $entity_type = $form_state->getValue('entity_type');
     $entity_type_bundle = NULL;
     $csv = current($form_state->getValue('csv'));
-    // $csv_parse = $this->parser->getCsvById($csv, $form_state->getUserInput()['delimiter']);
+  
+    
+    if($entity_type == 'user'){      
+      $batchUserImport = new BatchUserImport($csv);
+      $batchUserImport->execute();
+      return; 
+    }
+
     $csv_parse = [];
     if (isset($form_state->getUserInput()['entity_type_bundle'])) {
       $entity_type_bundle = $form_state->getUserInput()['entity_type_bundle'];
     }
-
-    // if($entity_type == 'node'){
-      //  $valid_category = $this->getValidCategory($entity_type_bundle);
-      //  $mids = $valid_category[self::MIDDLE_CATEGORY];
-      //  $sids = $valid_category[self::SMALL_CATEGORY];
-       
-      // if(!empty($mids)){
-      //   foreach ($mids as $mid) {
-      //     $this->alterRegisterState($mid,$entity_type_bundle,self::MIDDLE_CATEGORY);
-      //   }
-      // }
-
-      // if(!empty($sids)){
-      //   foreach ($sids as $sid) {
-      //     $this->alterRegisterState($sid,$entity_type_bundle,self::SMALL_CATEGORY);
-      //    }
-      // }
-    // }
 
     $entity_fields = $this->getEntityTypeFields($entity_type, $entity_type_bundle);
     $this->importer->createInstance($form_state->getUserInput()['plugin_id'], [
@@ -481,13 +428,18 @@ class ImporterForm extends FormBase {
     $result       = $form_state->getValues();
     $entity_type  = $result['entity_type'];
     $content_type = $result['entity_type_bundle'];
+    $status       = $result['status'];
     $langcode     = 'en';
     $translatable = false;
-    $status       = $result['status'];
-    // $mids         = $result['middle_category'];
     
     if(empty($entity_type)){
       return \Drupal::messenger()->addWarning(t('Please Select Entity'));
+    }
+
+    if($entity_type == 'user'){
+      $batch = new BatchUserExport();
+      $batch->execute();
+      return;
     }
 
     $batch = new BatchExport($content_type,$entity_type,$langcode,$translatable);

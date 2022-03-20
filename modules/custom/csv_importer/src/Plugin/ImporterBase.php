@@ -264,14 +264,14 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
     $pathauto          = \Drupal::service('pathauto.generator');
     $logger            = \Drupal::service('csv_importer.logger');
     $ram_usage         =  round(memory_get_usage(true)/1048576).'MB'; // convert from Bytes into MB
-    $fields_arrs       = [];
+    $contents          = [];
     $datas             = [];
     
     $csv_file_handler = fopen($filename,'r');
     $row = 0;
     while ($data = fgetcsv($csv_file_handler,10000,self::SEPARATOR)) {
       if($row >= $start_offset && $row <= $end_offset ){
-        $fields_arrs[] = array_combine($header,$data);   
+        $contents[] = array_combine($header,$data);   
       }
       if($row > $end_offset){
         break;
@@ -281,7 +281,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
     fclose($csv_file_handler);
 
 
-    $total_array = count($fields_arrs);
+    $total_array = count($contents);
     if (empty($context['sandbox'])) {
       $context['sandbox'] = [];
       $context['sandbox']['progress'] = 0;
@@ -290,20 +290,15 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
       $context['finished'] = FALSE;
     }
 
-      foreach ($fields_arrs as $key => $fields_arr) {
-
-            if(!in_array($fields_arr['langcode'],['en','ja','ko','de','zh-hans'])){ // check first if langcode is valid
+      foreach ($contents as $key => $fields_arr) {
+            if(!in_array($fields_arr['langcode'],['en'])){ // check first if langcode is valid
                 if($entity_type == 'node'){
                   $missing_lang_id = $fields_arr['nid'];
                 }
                 if($entity_type == 'taxonomy_term'){
                   $missing_lang_id = $fields_arr['tid'];
                 }        
-                $csv_import_log_file = fopen('private://csv_import.txt','a');
-                $date = date("F d,Y h:i:s A");
-                fwrite($csv_import_log_file,$date.' ID:'.$missing_lang_id.' invalid langcode:'.$fields_arr['langcode'].' '.$entity_type_bundle.PHP_EOL);
-                fclose($csv_import_log_file);
-
+                $this->logSummary(' ID:'.$missing_lang_id.' invalid langcode:'.$fields_arr['langcode'].' '.$entity_type_bundle);
                 $context['sandbox']['progress']++ ;
                 $context['sandbox']['current_node']++;
                 $context['message'] = t('Invalid langcode @langcode', [
@@ -361,95 +356,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
             }            
             unset($fields_arr['delete']);
             /** preprocessing fields */ 
-            foreach ($fields_arr as $field_arr_key => $field_arr_value) {              
-                  if(empty($field_definitions[$field_arr_key])){
-                    // \Drupal::logger('CSV Import')->error('invalid key '.$field_arr_key);
-                    $csv_import_log_file = fopen('private://csv_import.txt','a');
-                    $date = date("F d,Y h:i:s A");
-                    fwrite($csv_import_log_file,$date.' : invalid key '.$field_arr_key.' '.$entity_type_bundle.PHP_EOL);
-                    fclose($csv_import_log_file);
-                    continue;
-                  }
-
-                  $field_type     = $field_definitions[$field_arr_key]->getType();
-                  $field_settings = $field_definitions[$field_arr_key]->getSettings();
-                  $cardinality    = $field_definitions[$field_arr_key]->getFieldStorageDefinition()->getCardinality();
-                
-                  $normal_field   = TRUE; // detect if field is not entity referenced
-                  
-                  if($cardinality > 1 || $cardinality == -1){ // detect if the field is multiple values
-                    $tmp_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
-                  }
-
-                  if($field_type == 'entity_reference_revisions'){ // skip if field type is paragraph
-                    $normal_field = FALSE;
-                    continue;
-                  }
-
-                  if( $field_type == 'entity_reference'){  
-                    $normal_field = FALSE;
-                    if(empty($field_arr_value) && $field_arr_value != '0'){
-                      continue; // dont insert the empty value from entity_references
-                    }
-                  }
-
-                  if($field_type == 'file' || $field_type == 'image'){
-                      $normal_field = FALSE;
-                      $file_status  = \Drupal::service('csv_importer.entity')->setUri($field_arr_value)->getFileAssets();
-                      if(!empty($file_status['missing_uri'])){
-                        /** LOGGER */
-                        $missing_files = implode(',',$file_status['missing_uri']); 
-                        $log->setField([$field_arr_key => $missing_files])->appendFieldLog(); // collect the missing file logs 
-                        // continue; // dont insert the empty value from entity_references, url is on csv file but doesnt have physical file on imce                        
-                        $field_arr_value = FALSE;
-                      }
-                      
-                      if(!empty($file_status['fid'])){
-                        $field_arr_value = $file_status['fid'];
-                      }
-                  }
-                  
-                  if( $field_type == 'entity_reference'){
-                      $normal_field = FALSE;
-                      $target_type      = $field_settings['target_type'];
-                      $handlerSettings  = $field_settings['handler_settings']['target_bundles']; // array ['key'=>'value','key1'=>'value1']
-                      $name_status      = \Drupal::service('csv_importer.entity')->setHandlerSettings($handlerSettings)->entityType($target_type)->setNames($field_arr_value)->setMachineName($field_arr_key)->getIDFromNames();
-                      if(!empty($name_status['mismatch_name'])){
-                        /** LOGGER */
-                        $missing_files = implode(',',$name_status['mismatch_name']); 
-                        $log->setField([$field_arr_key => $missing_files])->appendFieldLog(); // collect the missing entity_reference logs 
-                        $field_arr_value = FALSE;
-                        // continue; // dont insert the empty value from entity_references
-                      }
-                      
-                      if(!empty($name_status['id'])){
-                        $field_arr_value = $name_status['id'];
-                      }
-
-                      if(empty($field_arr_value)){
-                        continue;
-                      } 
-                    // $field_arr_value = explode(',',$field_arr_value); // detect if multiple id 
-                  }
-
-                  if($field_type == 'link'){
-                    $normal_field = FALSE;
-                    $link_value = [];
-                    $link_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
-                    foreach ($link_multiple_field as $tmp_multiple_field_key => $tmp_multiple_field_value){
-                      $tmp_multiple_field_value = explode(self::LINK_DELIMITER,$tmp_multiple_field_value);
-                      $link_value[] = ['title'=>$tmp_multiple_field_value[0],'uri'=>$tmp_multiple_field_value[1]];
-                    }
-                    $field_arr_value = $link_value;
-                  }
-
-                  if($normal_field == TRUE && !empty($tmp_multiple_field) && ($cardinality > 1  || $cardinality == -1) ){ // store the normal values as an array
-                    $field_arr_value = $tmp_multiple_field;
-                  }
-
-                  $fields_temp_arr[$field_arr_key] = $field_arr_value;
-            }
-
+            $fields_temp_arr = $this->preprocessFields($fields_arr,$entity_type,$entity_type_bundle,$field_definitions,$log);
             /** LOGGER */ 
             $logger->setTmpUri($tmpfile_uri)
                    ->setCsvUri($logger_csv_filename)
@@ -465,8 +372,6 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
             $status     = isset($fields_arr['status'])   ? $fields_arr['status']   : 1;
             $moderation = $status == 1 ? 'published' : 'unpublish';
             unset($fields_arr['nid']);
-            // unset($fields_arr['status']);
-            // unset($fields_arr['langcode']);          
 
             if(empty($id)){
               $id = isset($fields_arr['tid']) ? $fields_arr['tid'] : FALSE;
@@ -490,12 +395,12 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
                    $ids_flag_result   = FALSE;
                    $title_flag_result = FALSE;
                    $ids_flag_query    = $entity->getStorage($entity_type)->getQuery();
-                   // if($entity_type == 'node'){
-                   //    $ids_flag_query->condition('type',$entity_type_bundle);
-                   //    $ids_flag_query->condition('title',$fields_arr['title']);
-                   //    $ids_flag_result   = $ids_flag_query->execute();
-                   //    $title_flag_result = $fields_arr['title'];
-                   //  }
+                   if($entity_type == 'node'){
+                      $ids_flag_query->condition('type',$entity_type_bundle);
+                      $ids_flag_query->condition('title',$fields_arr['title']);
+                      $ids_flag_result   = $ids_flag_query->execute();
+                      $title_flag_result = $fields_arr['title'];
+                    }
 
                     if($entity_type == 'taxonomy_term'){
                       $ids_flag_query->condition('vid',$entity_type_bundle);
@@ -523,10 +428,7 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
               $entity_content     = $entity->getStorage($entity_type)->load($id);
               /** DETECT IF CONTENT IS DELETED WHILE UPDATING*/ 
               if(empty($entity_content)){
-                  $csv_import_log_file = fopen('private://csv_import.txt','a');
-                  $date = date("F d,Y h:i:s A");
-                  fwrite($csv_import_log_file,$date.' ID:'.$id.' not exists while updating, '.$entity_type_bundle.PHP_EOL);
-                  fclose($csv_import_log_file);
+                  $this->logSummary(' ID:'.$id.' not exists while updating, '.$entity_type_bundle);
               }
               else{
                   /** UPDATE THE CONTENT */ 
@@ -577,6 +479,94 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
     \Drupal::logger('CSV IMPORT')->notice($start_offset.' out of '.$end_offset.' '.$ram_usage);
   }
 
+
+  public function preprocessFields($fields_arr,$entity_type,$entity_type_bundle,$field_definitions,$log){
+      $fields_temp_arr = [];
+      foreach ($fields_arr as $field_arr_key => $field_arr_value) {              
+                  if(empty($field_definitions[$field_arr_key])){
+                    $this->logSummary('invalid key '.$field_arr_key.' '.$entity_type_bundle);
+                    continue;
+                  }
+
+                  $field_type     = $field_definitions[$field_arr_key]->getType();
+                  $field_settings = $field_definitions[$field_arr_key]->getSettings();
+                  $cardinality    = $field_definitions[$field_arr_key]->getFieldStorageDefinition()->getCardinality();
+                
+                  $normal_field   = TRUE; // detect if field is not entity referenced
+                  
+                  if($cardinality > 1 || $cardinality == -1){ // detect if the field is multiple values
+                    $tmp_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
+                  }
+
+                  if($field_type == 'entity_reference_revisions'){ // skip if field type is paragraph
+                    $normal_field = FALSE;
+                    continue;
+                  }
+
+                  if( $field_type == 'entity_reference'){  
+                    $normal_field = FALSE;
+                    if(empty($field_arr_value) && $field_arr_value != '0'){
+                      continue; // dont insert the empty value from entity_references
+                    }
+                  }
+
+                  if($field_type == 'file' || $field_type == 'image'){
+                      $normal_field = FALSE;
+                      $file_status  = \Drupal::service('csv_importer.entity')->setUri($field_arr_value)->getFileAssets();
+                      if(!empty($file_status['missing_uri'])){
+                        /** LOGGER */
+                        $missing_files = implode(',',$file_status['missing_uri']); 
+                        $log->setField([$field_arr_key => $missing_files])->appendFieldLog(); // collect the missing file logs 
+                        $field_arr_value = FALSE;
+                      }
+                      
+                      if(!empty($file_status['fid'])){
+                        $field_arr_value = $file_status['fid'];
+                      }
+                  }
+                  
+                  if( $field_type == 'entity_reference'){
+                      $normal_field = FALSE;
+                      $target_type      = $field_settings['target_type'];
+                      $handlerSettings  = $field_settings['handler_settings']['target_bundles']; // array ['key'=>'value','key1'=>'value1']
+                      $name_status      = \Drupal::service('csv_importer.entity')->setHandlerSettings($handlerSettings)->entityType($target_type)->setNames($field_arr_value)->setMachineName($field_arr_key)->getIDFromNames();
+                      if(!empty($name_status['mismatch_name'])){
+                        /** LOGGER */
+                        $missing_files = implode(',',$name_status['mismatch_name']); 
+                        $log->setField([$field_arr_key => $missing_files])->appendFieldLog(); // collect the missing entity_reference logs 
+                        $field_arr_value = FALSE;
+                        // continue; // dont insert the empty value from entity_references
+                      }
+                      
+                      if(!empty($name_status['id'])){
+                        $field_arr_value = $name_status['id'];
+                      }
+
+                      if(empty($field_arr_value)){
+                        continue;
+                      } 
+                    // $field_arr_value = explode(',',$field_arr_value); // detect if multiple id 
+                  }
+
+                  if($field_type == 'link'){
+                    $normal_field = FALSE;
+                    $link_value = [];
+                    $link_multiple_field = explode(self::SEPARATOR_MULTI,$field_arr_value);
+                    foreach ($link_multiple_field as $tmp_multiple_field_key => $tmp_multiple_field_value){
+                      $tmp_multiple_field_value = explode(self::LINK_DELIMITER,$tmp_multiple_field_value);
+                      $link_value[] = ['title'=>$tmp_multiple_field_value[0],'uri'=>$tmp_multiple_field_value[1]];
+                    }
+                    $field_arr_value = $link_value;
+                  }
+
+                  if($normal_field == TRUE && !empty($tmp_multiple_field) && ($cardinality > 1  || $cardinality == -1) ){ // store the normal values as an array
+                    $field_arr_value = $tmp_multiple_field;
+                  }
+
+                  $fields_temp_arr[$field_arr_key] = $field_arr_value;
+            }
+            return $fields_temp_arr;
+  }
   /**
    * {@inheritdoc}
    */
@@ -615,4 +605,12 @@ abstract class ImporterBase extends PluginBase implements ImporterInterface {
        fwrite($file,$date.' : '.$logs.PHP_EOL);
        fclose($file);
   }
+
+  public function logSummary($logs){
+       $date = date("F d,Y h:i:s A");
+       $file = fopen('private://csv_import.txt','a');
+       fwrite($file,$date.' : '.$logs.PHP_EOL);
+       fclose($file); 
+  }
+
 }
