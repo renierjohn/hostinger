@@ -227,6 +227,12 @@ class ImporterForm extends FormBase {
       '#submit'   => ['::downloadCSV'],
     ];
 
+    $form['download_user'] = [
+      '#type'     => 'submit',
+      '#value'    => t('Download User CSV'),
+      '#submit'   => ['::downloadUserCSV'],
+    ];
+
     
     $form['download_missing_file'] = [
       '#type'     => 'submit',
@@ -472,6 +478,15 @@ class ImporterForm extends FormBase {
       return $this->downloadItemTypeExport($filename);
     }
   }
+
+  public function downloadUserCSV(array &$form, FormStateInterface $form_state){
+    $filename = 'private://users.csv';
+    if(!empty($filename)){
+      \Drupal::service('state')->delete('csv_file_download');
+      return $this->downloadItemTypeExport($filename);
+    }
+  }
+
   /**
    * Download file.
    *
