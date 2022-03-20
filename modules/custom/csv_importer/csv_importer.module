@@ -50,6 +50,11 @@ function csv_importer_validate($form, FormStateInterface $form_state) {
     if (isset($form_state->getUserInput()['entity_type_bundle'])) {
       $entity_type_bundle = $form_state->getUserInput()['entity_type_bundle'];
     }
+
+    if($form_state->getUserInput()['entity_type'] == 'user'){
+      return;
+    }
+
     $csv       = $values['csv'];
     if(empty($entity_type_bundle)){
       $form_state->setErrorByName('entity_type_bundle', 'Entity bundle is required.');
