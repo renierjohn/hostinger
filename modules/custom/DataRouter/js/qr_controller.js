@@ -14,14 +14,42 @@
     //////////////////////////////////////////
     firebase.initializeApp(drupalSettings.firebase);
     var firestore = firebase.firestore();
-    var date   = getCurrentDate();
-    var ref  = firestore.collection('students').doc('elementary').collection(date);
+    var db        = firebase.database();
+    var date      = getCurrentDate();
+    // var ref  = firestore.collection('students').doc('elementary').collection(date);
 
-    ref.onSnapshot((doc) => {
-          doc.docs.forEach((data)=>{
-            addStudentListInit(data.data());
-          })
+    // ref.onSnapshot((doc) => {
+    //       doc.docs.forEach((data)=>{
+    //         addStudentListInit(data.data());
+    //       })
+    // });
+
+    // ONCE ONLY FETCH
+    //  db.ref('/students/'+date).get().then((snapshot) => {
+    //     if (!snapshot.exists()) {
+    //       alert('NO INITIAL DATA');
+    //       return; 
+    //     }
+    //     snapshot.forEach((childSnapshot) => {
+    //       var childKey  = childSnapshot.key;
+    //       var childData = childSnapshot.val();
+    //       console.log(childKey);
+    //       console.log(childData);
+    //       addStudentListInit(childData);
+    //     });
+    // });
+
+    // REALTIME FETCH
+    db.ref('/students/'+date).on('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          var childKey  = childSnapshot.key;
+          var childData = childSnapshot.val();
+          console.log(childKey);
+          console.log(childData);
+          addStudentListInit(childData);
+        });
     });
+   
     //////////////////////////////////////////////
 
 
@@ -51,8 +79,6 @@
         requestUSer(hash)
     });
     //////////////////////////////////////////////
-
-
 
 
     //////////////////////////////////////////////////////////////
@@ -95,7 +121,7 @@
       canvas.stroke();
     }
 
-    function render(stream) {
+    function render() {
       loadingMessage.innerText = "⌛ Loading video..."
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
         loadingMessage.hidden = true;
@@ -129,14 +155,10 @@
           video.hidden = true;
           detect[0].value = '0';
           
-          stream.getVideoTracks().forEach(function(track) {
-              track.stop();
-          });
-
           $('#qr_download').show();
           $('.qr_hash').val(code.data);
           $('.modal').remove();
-          // requestUSer(code.data);
+          requestUSer(code.data);
           renderModal();
         } else {
           outputMessage.hidden            = false;
@@ -190,12 +212,12 @@
         'url' : '/api/student/?qr='+hash ,
         'type': 'GET',
         'success' : function(data) {
-          console.log(data);
           if(data.status == false){
             alert('NO DATA');
             return;
           }
-          saveToFireStore(data);
+          console.log(data);
+          saveToRealTimeDatabase(data);
         }
       });
     }
@@ -207,7 +229,28 @@
           image : data.data.image,
           name  : data.data.name,
           ts    : data.data.ts,
+          gender: data.data.gender,
+          level : data.data.level,
+          hour  : data.data.hour,
+          minute: data.data.minute,
+          ampm  : data.data.ampm,
       })
+    }
+
+    function saveToRealTimeDatabase(data) {
+       var unique_id = data.data.hash
+        // db.ref('students/'+ date+'/'+ unique_id).set({
+         db.ref('students/'+ date).push({ 
+            hash  : unique_id,
+            image : data.data.image,
+            name  : data.data.name,
+            ts    : data.data.ts,
+            gender: data.data.gender,
+            level : data.data.level,
+            hour  : data.data.hour,
+            minute: data.data.minute,
+            ampm  : data.data.ampm,
+        });
     }
 
     function addStudentListInit(data){
