@@ -54,7 +54,7 @@ data_router.student_api:
     _controller: '\Drupal\data_router\Controller\StudentController::getData'
     _title: 'Student Data'
   requirements:
-    _role : 'authenticated'
+    _access : 'TRUE'
 
 data_router.student_page:
   path: '/student'    
