@@ -7,26 +7,6 @@
   <section id="body" class="students">
     <div class="container">
       <!-- ROW 1 -->
-      <div class="row">
-        <input class="modal-state" id="modal-1" type="checkbox"  style="display: none;" />
-        <div class="modal">
-          <label class="modal__bg" for="modal-1"></label>
-          <div class="modal__inner">
-            <label class="modal__close" for="modal-1"></label>
-                  <div id="loadingMessage">🎥 Please enable Webcam</div>
-                  <canvas id="canvas" hidden></canvas>
-                  <div id="output">
-                    <div id="outputMessage">No QR code detected.</div>
-                    <div hidden><b>Code:</b> <span id="outputData"></span></div>
-                    <input type="hidden" name="detect" value="0">
-                  </div>
-                  <div>
-                    {# <button class="qr_download">Download</button> #}
-                    <button class="qr_stop">Stop</button>
-                  </div>
-          </div>
-        </div>
-      </div>
 
       <!-- ROW 2 -->
       <div class="row flex">
@@ -37,7 +17,10 @@
                 <div class="col-block">
                   <h5>Click To Scan</h5>
                    <label class="btn btn--stroke qr_camera" for="modal-1"><i class="fa fa-lightbulb"></i>SCAN</label>  
-                    <div id="qr_image_result"></div>
+                    <div class="camera" style="display:none">
+                      <div id="qr_image_result"></div>
+                      <canvas id="canvas" hidden></canvas>
+                    </div>
                 </div>
               </div>
               

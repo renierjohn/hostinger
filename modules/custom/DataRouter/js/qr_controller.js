@@ -3,10 +3,6 @@
     var video           = document.createElement("video");
     var canvasElement   = document.getElementById("canvas");
     var canvas          = canvasElement.getContext("2d");
-    var loadingMessage  = document.getElementById("loadingMessage");
-    var outputContainer = document.getElementById("output");
-    var outputMessage   = document.getElementById("outputMessage");
-    var outputData      = document.getElementById("outputData");
     var detect          = document.getElementsByTagName('input')
     
     ///////////////////////////////////////////
@@ -56,17 +52,14 @@
     ///////////////////////////////////////////
     // BUTTONS
     //////////////////////////////////////////
-    $('#qr_download').hide();
-    $('#qr_download').click(function(){
-      download();
-    });
 
     $('.qr_hash_generate').keyup(function(e){
       if(e.keyCode == 13){$(this).trigger("enterKey");}
     });
 
     $('.qr_hash_generate').bind("enterKey",function(e){
-        var hash = $(this).val() 
+        var hash = $(this).val()
+        $('#qr_image_result').html(' '); 
         new QRCode(document.getElementById('qr_image_result'),hash);
     });
 
@@ -87,6 +80,8 @@
     //
     //////////////////////////////////////////////////////////////
     $('.qr_camera').click(function(){
+      $('.camera').show();
+      $('#qr_image_result').html('' );
       startWebcam();
     })
 
@@ -98,16 +93,13 @@
           video.play();
           requestAnimationFrame(render);
           $('.qr_stop').click(function(){
-              canvasElement.height = 0;
-              canvasElement.width  = 0;
-              canvasElement.hidden = true;
-              video.hidden = true;
-              detect[0].value = '0';
               stream.getVideoTracks().forEach(function(track) {
                   track.stop();
+                  detect[0].value = '0';
+                  // renderModal();
+                  // $('.qr_image').html(' ');
+                  $('.modal').remove();
               });
-              renderModal();
-              $('.modal').remove();
           });
         });
     }
@@ -122,15 +114,12 @@
     }
 
     function render() {
-      loadingMessage.innerText = "⌛ Loading video..."
+      // loadingMessage.innerText = "⌛ Loading video..."
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        loadingMessage.hidden = true;
-        canvasElement.hidden = false;
-        outputContainer.hidden = false;
+          canvasElement.hidden   = false;
+          canvasElement.height = 200;
+          canvasElement.width  = 200;
 
-        canvasElement.height = $('.modal__inner').height() - 30;
-        canvasElement.width  = $('.modal__inner').width();
-        
         canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
         
         var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
@@ -143,10 +132,8 @@
           drawLine(code.location.topRightCorner, code.location.bottomRightCorner,   "#FF3B58");
           drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
           drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner,     "#FF3B58");
-          outputMessage.hidden            = true;
-          outputData.parentElement.hidden = false;
-          outputData.innerText            = code.data;
 
+          $('#qr_image_result').html(' ');
           new QRCode(document.getElementById('qr_image_result'),code.data);
 
           canvasElement.height = 0;
@@ -155,15 +142,8 @@
           video.hidden = true;
           detect[0].value = '0';
           
-          $('#qr_download').show();
-          $('.qr_hash').val(code.data);
-          $('.modal').remove();
           requestUSer(code.data);
-          renderModal();
-        } else {
-          outputMessage.hidden            = false;
-          outputData.parentElement.hidden = true;
-        }
+        } 
       }
 
       if(detect[0].value == '1'){
@@ -180,13 +160,13 @@
     //  Utils 
     //
     //////////////////////////////////////////////////////////////
-    function download(){
-      var qr = $('#qr_image').find('img').attr('src')
-      var a  = document.createElement('a');
-      a.href = qr;
-      a.download = "my_qrcode.png";
-      a.click();
-    }
+    // function download(){
+    //   var qr = $('#qr_image').find('img').attr('src')
+    //   var a  = document.createElement('a');
+    //   a.href = qr;
+    //   a.download = "my_qrcode.png";
+    //   a.click();
+    // }
 
     function getCurrentDate(){
       var date = new Date();
@@ -290,30 +270,6 @@
 
         $('.student-lists').prepend(template)
         $('.img-wrapper').show('fast')
-    }
-
-    function renderModal(){
-      var template = `
-      <div class="modal">
-          <label class="modal__bg" for="modal-1"></label>
-          <div class="modal__inner">
-            <label class="modal__close" for="modal-1"></label>
-                  <div id="loadingMessage">🎥 Please enable Webcam</div>
-                  <canvas id="canvas" hidden></canvas>
-                  <div id="qr_image"></div>
-
-                  <div id="output">
-                    <div id="outputMessage">No QR code detected.</div>
-                    <div hidden><b>Code:</b> <span id="outputData"></span></div>
-                    <input type="hidden" name="detect" value="0">
-                  </div>
-                  <div>
-                    <button class="qr_stop">Stop</button>
-                  </div>
-          </div>
-        </div>
-        `;
-        $('.students .row').append(template);
     }
 
 })(jQuery,Drupal,drupalSettings);
