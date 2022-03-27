@@ -176,6 +176,9 @@ class StudentService
   private function getFlag($id){ 
     $filename  = 'private://'.self::ROLE.'.json';
     $json_hash = file_get_contents($filename);
+    if(empty($json_hash)){
+      return False;
+    }
     $json_hash = json_decode($json_hash,True);
     $json_id   = array_column($json_hash,'id');
     if(in_array($id,$json_id)){
