@@ -56,13 +56,31 @@ data_router.student_api:
   requirements:
     _access : 'TRUE'
 
-data_router.student_page:
-  path: '/student'    
+data_router.student_list_api:
+  path: '/api/student/list'    
   defaults:
-    _controller: '\Drupal\data_router\Controller\StudentController::page'
+    _controller: '\Drupal\data_router\Controller\StudentController::ajaxStudentList'
     _title: 'Student Data'
   requirements:
     _access : 'TRUE'
+
+
+data_router.student_page:
+  path: '/student'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::renderStudentScanner'
+    _title: 'Student Data'
+  requirements:
+    _access : 'TRUE'
+
+data_router.student_list:
+  path: '/student/all'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::renderStudentList'
+    _title: 'Student Data'
+  requirements:
+    _access : 'TRUE'
+
 
 
 # data_router.fb_feed:

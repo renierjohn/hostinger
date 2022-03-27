@@ -32,7 +32,7 @@ class BatchUserExport {
 
        $csv_file = fopen($uri,'a');
 
-       if(empty($header)){
+       if(empty($header) && !empty($contents[0])){
        	 fputcsv($csv_file,array_keys($contents[0]),';');
        }
 
@@ -99,6 +99,10 @@ class BatchUserExport {
   	$users    = \Drupal::service('entity_type.manager')->getStorage('user')->loadMultiple($ids);
   	$contents = [];
   	foreach ($users as $user) {
+      if($user->roles->target_id != 'student'){
+        continue;
+      }
+
   	  $fields = [
   	  	'uid'  => $user->id(),
   	  	'name' => $user->name->value,

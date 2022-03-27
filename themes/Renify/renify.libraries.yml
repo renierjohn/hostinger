@@ -1,21 +1,21 @@
 base:
-  version: 1.1
+  version: 1.2
   css:
     theme:
       css/style.css: {}
       css/vendor.css: {}
       css/main.css: {}
       css/header.css: {}
+      css/breadcrumb.css: {}
       css/footer.css: {}
       css/contents.css: {}
       css/gallery.css: {}
       css/status_message.css: {}
-      css/8_mobile.css: {}
-      css/9_mobile-articles.css: {}
-      css/breadcrumb.css: {}
       css/tab.css: {}
       css/modal.css: {}
       css/fb.css: {}
+      css/8_mobile.css: {}
+      css/9_mobile-articles.css: {}
       css/base.css.map: {}
       css/vendor.css.map: {}
       css/main.css.map: {}

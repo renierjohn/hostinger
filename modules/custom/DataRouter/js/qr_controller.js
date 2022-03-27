@@ -61,6 +61,7 @@
         var hash = $(this).val()
         $('#qr_image_result').html(' '); 
         new QRCode(document.getElementById('qr_image_result'),hash);
+        $('.camera').show();
     });
 
     $('.qr_hash').keyup(function(e){

@@ -1,6 +1,46 @@
+.flex{
+	display: flex;
+}
+
+.flex h2 , .flex h3{
+	margin: 0;
+	padding: 0;
+	font-weight: 300;
+}
+
+.flex-1-3{
+	width: 33.3333%;
+}
+
+.flex-2-3{
+	width: 66.6667%;
+}
+
 .students{
 	background-color: white;
+	padding-top: 1rem;
 }
+
+.students h1,h2,h3,h4,h5,p{
+	margin: 0 !important;
+}
+
+.students .col-block{
+	margin: 1rem 0;
+}
+
+.students .gender-title{
+	
+}
+
+.students h3{
+	border-bottom-style: groove;
+  border-width: 1px;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+	padding: .2rem;
+	margin: 0;
+}
+
 
 .img-wrapper::before{
 	width: 100px;
@@ -9,17 +49,19 @@
 .img-wrapper img{
 	width: 100%;
 	height: 20vh;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 }
 
 .img-wrapper p{
 	margin: 0;
 	padding: 0;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
 .img-wrapper{
 	margin: 1rem;
 	padding: 1rem;
-	border-color: black;
+	border-color: #121619;
 	border-style: solid;
 	border-width: 1px;
 	width: initial;
@@ -34,23 +76,69 @@
 	width: initial;
 }
 
-.flex{
-	display: flex;
+.s-image-wrapper{
+  display: flex;
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
-.flex h2 , .flex h3{
-	margin: 0;
-	padding: 0;
+.s-present{
+	  border-color: #80c983c7;
 }
 
-.flex-1-3{
-	width: 33.3333%;
+.s-not-present{
+	  border-color: #ff0000;
 }
 
-.flex-2-3{
-	width: 66.6667%;
+.s-image-wrapper .s-image{
+	width: 50%;
 }
 
+.s-image-wrapper .s-image img{
+	height: 160px;
+   object-fit: cover;
+}
+
+.s-data-wrapper{
+	padding: .5rem;
+	margin: 0 1.5rem;
+}
+
+.s-data-wrapper h3{
+	font-size: large;
+}
+
+.s-image-wrapper .s-image-hash img{
+	height: 155px;
+   padding: 0.4rem;;
+}
+
+.boys{
+  border-right-style: solid;
+  padding: 1rem;
+  border-width: 1px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.girls{
+	text-align: center;
+   padding: 1rem;
+}
+
+@media only screen and (max-width:1024px) {
+	.s-image-wrapper .s-image-hash img{
+		height: 100px;
+	}
+	.s-image-wrapper .s-image img{
+		height: 100px;
+	}
+}
 
 @media only screen and (max-width:800px) {
    .flex{
@@ -59,4 +147,38 @@
    .flex-1-3 , .flex-2-3 {
 	  width: 100%;
    }
+ }
+
+
+ @media only screen and (max-width:500px) {
+	.s-image-wrapper{
+		margin: 0.5rem;
+	}
+
+	.s-image-wrapper .s-image img{
+		 height: 80px;
+	}
+
+	.s-data-wrapper h3{
+		font-size: small;
+		inline-size: max-content;
+	}
+ }
+
+ @media only screen and (max-width:400px) {
+	.s-image-wrapper{
+		margin: 0.5rem 0;
+	}
+
+	.s-image-wrapper .s-image img{
+		 height: 80px;
+	}
+
+	.s-data-wrapper h3{
+		font-size: small;
+	}
+
+	.s-image-wrapper .s-image img{
+		 height: 65px;
+	}
  }

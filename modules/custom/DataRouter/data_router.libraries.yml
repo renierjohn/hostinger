@@ -37,3 +37,17 @@ qr:
   dependencies:
     - core/jquery
     - core/drupal
+
+student:
+  version: 1.0
+  css:
+    theme:
+      css/student.css: {}
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.7/firebase-compat.min.js: {type: external}
+    js/qr_decoder.js: {}
+    js/qr_encoder.js: {}
+    js/student_list.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal    

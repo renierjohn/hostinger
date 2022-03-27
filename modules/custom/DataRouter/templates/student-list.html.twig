@@ -1,0 +1,109 @@
+
+<!-- HEADER -->
+    <section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="../images/logo.png" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
+      <div class="header-mini-title center">
+        <h2>STUDENT LISTS</h2>
+      </div>
+    </section>
+    <!-- END HEADER -->
+
+     <!-- LIST -->
+ <section id="body" class="students">
+    <div class="container">
+      <!-- ROW 1 -->
+      <div class="row">
+          <div class="summary">
+             <div class="block-1-4">
+               
+               {% for level in data.level %}
+                 <div class="col-block">
+                   <h3 class="center">Grade {{level.level}}</h3>
+                    <div class="block-1-2">
+                      <div class="col-block boys">
+                        <h5>BOYS</h5>
+                        <p>{{level.male|length}}</p>
+                      </div>
+                      <div class="col-block girls">
+                        <h5>GIRLS</h5>
+                        <p>{{level.female|length}}</p>
+                      </div>
+                    </div>
+                 </div>
+               {% endfor %}
+
+             </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="block-1-6">
+          <div class="col-block">
+              <h5>Status</h5>
+              <select class="s-js-select-attendance">
+                <option value="all">All</option>
+                <option value="1">Present</option>
+                <option value="2">None</option>
+              </select>
+          </div>
+          <div class="col-block">
+              <h5>Level</h5>
+              <select class="s-js-select-level">
+                <option value="all">All</option>
+                {% for level in data.level %}
+                  <option value="{{level.level}}">{{level.level}}</option>
+                {% endfor %}  
+              </select>
+          </div>
+          <div class="col-block">
+              <h5>Gender</h5>
+              <select class="s-js-select-gender">
+                <option value="all">All</option>
+                <option value="male">BOYS</option>
+                <option value="female">GIRLS</option>
+              </select>
+          </div>    
+        </div>  
+      </div>
+      
+      <div class="row">
+        <div class="summary">
+          <div class="block-1-3 student-list">
+            {% for student in data.students %}
+             
+              {% if student.flag %}
+                {% set state_class = 's-present' %}
+              {% else %}
+                {% set state_class = 's-not-present' %}
+              {% endif %}
+
+              <div class="col-block" s-hash="{{student.hash}}" >
+                <div class="s-image-wrapper {{state_class}}"> 
+                  <div class="s-image">
+                      <img src="{{student.image}}" alt="">
+                  </div>
+                  <div class="s-image s-image-hash">
+
+                  </div>
+                </div>
+                <div class="s-data-wrapper">
+                     <h3>Name : {{student.name}}</h3>
+                     <h3 s-gender="{{student.gender}}" s-level="{{student.level}}">Level : {{student.level}}</h3>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="block-1-1 center">
+            <div class="col-block">
+              {% if data.more_flag %}
+                <button class="s-more" limit={{data.limit}} start={{data.start}} >MORE <i class="fa fa-arrow-down"></i></button>
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- END MAIN CONTENT -->

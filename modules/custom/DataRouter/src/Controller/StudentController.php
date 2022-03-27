@@ -19,6 +19,8 @@ class StudentController extends ControllerBase {
 
   protected $student;
 
+  const LIMIT = 9;
+
   public function __construct(State $state,RequestStack $request,StudentService $student) {
     $this->state   = $state;
     $this->student = $student;
@@ -52,7 +54,7 @@ class StudentController extends ControllerBase {
     return new JsonResponse(['status'=>TRUE,'data'=>$student]);
   }
 
-  public function page(){
+  public function renderStudentScanner(){
     $build = [
       '#theme' => 'student',
       '#attached' => [
@@ -62,6 +64,49 @@ class StudentController extends ControllerBase {
       ],
     ];
     return $build;
+  }
+
+  public function renderStudentList(){
+    $request = $this->request->query->all();
+    $gender  = !empty($request['g'])    ? $request['g']   : '';
+    $level   = !empty($request['lvl']) ? $request['lvl'] : '';
+    $present = !empty($request['p'])   ? $request['p'] : False;
+
+    $students  = $this->student->query(self::LIMIT,0,$gender,$level,$present);
+    $build = [
+      '#theme' => 'student_list',
+      '#attached' => [
+        'library' => [
+          'data_router/student'
+        ]
+      ],
+      '#data' => [
+        'start'     => 0,
+        'limit'     => self::LIMIT,
+        'level'     => $this->student->getLevels(),
+        'more_flag' => count($students) > self::LIMIT ? True : False, 
+        'students'  => count($students) > self::LIMIT ? array_splice($students,0,self::LIMIT) : $students,
+      ],
+    ];
+    return $build;
+  }
+
+  public function ajaxStudentList(){
+    $request = $this->request->query->all();
+    $limit   = !empty($request['l'])    ? $request['l']   : 10;
+    $start   = !empty($request['s'])    ? $request['s']   : 0;
+    $gender  = !empty($request['g'])    ? $request['g']   : '';
+    $level   = !empty($request['lvl']) ? $request['lvl'] : '';
+    $present = !empty($request['p'])   ? $request['p'] : False;
+
+    $students  = $this->student->query($limit,$start,$gender,$level,$present);
+    $more_flag = count($students) > $limit ? True : False;
+    $students  = array_splice($students,0,$limit);
+    $data = [
+      'students'  => $students,
+      'more_flag' => $more_flag,
+    ];
+    return new JsonResponse($data);
   }
 
 }
