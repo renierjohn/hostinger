@@ -1,3 +1,4 @@
+{% set lazy  = '/themes/Renify/images/lazy/lazy.jpg' %}
 
 <!-- HEADER -->
     <section id="home" class="s-home-mini target-section banner-product" data-parallax="scroll" data-image-src="../images/logo.png" data-natural-width=1600 data-natural-height=1200 data-position-y=center>
@@ -79,7 +80,7 @@
               <div class="col-block" s-hash="{{student.hash}}" >
                 <div class="s-image-wrapper {{state_class}}"> 
                   <div class="s-image">
-                      <img src="{{student.image}}" alt="">
+                      <img src={{lazy}} data-src="{{student.image}}" class="img-fluid lazy" alt="">
                   </div>
                   <div class="s-image s-image-hash">
 

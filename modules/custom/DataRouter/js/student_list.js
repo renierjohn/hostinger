@@ -220,6 +220,17 @@
       return String(date.getMonth()+1) + '-' + String(date.getDate()) + '-' + String(date.getFullYear());
     }
 
+    $('.lazy').Lazy({
+        scrollDirection: 'vertical',
+        effect: 'fadeIn',
+        effectTime:500,
+        threshold:0,
+        visibleOnly: true,
+        onError: function(element) {
+            console.log('error loading ' + element.data('src'));
+        }
+    });
+
     renderQr();
 
 })(jQuery,Drupal,drupalSettings);
