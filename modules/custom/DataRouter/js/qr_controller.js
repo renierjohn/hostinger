@@ -260,7 +260,7 @@
                             <p>`+data.name+`</p>
                           </div>
                           <div class="row">
-                            <p>Grade 9</p>
+                            <p>Grade `+data.level+`</p>
                           </div>
                           <div class="row">
                             <p>`+data.ts+`</p>
