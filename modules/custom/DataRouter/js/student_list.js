@@ -101,14 +101,27 @@
   //         );
   //     }
   // });
+
     db.ref('/students/'+date).on('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
-          var childKey  = childSnapshot.key;
+        //   var childKey  = childSnapshot.key;
           var childData = childSnapshot.val();
-          console.log(childKey);
-          console.log(childData);
-          setRealTimeRender(childData);
+        //   console.log(childKey);
+          // console.log(childData);
+        //   setRealTimeRender(childData);
         });
+        var uri = `/api/student/recent`;       
+        $.ajax({
+        'url' : uri,
+        'type': 'GET',
+        'success' : function(datas) {
+          if(datas.length > 0){
+            datas.forEach(function(data){
+              setRealTimeRender(data)
+            })
+          }
+        }
+      })
     });
 
     $('.s-js-select-attendance').on('change', function() {
@@ -206,9 +219,23 @@
       });
     }
 
-    function setRealTimeRender(childData){
-      var hash = childData.hash;
-      console.log(hash);
+    // function setRealTimeRender(childData){
+    //   var hash = childData.hash;
+    //   if($(`[s-hash=${hash}]`).find('.s-image-wrapper').hasClass('s-present')){
+    //     return; 
+    //   }
+    //   $(`[s-hash=${hash}]`).find('.s-image-wrapper').removeClass('s-not-present');
+    //   $(`[s-hash=${hash}]`).find('.s-image-wrapper').addClass('s-present');
+    //   $(`[s-hash=${hash}]`).find('.s-image-wrapper').fadeOut('fast');
+    //   $(`[s-hash=${hash}]`).find('.s-image-wrapper').fadeIn('fast');
+    // }
+
+    function setRealTimeRender(data){
+      var hash = data.hash;
+      
+      if($(`[s-hash=${hash}]`).find('.s-image-wrapper').hasClass('s-present')){
+        return; 
+      }
       $(`[s-hash=${hash}]`).find('.s-image-wrapper').removeClass('s-not-present');
       $(`[s-hash=${hash}]`).find('.s-image-wrapper').addClass('s-present');
       $(`[s-hash=${hash}]`).find('.s-image-wrapper').fadeOut('fast');

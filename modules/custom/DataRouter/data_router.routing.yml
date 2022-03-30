@@ -64,6 +64,14 @@ data_router.student_list_api:
   requirements:
     _access : 'TRUE'
 
+data_router.student_recent_api:
+  path: '/api/student/recent'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::ajaxRecent'
+    _title: 'Student Recent'
+  requirements:
+    _access : 'TRUE'
+
 
 data_router.student_page:
   path: '/student'    

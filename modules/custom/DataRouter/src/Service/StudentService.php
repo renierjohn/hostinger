@@ -84,7 +84,19 @@ class StudentService
       ];
       file_put_contents($filename,json_encode($json_hash));
     }
+  }
 
+  public function getLatestHash(){
+    $filename  = 'private://'.self::ROLE.'.json';
+    $json_hash = file_get_contents($filename);
+    $hash      = json_decode($json_hash,True);
+    if(!empty($hash)){
+      if(count($hash) > 3){
+        $hash = array_reverse($hash);
+        return array_splice($hash,0,3);
+      }
+    }
+    return $hash;
   }
 
   public function isHashExists($hash){

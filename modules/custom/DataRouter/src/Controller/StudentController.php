@@ -91,6 +91,11 @@ class StudentController extends ControllerBase {
     return $build;
   }
 
+  public function ajaxRecent(){
+    $hash = $this->student->getLatestHash();
+    return new JsonResponse($hash);
+  }
+
   public function ajaxStudentList(){
     $request = $this->request->query->all();
     $limit   = !empty($request['l'])    ? $request['l']   : 10;
