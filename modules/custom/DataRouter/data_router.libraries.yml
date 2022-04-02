@@ -11,7 +11,6 @@ sched:
     - core/jquery  
 
 barkota:
-  version: 1.1
   js:
     js/brkta.js: {}
   dependencies:

@@ -38,7 +38,7 @@
   function getID(origin,dest,date){
     var uuid = $("input[name='uuid']").val()
 		var settings = {
-				"url": "/api/vessel/",
+			  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/search/bylocation",
 			  "method": "POST",
 			  // "timeout": 0,
 			  "headers": {
@@ -66,7 +66,7 @@
   function getDateRange(origin,dest,date){
   	var uuid = $("input[name='uuid']").val()
 		var settings = {
-			"url": "/api/vessel/dates/",
+		  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/available-dates/passageandcargo",
 		  "method": "POST",
 		  // "timeout": 0,
 		  "headers": {
@@ -170,25 +170,16 @@
             slidesToShow: 10,
             slidesToScroll: 3,
             pauseOnFocus: false,
-            // autoplaySpeed: 1500,
+            autoplaySpeed: 1500,
             prevArrow: '<div class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
 		   		  nextArrow: '<div class="slick-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>',
             responsive: [
                 {
-                    breakpoint: 500,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2,
-                        variableWidth: true,
-                    		arrows:false,
-                    }
-                },
-                {
                     breakpoint: 800,
                     settings: {
-                        slidesToShow: 4,
+                        slidesToShow: 5,
                         slidesToScroll: 2,
-                     		arrows:false,   
+                        arrows: false,
                     }
                 }
             ]
