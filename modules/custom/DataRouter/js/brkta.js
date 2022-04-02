@@ -48,7 +48,10 @@
 			    "origin": origin,
 			    "destination": dest,
 			    "departureDate": date,
+			    "passengerCount": 1,
 			    "shippingCompany": uuid,
+			    "cargoItemId": null,
+			    "withDriver": 1
 		  }),
 		};
 
@@ -70,10 +73,13 @@
 		    "Content-Type": "application/json"
 		  },
 		  "data": JSON.stringify({
-	    	"origin": origin,
+		    "origin": origin,
 		    "destination": dest,
 		    "departureDate": date,
+		    "passengerCount": 1,
 		    "shippingCompany": uuid,
+		    "cargoItemId": null,
+		    "withDriver": 1
 		  }),
 		};
 
