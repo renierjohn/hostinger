@@ -37,58 +37,32 @@
 
   function getID(origin,dest,date){
     var uuid = $("input[name='uuid']").val()
-		var settings = {
-			  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/search/bylocation",
-			  "method": "POST",
-			  // "timeout": 0,
-			  "headers": {
-			    "Content-Type": "application/json"
-			  },
-			  "data": JSON.stringify({
-			    "origin": origin,
-			    "destination": dest,
-			    "departureDate": date,
-			    "passengerCount": 1,
-			    "shippingCompany": uuid,
-			    "cargoItemId": null,
-			    "withDriver": 1
-		  }),
-		};
-
-			$.ajax(settings).done(function (data) {
+    var url  = "https://renifysite.com/api/vessel/";
+		var uri = `${url}?o=${origin}&d=${dest}&date=${date}&uuid=${uuid}`;
+		var data =  fetch(uri).then(function(data){
+			  return data.json()
+			}).then(function(data){
 				if(data.length == 0){
-		    		$('.ajax-message').show();
-				}
-			  renderTable(data);	
-			});
+					$('.ajax-message').show();
+  				return;
+  			}
+				renderTable(data);
+			})
   }
 
   function getDateRange(origin,dest,date){
   	var uuid = $("input[name='uuid']").val()
-		var settings = {
-		  "url": "https://barkota-reseller-php-prod-4kl27j34za-uc.a.run.app/ob/voyages/available-dates/passageandcargo",
-		  "method": "POST",
-		  // "timeout": 0,
-		  "headers": {
-		    "Content-Type": "application/json"
-		  },
-		  "data": JSON.stringify({
-		    "origin": origin,
-		    "destination": dest,
-		    "departureDate": date,
-		    "passengerCount": 1,
-		    "shippingCompany": uuid,
-		    "cargoItemId": null,
-		    "withDriver": 1
-		  }),
-		};
-
-		$.ajax(settings).done(function (data) {
-			if(data.length == 0){
+  	var url  ='https://vessel.renier.workers.dev/dates';
+		var uri = `${url}?o=${origin}&d=${dest}&date=${date}&uuid=${uuid}`;
+		var data =  fetch(uri).then(function(data){
+			  return data.json()
+			}).then(function(data){
+					if(data.length == 0){
 	    		return;
 			}
-		  renderDate(data);
-		});
+				renderDate(data);
+			  return data;
+			})
   }
 
   function renderTable(data){
