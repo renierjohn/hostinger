@@ -43,6 +43,7 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
   if($form_id == 'user_register_form'){
     $form['#validate'][] = 'updateHash';
   }
+  // d($form_state->getValues());
 }
 
 function updateHash(&$form,&$form_state){
@@ -70,10 +71,12 @@ function send_email_edit(&$form,&$form_state){
   $url    = $values['path'][0]['alias'];
   $nid    = $values['nid'];
   $status = $values['status'];
-  
-  $user  = \Drupal::currentUser();
+  $uid    = $form_state->getValues()['uid'] ? $form_state->getValues()['uid'][0]['target_id'] : FALSE;
+  if(empty($uid)){
+    return;
+  }
+  $user = \Drupal::service('entity_type.manager')->getStorage('user')->load($uid);
   $email = $user->getEmail();
-
   $type  = 'edit_data';
   sendEmail($type,$email);
 }
