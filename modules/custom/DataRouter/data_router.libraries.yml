@@ -25,7 +25,7 @@ weather:
 
 
 qr:
-  version: 1.9
+  version: 1.10
   css:
     theme:
       css/qr.css: {}

@@ -48,6 +48,14 @@ data_router.fb_page_hook:
   options:
     no_cache: 'TRUE'
 
+data_router.student_delete:
+  path: '/api/student/delete'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::deleteData'
+    _title: 'Student Delete'
+  requirements:
+    _role : 'administrator'
+
 data_router.student_api:
   path: '/api/student'    
   defaults:

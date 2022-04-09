@@ -72,6 +72,12 @@
         var hash = $(this).val() 
         requestUSer(hash)
     });
+
+    $('.qr_reset').click(function(e){
+        fetch('/api/student/delete');
+        db.ref('/students').child(date).remove();
+        $('.student-lists').hide();
+    });
     //////////////////////////////////////////////
 
 

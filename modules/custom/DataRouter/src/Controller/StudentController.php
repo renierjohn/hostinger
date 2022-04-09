@@ -114,4 +114,9 @@ class StudentController extends ControllerBase {
     return new JsonResponse($data);
   }
 
+  public function deleteData(){
+    $this->student->deleteData();
+    return new JsonResponse(['status'=>TRUE]);
+  }
+
 }

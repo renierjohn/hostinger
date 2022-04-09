@@ -62,6 +62,11 @@ class StudentService
     return 'renify-'.md5($name.time());
   }
 
+  public function deleteData(){
+      $filename = 'private://'.self::ROLE.'.json';
+      file_put_contents($filename,json_encode([]));
+  }
+
   private function storeHash($hash,$id){
     $filename = 'private://'.self::ROLE.'.json';
     $json_hash = file_get_contents($filename);
