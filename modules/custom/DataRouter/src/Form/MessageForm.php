@@ -135,11 +135,12 @@ class MessageForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $curent_path = \Drupal::request()->getRequestUri();
     $account = $this->account;
     $values  = $form_state->getValues();
     $email   = $values['mail'];
     $message = $values['message'];
-    $result  = $account->setEmail($email)->setMessage($message)->store_message();
+    $result  = $account->setEmail($email)->setMessage('path : '.$curent_path.'</br> message: '.$message)->store_message();
     \Drupal::messenger()->addMessage('Thankyou For Messaging Us . Please Keep in Touch');
   }
 }
