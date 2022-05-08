@@ -1,0 +1,29 @@
+{% set id       = fields.nid.content|raw|striptags|trim %}
+{% set title    = fields.title.content|raw|striptags|trim %}
+{% set image    = fields.field_banner_image.content|raw|striptags|trim %}
+{% set link     = fields.view_node.content|raw|striptags %}
+
+{% set price = fields.field_product_price.content|raw|striptags|trim %}
+
+{% set lazy_img = '/themes/Renify/images/lazy/01.jpg' %}
+
+<div class="col-block p-list-main">
+  <div class="p-list-price">
+    Php {{price}}
+  </div>
+  <div class="p-list-img">
+    <a href="{{link}}" title="{{title}}">
+    <img src="{{lazy_img}}" data-src="{{image}}" class="lazy" alt="{{title}}">
+    </a>
+  </div>
+  <div class="p-list-info">
+    <div class="p-list-info-brand center">{{title}}</div>
+    <div class="p-list-info-rate center">
+      5/10 Bought This
+    </div>
+    <div class="p-list-btn">
+      <a href="#" class="p-add-wishlist" title="{{title}}" pid="{{id}}"><i class="fas fa-check-circle"></i></a>
+      <button class="p-add-cart" pid="{{id}}"><i class="fa fa-shopping-cart"></i> ADD</button>
+    </div>
+  </div>
+</div>

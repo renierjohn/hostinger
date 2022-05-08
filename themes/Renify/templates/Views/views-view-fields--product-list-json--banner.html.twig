@@ -1,0 +1,22 @@
+{% set id       = fields.nid.content|raw|striptags|trim %}
+{% set title    = fields.title.content|raw|striptags|trim %}
+{% set image    = fields.field_banner_image.content|raw|striptags|trim %}
+{% set link     = fields.view_node.content|raw|striptags|trim %}
+
+{% set body  = fields.field_description .content|raw|striptags|trim %}
+{% set price = fields.field_product_price.content|raw|striptags|trim %}
+
+{% set lazy_img = '/themes/Renify/images/lazy/01.jpg' %}
+
+<a href="{{link}}" title="{{title}}" class="p-news-img">
+  <img src="{{lazy_img}}" data-src="{{image}}" class="lazy" alt="{{title}}">
+</a>
+<div class="p-news-data">
+  <div>
+    {{body|raw}}
+  </div>
+  <div>
+    <button>BUY</button>
+    <button>DETAILS</button>
+  </div>
+</div>

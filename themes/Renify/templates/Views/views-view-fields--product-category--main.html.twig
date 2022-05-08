@@ -1,0 +1,33 @@
+{% set id       = fields.tid.content|raw|striptags|trim %}
+{% set title    = fields.name.content|raw|striptags|trim %}
+{% set image    = fields.field_banner.content|raw|striptags|trim %}
+{% set lazy_img = '/themes/Renify/images/lazy/01.jpg' %}
+
+{% set active_flag = '' %}
+{% set link        = '#' %}
+{% set btn_class   = 'sidebar-btn' %} {# activate js #}
+
+{% if current_route_name == 'entity.node.canonical' %}
+  {% set link      = '/products/' ~ title|lower ~ '/' %}
+  {% set btn_class = 'sidebar-btn-detail' %}
+    {% if current_category == id %}
+      {% set active_flag = 'active' %}
+    {% endif %}
+{% endif %}
+
+{% if current_route_name == 'view.product_list_json.main' %}
+  
+{% endif %}
+
+<li>
+  <a href="{{link}}" title="{{title|lower}}" class="{{btn_class}}" pid="{{id}}">
+    <div class="p-list">
+      <div class="p-img-wrapper">
+        <img src="{{lazy_img}}" data-src="{{image}}" class="lazy" alt="{{title}}">
+      </div>
+      <div class="p-txt-wrapper {{active_flag}}">
+        {{title}}
+      </div>
+    </div>
+  </a>
+</li>

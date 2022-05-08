@@ -62,7 +62,8 @@ function renify_preprocess_block(&$variables){
   $variables['node_url']   = '/';
   if ($node instanceof \Drupal\node\NodeInterface) {
     $variables['node_title'] = $node->getTitle();
-    $variables['node_url']   = !empty($node->path->getValue()[0]) ? $node->path->getValue()[0]['alias'] : '/node/'.$node->id();
+    $node_url  = !empty($node->path->getValue()[0]) ? $node->path->getValue()[0]: FALSE;
+    $variables['node_url']   = !empty($node_url['alias']) ? $node_url['alias'] : '/node/'.$node->id();
   }
 }
 
@@ -102,4 +103,16 @@ function renify_preprocess_form(&$variables){
 function renify_preprocess_views_view_unformatted(&$variables){
   // Cocaliong ajax search
   $variables['ajaxform'] = \Drupal::service('data_router.ajaxroute')->getRouteLists();
+}
+
+function renify_preprocess_views_view_fields(&$variables){
+  $variables['current_route_name'] = \Drupal::routeMatch()->getRouteName();
+  $variables['current_category'] = False;
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if(!empty($node)){
+    if($node->bundle() == 'products'){
+        $variables['current_category'] =  $node->field_product_category->target_id;
+    }
+  }
+
 }

@@ -395,7 +395,7 @@
    /* Initialize
     * ------------------------------------------------------ */
     (function clInit() {
-        jQuery('.search-detail-desc').hide();
+        // jQuery('.search-detail-desc').hide();
         ssPreloader();
         ssMenuOnScrolldown();
         ssMobileMenu();

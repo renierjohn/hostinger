@@ -37,6 +37,12 @@ services:
     arguments:
       - '@entity_type.manager'
 
+  data_router.cart:
+    class: Drupal\data_router\Service\CartService
+    arguments:
+      - '@entity_type.manager'
+
+
   data_router.student:
     class: Drupal\data_router\Service\StudentService
     arguments:

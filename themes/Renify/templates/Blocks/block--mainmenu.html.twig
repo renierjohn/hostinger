@@ -1,0 +1,44 @@
+<header class="s-header top-header" id='header'>
+    <div class="row">
+        <div class="header-logo">
+        <a class="site-logo" href="/">
+          <img src="/themes/Renify/favicon.ico" alt="Homepage" />
+        </a>
+      </div>
+      <nav class="header-nav-wrap">
+        <ul class="header-main-nav">
+          <li class="">
+            <li>
+            <a href="/" data-drupal-link-system-path="<front>" class="is-active">Home</a>
+          </li>
+          <li>
+            <a href="/routes/">Bus Routes</a>
+          </li>
+          <li>
+            <a href="/vessel/">Shippping Vessels</a>
+          </li>
+          <li>
+            <a href="/store/">Stores</a>
+          </li>
+        </ul>
+        
+        <div class="header-cta">
+        {% if logged_in %}
+            <a href="/user/logout/" class="btn btn--primary header-cta__btn padding--left--0">
+              <ul>
+                <li>
+                  <img src='{{user_profile}}'  class="img-no-radius" alt="...">
+                </li>
+                <li>
+                  Logout
+                </li>
+              </ul>
+            </a>
+        {% else %}
+            <a href="/user/login/" class="btn btn--stroke--reverse header-cta__btn"><i class="fas fa-user"></i>Login Now</a>
+        {% endif %}
+        </div>
+      </nav>
+      <a class="header-menu-toggle" href="#"><span>Menu</span></a>
+    </div>
+</header>

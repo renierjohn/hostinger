@@ -97,7 +97,15 @@ data_router.student_list:
   requirements:
     _access : 'TRUE'
 
-
+data_router.cart_controller:
+  path: '/cart'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\CartController::render'
+    _title: 'Cart'
+  requirements:
+    _access : 'TRUE'
+  # options:
+  #   no_cache: 'TRUE'
 
 # data_router.fb_feed:
 #   path: '/pagehook'    

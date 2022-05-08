@@ -1,0 +1,217 @@
+{{ attach_library('renify/products') }}
+<!-- TOP BANNER -->
+<section class="p-news-container">
+  <div class="row">
+    <div class="p-news">
+      <div class="p-news-wrapper">
+        
+        {{ drupal_view('product_list_json','banner')}}
+
+        <div class="p-news-exit">
+          <i class="fa fa-window-close"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN BODY -->
+<section id="body" class="products">
+  <div class="row flex">
+    <!-- SIDEBAR -->
+    {{ drupal_view('product_category','main')}}
+    <!-- MAIN -->
+    <div class="flex-2-3">
+      <div class="p-main">
+        <!-- OFFER -->
+        <div class="p-row">
+          <div class="p-main-offer">
+            <div class="p-offer-wrapper">
+              <div class="p-offer-wide">
+                <a href="" title="">
+                  <img src="/themes/renify/images/offer1.jpg" alt="">
+                </a>
+              </div>
+              <div class="p-offer-narr">
+                <img src="/themes/renify/images/offer2.jpg" alt="">
+              </div>
+            </div>
+            <div class="p-offer-wrapper">
+              <div class="p-offer-narr">
+                <img src="/themes/renify/images/offer3.jpg" alt="">
+              </div>
+              <div class="p-offer-wide">
+                <img src="/themes/renify/images/offer4.jpg" alt="">
+              </div>
+            </div>
+            <div class="p-offer-wrapper">
+              <div class="p-offer-mid">
+                <img src="/themes/renify/images/wine.jpg" alt="">
+              </div>
+              <div class="p-offer-mid">
+                <img src="/themes/renify/images/offer1.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT LISTS -->
+        <div class="p-row block-1-3 p-list-wrapper">
+          
+{#           <div class="col-block p-list-main">
+            <div class="p-list-price">
+              Php 100.00
+            </div>
+            <div class="p-list-img">
+              <a href="" title="">
+              <img src="/themes/renify/images/wine.jpg" alt="">
+              </a>
+            </div>
+            <div class="p-list-info">
+              <div class="p-list-info-brand center">Margarito</div>
+              <div class="p-list-info-rate center">
+                5/10 Bought This
+              </div>
+              <div class="p-list-btn">
+                <a href="" title="" ><i class="fas fa-check-circle"></i></a>
+                <button class="p-add-cart" pid='111'><i class="fa fa-shopping-cart"></i> ADD</button>
+              </div>
+            </div>
+          </div> #}
+            {% if rows %}
+              {% for row in rows %}
+                {{row.content}}
+              {% endfor %}
+            {% endif %}
+          
+          
+        </div>
+        <div class="p-row block-1-1 p-list-paginate flex">
+            <ul>
+              <li><a href="#">&lt;</a></li>
+              <li>
+                  <ol>
+                      <li class="active"><a>1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                      <li><a href="#">4</a></li>
+                  </ol>
+              </li>
+              <li class="next"><a href="#">&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="featured" class="featured-products">
+  <div class="container">
+    <div class="row">
+      <div class="f-title">
+        <h3>
+          Best Seller Items
+        </h3>
+      </div>
+      <div class="f-items">
+        
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/corneto.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/soap.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/pocari.png" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/corneto.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/tanduay.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/magnum.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="store" class="s-store">
+  <div class="container">
+    <div class="row">
+      <div class="f-title">
+        <h3>
+          Youre Favorate Store
+        </h3>
+      </div>
+      
+      <div class="s-items">
+        <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store.jpg" alt="">
+            <div class="s-name">
+              Minda Store
+            </div>
+          </a>
+        </div>
+
+        <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store4.jpg" alt="">
+            <div class="s-name">
+              Marisol Store
+            </div>
+          </a>
+        </div>
+
+         <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store1.jpeg" alt="">
+            <div class="s-name">
+              Marites Store
+            </div>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

@@ -2415,25 +2415,6 @@ input::-moz-focus-inner {
   margin-bottom: 0 !important;
 }
 
-.cart{
-    position: relative;
-    top: 1rem;
-    padding-right: 1rem;
-}
-
-.cart a:hover{
-  color: #fefefe;
-}
-
-.cart .badge{
-  font-size: 1.5rem;
-  position: relative;
-  right: 5px;
-  top: -10px;
-  background-color: white;
-  border-radius: 50%;
-  padding: 3px;
-}
 
 .search-form{
   display: flex;

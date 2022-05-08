@@ -1,0 +1,215 @@
+{% set lazy_img    = '/themes/Renify/images/lazy/01.jpg' %}
+{% set id          = node.id|raw|striptags|raw|trim %}
+{% set path 	   = node.path.0.alias ~ '/' %}
+{% set title       = node.title.value|raw|striptags %}
+{% set image       = content.field_banner_image.0['#markup'] %}
+{% set thumbnails  = content.field_thumbnails %}
+{% set description = content.field_description.0['#text'] %}
+
+{% set price       = content.field_product_price.0['#markup'] %}
+{% set category_id = content.field_product_category.0['#plain_text'] %}
+
+{# 
+{% set next         = pagination.next %}
+{% set prev         = pagination.prev %}
+ #}
+{{ attach_library('core/drupal') }}
+{{ attach_library('data_router/tracker') }}
+{{ attach_library('renify/products') }}
+
+<input type="hidden" name="product_category" tid="{{category_id}}">
+<section class="p-news-container">
+  <div class="row">
+    <div class="p-news">
+      <div class="p-news-wrapper">
+        {# <a href="#" title="" class="p-news-img">
+          <img src="/themes/renify/images/ship.jpg" alt="">
+        </a>
+        <div class="p-news-data">
+          <div>
+            <p>With the online text generator you can process your personal Lorem Ipsum enriching it with html elements that define its structure, with the possibility to insert external links, but not only.</p>
+          </div>
+          <div>
+            <button>BUY</button>
+            <button>DETAILS</button>
+          </div>
+        </div> #}
+        {{ drupal_view('product_list_json','banner')}}
+
+        <div class="p-news-exit">
+          <i class="fa fa-window-close"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN BODY -->
+<section id="body" class="products">
+  <div class="row flex">
+    <!-- SIDEBAR -->
+    {{ drupal_view('product_category','main')}}
+    <!-- MAIN -->
+    <div class="flex-2-3">
+      <div class="p-main">
+        <!-- PRODUCT LISTS -->
+        <div class="p-row block-1-1 p-detail-list-wrapper head">
+          <h2>{{title}}</h2>
+           5/10 Bought This
+        </div>
+        <div class="p-row block-1-1 p-detail-list-wrapper body">
+          <div class="col-block p-detail-list-main">
+            <div class="p-detail-img-wrapper">
+              <div class="p-list-price">
+                Php {{price}}
+              </div>
+              <div class="p-list-img-main">
+                <a href="" title="">
+              	  <img src="{{lazy_img}}" data-src="{{content.field_thumbnails.0['#markup']}}" class="img-fluid lazy" alt="{{title}}">
+                </a>
+              </div>
+            </div>
+            <div class="p-detail-img-thumb-wrapper">
+            	{{thumbnails}}
+            </div>
+          </div>
+
+          <div class="col-block p-detail-list-main-desc">
+            <div class="p-detail-list p-tag">
+              <a href="#" title=""><i class="fas fa-check-circle"></i>Best Seller</a>
+            </div>
+            <div class="p-detail-list p-btn">
+              <a href="#." title="wishlist" class="p-add-wishlist" pid="{{id}}"><i class="fas fa-check-circle"></i></a>
+              <a href="#." title="add-to-cart" class="p-add-cart" pid="{{id}}"><i class="fa fa-shopping-cart"></i>ADD</a>
+            </div>
+            <div class="p-detail-list p-desc">
+              {{description|raw}}
+            </div>
+          </div>                
+
+        </div>
+
+        <div class="p-row block-1-1 p-list-paginate flex">
+            <div class="p-detail-paginate">
+              <a href="" title="" class="btn btn--stroke--reverse"><i class="fa fa-arrow-left"></i>Prev</a>
+            </div>
+            <div class="p-detail-paginate">
+              <a href="" title="" class="btn btn--stroke--reverse">Next<i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="featured" class="featured-products">
+  <div class="container">
+    <div class="row">
+      <div class="f-title">
+        <h3>
+          Best Seller Items
+        </h3>
+      </div>
+      <div class="f-items">
+        
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/corneto.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/soap.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/pocari.png" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/corneto.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/tanduay.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+
+        <div class="f-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/magnum.jpg" alt="">
+            <div class="f-list-price">
+              Php 300
+            </div>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="store" class="s-store">
+  <div class="container">
+    <div class="row">
+      <div class="f-title">
+        <h3>
+          Youre Favorate Store
+        </h3>
+      </div>
+      
+      <div class="s-items">
+        <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store.jpg" alt="">
+            <div class="s-name">
+              Minda Store
+            </div>
+          </a>
+        </div>
+
+        <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store4.jpg" alt="">
+            <div class="s-name">
+              Marisol Store
+            </div>
+          </a>
+        </div>
+
+         <div class="s-items-wrapper">
+          <a href="" title="">
+            <img src="/themes/renify/images/store1.jpeg" alt="">
+            <div class="s-name">
+              Marites Store
+            </div>
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

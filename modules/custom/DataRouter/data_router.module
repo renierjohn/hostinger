@@ -137,5 +137,8 @@ function validate_captcha($form,$form_state){
       'student_list' => [
         'variables' => ['data' => NULL],
       ],
+      'cart' => [
+        'variables' => ['data' => NULL],
+      ],
     ];
  } 
