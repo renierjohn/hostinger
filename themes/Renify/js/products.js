@@ -255,6 +255,7 @@
       var ts = new Date().getTime();
       window.history.replaceState(null, null, `?${ts}`);
     }
+    $('.cart').attr('href',`/cart/?${ts}`);
   }
   // function renderSideBar(data){
   //   var template = '';

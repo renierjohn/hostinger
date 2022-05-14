@@ -54,7 +54,7 @@ base-extend:
     - core/jquery
 
 products:
-  version: 1.0
+  version: 1.1
   css:
     theme:
       css/4_products.css: { preprocess: false }
