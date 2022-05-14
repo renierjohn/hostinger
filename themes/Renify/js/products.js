@@ -251,8 +251,8 @@
 
   function initCartUrl(){
     var path = drupalSettings.path.currentPath;
+    var ts   = new Date().getTime();
     if(path == 'cart'){
-      var ts = new Date().getTime();
       window.history.replaceState(null, null, `?${ts}`);
     }
     $('.cart').attr('href',`/cart/?${ts}`);
