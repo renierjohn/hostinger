@@ -1,6 +1,6 @@
 (function($,drupalSettings) {
 
- // var drupalSettings = {path:{currentPath:'/cart'}};
+ var drupalSettings = {path:{currentPath:'/cart'}};
 
   console.log(drupalSettings)
   "use strict";
@@ -96,7 +96,7 @@
     initButtons();
   })
 
-  function initButtons(){
+  function initButtons(){  
     // ADD CART
     $('.p-add-cart').click(function(e){
       e.preventDefault();
@@ -115,9 +115,9 @@
   }
 
   function updateSummary(pid,qty){
-    $(`.p-sidebar-list[pid=${pid}] .p-sidebar-quantity`).fadeOut(100,function(){
+    $(`.p-sidebar-list[pid=${pid}] .p-sidebar-quantity`).fadeOut(0,function(){
       $(this).html(qty);
-    }).fadeIn(500);
+    }).fadeIn(0);
   }
 
   function setTotalPrie(){
