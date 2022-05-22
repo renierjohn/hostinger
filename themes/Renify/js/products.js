@@ -1,6 +1,6 @@
 (function($,drupalSettings) {
 
- var drupalSettings = {path:{currentPath:'/cart'}};
+ // var drupalSettings = {path:{currentPath:'/cart'}};
 
   console.log(drupalSettings)
   "use strict";
@@ -26,9 +26,10 @@
   $('.p-td-close a').click(function(){
     $(this).parent().parent().fadeOut(200);
     var pid = $(this).parent().attr('pid');
-    $(`.p-sidebar-list[pid=${pid}]`).fadeOut(200);
+    $(`.p-sidebar-list[pid=${pid}]`).fadeOut(200,function(){
+      setTotalPrie();
+    });
     cookieCartHandlerRemover('cart',pid);
-    setTotalPrie();
     setCartBadge();
   })
 
@@ -121,16 +122,27 @@
   }
 
   function setTotalPrie(){
-    var total = 0;
+    var total        = 0;
+    var total_deduct = 0;
     $(`.p-sidebar-list`).each(function(index,data){
-        if($(this).css('display') == 'none'){
-          return;
+        if($(this).css('display') != 'none'){
+          var price = $('.p-sidebar-price',this).html();
+          var qty = $('.p-sidebar-quantity',this).html();
+          total += Number(price) * Number(qty);
+          console.log('loop total_deduct',total_deduct);
         }
-        var price = $('.p-sidebar-price',this).html();
-        var qty = $('.p-sidebar-quantity',this).html();
-        total += Number(price) * Number(qty);
+        // else{
+        //   total_deduct += Number(price) * Number(qty);
+        //   var price = $('.p-sidebar-price',this).html();
+        //   var qty = $('.p-sidebar-quantity',this).html();
+        //   console.log('loop total',total);
+        // }
     })
 
+    // total = total - total_deduct;
+    
+    // console.log('result',total,total_deduct);
+    
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'Php',
@@ -233,7 +245,9 @@
     }
     var cart_count = JSON.parse(cart).length;
     $('.badge').html(cart_count).fadeOut(100).fadeIn(500);
-    $('.badge-menu').html(cart_count).fadeOut(100).fadeIn(500);
+    if($(window).width() <= 800){
+      $('.badge-menu').html(cart_count).fadeOut(100).fadeIn(500);
+    }
   }
 
   function initSidebar(){
