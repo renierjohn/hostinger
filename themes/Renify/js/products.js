@@ -97,6 +97,23 @@
     initButtons();
   })
 
+  $('.p-sidebar-checkout').click(function(){
+    Swal.fire({
+      title: '<strong>Order Complete</strong>',
+      icon: 'success',
+      html: `Please goto sari-sari store and let scan`,
+      showCloseButton: true,
+      showCancelButton: false,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> OK',
+      
+    }).then(function(){
+      document.cookie = 'cart=';
+      window.location.href = '/products';
+    })
+  })
+
   function initButtons(){  
     // ADD CART
     $('.p-add-cart').click(function(e){
@@ -123,30 +140,19 @@
 
   function setTotalPrie(){
     var total        = 0;
-    var total_deduct = 0;
     $(`.p-sidebar-list`).each(function(index,data){
         if($(this).css('display') != 'none'){
           var price = $('.p-sidebar-price',this).html();
           var qty = $('.p-sidebar-quantity',this).html();
           total += Number(price) * Number(qty);
-          console.log('loop total_deduct',total_deduct);
         }
-        // else{
-        //   total_deduct += Number(price) * Number(qty);
-        //   var price = $('.p-sidebar-price',this).html();
-        //   var qty = $('.p-sidebar-quantity',this).html();
-        //   console.log('loop total',total);
-        // }
     })
 
-    // total = total - total_deduct;
-    
-    // console.log('result',total,total_deduct);
-    
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'Php',
     });
+
     var total_formated = formatter.format(total)
     $(`.p-sidebar-total span`).fadeOut(100,function(){
       $(this).html(String(total_formated));
