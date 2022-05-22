@@ -30,6 +30,7 @@ base:
     js/main.js: {}
     js/custom.js: {}
     js/ajax.js: {}
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js: { type: external , minified: true}
   dependencies:
     - core/jquery
 
