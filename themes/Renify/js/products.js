@@ -109,10 +109,10 @@
         '<i class="fa fa-thumbs-up"></i> OK',
       
     }).then(function(){
-      document.cookie = 'cart=';
+      document.cookie = 'cart=[]';
       window.location.href = '/products';
-    })
-  })
+    });
+  });
 
   function initButtons(){  
     // ADD CART
