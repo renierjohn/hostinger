@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack serve --mode development",
+    "serve": "webpack serve --mode development --open chrome",
     "build": "webpack --mode production",
     "static": "echo static"
   },
@@ -12,28 +12,25 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.46.0"
+    "webpack": "^5.72.1"
   },
   "dependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/preset-env": "^7.14.8",
-    "@babel/preset-react": "^7.14.5",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
     "@babel/runtime": "^7.14.8",
-    "@tensorflow-models/coco-ssd": "^2.2.2",
-    "@tensorflow/tfjs": "^3.8.0",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.2.5",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "css-loader": "^6.2.0",
+    "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "instascan": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-qr-reader": "^2.2.1",
     "react-webcam": "^5.2.4",
     "run-script": "^0.1.1",
     "style-loader": "^3.2.1",
-    "webpack-cli": "^4.7.2",
+    "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^3.11.2"
   }
 }

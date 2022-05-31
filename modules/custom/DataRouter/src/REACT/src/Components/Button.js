@@ -1,33 +1,24 @@
-import React,{useState,useEffect} from "react";
-import Users  from './Users';
-import Camera from './Camera';
+import React , { useState } from 'react';
 
-export default function Button({title}) {
-    
-  const [toggle, setToggle] = useState(false);
 
-  const users = [
-   	{
-   		'id' :1,
-		'name':'Renier',
-		'age': 27,
-   	},
-   	{
-   		'id':2,
-		'name':'JIJI',
-		'age': 28,
-   	}
-  ];
+const button = (props) => {
+	const [name,setName] = useState('');
+	const [count,setCount] = useState('');
+	
+	function changeName(){
+		setName('NEW CHILDREN');
+		document.getElementsByClassName('cart')[0].innerHTML = '121212'
+	}
+  
 
   return (
-    <section>
-      <button className="primary" onClick={() => setToggle(!toggle)}>
-        {toggle ? `ON ${title}` : `OFF ${title}`}
-      </button>
-      
-      {toggle ? <Users users={users} toggle={toggle} /> : `NO USERS`}
-      {toggle ? < Camera /> : 'No Camera' }
-      
-    </section>
-  );
+    <>
+	    <button onClick= {() => changeName()} >
+	   		{ props.name }
+	    </button>
+	    <h1>{ name ? name : props.children}</h1>
+    </>
+  )
 }
+
+export default button;

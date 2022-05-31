@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDom from "react-dom"
-import App from "./App"
-import "./App.css"
-import "regenerator-runtime/runtime";
 
-ReactDom.render(<App />, document.getElementById('main'))
+import AppMain from "./AppMain"
+import AppProduct from "./AppProduct"
+
+ReactDom.render(<AppMain />, document.getElementById('main'))
+ReactDom.render(<AppProduct />, document.getElementById('product'))
