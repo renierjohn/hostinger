@@ -1,5 +1,5 @@
 (function($) {
-  var domain = 'https://www.renifysite.com';
+  var domain = 'https://renifysite.com';
   "use strict";
   $('.add-to-cart').bind('click', function(e) {
     var pid = $(this).attr('data-id');
