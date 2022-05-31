@@ -23,7 +23,6 @@ base:
     js/jquery.lazy.min.js: {}
     js/jquery.lazy.plugins.min.js: {}
     js/trunc8.js: {}
-    js/aos.js.map: {}
     js/modernizr.js: {}
     js/plugins.js: {}
     js/pace.min.js: {}
