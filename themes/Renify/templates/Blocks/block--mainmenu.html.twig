@@ -20,6 +20,17 @@
           <li>
             <a href="/store/">Stores</a>
           </li>
+        {% if logged_in %}
+          <li>
+            <a href="/myplace/">My Places</a>
+          </li>
+          <li>
+            <a href="/node/add/places/">Add Place</a>
+          </li>
+        {% endif %} 
+          <li> 
+            <a href="#data-route-signup-form">Signup</a>
+          </li>
         </ul>
         
         <div class="header-cta">
