@@ -58,8 +58,15 @@ function renify_preprocess_taxonomy_term(&$variables){
 
 function renify_preprocess_block(&$variables){
   $node = \Drupal::routeMatch()->getParameter('node');
-  $variables['node_title'] = 'Renify';
-  $variables['node_url']   = '/';
+  $variables['node_title']         = 'Renify';
+  $variables['node_url']           = '/';
+  $variables['is_front']           = \Drupal::service('path.matcher')->isFrontPage();
+  $variables['#cache']             = 
+    [
+        'max-age' => 0,
+        'contexts' => ['url.path.is_front '],
+    ];
+
   if ($node instanceof \Drupal\node\NodeInterface) {
     $variables['node_title'] = $node->getTitle();
     $node_url  = !empty($node->path->getValue()[0]) ? $node->path->getValue()[0]: FALSE;

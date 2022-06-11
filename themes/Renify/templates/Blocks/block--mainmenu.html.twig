@@ -27,12 +27,16 @@
           <li>
             <a href="/node/add/places/">Add Place</a>
           </li>
+        {% else %} 
+            <li> 
+              {% if is_front %}
+                <label for="modal-2" style="color:rgba(255,255,255,0.5);cursor:pointer;">Signup</label>
+              {% else %}
+                <a href="#data-route-signup-form">Signup</a>
+              {% endif %}
+            </li>
         {% endif %} 
-          <li> 
-            <a href="#data-route-signup-form">Signup</a>
-          </li>
         </ul>
-        
         <div class="header-cta">
         {% if logged_in %}
             <a href="/user/logout/" class="btn btn--primary header-cta__btn padding--left--0">

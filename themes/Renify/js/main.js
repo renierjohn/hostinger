@@ -34,12 +34,12 @@
    /* Menu on Scrolldown
     * ------------------------------------------------------ */
     var ssMenuOnScrolldown = function() {
-        var hdr= $('.top-header'),
-            hdrTop = $('.top-header').offset().top;
+        var hdr    = $('.top-header');
+        // var hdrTop = $('.top-header').offset().top;
 
         $WIN.on('scroll', function() {
 
-            if ($WIN.scrollTop() > hdrTop) {
+            if ($WIN.scrollTop() > 100) {
                 hdr.addClass('sticky');
             }
             else {
@@ -395,7 +395,7 @@
    /* Initialize
     * ------------------------------------------------------ */
     (function clInit() {
-        // jQuery('.search-detail-desc').hide();
+        jQuery('.search-detail-desc').hide();
         ssPreloader();
         ssMenuOnScrolldown();
         ssMobileMenu();
