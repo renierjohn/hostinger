@@ -108,4 +108,12 @@
 
   $('.route_list').trunk8({lines:6})
 
+
+  // $('.message_success').fadeIn(10000,function(){
+  //   fadeOut(1000);
+  // }); //message success
+  // $('.message_fail').fadeIn(10000,function(){
+  //   fadeOut(1000);
+  // }); //message success
+  
   }(jQuery));

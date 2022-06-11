@@ -216,7 +216,8 @@
     var promt  = "select_account";
     var response_type = 'code';
     $('#login-google').on('click',function(e){
-        window.open('https://accounts.google.com/o/oauth2/v2/auth?client_id='+clientID+'&redirect_uri='+redirect_url+'&state='+state+'&prompt='+promt+'&response_type='+response_type+'&include_granted_scopes=true&scope='+scope);
+      document.location = 'https://accounts.google.com/o/oauth2/v2/auth?client_id='+clientID+'&redirect_uri='+redirect_url+'&state='+state+'&prompt='+promt+'&response_type='+response_type+'&include_granted_scopes=true&scope='+scope;
+        // window.open('https://accounts.google.com/o/oauth2/v2/auth?client_id='+clientID+'&redirect_uri='+redirect_url+'&state='+state+'&prompt='+promt+'&response_type='+response_type+'&include_granted_scopes=true&scope='+scope);
     });
 
 }(jQuery));
