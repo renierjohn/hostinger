@@ -245,3 +245,8 @@
 .header-mini-title h2{
   color: #fff;
 }
+
+.message_success , .message_fail {
+  position: relative;
+  z-index: 1000;
+}
