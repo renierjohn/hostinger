@@ -132,7 +132,7 @@ class LoginController extends ControllerBase {
 
     $email   = $result['email'];
     $profile = $result['picture'];
-    $name    = $result['name'].' '.$result['given_name'];
+    $name    = $result['name'].'_'.$result['given_name'];
 
     $user_result = $account->checkAccount($email);
     if(empty($user_result)){
