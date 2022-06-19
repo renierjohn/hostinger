@@ -240,8 +240,9 @@ class AccountService
       'mail'         => $email,
       'pass'         => $pass,
       'user_picture' => $fid,
-      'status'       => TRUE,
+      'status'       => 1,
     ];
+    
    $entity->getStorage('user')->create($fields)->save();
    $user = $entity->getStorage('user')->loadByProperties(['mail'=>$email]);
    return reset($user);
