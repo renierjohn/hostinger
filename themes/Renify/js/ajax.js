@@ -1,5 +1,5 @@
 (function($) {
-  var domain = 'https://renifysite.com';
+  var domain = 'http://renify.local';
   "use strict";
   $('.add-to-cart').bind('click', function(e) {
     var pid = $(this).attr('data-id');
@@ -190,7 +190,7 @@
         if(title.length == 0){
           title = 'Renify'
         }
-        window.open('http://www.twitter.com/share?url='+domain+pageid+'&t='+title,'sharer','toolbar=0,status=0,width=626,height=436');
+        window.open('http://www.twitter.com/share?url='+domain+pageid+'&t='+title,'sharer','toolbar=1,status=1,width=626,height=436');
         return false;
     });
 
