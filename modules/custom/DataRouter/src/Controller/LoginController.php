@@ -132,8 +132,8 @@ class LoginController extends ControllerBase {
     }
 
     $email   = $result['email'] ? $result['email'] : 'r_'.strval(rand()).'_user@gmail.com';
+    $name    = $result['name'] || $result['given_name'] ? $result['name'].'_'.$result['given_name'] : 'r_'.strval(rand()).'_user@gmail.com';
     $profile = $result['picture'];
-    $name    = $result['name'].'_'.$result['given_name'];
 
     $user_result = $account->checkAccount($email);
     if(empty($user_result)){
