@@ -113,6 +113,7 @@ class LoginController extends ControllerBase {
         $uri     = 'https://www.googleapis.com/oauth2/v3/userinfo?access_token='.$token;
         $result  = \Drupal::httpClient()->get($uri); // get profile info
         $result  = $result->getBody()->getContents();
+        $this->log($result);
         $result  = json_decode($result,TRUE);
       }
       catch(ClientException $e){
@@ -147,6 +148,12 @@ class LoginController extends ControllerBase {
     \Drupal::messenger()->addMessage('Success . Welcome '.$email);
     return new RedirectResponse('/');
 
+  }
+
+  private function log($data){
+     $file = fopen('private://google_log.txt','a');
+    fwrite($file,date('y-m-d_h:i:s',time()).$data.PHP_EOL);
+    fclose($file);
   }
 
 }
