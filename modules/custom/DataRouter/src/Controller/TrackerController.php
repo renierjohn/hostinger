@@ -17,7 +17,7 @@ class TrackerController extends ControllerBase {
 
   protected $request;
 
-  const COOKIE_KEY          = 't';
+  const QUERY_PARAM         = 't';
 
   const TRACKER_PREFIX      = 'track_';
 
@@ -43,7 +43,7 @@ class TrackerController extends ControllerBase {
    */
   public function getViewCount() {
     $request    = $this->request->query->all();
-    $view_count = $request[self::COOKIE_KEY];
+    $view_count = $request[self::QUERY_PARAM];
     $summary    = $this->getViewsSummary($view_count);
     $jsonResponse = new JsonResponse($summary);
     $jsonResponse->setCache(['etag'=>'views_tag']);

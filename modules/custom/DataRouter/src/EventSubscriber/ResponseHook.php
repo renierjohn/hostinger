@@ -49,7 +49,7 @@ class ResponseHook implements EventSubscriberInterface {
 
   const MODULE              = 'datarouter';
 
-  const COOKIE_KEY          = 't';
+  const COOKIE_KEY          = 'renify_t';
 
   const VALID_CONTENT_TYPES = ['places','routes','barkota_shipping_vessel'];
 
@@ -99,6 +99,7 @@ class ResponseHook implements EventSubscriberInterface {
         $this->temp_store->get(self::MODULE)->set(self::TEMP_PRIVATE,$id);
       }
     }
+
     if($routeName == 'view.cocaliong.main'){
       $cookies    = $request->cookies;
       if(!empty($cookies)){
@@ -114,8 +115,8 @@ class ResponseHook implements EventSubscriberInterface {
     $routeName  = $routeMatch->getRouteName();
     if($routeName == 'entity.node.canonical' || $routeName ==  'view.cocaliong.main'){
       $id       = $this->temp_store->get(self::MODULE)->get(self::TEMP_PRIVATE);
+      $response = $event->getResponse();
       if(!empty($id)){
-        $response = $event->getResponse();
         $response->headers->setCookie(new Cookie(self::COOKIE_KEY,$id));
       }
     }
@@ -131,6 +132,7 @@ class ResponseHook implements EventSubscriberInterface {
         return $nid;
       }
       $recent_page_cookie_arr = explode(',',$recent_page_cookie);
+
       if(!in_array($nid,$recent_page_cookie_arr)){
         $this->storeCount($nid);
         $recent_page_cookie_arr[] = $nid;
@@ -148,7 +150,7 @@ class ResponseHook implements EventSubscriberInterface {
     if(empty($count)){
       $count = 0;
     }
-    $state->set(self::TRACKER_PREFIX.$id,$count+1);
+    $state->set(self::TRACKER_PREFIX.$id,$count + 1);
   }
 
 }

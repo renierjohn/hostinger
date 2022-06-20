@@ -130,7 +130,7 @@ class LoginController extends ControllerBase {
          return new RedirectResponse('/user/login');
     }
 
-    $email   = $result['email'];
+    $email   = $result['email'] ? $result['email'] : 'r_'.strval(rand()).'_user@gmail.com';
     $profile = $result['picture'];
     $name    = $result['name'].'_'.$result['given_name'];
 
