@@ -2503,6 +2503,7 @@ input::-moz-focus-inner {
 .search-form{
   padding:1rem;
   margin: 1rem;
+  float: right;
 }
 
 .route_select{
