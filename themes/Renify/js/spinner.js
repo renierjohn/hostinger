@@ -93,8 +93,8 @@
       `;
     });
 
-    var template = `<div class="js-paginate-cache-${page}">${template}</div>`;
     $('.js-paginate-block').html(template);
+    var template = `<div class="js-paginate-cache-${page}">${template}</div>`;
     $('.js-paginate-cache').append(template);
 
     refresh();
