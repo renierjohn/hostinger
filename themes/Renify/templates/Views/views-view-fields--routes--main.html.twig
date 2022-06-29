@@ -4,6 +4,7 @@
 {% set link     = fields.view_node.content|raw|striptags|trim %}
 {% set ticket   = fields.field_ticket_link_list.content|raw %}  
 {% set routes   = fields.field_tx_table_route.content %}
+{% set custom = fields.nothing.content %}
 {% set lazy_img = '/themes/Renify/images/lazy/bus.svg' %}
 
 {{ attach_library('core/drupal') }}
@@ -24,7 +25,7 @@
             {{ticket}}
       {% endif %}
     </div>
-    <div class="search-detail-route" style="height:26vh; padding:0 1rem">
+    <div class="search-detail-route" style="height:26vh; padding:0 1rem" title="{{custom}}" data-role="popup">
       {{routes}}
     </div>
     <div class="article-social" style="padding:1rem">
