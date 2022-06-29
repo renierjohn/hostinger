@@ -60,4 +60,11 @@ products:
       css/4_products.css: { preprocess: false }
   js:
     js/products.js: {}
-        
+
+spinner:
+  version: 1.0
+  css:
+    theme:
+      css/spinner.css: {preprocess: false}
+  js:
+    js/spinner.js: {}            
