@@ -398,16 +398,17 @@
         jQuery('.search-detail-desc').hide();
         ssPreloader();
         ssMenuOnScrolldown();
-        ssMobileMenu();
         ssSlickSlider();
         ssSmoothScroll();
         ssAlertBoxes();
         ssAOS();
         ssBackToTop();
+        
     })();
     
     window.onload = function(){
         $('.search-detail-desc').show();
+        ssMobileMenu();
         trunc8();
     }
 
