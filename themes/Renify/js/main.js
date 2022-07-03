@@ -5,7 +5,7 @@
 
 (function($) {
     "use strict";
-    var $    = jQuery;
+   
     var $WIN = $(window);
 
     // Add the User Agent to the <html>
@@ -397,9 +397,8 @@
     (function clInit() {
         jQuery('.search-detail-desc').hide();
         ssPreloader();
-        ssMenuOnScrolldown();
         ssSlickSlider();
-        ssSmoothScroll();
+        // ssSmoothScroll();
         ssAlertBoxes();
         ssAOS();
         ssBackToTop();
@@ -407,9 +406,12 @@
     })();
     
     window.onload = function(){
-        $('.search-detail-desc').show();
+        if($('.search-detail-desc').length > 0){
+            $('.search-detail-desc').show();
+            trunc8();
+        } 
         ssMobileMenu();
-        trunc8();
+        ssMenuOnScrolldown();
     }
 
 })(jQuery);
