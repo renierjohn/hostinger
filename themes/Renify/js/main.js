@@ -282,26 +282,26 @@
 
    /* Smooth Scrolling
     * ------------------------------------------------------ */
-    var ssSmoothScroll = function() {
+    // var ssSmoothScroll = function() {
 
-        $('.smoothscroll').on('click', function (e) {
-            var target = this.hash,
-                $target = $(target);
+    //     $('.smoothscroll').on('click', function (e) {
+    //         var target = this.hash,
+    //             $target = $(target);
 
-                e.preventDefault();
-                e.stopPropagation();
+    //             e.preventDefault();
+    //             e.stopPropagation();
 
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, 900, 'linear').promise().done(function () {
-                // check if menu is open
-                // if ($('body').hasClass('menu-is-open')) {
-                //     $('.header-menu-toggle').trigger('click');
-                // }
-                window.location.hash = target;
-            });
-        });
-    };
+    //         $('html, body').stop().animate({
+    //             'scrollTop': $target.offset().top
+    //         }, 900, 'linear').promise().done(function () {
+    //             // check if menu is open
+    //             // if ($('body').hasClass('menu-is-open')) {
+    //             //     $('.header-menu-toggle').trigger('click');
+    //             // }
+    //             window.location.hash = target;
+    //         });
+    //     });
+    // };
 
 
    /* Alert Boxes

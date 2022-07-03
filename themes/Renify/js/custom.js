@@ -1,5 +1,8 @@
-(function($) {
+(function($,drupalSettings) {
   "use strict";
+  
+  init();
+
   $('.lazy').Lazy({
         scrollDirection: 'vertical',
         effect: 'fadeIn',
@@ -115,5 +118,32 @@
   // $('.message_fail').fadeIn(10000,function(){
   //   fadeOut(1000);
   // }); //message success
-  
-  }(jQuery));
+      
+  function init(){
+    if(window.location.hash.substring(1).length > 0){
+      var key = window.location.hash.substring(1);
+      
+      if(key == 'maps' || key == 'book'){
+        $('.tab-wrap').get(0).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        $('[for="tab3"]').click();
+      }
+
+      if(key == 'comment' ){
+        $('.tab-wrap').get(0).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        $('[for="tab2"]').click();
+      }
+
+      if(key == 'about' ){
+        $('.tab-wrap').get(0).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        $('[for="tab1"]').click();
+      }
+
+      if(key == 'vid' ){
+       $('.tab-wrap').get(0).scrollIntoView({ behavior: 'smooth', block: 'center' })
+        $('[for="tab4"]').click();
+      }
+
+    }    
+  }
+
+  }(jQuery,drupalSettings));
