@@ -13,6 +13,8 @@
 {% set id           = node.id|raw|striptags|raw %}
 {% set path        = node.path.0.alias ~ '/' %}
 
+{% set status        = node.status.value|raw|striptags %}
+
 {% set next         = pagination.next %}
 {% set prev         = pagination.prev %}
 
@@ -74,6 +76,11 @@
             <li>
               <a href="#preloader" class="smoothscroll"><span id="view_count" class="{{id}}"></span><em>View(s)</em></a>
             </li>
+            {% if status == 0 %}
+              <li>
+                <a href="#"><i>Pending</i><em>Status</em></a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>

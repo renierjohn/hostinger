@@ -43,7 +43,7 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
   if($form_id == 'user_register_form'){
     $form['#validate'][] = 'updateHash';
   }
-  // d($form_state->getValues());
+
 }
 
 function updateHash(&$form,&$form_state){
@@ -62,7 +62,7 @@ function send_email_add(&$form,&$form_state){
   $email = $user->getEmail();
 
   $type  = 'add_data';
-  sendEmail($type,$email);
+  sendEmail($type,$email,$nid);
 
 }
 
@@ -75,19 +75,25 @@ function send_email_edit(&$form,&$form_state){
   if(empty($uid)){
     return;
   }
+
   $user = \Drupal::service('entity_type.manager')->getStorage('user')->load($uid);
   $email = $user->getEmail();
   $type  = 'edit_data';
-  sendEmail($type,$email);
+  sendEmail($type,$email,$nid);
 }
 
-function sendEmail($type,$email){
+function sendEmail($type,$email,$nid){
+  $content      = \Drupal::service('entity_type.manager')->getStorage('node')->load($nid);
+  $content_link = $content->path->getValue()[0]['alias'];
+
   $node =  \Drupal::service('entity_type.manager')
           ->getStorage('node')
           ->loadByProperties(['type'=>'config','field_config_name'=>$type]);
   $node    = array_values($node)[0];
   $message = $node->field_message->value;
   $subject = $node->field_subject->value;
+
+  $message = str_replace('{{link}}',$content_link,$message);
 
   return \Drupal::service('data_router.mail')
           ->setMail($email)
@@ -102,10 +108,15 @@ function login_redirect($form,$form_state){
   $name     = $input['name'];
   $pass     = $input['pass'];
   $user     = \Drupal::service('entity_type.manager')->getStorage('user')->loadByProperties(['name' => $name]);
+
   user_login_finalize(reset($user));
   $url = Url::fromRoute('<front>');
   $form_state->setRedirectUrl($url);
   \Drupal::messenger()->addMessage('Welcome '.$name);
+
+  // $url = Url::fromRoute('view.dashboard.main'); // FOR DASHBOARD IMPLEMENTATION
+  // $form_state->setRedirectUrl($url);            // FOR DASHBOARD IMPLEMENTATION
+ 
 }
 
 
