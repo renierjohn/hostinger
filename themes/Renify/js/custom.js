@@ -1,4 +1,4 @@
-(function($,drupalSettings) {
+(function($) {
   "use strict";
   
   init();
@@ -146,4 +146,4 @@
     }    
   }
 
-  }(jQuery,drupalSettings));
+  }(jQuery));
