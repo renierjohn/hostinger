@@ -1,0 +1,26 @@
+<div class="users-table table-wrapper">
+  <input type="hidden" name="cache-view-count" value="">
+  <table class="posts-table">
+    <thead>
+      <tr class="users-table-info">
+        <th>
+          <label class="users-table__checkbox ms-20">
+            {# <input type="checkbox" class="check-all">#}{# Thumbnail #}
+            <a href="/node/add/places" title="add-place" target="_blank"><i data-feather="plus-square" aria-hidden="true"></i>ADD Place</a>
+          </label>
+        </th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Views</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="js-ajax-tbody">
+        {% if rows %}
+          {{ rows }}
+        {% endif %}
+    </tbody>
+  </table>
+</div>

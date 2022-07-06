@@ -11,10 +11,15 @@ services:
     arguments:
       - '@entity_type.manager'
 
-  # theme.negotiator.data_router:
-  #   class: Drupal\data_router\Theme\ImceOverrideTheme
-  #   tags:
-  #     - { name: theme_negotiator, priority: -50 }
+  theme.negotiator.data_router:
+    class: Drupal\data_router\Theme\DashboardTheme
+    tags:
+      - { name: theme_negotiator, priority: -50 }
+
+  theme.negotiator.data_router_imce:
+    class: Drupal\data_router\Theme\ImceOverrideTheme
+    tags:
+      - { name: theme_negotiator, priority: -49 }    
 
   data_router.tracker:
     class: Drupal\data_router\EventSubscriber\ResponseHook

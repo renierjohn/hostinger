@@ -110,12 +110,12 @@ function login_redirect($form,$form_state){
   $user     = \Drupal::service('entity_type.manager')->getStorage('user')->loadByProperties(['name' => $name]);
 
   user_login_finalize(reset($user));
-  $url = Url::fromRoute('<front>');
-  $form_state->setRedirectUrl($url);
-  \Drupal::messenger()->addMessage('Welcome '.$name);
+  // $url = Url::fromRoute('<front>');
+  // $form_state->setRedirectUrl($url);
+  // \Drupal::messenger()->addMessage('Welcome '.$name);
 
-  // $url = Url::fromRoute('view.dashboard.main'); // FOR DASHBOARD IMPLEMENTATION
-  // $form_state->setRedirectUrl($url);            // FOR DASHBOARD IMPLEMENTATION
+  $url = Url::fromRoute('view.dashboard.main'); // FOR DASHBOARD IMPLEMENTATION
+  $form_state->setRedirectUrl($url);            // FOR DASHBOARD IMPLEMENTATION
  
 }
 

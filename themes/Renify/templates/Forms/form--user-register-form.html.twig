@@ -1,0 +1,31 @@
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{# {% set account  = element.account['#markup'] %} #}
+
+{% set mail  = element.account.mail['#markup'] %}
+{% set name  = element.account.name['#markup'] %}
+
+{% set image    = element.user_picture['#markup'] %}
+{% set footer   = element.footer['#markup'] %}
+{% set submit   = element.actions['#markup'] %}
+
+<section id="body" class="articles">
+    <form{{attributes}}>
+            {{ build_id }}
+            {{ form_id }}
+        <div>
+            {# {{account}} #}
+        </div>
+        <div>
+            {{image}}
+        </div>
+        <div>
+            {{mail}}
+        </div>
+        <div>
+            {{name}}
+        </div>
+        {{submit}}
+    </form>
+</section>
+{# {{kint()}} #}

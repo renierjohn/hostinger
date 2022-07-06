@@ -1,0 +1,24 @@
+name: Renify Dashboard
+type: theme
+description: 'Renify Dashboard Custom Theme'
+package: Renify Dashboard
+
+libraries:
+  - renify_dashboard/base
+
+base theme: false
+
+regions:
+  header: 'Header'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  page_top: 'Page top'
+  content: 'Content'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+  footer: 'Footer'
+
+core_version_requirement: ^9 || ^10
+version: '1.x'
+project: 'drupal'
+datestamp: 1620214265

@@ -140,13 +140,13 @@ class LoginController extends ControllerBase {
       // $profile = system_retrieve_file($profile, 'public://google', FALSE, FILE_EXISTS_REPLACE);
       $user    = $account->registerDirect($name,$email);
       user_login_finalize($user);
-      \Drupal::messenger()->addMessage('Success . Welcome '.$email);
-      return new RedirectResponse('/');
+      // \Drupal::messenger()->addMessage('Success . Welcome '.$email);
+      return new RedirectResponse('/dashboard');
     }
 
     user_login_finalize($user_result);
-    \Drupal::messenger()->addMessage('Success . Welcome '.$email);
-    return new RedirectResponse('/');
+    // \Drupal::messenger()->addMessage('Success . Welcome '.$email);
+    return new RedirectResponse('/dashboard');
 
   }
 

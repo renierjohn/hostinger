@@ -1,0 +1,62 @@
+{% set id       = fields.nid.content|raw|striptags|trim %}
+{% set title    = fields.title.content|raw|striptags %}
+{% set image    = fields.field_banner_image.content|raw|striptags %}
+{% set id       = fields.nid.content|raw|striptags %}
+{% set view     = fields.view_node.content|raw|striptags|trim %}
+{% set edit     = fields.edit_node.content|raw|striptags|trim %}
+{% set delete   = fields.delete_node.content|raw|striptags|trim %}
+{% set status   = fields.status.content|raw|striptags|trim %}
+{% set date     = fields.created.content|raw|striptags|trim %}
+
+{% set status_class = 'badge-pending' %}
+{% set status_value = 'Pending' %}
+
+{% set redirect = '?destination=/dashboard' %}
+
+{% if status == 1 %}
+  {% set status_class = 'badge-active' %}
+  {% set status_value = 'Active' %}
+{% endif %}
+
+{% if image is empty %}
+  {% set image = '/themes/renify_dashboard/favicon.ico' %}
+{% endif %}
+
+<tr>
+  <td>
+    <label class="users-table__checkbox">
+      {# <input type="checkbox" class="check"> #}
+      <div class="categories-table-img">
+        <a href="{{view}}" title="{{title}}" target="_blank">
+          <picture>
+            {# <source srcset="/themes/renify_dashboard/img/categories/01.webp" type="image/webp"> #}
+            <img src="{{image}}" loading="lazy" alt="{{title}}">
+          </picture>
+        </a>
+      </div>
+    </label>
+  </td>
+  <td>
+    {{id}}
+  </td>
+  <td>
+    {{title}}
+  </td>
+  <td><span id="view_count" class="{{id}}"></span></td>
+  <td><span class="{{status_class}}">{{status_value}}</span></td>
+  <td>{{date}}</td>
+  <td>
+    <span class="p-relative">
+      <button class="dropdown-btn transparent-btn" type="button" title="More info">
+        <div class="sr-only">More info</div>
+        <i data-feather="more-horizontal" aria-hidden="true"></i>
+      </button>
+      <ul class="users-item-dropdown dropdown">
+        <li><a href="{{view}}{{redirect}}" target="_blank">View </a></li>
+        <li><a href="{{edit}}{{redirect}}" target="_blank">Edit </a></li>
+        <li><a href="{{delete}}{{redirect}}" target="_blank">Trash </a></li>
+      </ul>
+    </span>
+  </td>
+
+</tr>

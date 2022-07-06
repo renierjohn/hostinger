@@ -1,16 +1,28 @@
 <header class="s-header top-header" id='header'>
     <div class="row">
         <div class="header-logo">
-        <a class="site-logo" href="/">
-          <img src="/themes/Renify/favicon.ico" alt="Homepage" />
-        </a>
+        {% if logged_in %}
+          <a class="site-logo" href="/dashboard">
+            <img src="/themes/Renify/favicon.ico" alt="Homepage" />
+          </a>
+        {% else %}
+          <a class="site-logo" href="/">
+            <img src="/themes/Renify/favicon.ico" alt="Homepage" />
+          </a>
+        {% endif %}
+          
       </div>
       <nav class="header-nav-wrap">
         <ul class="header-main-nav">
-          <li class="">
+          {% if logged_in %}
             <li>
-            <a href="/" data-drupal-link-system-path="<front>" class="is-active">Home</a>
-          </li>
+              <a href="/dashboard" >Dashboard</a>
+            </li>
+          {% else %}
+             <li>
+              <a href="/" class="is-active" >Dashboard</a>
+            </li>
+          {% endif %}
           <li>
             <a href="/routes/">Bus Routes</a>
           </li>
@@ -21,9 +33,6 @@
             <a href="/store/">Stores</a>
           </li>
         {% if logged_in %}
-          <li>
-            <a href="/myplace/">My Places</a>
-          </li>
           <li>
             <a href="/node/add/places/">Add Place</a>
           </li>
@@ -54,6 +63,6 @@
         {% endif %}
         </div>
       </nav>
-      <a class="header-menu-toggle" href="#"><span>Menu</span></a>
+      <a class="header-menu-toggle" ><span>Menu</span></a>
     </div>
 </header>
