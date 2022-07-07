@@ -1,5 +1,11 @@
 {% set id       = fields.uid.content|raw|striptags|trim %}
 {% set image    = fields.user_picture.content|raw|striptags %}
+{% set points   = fields.field_points.content|raw|striptags %}
+{% set x_points = fields.field_prev_points.content|raw|striptags %}
+
+{% if image is empty %}
+  {% set image = '/themes/renify_dashboard/favicon.ico' %}
+{% endif %}
 
 <input type="hidden" name="js-current-user" value="{{id}}">
 <div class="layer"></div>
@@ -86,10 +92,10 @@
                       </a>
                       <ul class="cat-sub-menu">
                           <li>
-                              <a href="/imce" target="_blank">IMCE(Public)</a>
+                              <a href="/imce" target="_blank">Public Folder</a>
                           </li>
                           <li>
-                              <a href="/imce/private" target="_blank">IMCE(Private)</a>
+                              <a href="/imce/private" target="_blank">Private Folder</a>
                           </li>
                       </ul>
                   </li>
@@ -290,13 +296,13 @@
                 <i data-feather="file" aria-hidden="true"></i>
               </div>
               <div class="stat-cards-info">
-                <p class="stat-cards-info__num js-total-points">0</p>
+                <p class="stat-cards-info__num js-total-points">{{points}}</p>
                 <p class="stat-cards-info__title">Total Points</p>
                 <p class="stat-cards-info__progress">
-                  <span class="stat-cards-info__profit warning">
-                    <i data-feather="trending-up" aria-hidden="true"></i><span class="js-total-points-percent">0.00%</span>
+                  <span class="stat-cards-info__profit warning" prev-points="{{x_points}}" >
+                    <i data-feather="trending-up" aria-hidden="true"></i>
+                    <span class="js-total-points-percent">0.00%</span>
                   </span>
-                  Last month
                 </p>
               </div>
             </article>
@@ -336,99 +342,15 @@
 
           </div>
           <div class="col-lg-3">
-            {# <article class="customers-wrapper">
-              <canvas id="customersChart" aria-label="Customers statistics" role="img"></canvas>
-            </article> #}
-       
-           {#  <article class="white-block">
-              <div class="top-cat-title">
-                <h3>Top categories</h3>
-                <p>28 Categories, 1400 Posts</p>
-              </div>
-              <ul class="top-cat-list">
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Lifestyle <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Dailiy lifestyle articles <span class="purple">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Tutorials <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Coding tutorials <span class="blue">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Technology <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Dailiy technology articles <span class="danger">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      UX design <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      UX design tips <span class="success">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Interaction tips <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Interaction articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      App development <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Mobile development articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Nature <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Wildlife animal articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Geography <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Geography articles <span class="primary">+472</span>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </article> #}
-
+              <article class="white-block">
+                <div class="top-cat-title">
+                  <h3>Top Bloggers</h3>
+                  <p>10 Bloggers, 100 Posts</p>
+                </div>
+                 <ul class="top-cat-list js-top-user">
+                 
+                </ul>
+              </article>
           </div>
         </div>
       </div>
@@ -441,9 +363,9 @@
           rel="noopener noreferrer">renifysite.com</a></p>
     </div>
     <ul class="footer-end">
-      <li><a href="##">About</a></li>
+{#       <li><a href="##">About</a></li>
       <li><a href="##">Support</a></li>
-      <li><a href="##">Puchase</a></li>
+      <li><a href="##">Puchase</a></li> #}
     </ul>
   </div>
 </footer>

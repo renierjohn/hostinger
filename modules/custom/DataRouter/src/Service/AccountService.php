@@ -192,6 +192,11 @@ class AccountService
       return FALSE;
     }
     $user  = reset($user);
+
+    if($user->status->value == 1){
+      return FALSE;
+    }
+
     $name  = $user->name ? $user->name->getValue()[0]['value'] : 'user';
     $fname = $name[0];
     $uri   = 'public://profile/'.$fname.'.png';
@@ -202,7 +207,7 @@ class AccountService
       $fid   = $entity->getStorage('file')->getQuery()->condition('uri',$uri)->execute();
     }
     $fid   = reset($fid);
-    $user->activate()->set('user_picture',$fid)->save();
+    $user->activate()->set('user_picture',$fid)->set('field_points',10)->save();
     user_login_finalize($user);
     return $name;
   }
@@ -241,6 +246,7 @@ class AccountService
       'pass'         => $pass,
       'user_picture' => $fid,
       'status'       => 1,
+      'roles'        => ['moderator'],
     ];
     
    $entity->getStorage('user')->create($fields)->save();

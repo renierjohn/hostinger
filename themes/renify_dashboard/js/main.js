@@ -1,7 +1,6 @@
 (function($) {
     "use strict";
 
-    // renderViewCount();
     init();
     setTotalViews();
 
@@ -28,43 +27,6 @@
       $(this).attr('data',Number(page) + 1);
       render_loadMore(data);
     });
-
-    // async function renderViewCount(){
-    //   var url   = '/api/count/views?t=';
-    //   var query = '';
-    //   var x  = [];
-   
-    //   $('[id="view_count"]').each(function(index,item){
-    //       if(index == 0){
-    //         query =  $(this).attr('class');
-    //       }
-    //       if(index > 0){
-    //         query = query +','+ $(this).attr('class');
-    //       }
-    //   })
-
-    //   url = url+query;
-      
-    //   const response  = await fetch(url, {
-    //     method: 'GET', 
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     }
-    //   });
-
-    //   var data = await response.json();
-      
-    //   $('[id="view_count"]').each(function(index,item){
-    //       var id = $(this).attr('class');
-    //       $(this).html(String(data[id]));
-    //   });
-
-    //   var labels  = Object.keys(data).reverse();
-    //   var datas   = Object.values(data).reverse();
-
-    //   renderChart(labels,datas,Math.max(...datas));
-      
-    // }
 
     async function setTotalViews(){
       var uid = $('[name="js-current-user"]').val();
@@ -105,10 +67,22 @@
       });
 
       $('.js-total-views').html(total.toLocaleString());
+      $('.js-total-posts').html(views.length);
       renderChart(id.reverse(),views.reverse(),Math.max(...views));
     }
 
-    function init(){
+    async function init(){
+        var points_new  = $('.js-total-points').html();
+        var points_old = $('[prev-points]').attr('prev-points');
+        if(points_old > 0){
+          var percentage = (Number(points_old)/Number(points_new))*100;
+              percentage = Number(percentage).toFixed(2);
+          $('.js-total-points-percent').html(`${percentage}%`);
+          $('[prev-points]').removeClass('warning');
+          $('[prev-points]').addClass('success');
+          console.log(percentage);
+        }
+
         $('.dropdown-btn').click(function(e){
             e.preventDefault();
             var dropDown = $(this).parent().find('.users-item-dropdown');
@@ -119,6 +93,17 @@
             $('.users-item-dropdown').removeClass('active');
             $(this).parent().find('.users-item-dropdown').addClass('active');
         });
+
+        
+        const response  = await fetch('/api/dashboard/user', {  // get the total view count
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        var data  = await response.json();
+        render_user_block(data);
     }
 
     function render_loadMore(data){
@@ -189,7 +174,47 @@
           var id = $(this).attr('class');
           $(this).html(String(data[id]));
         });
-    } 
+    }
+
+    function render_user_block(data){
+      var template   = '';
+      var rank_type = '';
+      data.forEach(function(d,index){
+        var earn_points  = Number(d.points_new) - Number(d.points_old)
+        var status_points = 'warning';
+        if(earn_points > 0 && d.points_old > 0){
+          earn_points  = `+${earn_points}`;
+          status_points = 'success'
+        }else{
+          earn_points = `0`;
+        }
+
+        rank_type = '';
+        if(index == 0){
+          rank_type = 'class="icon star" style="background-color:#ffc107"'
+        }
+        if(index == 1){
+          rank_type = 'class="icon star" style="background-color:#9e9e9e"'
+        }
+        if(index == 2){
+          rank_type = 'class="icon star" style="background-color:#c59143"'
+        }
+
+        template += `
+          <li>
+            <a href="##">
+              <div class="top-cat-list__title">
+                <span  aria-hidden="true" ${rank_type} "></span>${d.name} <span>${d.points_new}</span>
+              </div>
+              <div class="top-cat-list__subtitle">
+                Total Points Earned <span class="${status_points}">${earn_points}</span>
+              </div>
+            </a>
+          </li>
+        `;
+      });
+      $('.js-top-user').html(template);
+    }
 
     function renderChart(labels,data,max){
        var ctx = $('#myChart').get(0);

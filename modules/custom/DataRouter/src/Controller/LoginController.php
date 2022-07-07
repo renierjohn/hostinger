@@ -50,12 +50,9 @@ class LoginController extends ControllerBase {
     $name = $this->account->setToken($token)->checkToken();
      if(empty($name)){
        \Drupal::messenger()->addError('Invalid Link');
+        return new RedirectResponse('/user/login');
      }
-     else{
-       \Drupal::messenger()->addMessage('Welcome '.$name);
-     }
-
-     return new RedirectResponse('/');
+     return new RedirectResponse('/dashboard');
   }
 
   public function google(){
