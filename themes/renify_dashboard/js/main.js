@@ -191,20 +191,20 @@
 
         rank_type = '';
         if(index == 0){
-          rank_type = 'class="icon star" style="background-color:#ffc107"'
+          rank_type = `<span  aria-hidden="true" class="icon star" style="background-color:#ffc107"></span>`
         }
         if(index == 1){
-          rank_type = 'class="icon star" style="background-color:#9e9e9e"'
+          rank_type = `<span  aria-hidden="true" class="icon star" style="background-color:#9e9e9e"></span>`
         }
         if(index == 2){
-          rank_type = 'class="icon star" style="background-color:#c59143"'
+          rank_type = `<span  aria-hidden="true" class="icon star" style="background-color:#c59143"></span>`
         }
 
         template += `
           <li>
             <a href="##">
               <div class="top-cat-list__title">
-                <span  aria-hidden="true" ${rank_type} "></span>${d.name} <span>${d.points_new}</span>
+                ${rank_type} ${d.name} <span>${d.points_new}</span>
               </div>
               <div class="top-cat-list__subtitle">
                 Total Points Earned <span class="${status_points}">${earn_points}</span>
