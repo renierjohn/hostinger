@@ -104,6 +104,17 @@
 
         var data  = await response.json();
         render_user_block(data);
+
+
+        const resp  = await fetch('/api/dashboard/place', {  // get the total view count
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        var data  = await resp.json();
+        var total_blogger_posts = Object.keys(data).length
+        $('.js-total-blogger-posts').html(total_blogger_posts);
     }
 
     function render_loadMore(data){
@@ -177,6 +188,7 @@
     }
 
     function render_user_block(data){
+      var total_bloggers = Object.keys(data).length;
       var template   = '';
       var rank_type = '';
       data.forEach(function(d,index){
@@ -214,6 +226,8 @@
         `;
       });
       $('.js-top-user').html(template);
+      $('.js-total-bloggers').html(total_bloggers);
+        console.log(total_bloggers);
     }
 
     function renderChart(labels,data,max){
