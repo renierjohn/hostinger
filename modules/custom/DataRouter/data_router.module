@@ -38,6 +38,18 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
 
   if($form_id == 'node_places_edit_form'){
     $form['actions']['submit']['#submit'][] = 'send_email_edit';
+    $status = $form['status']['widget']['value']['#default_value'];
+    $form_state->setTemporaryValue('old_status',$status);
+  }
+
+  /**
+   * Alter UserPoints User EDIT FORM
+   * */ 
+  if($form_id == 'user_form'){
+    $old_points = $form['field_points']['widget'][0]['value']['#default_value'];
+    $form_state->setTemporaryValue('old_points',$old_points);
+    $form['actions']['submit']['#submit'][] = 'alterPoints';
+    $form['field_prev_points']['#disabled'] = TRUE;
   }
 
   if($form_id == 'user_register_form'){
@@ -46,18 +58,33 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
 
 }
 
+/**
+ * Submit hook user edit form
+ * */ 
+function alterPoints(&$form,&$form_state){
+  $old_points     = $form_state->getTemporaryValue('old_points');
+  $uid            = $form_state->getValues()['uid'];
+  $user           = \Drupal::service('entity_type.manager')->getStorage('user')->load($uid);
+  $current_points = $user->get('field_points')->value;
+  if($old_points != $current_points){
+    $user->set('field_prev_points',$old_points)->save();
+  }
+}
+
 function updateHash(&$form,&$form_state){
   $name = $form_state->getValues()['name'];
   $hash = \Drupal::service('data_router.student')->generateHash($name);
   $form_state->setValue('field_qr',[['value' => $hash]]);
 }
 
+/**
+ * Submit hook Node ADD form
+ * */ 
 function send_email_add(&$form,&$form_state){
   $values = $form_state->getValues();
   $url    = $values['path'][0]['alias'];
   $nid    = $values['nid'];
 
-  // $roles = array_values($user->getRoles());
   $user  = \Drupal::currentUser();
   $email = $user->getEmail();
 
@@ -66,11 +93,18 @@ function send_email_add(&$form,&$form_state){
 
 }
 
+/**
+ * Submit hook Node Edit form
+ * */ 
 function send_email_edit(&$form,&$form_state){
+
   $values = $form_state->getValues();
   $url    = $values['path'][0]['alias'];
   $nid    = $values['nid'];
   $status = $values['status'];
+  $old_status = $form_state->getTemporaryValue('old_status');
+  $worklowStatus = getStatusWorkflow($old_status,$status);
+
   $uid    = $form_state->getValues()['uid'] ? $form_state->getValues()['uid'][0]['target_id'] : FALSE;
   if(empty($uid)){
     return;
@@ -80,6 +114,12 @@ function send_email_edit(&$form,&$form_state){
   $email = $user->getEmail();
   $type  = 'edit_data';
   sendEmail($type,$email,$nid);
+  if($worklowStatus['isChanged'] && $worklowStatus['status']){ // Add points when published set from unpublished
+    $points = $user->get('field_points')->value;
+    $user->set('field_prev_points',$points);
+    $user->set('field_points',$points + 10);
+    $user->save();
+  }
 }
 
 function sendEmail($type,$email,$nid){
@@ -102,6 +142,20 @@ function sendEmail($type,$email,$nid){
           ->send();
 }
 
+function getStatusWorkflow(&$old_status,$status){
+  $new_status = $status['value'];
+  if($old_status != $new_status){
+      return [
+        'isChanged' => TRUE,
+        'status' => $new_status
+      ];
+  }
+
+    return [
+      'isChanged' => FALSE,
+      'status' => $new_status
+    ];
+}
 
 function login_redirect($form,$form_state){
   $input    = $form_state->getUserInput();
