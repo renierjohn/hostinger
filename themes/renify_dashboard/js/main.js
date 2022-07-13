@@ -28,6 +28,14 @@
       render_loadMore(data);
     });
 
+    $('.js-redeem-points').click(function(){
+      if($('.js-total-points').html() < 50){
+        alert('Sorry , Please Earn at Least 50 Points')
+      }else{
+        alert('To Redeem , Please Message Us. Thank you');
+      }
+    })
+
     async function setTotalViews(){
       var uid = $('[name="js-current-user"]').val();
       
