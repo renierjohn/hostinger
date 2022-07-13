@@ -75,12 +75,12 @@
         var points_new  = $('.js-total-points').html();
         var points_old = $('[prev-points]').attr('prev-points');
         if(points_old > 0){
-          var percentage = (Number(points_old)/Number(points_new))*100;
+          var percentage = (1 - (Number(points_old)/Number(points_new)))*100;
               percentage = Number(percentage).toFixed(2);
           $('.js-total-points-percent').html(`${percentage}%`);
-          $('[prev-points]').removeClass('warning');
-          $('[prev-points]').addClass('success');
-          console.log(percentage);
+          // $('[prev-points]').removeClass('warning');
+          // $('[prev-points]').addClass('success');
+          console.log(points_old,points_new,percentage);
         }
 
         $('.dropdown-btn').click(function(e){
