@@ -61,9 +61,15 @@
       });
 
       var data  = await response.json();
+      
+      if(data.length == 0){
+        renderChart([1,2,3,4,5,6,7,8,9],[],0);
+        return;
+      }
 
       var id    = Object.keys(data);
       var views = Object.values(data);
+
       var total = views.reduce(function (a, b) {
           return a + b;
       });
@@ -76,7 +82,9 @@
 
       $('.js-total-views').html(total.toLocaleString());
       $('.js-total-posts').html(views.length);
+     
       renderChart(id.reverse(),views.reverse(),Math.max(...views));
+      
     }
 
     async function init(){

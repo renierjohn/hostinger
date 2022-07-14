@@ -14,15 +14,17 @@
       </div>
       <nav class="header-nav-wrap">
         <ul class="header-main-nav">
+          
           {% if logged_in %}
             <li>
               <a href="/dashboard" >Dashboard</a>
             </li>
           {% else %}
              <li>
-              <a href="/" class="is-active" >Home</a>
+              <a href="/" class="is-active">Home</a>
             </li>
           {% endif %}
+
           <li>
             <a href="/routes/">Bus Routes</a>
           </li>
