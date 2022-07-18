@@ -113,8 +113,8 @@ function send_email_edit(&$form,&$form_state){
   $user = \Drupal::service('entity_type.manager')->getStorage('user')->load($uid);
   $email = $user->getEmail();
   $type  = 'edit_data';
-  sendEmail($type,$email,$nid);
   if($worklowStatus['isChanged'] && $worklowStatus['status']){ // Add points when published set from unpublished
+    sendEmail($type,$email,$nid);
     $points = $user->get('field_points')->value;
     $user->set('field_prev_points',$points);
     $user->set('field_points',$points + 10);
