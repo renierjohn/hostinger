@@ -13,9 +13,15 @@
                     <h1>{{ title }}</h1>
                     <h3>{{ short_text }}</h3>
                   <div class="home-content__btn-wrap">
-                      <a href="#body" class="btn btn--stroke--reverse btn--big home-content__btn ">
-                          {{ btn_text }}
-                      </a>
+                      {% if logged_in %}
+                        <a href="/node/add/places?destination=/dashboard" class="btn btn--stroke--reverse btn--big home-content__btn ">
+                            ADD PLACE
+                        </a>
+                      {% else %}
+                        <a href="#body" class="btn btn--stroke--reverse btn--big home-content__btn ">
+                            {{ btn_text }}
+                        </a>
+                      {% endif %}
                   </div>
               </div> <!-- end home-content__left-->
           </div> <!-- end home-content__main -->
