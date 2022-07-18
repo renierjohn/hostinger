@@ -54,3 +54,9 @@ student:
   dependencies:
     - core/jquery
     - core/drupal    
+
+places_form:
+  version: 1.0
+  css:
+    theme:
+      css/place_form.css: {}

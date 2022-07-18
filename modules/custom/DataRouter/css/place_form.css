@@ -1,0 +1,22 @@
+form select ,form input ,form textarea{
+	height: 4.4rem !important;
+	padding: 0 1rem !important;
+	margin-bottom: 1rem !important;
+	margin-top: 3rem !important;
+}
+
+form textarea{
+	min-height:  5rem;
+}
+
+.main-wrapper  form p {
+	font-size: 1.5rem !important;
+	color: #3e5b61;
+	margin: 0 !important;
+}
+
+.main-wrapper{
+	background-image: url("/themes/Renify/favicon.ico") !important;
+	background-position: center center !important;
+  background-repeat: no-repeat !important;
+}

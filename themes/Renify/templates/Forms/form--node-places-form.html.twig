@@ -1,6 +1,6 @@
-{% set build_id = element.form_build_id['#markup'] %}
-{% set form_token = element.form_token['#markup'] %}
-{% set form_id  = element.form_id['#markup'] %}
+{% set build_id      = element.form_build_id['#markup'] %}
+{% set form_token    = element.form_token['#markup'] %}
+{% set form_id       = element.form_id['#markup'] %}
 
 {% set category      = element.field_category['#markup'] %}
 {% set short_text    = element.field_short_text['#markup'] %}
@@ -12,15 +12,19 @@
 {% set nearby_place  = element.field_nearby_place['#markup'] %}
 {% set map           = element.field_google_map['#markup'] %}
 
-{% set submit   = element.actions['#markup'] %}
+{% set submit        = element.actions['#markup'] %}
 
-{% set title = element.title['#markup'] %}
-<section class="main-wrapper" id="body" style="margin-top:12rem;">
+{% set title         = element.title['#markup'] %}
+
+{{ attach_library('data_router/places_form') }}
+
+<section class="main-wrapper" id="body" style="margin-top:14rem;">
   <div class="center mt-6">
     <h2 class="display-2">Create Youre Own Place</h2>
-      <p class="lead">
-          Contribute Us <br> Create youre own story and share to the community
-      </p>
+      <h6>Contribute Us <br> 
+        Create youre own story and share to the community<br><br>
+        Earn Points and Convert to Mobile Data Load
+      </h6>
   </div>
   <div class="wrapper-header">
     <div class="inner">
@@ -30,28 +34,53 @@
       {{form_token}}
       
       {{category}}
-      
+      <p>Category</p>
+
       {{title}}
+      <p>Title</p>
 
       <h4>Cover Photo</h4>
       {{cover_photo}}
+      <p>Upload Image less than <i>2MB</i></p>
 
+      <hr>
+      
       {{short_text}}
+      <p>Type the introduction message maximum 5 words</p>
+
+      <hr>
 
       <h4>Details</h4>
       {{description}}
+      <p>Tell Us the whole story of the Place</p>
+
+      <hr>
 
       <h4>Gallery</h4>
       {{gallery}}
+      <p>Upload Images less than <i>2MB</i> size with Maximum<i> <b>5</b> items</i></p>
+
+      <hr>
 
       {{nearby_place}}
+      <p>Type the Place which has nearby ( <i>Barangay Name, Municipal Name</i>) </p>
+
+      <hr>
 
       {{map}}
+      <p>Type the Location of youre Place provided from the Google Map.<br>
+       <b>Example :</b> <i>Renify E-Service,Dauin,Negros Oriental</i> 
+      </p>
+      
+      <hr>
 
       {{youtube}}
+      <p>Write down the youtube link of the video</p>
+      
+      <hr>
 
-      <h6 class="display-4">Click Preview to See the teporary display . <br>Once you submit it will review from moderator and published youre content</h6>
       {{submit}}
+      <h6 class="display-4">Click Preview to See the teporary display . <br>Once you submit it will review from moderator and published youre content</h6>
     </form>
     </div>
   </div>
