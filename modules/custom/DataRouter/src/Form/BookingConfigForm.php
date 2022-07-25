@@ -142,6 +142,7 @@ class BookingConfigForm extends FormBase {
     fclose($file);
 
     $data = json_decode($data,TRUE);
+    $old_status      = $data['pending']; 
     $data['pending'] = $status;
     
     if(!empty($remarks)){
@@ -152,7 +153,7 @@ class BookingConfigForm extends FormBase {
       $data['price'] = $price;
     }
 
-    if($status == FALSE){
+    if($status == FALSE && $old_status == TRUE){
       $this->bookingTemplate->formatBookingMessage($data)->sendMailManual();
     }
 
