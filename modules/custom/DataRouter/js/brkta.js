@@ -371,7 +371,7 @@
 
       $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
         FB.init({
-          appId: '376061863589278', //replace with your app ID
+          appId: '395967462029410', //replace with your app ID
           version: 'v8.0'
         });
         FB.ui({
