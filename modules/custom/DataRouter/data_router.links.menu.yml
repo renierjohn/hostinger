@@ -1,0 +1,5 @@
+data_router.booking_link:
+  title:  Booking Manager
+  description: 'Booking Manager'
+  parent: system.admin_config_system
+  route_name: data_router.book_config
