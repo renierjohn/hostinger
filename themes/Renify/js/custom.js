@@ -133,7 +133,7 @@
         $('[for="tab2"]').click();
       }
 
-      if(key == 'about' ){
+      if(key == 'about' || key == 'rates' ){
         $('.tab-wrap').get(0).scrollIntoView({ behavior: 'smooth', block: 'center' })
         $('[for="tab1"]').click();
       }

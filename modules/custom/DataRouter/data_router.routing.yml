@@ -107,6 +107,24 @@ data_router.cart_controller:
   # options:
   #   no_cache: 'TRUE'
 
+data_router.book:
+  path: '/book/{hash}'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\BookingController::render'
+    _title: 'Page Hook'
+  requirements:
+    _access : 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+data_router.book_config:
+  path: '/admin/config/development/book'
+  defaults:
+    _form: '\Drupal\data_router\Form\BookingConfigForm'
+    _title: 'Booking Form'
+  requirements:
+    _permission: 'administer site configuration'
+
 # data_router.fb_feed:
 #   path: '/pagehook'    
 #   defaults:

@@ -1,0 +1,128 @@
+{% set form_token = element.form_token['#markup'] %}
+{% set build_id = element.form_build_id['#markup'] %}
+{% set form_id  = element.form_id['#markup'] %}
+{% set mail     = element.mail['#markup'] %}
+{% set name     = element.name['#markup'] %}
+{% set lastname = element.lastname['#markup'] %}
+{% set number   = element.number['#markup'] %}  
+{% set address  = element.address['#markup'] %}  
+{% set birthday = element.birthday['#markup'] %}  
+{% set gender   = element.gender['#markup'] %}
+{% set datetime = element.datetime['#markup'] %}
+{% set vessel   = element.vessel['#markup'] %}  
+{% set origin   = element.origin['#markup'] %}  
+{% set hash     = element.hash['#markup'] %}  
+{% set price    = element.price['#markup'] %}  
+{% set destination  = element.destination['#markup'] %}  
+{% set accomodation = element.accomodation['#markup'] %}  
+
+
+{% set submit   = element.submit['#markup'] %}
+
+<section id="message-form" class="col-1r">
+  
+  <div class="center mt-6">
+   <h2 class="display-2">Book Ticket 
+      <span class="js-data-price-total" style="font-size:2.8rem;">
+        <button class="btn btn--stroke" onClick="document.getElementById('tab1').click(); return false;">
+          Select Rates
+        </button> 
+      </span>
+    </h2>
+   <p class="js-data-summary" style="font-size:2rem;display: contents;"></p>
+  </div>
+  
+  <div class="row">
+    <div class="col-six tab-full">
+      <form{{ attributes }}>
+        
+        {{ price }}
+        {{ build_id }}
+        {{ form_id }}
+        {{form_token}}
+        
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> E-mail</label>
+            {{ mail }}
+        </div>
+        
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> FirstName</label>
+            {{ name }}
+        </div>
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> LastName / Surname</label>
+            {{ lastname }}
+        </div>
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> Number</label>
+            {{ number }}
+        </div>
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> Address</label>
+            {{ address }}
+        </div>
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> Gender</label>
+            {{ gender }}
+        </div>
+
+        <div>
+            <label for="sampleInput"><span style="color:red;">*</span> Birthday</label>
+            {{ birthday }}
+        </div>
+
+        <div style="display:none;">
+          <div>
+              {{ datetime }}
+          </div>
+
+          <div>
+              <label for="sampleInput">Vessel</label>
+              {{ vessel }}
+          </div>
+
+          <div>
+              <label for="sampleInput">Accomodation</label>
+              {{ accomodation }}
+          </div>
+
+          <div>
+              <label for="sampleInput">Origin</label>
+              {{ origin }}
+          </div>
+
+          <div>
+              <label for="sampleInput">Destination</label>
+              {{ destination }}
+          </div>
+        </div>
+
+        <div>
+          <div class="g-recaptcha" data-size="normal" data-tabindex="10" data-sitekey='6Lc1yTMdAAAAAF1l7Ygp_9ML3oGf_daxXoNuK5JX'></div>
+        </div>
+
+        <div class="message-wrapper">
+          {{ hash }}
+          {{submit}}
+        </div>
+      </form>
+    </div>
+    <div class="col-six tab-full">
+      <h3>About Renify Booking</h3>
+      <aside class="pull-quote">
+        <blockquote>
+          <p>
+            Mabuhay !!! Schedule for Domestic Trips Are Now Unrestricted . Click Here For More Available Schedules .
+          </p>
+        </blockquote>
+        <a href="/vessel/" title="Shipping Vessel" class="btn btn--stroke--reverse btn-effect " target="_blank">More Shipping Vessels</a>
+      </aside>
+    </div>
+  </div>
+</section>

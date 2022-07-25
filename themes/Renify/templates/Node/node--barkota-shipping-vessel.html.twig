@@ -213,7 +213,7 @@
                     <th>Vessel</th>
                     <th>Departure</th>
                     <th>Duration</th>
-                    <th>Accomodations</th>
+                    <th>Accomodations ( Click Below<i class="fa fa-arrow-down"></i> to Book )</th>
                   </tr>
                 </thead>
                 <tbody class="ajax_schedules">
@@ -254,7 +254,7 @@
                 style="float:right;"
                 >
               </div>
-            <p>Comming Soon</p>
+              {{ drupal_form('Drupal\\data_router\\Form\\BookingForm')}}
           </div>
       </div> 
   </div>

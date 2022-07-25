@@ -10,6 +10,10 @@
   	var date   = $('.selected-date.active').attr('date');
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
+ 
+    $('#edit-origin').val($('.select-origin').find(":selected").html());
+    $('#edit-destination').val($('.select-dest').find(":selected").html());
+    
     if(origin == dest){
     	return;
     }
@@ -18,6 +22,7 @@
     getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
 	  updateQuery(origin,dest,getCurrentDate());
+    initBookingButton();
   })
 
   // select destination
@@ -26,6 +31,10 @@
     var origin = $('.select-origin').find(":selected").val();
     var dest   = $('.select-dest').find(":selected").val();
     $('.ajax-message').hide();
+
+    $('#edit-origin').val($('.select-origin').find(":selected").html());
+    $('#edit-destination').val($('.select-dest').find(":selected").html());
+
     if(origin == dest){
     	return;
     }
@@ -33,6 +42,7 @@
     getID(origin,dest,date);
     getDateRange(origin,dest,getCurrentDate());
     updateQuery(origin,dest,getCurrentDate());
+    initBookingButton();
   })
 
   function getID(origin,dest,date){
@@ -70,13 +80,25 @@
     var template_rates    = ``;
     var ajax_table_origin = `<i>from</i><br>`+data[0].voyage.port.origin;
     var ajax_table_dest   = `<i>to</i><br>`+data[0].voyage.port.destination;
-
+    var hashData          = $('[data-drupal-selector="edit-hash"]').attr('hash');
+    
     data.forEach(function(dat){
     	if(dat.accommodations.length > 0){
 	    		var template_acc = '';
 		    	dat.accommodations.forEach(function(content){
+            var hashed = $.md5(content.price+hashData)
 		    		var color = content.isAvailable == true ? 'color:green' : 'color:red';
-	          template_acc += `<li style="`+ color+`">`+content.name+`  - `+content.price+`</li>`
+	          template_acc +=`<li style="${color}" class="js-data">
+                                <a href="#" 
+                                  js-data-acc   = "${content.name}"
+                                  js-data-hash  = "${hashed}"
+                                  js-data-price = "${content.price}" 
+                                  js-data-date  = "${dat.voyage.departureDateTime}"
+                                  js-data-name  = "${dat.voyage.vesselName}"
+                                  style="color:green;">
+                                      ${content.name} - ${content.price}
+                                </a>
+                            </li>`
 		    	});
     	}else{
     		var template_acc = 'No Longer Available'
@@ -98,6 +120,107 @@
     $('.ajax_table_origin').html(ajax_table_origin)
     $('.ajax_table_dest').html(ajax_table_dest)
     $('.features').css({'opacity':1});
+    initBookingButton();
+  }
+
+  function initBookingButton(){ // INIT PRICE BTN
+    $('.js-data a').click(function(e){
+      e.preventDefault();
+      var origin        = $('.select-origin').find(":selected").html();
+      var dest          = $('.select-dest').find(":selected").html();
+      var accommodation = $(this).attr('js-data-acc');
+      var price         = $(this).attr('js-data-price');
+      var vesselName    = $(this).attr('js-data-name');
+      var dateTime_     = $(this).attr('js-data-date');
+      var price_hashed  = $(this).attr('js-data-hash');
+      var hashData      = $('[data-drupal-selector="edit-hash"]').attr('hash');
+      var gen_hashed    = $.md5(price+hashData);
+
+      if(gen_hashed != price_hashed){
+         Swal.fire({
+            title:  `Oops... . Please Dont Change the Rate`,
+            width: 600,
+            padding: '3em',
+            color: '#7066e0',
+            icon:'error',
+            confirmButtonText: 'Im not a hacker',
+          })
+         return;
+      }
+
+      $('[data-drupal-selector="edit-hash"]').val($.md5(price+hashData));
+      console.log(origin,dest,accommodation,price,vesselName,setDateTimeForm(dateTime_),hashData);
+
+      dateTime = setDateTimeForm(dateTime_);
+      date     = dateTime[0];
+      time     = dateTime[1];
+      $('#edit-vessel').val(vesselName);
+      $('#edit-origin').val(origin);
+      $('#edit-destination').val(dest);
+      $('#edit-accomodation').val(accommodation);
+      $('#edit-datetime-date').val(date);
+      $('#edit-datetime-time').val(time);
+      $('[data-drupal-selector="edit-price"]').val(price);
+
+      $('.js-data-price-total').html(`<i>(Php ${price}.00)</i>`);
+      $('.js-data-summary').html(`
+        <b>${vesselName}</b> <br> <i>${origin} -> <b>${dest}</b></i>  <br> ${dateTime_}
+      `);
+      
+      alertSweet(vesselName,accommodation,dateTime_);
+    })
+  }
+
+  function alertSweet(vesselName,accommodation,dateTime_){
+    Swal.fire({
+      title:  `You Selected <i><b>${vesselName}</b></i><br>
+               ${accommodation} - ${dateTime_} <br>
+               Please Proceed Booking`,
+      width: 600,
+      padding: '3em',
+      color: '#7066e0',
+      icon:'success',
+      confirmButtonText: 'BOOK TICKET',
+      // background: '#fff url(/themes/Renify/favicon.ico)',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("/images/nyan-cat.gif")
+        left top
+        no-repeat
+      `
+    }).then(function(){
+       $('[for="tab3"]').click();
+    })
+  }
+
+  function setDateTimeForm(dateTime){
+    // yyyy-MM-dd // 
+    // current MM/dd/yyyy //
+    var date = dateTime.split(' ')[0];
+    var d    = date.split('/');
+    date     = `${d[2]}-${d[0]}-${d[1]}`;
+    var time = dateTime.split(' ')[1];
+    var ampm = dateTime.split(' ')[2];
+
+    H = Number(time.split(':')[0]);
+    M = Number(time.split(':')[1]);
+    
+    if(ampm == 'pm'){
+      H += 12;
+    }
+
+    if(H<10){
+      H = '0'+String(H);
+    }
+
+    if(M<10){
+      M = '0'+String(M);
+    }
+    
+    time = `${H}:${M}`;
+
+   
+    return [date,time];
   }
 
   function renderDate(data){
@@ -180,6 +303,7 @@
 			$('.ajax-message').hide();
 			getID(origin,dest,date);
 			updateQuery(origin,dest,date);
+      initBookingButton();
 	  })
  	}
 

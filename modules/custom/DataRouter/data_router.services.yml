@@ -52,3 +52,10 @@ services:
     class: Drupal\data_router\Service\StudentService
     arguments:
       - '@entity_type.manager'    
+
+  data_router.bookservice:
+    class: Drupal\data_router\Service\BookingService
+    arguments:
+      - '@entity_type.manager' 
+      - '@data_router.mail'
+      
