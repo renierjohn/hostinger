@@ -59,10 +59,19 @@ class BookingService
 	  $template      = fread($file_template,filesize($filename));
 	  fclose($file_template);
 
-	  $status           = $data['pending'] ? 'PENDING' : 'SUCCESS';
-	  $status_bg_color  = $data['pending'] ? '#ffcc00' : 'green';
-	  $status_txt_color = $data['pending'] ? 'black'   : 'white';
-	  
+	  $status           = 'SUCCESS';
+	  $status_bg_color  = 'green';
+	  $status_txt_color = 'white';
+  	$link_tag         = '<a href="https://renifysite.com/sites/default/files/book/ticket/'.$data['hash'].'.pdf" title="link" target="_blank">Download Youre Ticket Here</a>';
+
+    if($data['pending']){
+      $status           = 'PENDING';
+      $status_bg_color  = '#ffcc00';
+      $status_txt_color = 'black';
+      $link_tag         = '<a href="https://renifysite.com/book/'.$data['hash'].'" title="link" target="_blank">Click Here to Check Status</a>';
+    }
+
+
     $template = str_replace('{{fee}}',self::FEE,$template);
     $template = str_replace('{{firstname}}',$data['name'],$template);
     $template = str_replace('{{lastname}}',$data['lastname'],$template);
@@ -77,6 +86,8 @@ class BookingService
     $template = str_replace('{{status_bg_color}}',$status_bg_color,$template);
     $template = str_replace('{{status_txt_color}}',$status_txt_color,$template);
     $template = str_replace('{{link}}','https://renifysite.com/book/'.$data['hash'],$template);
+
+    $template = str_replace('{{link_tag}}',$link_tag,$template);
     
     $this->template = $template;
     $this->email    = $data['mail'];
