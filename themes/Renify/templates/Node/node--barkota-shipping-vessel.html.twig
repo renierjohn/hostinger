@@ -73,9 +73,6 @@
     </div>
 </section>
 
-
-{{ drupal_view('frontpage', 'block_1') }}
-
 <section id="body" class="articles"  max-pager="">
     <div class="row section-header has-bottom-sep" >
         <div class="col-full">
@@ -110,13 +107,7 @@
           <a class="weatherwidget-io" href="https://forecast7.com/en/10d32123d89/cebu-city/" data-label_1="CEBU CITY" data-label_2="WEATHER" data-font="Roboto" data-icons="Climacons Animated" data-days="7" data-theme="original" >CEBU CITY WEATHER</a>
       </div> #}
 
-<div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
-  <div class="col-block" style="width: 100%;overflow: auto;">
-    <div class="selected-weather-wrap" style="opacity: 1;">      
-    
-    </div>
-   </div>
- </div>
+
 
 {# Search By Date #}
   <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
@@ -258,6 +249,16 @@
           </div>
       </div> 
   </div>
+
+  {# WEATHER BLOCK #}
+  <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+    <div class="col-block" style="width: 100%;overflow: auto;">
+      <div class="selected-weather-wrap" style="opacity: 1;">      
+      
+      </div>
+     </div>
+ </div>
+
   <div class="row center" >
     <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>
   </div>
@@ -292,6 +293,8 @@
     <h2>Want to Travel By Land ? <a href="/routes/" class="invert">Click Here</a></h2>
   </div>
 </section>
+
+{{ drupal_view('frontpage', 'block_1') }}
 
 {# RELATED VESSEL #}
 <section id="category" class="">

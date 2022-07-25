@@ -55,8 +55,6 @@
     </div>
 </section>
 
-{{ drupal_view('frontpage', 'block_1') }}
-
 <section id="body" class="articles"  max-pager="">
     <div class="row section-header has-bottom-sep" >
         <div class="col-full">
@@ -85,15 +83,6 @@
             </div>
         </div>
     </div> <!-- end section-header -->
-
-    <!-- WEATHER DISPLAY -->
-    <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
-      <div class="col-block" style="width: 100%;overflow: auto;">
-        <div class="selected-weather-wrap" style="opacity: 1;">      
-         
-        </div>
-      </div>
-    </div>
 
   <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
       <div class="col-block">
@@ -245,6 +234,15 @@
       </div>
   </div>
 
+      <!-- WEATHER DISPLAY -->
+    <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
+      <div class="col-block" style="width: 100%;overflow: auto;">
+        <div class="selected-weather-wrap" style="opacity: 1;">      
+         
+        </div>
+      </div>
+    </div>
+
     <div class="row center" >
         <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>
     </div>
@@ -276,6 +274,8 @@
   </div>
 </section>
 
+
+{{ drupal_view('frontpage', 'block_1') }}
 
 {# RELATED VESSEL #}
 <section id="category" class="">
