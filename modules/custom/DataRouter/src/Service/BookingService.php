@@ -78,6 +78,7 @@ class BookingService
     $template = str_replace('{{hash}}',$data['hash'],$template);
     $template = str_replace('{{price}}',$data['price'],$template);
     $template = str_replace('{{vessel}}',$data['vessel'],$template);
+    $template = str_replace('{{accomodation}}',$data['accomodation'],$template);
     $template = str_replace('{{origin}}',$data['origin'],$template);
     $template = str_replace('{{destination}}',$data['destination'],$template);
     $template = str_replace('{{remarks}}',$data['remarks'],$template);
