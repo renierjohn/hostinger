@@ -1,0 +1,26 @@
+table tr td ul {
+	margin: 0;
+	display: flex;
+}
+
+table tr td li {
+	padding: 1rem;
+	list-style: none;
+  border-color: #4caf50;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0 1rem;
+  width: 50%;
+}
+
+table tr td li:hover{
+	border-color: black;
+	color: black;
+	transition: 1s;
+}
+
+table tr td li a:hover{
+	color: black !important;
+	transition: 1s;
+}
+

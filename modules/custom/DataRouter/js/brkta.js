@@ -88,7 +88,8 @@
 		    	dat.accommodations.forEach(function(content){
             var hashed = $.md5(content.price+hashData)
 		    		var color = content.isAvailable == true ? 'color:green' : 'color:red';
-	          template_acc +=`<li style="${color}" class="js-data">
+	          template_acc +=`<li style="${color};list-style:none;" class="js-data">
+                                <i class="fa fa-copy" aria-hidden="true"></i>
                                 <a href="#" 
                                   js-data-acc   = "${content.name}"
                                   js-data-hash  = "${hashed}"

@@ -11,7 +11,10 @@ sched:
     - core/jquery  
 
 barkota:
-  version: 1.6.1
+  version: 1.6.2
+  css:
+    theme:
+      css/barkota.css: {}
   js:
     js/brkta.js: {}
     https://cdn.jsdelivr.net/npm/jquery.md5@1.0.2/index.min.js: {type: external}
