@@ -5,6 +5,7 @@
 {% set description = content.field_description%}
 {% set banner      = content.field_banner_image.0['#markup'] %}
 {% set code        = content.field_code %}
+{% set logo        = content.field_logo.0['#context'].value %}
 {% set uuid        = content.field_uuid.0['#context'].value %}
 {% set name        = content.field_display_name %}
 {% set route_orign = content.field_vessel_origin['#items'] %}	
@@ -112,7 +113,10 @@
 {# Search By Date #}
   <div class="row features block-1-1 block-tab-full route_select aos-init aos-animate" data-aos="fade-in">
         <div class="col-block">
-          <h2>Search By Date</h2>
+          <div class="date-title-wrapper">
+            <h2>Search By Date</h2>
+            (<img src="/themes/Renify/images/icons/scroll.png" class="swipe-icon" alt="swipe-icon" > Scroll )
+          </div>
           <div class="select-date">
               <div class="carousel slick-initialized slick-slider">
                 <div class="slick-list">
@@ -197,6 +201,7 @@
                 >
               </div>
               <table>
+                <caption><img src="{{logo}}" class="vessel_logo" alt="{{title}}"></caption>
                 <caption class="ajax_table_origin"><i>from</i></caption>
                 <caption class="ajax_table_dest"><i>to</i></caption>
                 <thead>
@@ -245,6 +250,7 @@
                 style="float:right;"
                 >
               </div>
+              <caption><img src="{{logo}}" class="vessel_logo" alt="{{title}}"></caption>
               {{ drupal_form('Drupal\\data_router\\Form\\BookingForm')}}
           </div>
       </div> 

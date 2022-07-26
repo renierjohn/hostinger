@@ -46,7 +46,11 @@
  * responsive:
  * reusable and common theme styles
  * ------------------------------------------------------------------- */
-@media only screen and (max-width:1000px) {
+@media only screen and (max-width:1024px) {
+  .route_select .selected-date-wrap{
+    width: 90vw;
+  }
+
   .display-1 {
     font-size: 5.2rem;
   }
@@ -62,10 +66,6 @@
 }
 
 @media only screen and (max-width:800px) {
-
-  .route_select .selected-date-wrap{
-    width: 800px;
-  }
 
   .slick-prev{
 
@@ -179,10 +179,6 @@
 }
 
 @media only screen and (max-width:425px) {
-  .route_select .selected-date-wrap{
-    width: 425px;
-  }
-
   .display-1 {
     font-size: 3.8rem;
   }

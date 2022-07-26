@@ -1,6 +1,7 @@
 table tr td ul {
 	margin: 0;
 	display: flex;
+	flex-wrap: wrap;
 }
 
 table tr td li {
@@ -10,7 +11,8 @@ table tr td li {
   border-style: solid;
   border-width: 1px;
   margin: 0 1rem;
-  width: 50%;
+  width: 45%;
+  margin: 4px 4px;
 }
 
 table tr td li:hover{
@@ -24,3 +26,27 @@ table tr td li a:hover{
 	transition: 1s;
 }
 
+.date-title-wrapper{
+	display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.vessel_logo{
+	width: 200px !important;
+}
+
+.swipe-icon{
+	width: 50px !important;
+  height: 50px !important;
+  margin: 0 2rem 0 0;
+}
+
+@media only screen and (max-width:800px) {
+  table tr td li {
+	  width: 100%;
+	  margin: 4px 4px;
+	}
+}

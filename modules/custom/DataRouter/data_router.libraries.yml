@@ -11,7 +11,7 @@ sched:
     - core/jquery  
 
 barkota:
-  version: 1.6.2
+  version: 1.6.3
   css:
     theme:
       css/barkota.css: {}
