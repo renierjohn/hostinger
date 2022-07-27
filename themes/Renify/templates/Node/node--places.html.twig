@@ -6,6 +6,7 @@
 {% set category     = content.field_category.0['#title'] %}
 {% set youtube_img  = content.field_banner_image.0['#markup'] %}
 {% set nearby       = content.field_nearby_place.0['#plain_text'] %}
+{% set calendar     = content.field_calendar.0['#context'].value %}
 {% set booking_link = content.field_table_ticket_link.0 %}
 {% set date         = node.created.value|format_date('y M o') %}
 {% set title        = node.title.value|raw|striptags %}
@@ -35,6 +36,8 @@
 {% if youtube is empty %}
   {% set youtube = 'https://youtu.be/OIyWjRQztVY' %}
 {% endif %}
+
+{% set default_calendar = 'https://calendar.google.com/calendar/embed?src=u7rqqjuki0d3op2afm0ammi9rg%40group.calendar.google.com&ctz=Asia%2FManila' %}
 
 <section id="breadcrumb" class="breadcrumb">
     <div class="cont_principal">
@@ -101,6 +104,8 @@
                 style="float:right;"
                 >
             </div></h3>
+       
+       {# SOCIAL MEDIA ICON LINKS #}
        <div class="content-social">
         <ul>
           <li>
@@ -119,17 +124,31 @@
           </li>
         </ul>
       </div>
-      {% if booking_link %}
-        <div>
-          <a href="{{booking_link}}" class="btn btn--stroke" target="blank"><i class="fa fa-book"></i> Book Here <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
-        </div>
-      {% endif %}
       
-      <div class="tab-wrap">
-          <input type="radio" id="tab1" name="tabGroup1" class="tab" >
-            <label for="tab1">Details</label>
+      {# BOOKING BUTTONS #}
+      <div>
+        <label href="#data-route-signup-form" for="modal-signup" class="btn btn--stroke btn--big js-alert">
+          <i class="fa fa-plus"></i> About Us
+        </label>
+        
+        <label href="#data-route-signup-form" for="modal-book" class="btn btn--stroke js-alert" >
+          <i class="fa fa-book"></i> Book Here <i class="fa fa-link" aria-hidden="true"></i>
+        </label>
 
-          <input type="radio" id="tab2" name="tabGroup1" class="tab" checked>
+          {% if booking_link %}
+              <a href="{{booking_link}}" class="btn btn--stroke" target="blank">
+                <i class="fa fa-book"></i> Book More <i class="fa fa-external-link-alt" aria-hidden="true"></i>
+              </a>
+          {% endif %}
+      </div>
+      {# END BOOKING BUTTONS #}
+      
+      {# TABS #}
+      <div class="tab-wrap">
+          <input type="radio" id="tab1" name="tabGroup1" class="tab" checked >
+            <label for="tab1">Find Booking Schedule</label>
+
+          <input type="radio" id="tab2" name="tabGroup1" class="tab" >
             <label for="tab2">Comments</label>
           
           <input type="radio" id="tab3" name="tabGroup1" class="tab">
@@ -137,21 +156,30 @@
           
           <input type="radio" id="tab4" name="tabGroup1" class="tab">
             <label for="tab4">Video</label>
-         
+          
+          {# 1ST TAB / CALENDAR #}
           <div class="tab__content">
-            <h3>About {{title}}</h3>
-            {{ description|raw }}
-            {# <iframe src="https://planner5d.com/v?key=7d7b42d52ae86730ecbed707faae054e&viewMode=3d" style="width:100%; height:60vh; border:none;" allowfullscreen></iframe> #}
+            {% if calendar %}
+              <a href="{{calendar}}" class="btn btn--stroke" target="_blank" title="" ><i class="fa fa-expand"></i> FULL SCREEN</a>
+              <iframe src="{{calendar}}" style="border: 0" width="100%" height="700px" frameborder="0" scrolling="no"></iframe>
+            {% else %}
+              <a href="https://forms.gle/rgoAoe6pAcxRnJvV7" class="btn btn--stroke" title="Subscribe" target="_blank"><i class="fas fa-shopping-cart"></i> Subscribe Now</a>
+              <a href="{{default_calendar}}" class="btn btn--stroke" target="_blank" title="" ><i class="fa fa-expand"></i> FULL SCREEN</a>
+              <iframe src="{{default_calendar}}" style="border: 0" width="100%" height="700px" frameborder="0" scrolling="no"></iframe>
+            {% endif %}
           </div>
 
+          {# 2ND TAB / COMMENT #}
           <div class="tab__content">
             <div class="fb-comments" id="comment" data-href="https://renifysite.com{{path}}"  data-width="" data-numposts="10"></div>
           </div>
 
+          {# 3RD TAB / MAPS #}
           <div class="tab__content">
             <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=60025&amp;height=600&amp;hl=en&amp;q={{map}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
           </div>
 
+          {# 4TH TAB / VIDEO #}
           <div class="tab__content">
               <div class="col-full video-bg" style="background-image: url({{youtube_img}}); margin-top:0;">
                 <a class="btn-video" href={{youtube}} data-lity>
@@ -159,7 +187,10 @@
                 </a>
               </div>
           </div>
-       </div> 
+       </div>
+      {# END TABS  #}
+      
+
     </div>   
 
     <div class="content-social">
@@ -247,7 +278,6 @@
 {{ drupal_form('Drupal\\data_router\\Form\\MessageForm')}}
 
 <!--video  -->
-
 <section id="video" class="video">
   <div class="row">
     <div id="video-bg" class="col-full video-bg" style="background-image: url({{youtube_img}})">
@@ -272,3 +302,54 @@
     </div>
   </div>
 </section>
+<!-- End video  -->
+
+{# 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  //   MODAL BELOW
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+#}
+
+
+{# MODAL ABOUT US #}
+<div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
+  <input class="modal-state" id="modal-signup" type="checkbox"  style="display: none;" />
+  <div class="modal">
+    <label class="modal__bg" for="modal-signup"></label>
+    <div class="modal__inner" style="background-color:white;height:70%;">
+        <label class="modal__close" for="modal-signup"></label>
+        <h3>About {{title}}</h3>
+        {{ description|raw }}
+    </div>
+  </div>
+</div>
+
+
+{# MODAL BOOK HERE #}
+<div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
+  <input class="modal-state" id="modal-book" type="checkbox"  style="display: none;" />
+  <div class="modal">
+    <label class="modal__bg" for="modal-book"></label>
+    <div class="modal__inner" style="background-color:white;height:20%;">
+        <label class="modal__close" for="modal-book"></label>
+        <h3 style="margin-top:2rem;"><i class="fas fa-shopping-cart"></i> Comming Soon <i class="fa fa-location-pin"></i></h3>
+        <div class="content-social">
+          <ul>
+            <li>
+              <a href="#." class="share-fb" data-pageid="/beach/gracey-dive-resort-and-restaurant" data-id="" data-title="Gracey Dive Resort And Restaurant"
+                ><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#." class="share-twitter" data-pageid="/beach/gracey-dive-resort-and-restaurant" data-id="" data-title="Gracey Dive Resort And Restaurant">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#." class="share-insta" data-pageid="/beach/gracey-dive-resort-and-restaurant" data-title="Gracey Dive Resort And Restaurant">
+                <i class="fab fa-instagram" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

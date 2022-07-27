@@ -273,12 +273,12 @@
     <a href="/vessel/" class="btn btn--stroke--reverse btn-effect btn--big"><i class="fa fa-arrow-left"></i>GO BACk TO LIST</a>
   </div>
   
-  <div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
-      {% if description.0 %}
-      <h3 style="margin-top:1rem">About {{title}}</h3>
-          {{description|raw}}
-      {% endif %}  
-  </div> 
+  {% if description.0 %}
+    <div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
+    <h3 style="margin-top:1rem">About {{title}}</h3>
+        {{description|raw}}
+    </div> 
+  {% endif %}  
 </section>
 
 <!-- Pagination  -->
