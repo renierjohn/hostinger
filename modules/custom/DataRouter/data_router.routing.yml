@@ -56,6 +56,40 @@ data_router.student_delete:
   requirements:
     _role : 'administrator'
 
+data_router.student_rest_api_login_state:
+  path: '/rest/api/v1/student/status'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::checkLoginStatus'
+    _title: 'Check Login Status'
+  requirements:
+    _access : 'TRUE'
+
+data_router.student_rest_api_scan:
+  path: '/rest/api/v1/student/scan/{qr}'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::scanQrCode'
+    _title: 'Scan QR Code'
+  requirements:
+    _role : 'teacher+administrator'
+
+data_router.student_rest_api_recent:
+  path: '/rest/api/v1/student/recent'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::renderRecentStudent'
+    _title: 'Recent Scanned QR Code'
+  requirements:
+    _access : 'TRUE'
+
+
+data_router.student_rest_api_delete:
+  path: '/rest/api/v1/student/delete/cache'
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::deleteCache'
+    _title: 'Delete Rest API Cache'
+  requirements:
+   _access : 'TRUE'
+
+
 data_router.student_api:
   path: '/api/student'    
   defaults:

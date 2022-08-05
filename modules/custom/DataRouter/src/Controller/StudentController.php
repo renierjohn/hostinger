@@ -4,6 +4,8 @@ namespace Drupal\data_router\Controller;
 
 use Drupal\Core\State\State;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -19,7 +21,13 @@ class StudentController extends ControllerBase {
 
   protected $student;
 
-  const LIMIT = 9;
+  const LIMIT     = 7;
+
+  const LIMIT_ALL = 9;
+
+  const PATH      = 'private://students';
+
+  const PATH_FLAG = 'public://students_flag'; 
 
   public function __construct(State $state,RequestStack $request,StudentService $student) {
     $this->state   = $state;
@@ -98,7 +106,7 @@ class StudentController extends ControllerBase {
 
   public function ajaxStudentList(){
     $request = $this->request->query->all();
-    $limit   = !empty($request['l'])    ? $request['l']   : 10;
+    $limit   = !empty($request['l'])    ? $request['l']   : self::LIMIT_ALL;
     $start   = !empty($request['s'])    ? $request['s']   : 0;
     $gender  = !empty($request['g'])    ? $request['g']   : '';
     $level   = !empty($request['lvl']) ? $request['lvl'] : '';
@@ -110,13 +118,113 @@ class StudentController extends ControllerBase {
     $data = [
       'students'  => $students,
       'more_flag' => $more_flag,
+      'limit'     => self::LIMIT_ALL
     ];
-    return new JsonResponse($data);
+    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    return new JsonResponse($data,200,$headers);
   }
 
   public function deleteData(){
     $this->student->deleteData();
     return new JsonResponse(['status'=>TRUE]);
+  }
+
+
+  ////
+  ////
+  //// FOR EXTERNAL SITE BELOW ALL
+  ////
+  ////
+  public function checkLoginStatus(){
+    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    $roles = \Drupal::currentUser()->getRoles();
+    if(in_array('teacher',$roles) || in_array('administrator',$roles)){
+      return new JsonResponse(['status' => true],200);  
+    }
+    return new JsonResponse(['status' => false],200);
+  }
+
+  public function scanQrCode($qr){
+    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+
+    if(empty($qr)){
+      return new JsonResponse(['status' => false],200,$headers);
+    }
+
+    $data =  $this->student->sethash($qr)->getStudentDataByHash();
+    if(empty($data)){
+     return new JsonResponse(['status' => false],200,$headers); 
+    }
+
+    $this->storeRecentData($data);
+    $this->storeDataFlag($data);
+    
+    return new JsonResponse(['status' => true,'data' => $data],200,$headers);
+  }
+
+  public function renderRecentStudent(){
+    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    $files = scandir(self::PATH);
+    unset($files[0]);unset($files[1]);
+    
+    if(empty($files)){
+       return new JsonResponse(['status' => false],200,$headers); 
+    }
+
+    $files = array_reverse($files);
+    $data  = []; 
+    foreach ($files as $key => $filename) {
+      $json   = file_get_contents(self::PATH.'/'.$filename);
+      $data[] = json_decode($json,TRUE);
+      if($key == self::LIMIT - 1){
+        break;
+      }
+    }
+
+    return new JsonResponse(['status' => true,'data'=>$data],200,$headers); 
+  }
+
+  // DELETE CACHE / Folder
+  public function deleteCache(){
+    \Drupal::service('rest_api_access_token.cache')->deleteAll(); // delete cache rest api
+    $files = scandir(self::PATH);
+    unset($files[0]);unset($files[1]);
+     
+    foreach ($files as $key => $filename) {
+       unlink(self::PATH.'/'.$filename); // delete all files inside STUDENTS Folder
+    }
+    return new JsonResponse(['status'=>True]);
+  }
+
+  // FOR DISPLAYING RECENT
+  private function storeRecentData(&$data){
+    $file = fopen(self::PATH.'/'.$data['ts'],'a');
+    fwrite($file,json_encode($data));
+    fclose($file);
+  }
+
+  // FOR DETECTING SCANNED MEMBERS
+  private function storeDataFlag(&$data){
+    $date = date("Y-m-d",time());
+    $date = str_replace('-','_',$date);
+    $filename = $date.'.json';
+    if(file_exists(self::PATH_FLAG.'/'.$filename)){
+      $file  = fopen(self::PATH_FLAG.'/'.$filename,'r');
+      $dataf = fread($file,100000000);
+      fclose($file);
+      $dataf = json_decode($dataf,TRUE);
+    }
+    else{
+      $dataf = [];
+    }
+
+    $file  = fopen(self::PATH_FLAG.'/'.$filename,'w');
+    $dataf[] =  [
+      'uid'  => $data['uid'],
+      'hash' => $data['hash']
+    ];
+    fwrite($file,json_encode($dataf));
+    fclose($file);
   }
 
 }

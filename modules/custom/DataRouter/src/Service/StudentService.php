@@ -204,4 +204,34 @@ class StudentService
     return False;
   }
 
+  ////
+  ////
+  //// FOR EXTERNAL SITE BELOW ALL
+  ////
+  ////
+  public function getStudentDataByHash(){
+    $hash = $this->hash;
+    $user = $this->entityTypeManager->getStorage('user')->loadByProperties(['roles'=>'student','field_qr'=>$hash]);
+    if(empty($user)){
+      return FALSE;
+    }
+
+    $user = reset($user);
+    $timeStamp = time();
+    $data = [
+      'uid'   => $user->id(),
+      'hash'  => $user->field_qr->value,
+      'level' => $user->field_level->value,
+      'gender'=> $user->field_gender->value,
+      'name'  => $user->name->value,
+      'image' => $this->getUrl($user->user_picture->target_id),
+      'ts'    => $timeStamp,
+      'dt'    => date("Y-m-d h:i A",$timeStamp),
+      'hour'  => date("h",time()),
+      'minute'=> date("i",time()),
+      'ampm'  => date("A",time()),
+    ];
+    return $data;
+  }
+
 }
