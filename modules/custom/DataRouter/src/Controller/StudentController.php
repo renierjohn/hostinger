@@ -121,7 +121,7 @@ class StudentController extends ControllerBase {
       'limit'     => self::LIMIT_ALL
     ];
     $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
-    return new JsonResponse($data,200,$headers);
+    return new JsonResponse($data);
   }
 
   public function deleteData(){
