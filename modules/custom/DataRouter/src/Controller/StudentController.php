@@ -25,9 +25,9 @@ class StudentController extends ControllerBase {
 
   const LIMIT_ALL = 9;
 
-  const PATH      = 'public://students';
+  const PATH      = 'private://students';
 
-  const PATH_FLAG = 'public://students_flag'; 
+  const PATH_FLAG = 'private://students_flag'; 
 
   public function __construct(State $state,RequestStack $request,StudentService $student) {
     $this->state   = $state;
@@ -210,7 +210,7 @@ class StudentController extends ControllerBase {
 
   // FOR DISPLAYING RECENT
   private function storeRecentData(&$data){
-    $file = fopen(self::PATH.'/'.$data['ts'],'a');
+    $file = fopen(self::PATH.'/'.$data['ts'],'w');
     fwrite($file,json_encode($data));
     fclose($file);
   }
