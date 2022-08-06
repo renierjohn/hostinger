@@ -163,7 +163,11 @@ class StudentController extends ControllerBase {
   }
 
   public function renderRecentStudent(){
-    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    $headers = [ 
+                'Access-Control-Allow-Headers' => '*',
+                'Access-Control-Allow-Origin'  => '*',
+                'Access-Control-Allow-Methods' => '*'
+              ];
     $files = scandir(self::PATH);
     unset($files[0]);unset($files[1]);
     
@@ -181,7 +185,7 @@ class StudentController extends ControllerBase {
       }
     }
 
-    return new JsonResponse(['status' => true,'data'=>$data],200,$headers); 
+    return new JsonResponse(['status' => true,'data'=>$data]); 
   }
 
   // DELETE CACHE / Folder
