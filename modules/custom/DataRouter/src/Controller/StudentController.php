@@ -172,7 +172,7 @@ class StudentController extends ControllerBase {
     unset($files[0]);unset($files[1]);
     
     if(empty($files)){
-       return new JsonResponse(['status' => false],200,$headers); 
+       return new JsonResponse(['status' => false]); 
     }
 
     $files = array_reverse($files);
