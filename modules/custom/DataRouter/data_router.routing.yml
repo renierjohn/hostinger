@@ -72,8 +72,16 @@ data_router.student_rest_api_scan:
   requirements:
     _role : 'teacher+administrator'
 
+# data_router.student_rest_api_recent:
+#   path: '/rest/api/v1/student/recents'
+#   defaults:
+#     _controller: '\Drupal\data_router\Controller\StudentController::renderRecentStudent'
+#     _title: 'Recent Scanned QR Code'
+#   requirements:
+#     _access : 'TRUE'
+
 data_router.student_rest_api_recent:
-  path: '/rest/api/v1/student/recents'
+  path: '/api/student/recents'
   defaults:
     _controller: '\Drupal\data_router\Controller\StudentController::renderRecentStudent'
     _title: 'Recent Scanned QR Code'
