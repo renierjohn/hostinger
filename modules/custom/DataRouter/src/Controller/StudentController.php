@@ -25,7 +25,7 @@ class StudentController extends ControllerBase {
 
   const LIMIT_ALL = 9;
 
-  const PATH      = 'private://students';
+  const PATH      = 'public://students';
 
   const PATH_FLAG = 'public://students_flag'; 
 
