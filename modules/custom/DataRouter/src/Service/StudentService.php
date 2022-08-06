@@ -115,7 +115,7 @@ class StudentService
     return False;
   }
 
-  public function query($limit,$start,$gender = False,$level = False,$present = False){
+  public function query($limit,$start,$gender = False,$level = False,$name = False){
     $query = $this->entityTypeManager->getStorage('user')->getQuery();
     $query->condition('roles','student');
     if(empty($present)){
@@ -130,19 +130,23 @@ class StudentService
       $query->condition('field_level',$level);
     }
 
+    if(!empty($name)){
+      $query->condition('name',$name,'CONTAINS');
+    }
+
     $ids = $query->execute();
 
-    if($present == 1){
-      $ids = $this->filterIds(array_values($ids),1);
-    }
+    // if($present == 1){
+    //   $ids = $this->filterIds(array_values($ids),1);
+    // }
 
-    if($present == 2 && !empty($present)){
-      $ids = $this->filterIds(array_values($ids),2);
-    }
+    // if($present == 2 && !empty($present)){
+    //   $ids = $this->filterIds(array_values($ids),2);
+    // }
 
-    if(!empty($present) && count($ids) > $limit){
-      $ids = array_splice($ids,0,$limit + 1);
-    }
+    // if(!empty($present) && count($ids) > $limit){
+    //   $ids = array_splice($ids,0,$limit + 1);
+    // }
 
     $users = $this->entityTypeManager->getStorage('user')->loadMultiple($ids);
     $users_arr = [];

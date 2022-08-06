@@ -104,6 +104,7 @@ class StudentController extends ControllerBase {
     return new JsonResponse($hash);
   }
 
+  // INCLUDE EXTERNAL SITE
   public function ajaxStudentList(){
     $request = $this->request->query->all();
     $limit   = !empty($request['l'])    ? $request['l']   : self::LIMIT_ALL;
@@ -111,8 +112,9 @@ class StudentController extends ControllerBase {
     $gender  = !empty($request['g'])    ? $request['g']   : '';
     $level   = !empty($request['lvl']) ? $request['lvl'] : '';
     $present = !empty($request['p'])   ? $request['p'] : False;
+    $name    = !empty($request['n'])   ? $request['n'] : False;
 
-    $students  = $this->student->query($limit,$start,$gender,$level,$present);
+    $students  = $this->student->query($limit,$start,$gender,$level,$name);
     $more_flag = count($students) > $limit ? True : False;
     $students  = array_splice($students,0,$limit);
     $data = [
@@ -120,8 +122,14 @@ class StudentController extends ControllerBase {
       'more_flag' => $more_flag,
       'limit'     => self::LIMIT_ALL
     ];
-    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
-    return new JsonResponse($data);
+    // $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    $metadata = new CacheableMetadata();
+    $metadata->setCacheTags(['user_lists']);
+    $metadata->setCacheContexts(['url.query_args']);
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency($metadata);
+    return $response;
+    // return new JsonResponse($data);
   }
 
   public function deleteData(){
@@ -136,7 +144,7 @@ class StudentController extends ControllerBase {
   ////
   ////
   public function checkLoginStatus(){
-    $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
+    // $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
     $roles = \Drupal::currentUser()->getRoles();
     if(in_array('teacher',$roles) || in_array('administrator',$roles)){
       return new JsonResponse(['status' => true],200);  
