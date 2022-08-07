@@ -143,13 +143,28 @@ class StudentController extends ControllerBase {
   //// FOR EXTERNAL SITE BELOW ALL
   ////
   ////
+  public function getFirebaseToken(){
+     $path = 'private://auth/firebase.json';
+     if(!file_exists($path)){
+      return new JsonResponse(['status' => false]); 
+     }
+     $json = file_get_contents($path);
+     $conf = json_decode($json,TRUE);
+
+     $roles = \Drupal::currentUser()->getRoles();
+     if(!in_array('administrator',$roles) && !in_array('moderator',$roles) ){
+      unset($conf['apiKey']);
+     }
+     return new JsonResponse(['status' => true,'data'=>$conf]);
+  }
+
   public function checkLoginStatus(){
     // $headers = [ 'Access-Control-Allow-Headers' => '*','Access-Control-Allow-Origin' => '*'];
     $roles = \Drupal::currentUser()->getRoles();
     if(in_array('teacher',$roles) || in_array('administrator',$roles)){
-      return new JsonResponse(['status' => true],200);  
+      return new JsonResponse(['status' => true]);  
     }
-    return new JsonResponse(['status' => false],200);
+    return new JsonResponse(['status' => false]);
   }
 
   public function scanQrCode($qr){
@@ -193,7 +208,16 @@ class StudentController extends ControllerBase {
       }
     }
 
-    return new JsonResponse(['status' => true,'data'=>$data]); 
+    $filename = self::PATH_FLAG.'/'.$this->getCurrentDate().'.json';
+    if(!file_exists($filename)){
+      return new JsonResponse(['status' => false]);
+    }
+    $json = file_get_contents($filename);
+    $data_flag = [];
+    if(!empty($json)){
+      $data_flag = json_decode($json,TRUE);
+    }
+    return new JsonResponse(['status' => true,'data'=>$data,'data_flag'=>$data_flag]); 
   }
 
   // DELETE CACHE / Folder
@@ -205,6 +229,11 @@ class StudentController extends ControllerBase {
     foreach ($files as $key => $filename) {
        unlink(self::PATH.'/'.$filename); // delete all files inside STUDENTS Folder
     }
+
+    $filename = self::PATH_FLAG.'/'.$this->getCurrentDate().'.json';
+    $file = fopen($filename,'w');
+    fclose($file);
+    
     return new JsonResponse(['status'=>True]);
   }
 
@@ -217,9 +246,7 @@ class StudentController extends ControllerBase {
 
   // FOR DETECTING SCANNED MEMBERS
   private function storeDataFlag(&$data){
-    $date = date("Y-m-d",time());
-    $date = str_replace('-','_',$date);
-    $filename = $date.'.json';
+    $filename = $this->getCurrentDate().'.json';
     if(file_exists(self::PATH_FLAG.'/'.$filename)){
       $file  = fopen(self::PATH_FLAG.'/'.$filename,'r');
       $dataf = fread($file,100000000);
@@ -231,12 +258,25 @@ class StudentController extends ControllerBase {
     }
 
     $file  = fopen(self::PATH_FLAG.'/'.$filename,'w');
-    $dataf[] =  [
-      'uid'  => $data['uid'],
-      'hash' => $data['hash']
-    ];
+
+    if(!empty($dataf)){
+      $uid_arr = array_column($dataf,'uid');
+      if(!in_array($data['uid'],$uid_arr)){
+        $dataf[] =  [
+          'uid'  => $data['uid'],
+          'hash' => $data['hash']
+        ];
+      }
+    }
+
     fwrite($file,json_encode($dataf));
     fclose($file);
+  }
+
+  private function getCurrentDate(){
+    $date = date("Y-m-d",time());
+    $date = str_replace('-','_',$date);
+    return $date;
   }
 
 }

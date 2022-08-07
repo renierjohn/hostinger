@@ -64,6 +64,14 @@ data_router.student_rest_api_login_state:
   requirements:
     _access : 'TRUE'
 
+data_router.student_rest_api_firebase:
+  path: '/rest/api/v1/student/firebase'    
+  defaults:
+    _controller: '\Drupal\data_router\Controller\StudentController::getFirebaseToken'
+    _title: 'Get Firebase Token'
+  requirements:
+    _access : 'TRUE'
+
 data_router.student_rest_api_scan:
   path: '/rest/api/v1/student/scan/{qr}'
   defaults:
