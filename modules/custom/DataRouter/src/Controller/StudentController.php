@@ -180,7 +180,7 @@ class StudentController extends ControllerBase {
     }
 
     $this->storeRecentData($data);
-    $this->storeDataFlag($data);
+    // $this->storeDataFlag($data);
     
     return new JsonResponse(['status' => true,'data' => $data],200,$headers);
   }
