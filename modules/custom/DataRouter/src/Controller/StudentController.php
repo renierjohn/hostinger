@@ -206,7 +206,7 @@ class StudentController extends ControllerBase {
       // $data[] = json_decode($json,TRUE);
 
       $json_arr = json_decode($json,TRUE);
-      if(date('Y_m_d',$json_arr['ts'])  == getCurrentDate()){
+      if(date('Y_m_d',$json_arr['ts'])  == $this->getCurrentDate()){
         $data[]  = $json_arr;
         $data_flag[] = [
           'uid'  => $json_arr['uid'],
