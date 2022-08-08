@@ -200,23 +200,33 @@ class StudentController extends ControllerBase {
 
     $files = array_reverse($files);
     $data  = []; 
+    $data_flag = [];
     foreach ($files as $key => $filename) {
       $json   = file_get_contents(self::PATH.'/'.$filename);
-      $data[] = json_decode($json,TRUE);
-      if($key == self::LIMIT - 1){
-        break;
+      // $data[] = json_decode($json,TRUE);
+
+      $json_arr = json_decode($json,TRUE);
+      if(date('Y_m_d',$json_arr['ts'])  == getCurrentDate()){
+        $data[]  = $json_arr;
+        $data_flag[] = [
+          'uid'  => $json_arr['uid'],
+          'hash' => $json_arr['hash']
+        ];
       }
+    
     }
 
-    $filename = self::PATH_FLAG.'/'.$this->getCurrentDate().'.json';
-    if(!file_exists($filename)){
-      return new JsonResponse(['status' => false]);
-    }
-    $json = file_get_contents($filename);
-    $data_flag = [];
-    if(!empty($json)){
-      $data_flag = json_decode($json,TRUE);
-    }
+    // $filename = self::PATH_FLAG.'/'.$this->getCurrentDate().'.json';
+    // if(!file_exists($filename)){
+    //   return new JsonResponse(['status' => false]);
+    // }
+    // $json = file_get_contents($filename);
+    // $data_flag = [];
+    // if(!empty($json)){
+    //   $data_flag = json_decode($json,TRUE);
+    // }
+    // $data_flag = [];
+
     return new JsonResponse(['status' => true,'data'=>$data,'data_flag'=>$data_flag]); 
   }
 
