@@ -89,6 +89,7 @@ class ExportCSVController extends ControllerBase {
       return FALSE;
     }
     $nid = reset($nids);
+    $a=1;
 
   }
 
