@@ -163,8 +163,8 @@
 
       $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
         FB.init({
-          appId: '395967462029410', //replace with your app ID
-          version: 'v8.0'
+          appId: '1361238817743309', //replace with your app ID
+          version: 'v16.0'
         });
         FB.ui({
               method: 'share',
