@@ -1,0 +1,12 @@
+name: REST API Access Token
+description: REST API Access Token module.
+package: Web services
+type: module
+configure: rest_api_access_token.config_form
+core_version_requirement: ^8 || ^9
+core: 8.x
+
+# Information added by Drupal.org packaging script on 2021-02-22
+version: '8.x-1.6'
+project: 'rest_api_access_token'
+datestamp: 1614004619

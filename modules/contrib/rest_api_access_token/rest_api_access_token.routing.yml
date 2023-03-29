@@ -1,0 +1,42 @@
+rest_api_access_token.auth_controller_generateToken:
+  path: 'api/v1/auth/token'
+  methods:  ['POST']
+  defaults:
+    _controller: '\Drupal\rest_api_access_token\Controller\AuthController::tokenResponse'
+  requirements:
+    # Anonymous can log in to system.
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+rest_api_access_token.auth_controller_logout:
+  path: 'api/v1/auth/logout'
+  methods:  ['POST']
+  defaults:
+    _controller: '\Drupal\rest_api_access_token\Controller\AuthController::logout'
+  requirements:
+    # User can logout with rest_api_access_token.
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+    _auth: ['rest_api_access_token']
+rest_api_access_token.auth_controller_logoutFromAllDevices:
+  path: 'api/v1/auth/logout-from-all-devices'
+  methods:  ['POST']
+  defaults:
+    _controller: '\Drupal\rest_api_access_token\Controller\AuthController::logoutFromAllDevices'
+  requirements:
+    # User can logout with rest_api_access_token.
+    _access: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+    _auth: ['rest_api_access_token']
+
+rest_api_access_token.config_form:
+  path: '/admin/config/system/rest_api_access_token'
+  defaults:
+    _form: '\Drupal\rest_api_access_token\Form\ConfigForm'
+    _title: 'REST API Access Token'
+  requirements:
+    _permission: 'administer rest api access token'
+  options:
+    _admin_route: TRUE

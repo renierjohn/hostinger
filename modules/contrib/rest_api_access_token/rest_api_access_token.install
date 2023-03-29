@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the rest_api_access_token module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function rest_api_access_token_schema() {
+  $schema['rest_api_access_token'] = [
+    'description' => 'Stores access tokens.',
+    'fields' => [
+      'user_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'public_token' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+      'secret' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+    ],
+    'indexes' => [
+      'public_token' => ['public_token'],
+      'user_id' => ['user_id'],
+    ],
+    'primary key' => ['public_token'],
+  ];
+
+  return $schema;
+}

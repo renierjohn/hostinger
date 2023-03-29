@@ -1,0 +1,12 @@
+name: 'Aggregator test views'
+type: module
+description: 'Provides default views for views aggregator tests.'
+package: Testing
+dependencies:
+  - drupal:aggregator
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2022-10-22
+version: '2.0.1'
+project: 'aggregator'
+datestamp: 1666403649
