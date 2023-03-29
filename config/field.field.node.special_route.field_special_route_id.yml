@@ -1,0 +1,23 @@
+uuid: f64151d6-f165-45e6-9c84-9f3132438ce7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_special_route_id
+    - node.type.special_route
+id: node.special_route.field_special_route_id
+field_name: field_special_route_id
+entity_type: node
+bundle: special_route
+label: 'Special Route ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

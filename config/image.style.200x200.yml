@@ -1,0 +1,15 @@
+uuid: fae7aa28-7bd7-485c-a6d2-6fb327ee59aa
+langcode: en
+status: true
+dependencies: {  }
+name: 200x200
+label: 200x200
+effects:
+  f7291f9e-7085-4642-b5f7-669a3e7bbd55:
+    uuid: f7291f9e-7085-4642-b5f7-669a3e7bbd55
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 200
+      height: 200
+      anchor: center-center

@@ -1,0 +1,28 @@
+uuid: 39463a1f-8ad4-4e10-979c-e23a286a813e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.config.field_config_name
+    - field.field.node.config.field_data
+    - field.field.node.config.field_message
+    - field.field.node.config.field_subject
+    - node.type.config
+  module:
+    - user
+id: node.config.teaser
+targetEntityType: node
+bundle: config
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_config_name: true
+  field_data: true
+  field_message: true
+  field_subject: true

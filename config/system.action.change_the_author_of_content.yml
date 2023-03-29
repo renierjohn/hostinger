@@ -1,0 +1,12 @@
+uuid: 5dfc02d7-f60f-4bec-8b2c-ab8da7fd2897
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: change_the_author_of_content
+label: 'Change the author of content'
+type: node
+plugin: node_assign_owner_action
+configuration:
+  owner_uid: '22'

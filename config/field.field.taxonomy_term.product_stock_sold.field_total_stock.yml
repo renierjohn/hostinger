@@ -1,0 +1,23 @@
+uuid: d84af7b9-c769-42aa-a5e1-544deb7a0bfc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_total_stock
+    - taxonomy.vocabulary.product_stock_sold
+id: taxonomy_term.product_stock_sold.field_total_stock
+field_name: field_total_stock
+entity_type: taxonomy_term
+bundle: product_stock_sold
+label: 'Total Stock'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,39 @@
+uuid: 1befd07d-000d-40a1-a7c2-4a69abf832d2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_product_discount
+field_name: field_product_discount
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '0'
+      label: 0%
+    -
+      value: '10'
+      label: 10%
+    -
+      value: '20'
+      label: 20%
+    -
+      value: '30'
+      label: 30%
+    -
+      value: '40'
+      label: 40%
+    -
+      value: '50'
+      label: 50%
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

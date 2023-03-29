@@ -1,0 +1,8 @@
+uuid: 286cf993-413b-47f2-9837-9b22779c986c
+langcode: en
+status: true
+dependencies: {  }
+name: Store
+vid: store
+description: ''
+weight: -6

@@ -1,0 +1,19 @@
+uuid: 8a353b20-12bf-437f-bd91-4ccca69fd514
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_name
+    - node.type.barkota_shipping_vessel
+id: node.barkota_shipping_vessel.field_display_name
+field_name: field_display_name
+entity_type: node
+bundle: barkota_shipping_vessel
+label: 'Display Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

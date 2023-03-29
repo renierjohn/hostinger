@@ -1,0 +1,38 @@
+uuid: 0c5dd2de-f26f-404f-9f7b-dcf9718d1f61
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: rpwvgyEURXLz_JjgMCrkS1rUv-0k3L79BpO-ReN7fDI
+id: node
+label: Content
+tags:
+  robots: 'index, follow'
+  title: '[node:title] | [site:name]'
+  keywords: Travel
+  next: '[site:url]/tourist-spots/prayer-mountain/'
+  referrer: strict-origin-when-cross-origin
+  abstract: '[node:field_description]'
+  geo_region: PH-Asia
+  description: '[node:field_description]'
+  prev: '[site:url]/tourist-spots/malmag-falls/'
+  geo_position: '9.1910204,123.2650455'
+  canonical_url: '[node:url]'
+  icbm: '9.1910204,123.2650455'
+  content_language: en
+  geo_placename: Dauin
+  og_url: '[node:url:absolute]'
+  og_type: article
+  og_image: '[node:field_banner_image:facebook:url]'
+  og_determiner: renify
+  og_image_url: '[node:field_banner_image:facebook:url]'
+  og_see_also: '[site:url]/tourist-spots/mag-aso-steam-cave/'
+  og_image_type: '[node:field_banner_image:facebook:mimetype]'
+  og_description: '[node:field_description]'
+  og_image_width: '[node:field_banner_image:facebook:width]'
+  og_title: '[node:title]'
+  og_image_alt: '[node:title]'
+  og_site_name: Renify
+  og_image_height: '[node:field_banner_image:facebook:height]'
+  og_email: renify.official@gmail.com
+  twitter_cards_type: gallery

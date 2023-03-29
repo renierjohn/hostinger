@@ -1,0 +1,17 @@
+uuid: 59322218-c414-45fb-a5e5-e16ece5031a7
+langcode: en
+status: true
+dependencies: {  }
+id: node__routes
+label: 'Content: Routes'
+tags:
+  title: '[current-page:title] | Bus | Renify'
+  keywords: '[node:field_route_origin],[node:field_route_destination]'
+  og_image_secure_url: '[node:field_banner_image:facebook]'
+  og_image: '[node:field_banner_image:facebook]'
+  og_image_url: '[node:field_banner_image:facebook]'
+  og_see_also: 'https://renifysite.com/vessel/cocaliong/'
+  og_image_type: '[node:field_image:facebook:mimetype]'
+  og_image_width: '[node:field_banner_image:facebook:width]'
+  og_title: '[current-page:title] | Bus | Renify'
+  og_image_height: '[node:field_banner_image:facebook:height]'

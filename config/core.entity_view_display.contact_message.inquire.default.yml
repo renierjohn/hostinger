@@ -1,0 +1,19 @@
+uuid: 239631fe-2b7b-4daf-8ffa-77b89eb0d50c
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.inquire
+id: contact_message.inquire.default
+targetEntityType: contact_message
+bundle: inquire
+mode: default
+content:
+  message:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

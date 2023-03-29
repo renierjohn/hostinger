@@ -1,0 +1,10 @@
+uuid: 9573c18b-2757-4543-8c83-2cbd39b4ef4b
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.rss
+label: RSS
+targetEntityType: taxonomy_term
+cache: true

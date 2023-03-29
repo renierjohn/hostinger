@@ -1,0 +1,65 @@
+uuid: 2bbdceab-0f2c-40e7-90a1-47ecbf7f4dc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.special_route.field_lat
+    - field.field.node.special_route.field_lng
+    - field.field.node.special_route.field_special_route_destination
+    - field.field.node.special_route.field_special_route_id
+    - field.field.node.special_route.field_special_route_origin
+    - node.type.special_route
+  module:
+    - user
+id: node.special_route.default
+targetEntityType: node
+bundle: special_route
+mode: default
+content:
+  field_lat:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_lng:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_special_route_destination:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_special_route_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_special_route_origin:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

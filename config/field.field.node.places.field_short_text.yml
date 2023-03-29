@@ -1,0 +1,19 @@
+uuid: cc78d31e-d243-4dab-b9c0-28c0a313a828
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_short_text
+    - node.type.places
+id: node.places.field_short_text
+field_name: field_short_text
+entity_type: node
+bundle: places
+label: 'Short Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

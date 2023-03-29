@@ -1,0 +1,30 @@
+uuid: c0c1b6d3-5e67-4b4d-8e75-12968eb45c3e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9e828542-803e-475d-9743-037e96e010aa'
+  module:
+    - block_content
+    - system
+  theme:
+    - renify_dashboard
+id: renify_dashboard_mainmenu
+theme: renify_dashboard
+region: header
+weight: -7
+provider: null
+plugin: 'block_content:9e828542-803e-475d-9743-037e96e010aa'
+settings:
+  id: 'block_content:9e828542-803e-475d-9743-037e96e010aa'
+  label: 'Main Menu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/products\r\n/products/*\r\n/cart\r\n/user/login"

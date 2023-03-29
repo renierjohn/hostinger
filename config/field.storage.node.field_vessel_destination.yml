@@ -1,0 +1,20 @@
+uuid: e5afa57b-4405-431a-985a-37a4c124f852
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_vessel_destination
+field_name: field_vessel_destination
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

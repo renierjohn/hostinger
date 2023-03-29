@@ -1,0 +1,62 @@
+uuid: f7e0635f-da1c-45f8-b375-bfc674ff1fb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.user.register
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_level
+    - field.field.user.user.field_mobile_number
+    - field.field.user.user.field_points
+    - field.field.user.user.field_prev_points
+    - field.field.user.user.field_qr
+    - field.field.user.user.field_redeem_points
+    - field.field.user.user.field_store_photo
+    - field.field.user.user.field_token
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - imce
+    - user
+_core:
+  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
+id: user.user.register
+targetEntityType: user
+bundle: user
+mode: register
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_gender:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image_image
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings:
+      imce:
+        enabled: true
+hidden:
+  contact: true
+  field_level: true
+  field_mobile_number: true
+  field_points: true
+  field_prev_points: true
+  field_qr: true
+  field_redeem_points: true
+  field_store_photo: true
+  field_token: true
+  language: true
+  path: true
+  timezone: true

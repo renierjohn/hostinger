@@ -1,0 +1,33 @@
+uuid: 79aef9ae-50c9-477e-92fa-e0bf482289b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vessel_destination
+    - node.type.places
+    - taxonomy.vocabulary.route_vessels
+  content:
+    - 'taxonomy_term:route_vessels:b398e608-ab2f-4e80-ac05-3457029e8abf'
+id: node.places.field_vessel_destination
+field_name: field_vessel_destination
+entity_type: node
+bundle: places
+label: 'Vessel Route'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    target_uuid: b398e608-ab2f-4e80-ac05-3457029e8abf
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      route_vessels: route_vessels
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

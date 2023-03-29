@@ -1,0 +1,36 @@
+uuid: 5596491e-f365-4529-aacd-3ae1d7675de9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_config_name
+field_name: field_config_name
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: mail_config
+      label: 'Mail Config'
+    -
+      value: mail_data
+      label: 'Mail Message'
+    -
+      value: signup_data
+      label: 'Signup Message'
+    -
+      value: add_data
+      label: 'Add Content Message'
+    -
+      value: edit_data
+      label: 'Edit Content Message'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,36 @@
+entity_type_groups:
+  node:
+    barkota_shipping_vessel:
+      basic: basic
+      open_graph: open_graph
+    places:
+      basic: basic
+      open_graph: open_graph
+      schema_article: schema_article
+      schema_web_page: schema_web_page
+      schema_web_site: schema_web_site
+      site_verification: site_verification
+      google_cse: google_cse
+    routes:
+      basic: basic
+      open_graph: open_graph
+  taxonomy_term:
+    route_vessels:
+      schema_article: schema_article
+      schema_web_page: schema_web_page
+      schema_web_site: schema_web_site
+      site_verification: site_verification
+tag_trim_method: beforeValue
+tag_trim_maxlength:
+  metatag_maxlength_title: null
+  metatag_maxlength_description: null
+  metatag_maxlength_abstract: null
+  metatag_maxlength_google_plus_name: null
+  metatag_maxlength_google_plus_description: null
+  metatag_maxlength_og_site_name: null
+  metatag_maxlength_og_title: null
+  metatag_maxlength_og_description: null
+  metatag_maxlength_twitter_cards_label1: null
+  metatag_maxlength_twitter_cards_title: null
+  metatag_maxlength_twitter_cards_description: null
+  metatag_maxlength_twitter_cards_label2: null

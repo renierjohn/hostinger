@@ -1,0 +1,47 @@
+uuid: e219d6a0-a9d8-4939-b1b1-4fd07d4d790c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.rss
+    - field.field.taxonomy_term.route_vessels.field_booking_link
+    - field.field.taxonomy_term.route_vessels.field_code
+    - field.field.taxonomy_term.route_vessels.field_id
+    - field.field.taxonomy_term.route_vessels.field_lat
+    - field.field.taxonomy_term.route_vessels.field_lng
+    - taxonomy.vocabulary.route_vessels
+  module:
+    - text
+id: taxonomy_term.route_vessels.rss
+targetEntityType: taxonomy_term
+bundle: route_vessels
+mode: rss
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_code:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_booking_link: true
+  field_lat: true
+  field_lng: true

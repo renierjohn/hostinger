@@ -1,0 +1,25 @@
+uuid: 2873edb8-d8c0-4164-881e-7d4b83153494
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product_price
+    - node.type.products
+id: node.products.field_product_price
+field_name: field_product_price
+entity_type: node
+bundle: products
+label: 'Price (Php)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: !!float 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

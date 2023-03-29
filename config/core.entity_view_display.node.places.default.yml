@@ -1,0 +1,146 @@
+uuid: 3e94958b-f2fd-49db-8e9b-99927527cbc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.places.field_banner_image
+    - field.field.node.places.field_calendar
+    - field.field.node.places.field_category
+    - field.field.node.places.field_comments
+    - field.field.node.places.field_description
+    - field.field.node.places.field_google_map
+    - field.field.node.places.field_has_cocaliong_route
+    - field.field.node.places.field_nearby_place
+    - field.field.node.places.field_short_text
+    - field.field.node.places.field_table_ticket_link
+    - field.field.node.places.field_thumbnails
+    - field.field.node.places.field_tx_table_route
+    - field.field.node.places.field_vessel_destination
+    - field.field.node.places.field_youtube
+    - node.type.places
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.places.default
+targetEntityType: node
+bundle: places
+mode: default
+content:
+  field_banner_image:
+    type: image_url
+    label: above
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_calendar:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_google_map:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_has_cocaliong_route:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_nearby_place:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_short_text:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_table_ticket_link:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_thumbnails:
+    type: image_url
+    label: above
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_tx_table_route:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_vessel_destination:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_youtube:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_comments: true

@@ -1,0 +1,21 @@
+uuid: 9dc43be2-7d3d-41d0-834f-b3d27d578fba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.barkota_shipping_vessel
+  module:
+    - text
+id: node.barkota_shipping_vessel.field_description
+field_name: field_description
+entity_type: node
+bundle: barkota_shipping_vessel
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

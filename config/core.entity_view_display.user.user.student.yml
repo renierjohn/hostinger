@@ -1,0 +1,53 @@
+uuid: fca7a268-9f5f-4e19-a420-5647d6773d91
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.student
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_level
+    - field.field.user.user.field_mobile_number
+    - field.field.user.user.field_points
+    - field.field.user.user.field_prev_points
+    - field.field.user.user.field_qr
+    - field.field.user.user.field_redeem_points
+    - field.field.user.user.field_store_photo
+    - field.field.user.user.field_token
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - user
+_core:
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
+id: user.user.student
+targetEntityType: user
+bundle: user
+mode: student
+content:
+  field_qr:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  user_picture:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_gender: true
+  field_level: true
+  field_mobile_number: true
+  field_points: true
+  field_prev_points: true
+  field_redeem_points: true
+  field_store_photo: true
+  field_token: true
+  member_for: true

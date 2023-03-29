@@ -1,0 +1,29 @@
+uuid: e71d419a-131f-4fea-87de-0e3162dac82e
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.inquire
+id: contact_message.inquire.default
+targetEntityType: contact_message
+bundle: inquire
+mode: default
+content:
+  mail:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  message:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 12
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  copy: true
+  name: true
+  preview: true
+  subject: true

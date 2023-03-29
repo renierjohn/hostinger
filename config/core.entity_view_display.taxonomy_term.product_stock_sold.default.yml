@@ -1,0 +1,40 @@
+uuid: b85a2bd3-19cc-4f5a-a6d4-1c436b5fb745
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.product_stock_sold.field_product_ref
+    - field.field.taxonomy_term.product_stock_sold.field_total_stock
+    - taxonomy.vocabulary.product_stock_sold
+  module:
+    - text
+id: taxonomy_term.product_stock_sold.default
+targetEntityType: taxonomy_term
+bundle: product_stock_sold
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_product_ref:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_total_stock:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

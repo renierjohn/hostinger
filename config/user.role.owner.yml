@@ -1,0 +1,9 @@
+uuid: 3771f0ad-a70f-4bbd-b5d6-60a5145afe83
+langcode: en
+status: true
+dependencies: {  }
+id: owner
+label: 'Store Owner'
+weight: 3
+is_admin: null
+permissions: {  }

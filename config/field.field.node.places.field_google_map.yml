@@ -1,0 +1,19 @@
+uuid: 506bd3c8-e8d6-4b68-ac07-5f14732d5800
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_google_map
+    - node.type.places
+id: node.places.field_google_map
+field_name: field_google_map
+entity_type: node
+bundle: places
+label: 'Google Map'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

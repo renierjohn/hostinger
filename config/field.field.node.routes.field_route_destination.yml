@@ -1,0 +1,19 @@
+uuid: cb7ea8d8-4021-4608-9e03-33914f7425e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_route_destination
+    - node.type.routes
+id: node.routes.field_route_destination
+field_name: field_route_destination
+entity_type: node
+bundle: routes
+label: 'Route Destination'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

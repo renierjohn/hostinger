@@ -1,0 +1,25 @@
+uuid: a37db6bb-bf61-44f6-a31c-1e565150c9eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.barkota_shipping_vessel
+id: node.barkota_shipping_vessel.field_weight
+field_name: field_weight
+entity_type: node
+bundle: barkota_shipping_vessel
+label: Weight
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

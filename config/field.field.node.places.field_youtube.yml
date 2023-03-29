@@ -1,0 +1,28 @@
+uuid: bd78d8f3-7bc3-42a4-b211-5c50a931e766
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_youtube
+    - node.type.places
+  module:
+    - link
+id: node.places.field_youtube
+field_name: field_youtube
+entity_type: node
+bundle: places
+label: Youtube
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    uri: 'https://www.youtube.com/watch?v=OIyWjRQztVY'
+    title: ''
+    options: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

@@ -1,0 +1,26 @@
+uuid: c3694a86-a2ed-44e9-b082-c00cdcc6070b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_redeem_points
+  module:
+    - user
+id: user.user.field_redeem_points
+field_name: field_redeem_points
+entity_type: user
+bundle: user
+label: 'Points (Redeem)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

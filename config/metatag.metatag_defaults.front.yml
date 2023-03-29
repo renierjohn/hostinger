@@ -1,0 +1,29 @@
+uuid: 24892dab-f21c-419a-93d3-d9c27d1022b9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1noCXlegCr5HFehQRF1ViXy1jhU1jZ_sNN99a8Sj5jo
+id: front
+label: 'Front page'
+tags:
+  news_keywords: 'renify,explore,travel,fun,nature'
+  title: Renify
+  robots: 'index, follow'
+  description: "Find Schedules and Fare Rates here with Realtime data . Explore some top tourist destinations here .\r\nBus routes also available here nationwide . Travel and Enjoy"
+  next: 'https://renifysite.com/vessel/cocaliong/'
+  canonical_url: '[site:url]'
+  shortlink: '[site:url]'
+  prev: 'https://renifysite.com/tourist-spots/bidjao-overlooking-view/'
+  image_src: 'https://renifysite.com/sites/default/files/public/travel.jpg'
+  og_image_alt: travel
+  profile_last_name: renify
+  profile_username: renify
+  og_image_width: '1920'
+  video_release_date: '2020-01-01'
+  og_image_secure_url: 'https://renifysite.com/sites/default/files/public/travel.jpg'
+  og_image_url: 'https://renifysite.com/sites/default/files/public/travel.jpg'
+  og_image: 'https://renifysite.com/sites/default/files/public/travel.jpg'
+  og_title: Renify
+  og_image_height: '1080'
+  profile_first_name: renify

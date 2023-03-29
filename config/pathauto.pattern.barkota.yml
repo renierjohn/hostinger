@@ -1,0 +1,22 @@
+uuid: 050f5dd1-3cbf-4dc8-b1b1-1a5c1f25d90d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: barkota
+label: Barkota
+type: 'canonical_entities:node'
+pattern: '/vessel/[node:title]/'
+selection_criteria:
+  263bf54a-b556-454b-a7d8-904a283c77be:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 263bf54a-b556-454b-a7d8-904a283c77be
+    context_mapping:
+      node: node
+    bundles:
+      barkota_shipping_vessel: barkota_shipping_vessel
+selection_logic: and
+weight: -5
+relationships: {  }

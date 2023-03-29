@@ -1,0 +1,30 @@
+uuid: e45568f1-afb5-49bf-8ce8-70e3fbf78adb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.special_route.field_lat
+    - field.field.node.special_route.field_lng
+    - field.field.node.special_route.field_special_route_destination
+    - field.field.node.special_route.field_special_route_id
+    - field.field.node.special_route.field_special_route_origin
+    - node.type.special_route
+  module:
+    - user
+id: node.special_route.teaser
+targetEntityType: node
+bundle: special_route
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_lat: true
+  field_lng: true
+  field_special_route_destination: true
+  field_special_route_id: true
+  field_special_route_origin: true

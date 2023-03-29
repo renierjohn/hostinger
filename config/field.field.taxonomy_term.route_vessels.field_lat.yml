@@ -1,0 +1,19 @@
+uuid: 6e8a4a82-a7f3-475b-bdd9-6b5e692a3961
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_lat
+    - taxonomy.vocabulary.route_vessels
+id: taxonomy_term.route_vessels.field_lat
+field_name: field_lat
+entity_type: taxonomy_term
+bundle: route_vessels
+label: Latittude
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: e9f73939-a617-48e9-977e-9c9f2cb94bb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ticket_link_list
+    - node.type.routes
+  module:
+    - link
+id: node.routes.field_ticket_link_list
+field_name: field_ticket_link_list
+entity_type: node
+bundle: routes
+label: 'Ticket Link List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 16
+field_type: link

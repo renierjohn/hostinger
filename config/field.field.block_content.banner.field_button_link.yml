@@ -1,0 +1,23 @@
+uuid: 31011280-4cbe-430e-9da9-5732480dd535
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner
+    - field.storage.block_content.field_button_link
+  module:
+    - link
+id: block_content.banner.field_button_link
+field_name: field_button_link
+entity_type: block_content
+bundle: banner
+label: 'Button Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

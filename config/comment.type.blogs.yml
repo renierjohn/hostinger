@@ -1,0 +1,8 @@
+uuid: 92cab430-cbce-418a-a06f-36a616848dca
+langcode: en
+status: true
+dependencies: {  }
+id: blogs
+label: Blogs
+target_entity_type_id: node
+description: ''

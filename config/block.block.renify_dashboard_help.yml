@@ -1,0 +1,22 @@
+uuid: c1d75bbf-db40-4ace-8907-917119de4b6b
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - renify_dashboard
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: renify_dashboard_help
+theme: renify_dashboard
+region: content
+weight: -5
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

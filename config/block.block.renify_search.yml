@@ -1,0 +1,23 @@
+uuid: ba5fb580-9a63-4919-b79f-5461fe1dd60d
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - renify
+_core:
+  default_config_hash: Q-4EcGAsu26ICu4ejEz0uE1zv4akpiaOsizxgZfAmEw
+id: renify_search
+theme: renify
+region: header
+weight: 2
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: visible
+  provider: search
+  page_id: node_search
+visibility: {  }

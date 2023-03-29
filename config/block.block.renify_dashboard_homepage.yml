@@ -1,0 +1,30 @@
+uuid: ca6a614b-1f5a-4b2c-af4d-878ef993cd2d
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:banner:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+  module:
+    - block_content
+    - system
+  theme:
+    - renify_dashboard
+id: renify_dashboard_homepage
+theme: renify_dashboard
+region: header
+weight: -5
+provider: null
+plugin: 'block_content:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+settings:
+  id: 'block_content:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+  label: Homepage
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home

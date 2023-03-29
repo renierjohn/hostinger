@@ -1,0 +1,21 @@
+uuid: c459397b-9c47-4803-9d88-efb72092e956
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.table_routes
+  module:
+    - text
+id: node.table_routes.field_description
+field_name: field_description
+entity_type: node
+bundle: table_routes
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

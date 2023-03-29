@@ -1,0 +1,18 @@
+uuid: 83dcb5a0-6712-499c-86c4-6c5822e04554
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Config
+type: config
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

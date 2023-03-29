@@ -1,0 +1,31 @@
+uuid: 86ac6574-1caa-48b0-a8a2-481e06672509
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.route_vessels.field_booking_link
+    - field.field.taxonomy_term.route_vessels.field_code
+    - field.field.taxonomy_term.route_vessels.field_id
+    - field.field.taxonomy_term.route_vessels.field_lat
+    - field.field.taxonomy_term.route_vessels.field_lng
+    - taxonomy.vocabulary.route_vessels
+  module:
+    - text
+id: taxonomy_term.route_vessels.default
+targetEntityType: taxonomy_term
+bundle: route_vessels
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_booking_link: true
+  field_code: true
+  field_id: true
+  field_lat: true
+  field_lng: true

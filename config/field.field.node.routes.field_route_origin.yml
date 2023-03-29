@@ -1,0 +1,19 @@
+uuid: b9b83a08-4e21-42a6-b727-0592826201e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_route_origin
+    - node.type.routes
+id: node.routes.field_route_origin
+field_name: field_route_origin
+entity_type: node
+bundle: routes
+label: 'Route Origin'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

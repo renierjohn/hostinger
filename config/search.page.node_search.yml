@@ -1,0 +1,16 @@
+uuid: 92e1e183-52bb-43d3-86fa-6e98b9e27596
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: 97tvtzGOa8_flb22CzSjgtm_YkiGMHvEBO-6q2K9V_U
+id: node_search
+label: Content
+path: result
+weight: -10
+plugin: node_search
+configuration:
+  rankings:
+    relevance: 2

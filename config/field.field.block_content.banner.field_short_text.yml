@@ -1,0 +1,19 @@
+uuid: 5e71fe24-09e2-45ea-9495-825b0c7a0802
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner
+    - field.storage.block_content.field_short_text
+id: block_content.banner.field_short_text
+field_name: field_short_text
+entity_type: block_content
+bundle: banner
+label: 'Short Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

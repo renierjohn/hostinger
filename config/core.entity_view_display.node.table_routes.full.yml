@@ -1,0 +1,73 @@
+uuid: 50399728-5708-44b9-8846-80c43c3ca96c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.table_routes.field_description
+    - field.field.node.table_routes.field_table_bus_name
+    - field.field.node.table_routes.field_table_route
+    - field.field.node.table_routes.field_table_summary
+    - field.field.node.table_routes.field_table_ticket_link
+    - field.field.node.table_routes.field_table_time
+    - node.type.table_routes
+  module:
+    - text
+    - user
+id: node.table_routes.full
+targetEntityType: node
+bundle: table_routes
+mode: full
+content:
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_table_bus_name:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_table_route:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_table_summary:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_table_ticket_link:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_table_time:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

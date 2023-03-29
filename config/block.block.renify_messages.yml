@@ -1,0 +1,22 @@
+uuid: 8ff383ac-3e7d-42c7-a618-155a8803ea25
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - renify
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: renify_messages
+theme: renify
+region: header
+weight: -8
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

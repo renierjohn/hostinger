@@ -1,0 +1,21 @@
+uuid: 3588d611-b45b-4a3c-9fb6-b8370930bc6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_config_name
+    - node.type.config
+  module:
+    - options
+id: node.config.field_config_name
+field_name: field_config_name
+entity_type: node
+bundle: config
+label: 'Config Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

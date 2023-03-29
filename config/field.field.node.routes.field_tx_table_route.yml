@@ -1,0 +1,29 @@
+uuid: 0da23d42-fb6f-453d-86dd-6ba47d5b482b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tx_table_route
+    - node.type.routes
+    - node.type.table_routes
+id: node.routes.field_tx_table_route
+field_name: field_tx_table_route
+entity_type: node
+bundle: routes
+label: 'Table Route'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      table_routes: table_routes
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

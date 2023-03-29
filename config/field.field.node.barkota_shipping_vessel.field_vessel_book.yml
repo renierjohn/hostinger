@@ -1,0 +1,23 @@
+uuid: 420143c8-a387-4279-996e-70e8e4316ed6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vessel_book
+    - node.type.barkota_shipping_vessel
+id: node.barkota_shipping_vessel.field_vessel_book
+field_name: field_vessel_book
+entity_type: node
+bundle: barkota_shipping_vessel
+label: 'Vessel Book Flag'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

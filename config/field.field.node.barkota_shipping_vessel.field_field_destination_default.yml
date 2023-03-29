@@ -1,0 +1,29 @@
+uuid: e0d39b61-a9b4-46cb-a840-51b77d26d4fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_field_destination_default
+    - node.type.barkota_shipping_vessel
+    - taxonomy.vocabulary.route_vessels
+id: node.barkota_shipping_vessel.field_field_destination_default
+field_name: field_field_destination_default
+entity_type: node
+bundle: barkota_shipping_vessel
+label: 'Default Destination'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      route_vessels: route_vessels
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

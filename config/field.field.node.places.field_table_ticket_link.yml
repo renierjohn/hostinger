@@ -1,0 +1,19 @@
+uuid: 13c5df54-f094-4c92-a042-f831174f8016
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_ticket_link
+    - node.type.places
+id: node.places.field_table_ticket_link
+field_name: field_table_ticket_link
+entity_type: node
+bundle: places
+label: 'Booking Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

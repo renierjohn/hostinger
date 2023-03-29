@@ -1,0 +1,14 @@
+uuid: 5a791b35-3cb6-4e4e-8e55-edb978ec8a15
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.owner
+  module:
+    - user
+id: user_add_role_action.owner
+label: 'Add the Owner role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: owner

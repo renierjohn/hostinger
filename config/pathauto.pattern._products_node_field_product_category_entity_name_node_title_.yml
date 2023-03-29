@@ -1,0 +1,22 @@
+uuid: 4a7c4e72-7f03-4b03-87dc-4cf1df07c32f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: _products_node_field_product_category_entity_name_node_title_
+label: Products
+type: 'canonical_entities:node'
+pattern: '/products/[node:field_product_category:entity:name]/[node:title]'
+selection_criteria:
+  a3245f3f-69bc-4140-b6b6-814f22647c6c:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a3245f3f-69bc-4140-b6b6-814f22647c6c
+    context_mapping:
+      node: node
+    bundles:
+      products: products
+selection_logic: and
+weight: -5
+relationships: {  }

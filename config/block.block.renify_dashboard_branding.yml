@@ -1,0 +1,25 @@
+uuid: 8cf02f7f-2550-4562-bd52-ad22c134b97e
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - renify_dashboard
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: renify_dashboard_branding
+theme: renify_dashboard
+region: header
+weight: 1
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

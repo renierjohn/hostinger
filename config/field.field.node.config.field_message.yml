@@ -1,0 +1,21 @@
+uuid: e90f8886-ae0e-4316-aeac-2d7a6cbe6553
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_message
+    - node.type.config
+  module:
+    - text
+id: node.config.field_message
+field_name: field_message
+entity_type: node
+bundle: config
+label: Message
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

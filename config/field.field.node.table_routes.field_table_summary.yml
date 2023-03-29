@@ -1,0 +1,19 @@
+uuid: ec1d0aa6-84d8-440e-b999-581a3522228b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_summary
+    - node.type.table_routes
+id: node.table_routes.field_table_summary
+field_name: field_table_summary
+entity_type: node
+bundle: table_routes
+label: Summary
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

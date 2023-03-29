@@ -1,0 +1,22 @@
+uuid: 53e99691-9013-40a7-9201-764461521421
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - renify_dashboard
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: renify_dashboard_breadcrumbs
+theme: renify_dashboard
+region: breadcrumb
+weight: -6
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

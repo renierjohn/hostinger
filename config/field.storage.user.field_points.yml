@@ -1,0 +1,20 @@
+uuid: e9338c1d-2cf1-430d-a173-e44d8c28bffb
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_points
+field_name: field_points
+entity_type: user
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

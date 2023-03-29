@@ -1,0 +1,22 @@
+uuid: 38b8c4e6-8fdf-4e12-aa1e-db734b95ae80
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.table_routes
+id: node.table_routes.promote
+field_name: promote
+entity_type: node
+bundle: table_routes
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

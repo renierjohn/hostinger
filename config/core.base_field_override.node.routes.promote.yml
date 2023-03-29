@@ -1,0 +1,22 @@
+uuid: ad74616d-5949-4f51-b9f0-a5d431fb97f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.routes
+id: node.routes.promote
+field_name: promote
+entity_type: node
+bundle: routes
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

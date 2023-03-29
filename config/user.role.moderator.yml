@@ -1,0 +1,15 @@
+uuid: 312a62c1-f0eb-48d4-9dfc-f2ac876f492c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.places
+  module:
+    - node
+id: moderator
+label: Moderator
+weight: 5
+is_admin: null
+permissions:
+  - 'delete own places content'
+  - 'edit own places content'

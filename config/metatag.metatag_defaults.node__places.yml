@@ -1,0 +1,15 @@
+uuid: e4d00836-0184-4244-88fb-9434e78dc6d6
+langcode: en
+status: true
+dependencies: {  }
+id: node__places
+label: 'Content: Places'
+tags:
+  title: '[current-page:title] | [node:field_category:entity:name] | Renify'
+  department: travel
+  doc_status: published
+  google_rating: '100'
+  audience: all
+  og_title: '[current-page:title] | [node:field_category:entity:name] | Renify'
+  schema_web_site_type: WebSite
+  schema_web_site_potential_action: 'a:2:{s:5:"@type";s:12:"SearchAction";s:5:"pivot";s:1:"1";}'

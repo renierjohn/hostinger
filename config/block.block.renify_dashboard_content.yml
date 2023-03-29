@@ -1,0 +1,22 @@
+uuid: 6e933063-3829-46e9-9df9-6b794a4a4e3d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - renify_dashboard
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: renify_dashboard_content
+theme: renify_dashboard
+region: content
+weight: -6
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

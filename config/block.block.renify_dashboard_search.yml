@@ -1,0 +1,23 @@
+uuid: 877480ab-e8d6-449f-b470-02bfdac30e55
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - renify_dashboard
+_core:
+  default_config_hash: Q-4EcGAsu26ICu4ejEz0uE1zv4akpiaOsizxgZfAmEw
+id: renify_dashboard_search
+theme: renify_dashboard
+region: header
+weight: 2
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  label_display: visible
+  provider: search
+  page_id: node_search
+visibility: {  }

@@ -1,0 +1,20 @@
+uuid: 097231fa-1c51-4a27-9c54-987f0d4c99f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_token
+  module:
+    - user
+id: user.user.field_token
+field_name: field_token
+entity_type: user
+bundle: user
+label: Token
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

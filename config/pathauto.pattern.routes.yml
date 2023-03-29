@@ -1,0 +1,22 @@
+uuid: 8ccfcf52-8dff-402d-9f7d-5208fd3ab8a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: routes
+label: Routes
+type: 'canonical_entities:node'
+pattern: '/routes/[node:title]'
+selection_criteria:
+  8e35196e-9b23-4566-a95c-236542d98363:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 8e35196e-9b23-4566-a95c-236542d98363
+    context_mapping:
+      node: node
+    bundles:
+      routes: routes
+selection_logic: and
+weight: -5
+relationships: {  }

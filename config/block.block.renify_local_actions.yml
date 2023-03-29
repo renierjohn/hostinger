@@ -1,0 +1,20 @@
+uuid: 430fa1da-d8be-4e7f-8795-9669a15a066f
+langcode: en
+status: true
+dependencies:
+  theme:
+    - renify
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: renify_local_actions
+theme: renify
+region: content
+weight: -7
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

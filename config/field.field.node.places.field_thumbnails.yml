@@ -1,0 +1,38 @@
+uuid: bc25940c-6903-48be-87f3-f44ef02f7c27
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_thumbnails
+    - node.type.places
+  module:
+    - image
+id: node.places.field_thumbnails
+field_name: field_thumbnails
+entity_type: node
+bundle: places
+label: Thumbnails
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: thubmnails
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: '2 MB'
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: false
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

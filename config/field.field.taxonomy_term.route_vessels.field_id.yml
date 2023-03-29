@@ -1,0 +1,23 @@
+uuid: b1666170-5ebd-4af1-85cc-c0890f48716f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_id
+    - taxonomy.vocabulary.route_vessels
+id: taxonomy_term.route_vessels.field_id
+field_name: field_id
+entity_type: taxonomy_term
+bundle: route_vessels
+label: ID
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

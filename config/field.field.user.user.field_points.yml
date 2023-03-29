@@ -1,0 +1,26 @@
+uuid: 1fe270a5-0730-43b3-98f5-575f54bf4dbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_points
+  module:
+    - user
+id: user.user.field_points
+field_name: field_points
+entity_type: user
+bundle: user
+label: 'Points (Actual)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

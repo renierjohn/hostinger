@@ -1,0 +1,10 @@
+uuid: 4629b5ed-099c-47a7-8457-81bc12bd8103
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.rss
+label: RSS
+targetEntityType: block_content
+cache: true

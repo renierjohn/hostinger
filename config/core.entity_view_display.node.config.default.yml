@@ -1,0 +1,27 @@
+uuid: b5a04ac4-1327-40bf-8523-6c62bc9e2f50
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.config.field_config_name
+    - field.field.node.config.field_data
+    - field.field.node.config.field_message
+    - field.field.node.config.field_subject
+    - node.type.config
+  module:
+    - user
+id: node.config.default
+targetEntityType: node
+bundle: config
+mode: default
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_config_name: true
+  field_data: true
+  field_message: true
+  field_subject: true

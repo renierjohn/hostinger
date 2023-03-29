@@ -1,0 +1,20 @@
+uuid: 125999b2-8b25-4335-b822-8c49133f1f58
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_special_route_id
+field_name: field_special_route_id
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,24 @@
+uuid: 93ff0aa3-16fb-4f54-aaab-3514820b876b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_level
+  module:
+    - user
+id: user.user.field_level
+field_name: field_level
+entity_type: user
+bundle: user
+label: Level
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 1
+  max: 12
+  prefix: Grade
+  suffix: ''
+field_type: integer

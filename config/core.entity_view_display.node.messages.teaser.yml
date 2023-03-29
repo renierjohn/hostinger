@@ -1,0 +1,20 @@
+uuid: 176205f0-8ef8-4cd8-a678-f7b96e8a8afb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.messages.body
+    - field.field.node.messages.field_email
+    - node.type.messages
+  module:
+    - user
+id: node.messages.teaser
+targetEntityType: node
+bundle: messages
+mode: teaser
+content: {  }
+hidden:
+  body: true
+  field_email: true
+  links: true

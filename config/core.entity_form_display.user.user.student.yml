@@ -1,0 +1,75 @@
+uuid: 2dd251ef-fe70-40bf-b357-e81260e55b62
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.user.student
+    - field.field.user.user.field_gender
+    - field.field.user.user.field_level
+    - field.field.user.user.field_mobile_number
+    - field.field.user.user.field_points
+    - field.field.user.user.field_prev_points
+    - field.field.user.user.field_qr
+    - field.field.user.user.field_redeem_points
+    - field.field.user.user.field_store_photo
+    - field.field.user.user.field_token
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - imce
+    - user
+_core:
+  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
+id: user.user.student
+targetEntityType: user
+bundle: user
+mode: student
+content:
+  account:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_gender:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_level:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_qr:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_picture:
+    type: image_image
+    weight: 0
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings:
+      imce:
+        enabled: true
+hidden:
+  contact: true
+  field_mobile_number: true
+  field_points: true
+  field_prev_points: true
+  field_redeem_points: true
+  field_store_photo: true
+  field_token: true
+  language: true
+  path: true
+  timezone: true

@@ -1,0 +1,15 @@
+uuid: 7444e9ae-4bed-4cf8-8ee0-5e5f9e405ee6
+langcode: en
+status: true
+dependencies: {  }
+name: facebook
+label: 'Facebook ( 480x240 )'
+effects:
+  49a5513c-bbee-4042-99a8-b55245465977:
+    uuid: 49a5513c-bbee-4042-99a8-b55245465977
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 630
+      anchor: center-center

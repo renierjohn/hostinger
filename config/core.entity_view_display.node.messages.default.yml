@@ -1,0 +1,19 @@
+uuid: 94a5590e-f7a1-43fb-b2d5-1a98edd1ee5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.messages.body
+    - field.field.node.messages.field_email
+    - node.type.messages
+  module:
+    - user
+id: node.messages.default
+targetEntityType: node
+bundle: messages
+mode: default
+content: {  }
+hidden:
+  body: true
+  field_email: true
+  links: true

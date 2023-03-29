@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+langcode: en
+uuid: 7b3e543e-b806-4175-896a-a54dd3c372fa
+name: Renify
+mail: renify.official@gmail.com
+slogan: ''
+page:
+  403: /node/28
+  404: /node/28
+  front: /home
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: ''

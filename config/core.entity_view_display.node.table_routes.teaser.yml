@@ -1,0 +1,32 @@
+uuid: 8e541b21-093d-43fb-ab92-5f132f0deae2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.table_routes.field_description
+    - field.field.node.table_routes.field_table_bus_name
+    - field.field.node.table_routes.field_table_route
+    - field.field.node.table_routes.field_table_summary
+    - field.field.node.table_routes.field_table_ticket_link
+    - field.field.node.table_routes.field_table_time
+    - node.type.table_routes
+  module:
+    - user
+id: node.table_routes.teaser
+targetEntityType: node
+bundle: table_routes
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_description: true
+  field_table_bus_name: true
+  field_table_route: true
+  field_table_summary: true
+  field_table_ticket_link: true
+  field_table_time: true

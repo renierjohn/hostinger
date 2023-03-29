@@ -1,0 +1,19 @@
+uuid: 29aadec9-b6f7-4fd8-948d-db0f8b813703
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_route_class
+    - node.type.routes
+id: node.routes.field_route_class
+field_name: field_route_class
+entity_type: node
+bundle: routes
+label: 'Route Class'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

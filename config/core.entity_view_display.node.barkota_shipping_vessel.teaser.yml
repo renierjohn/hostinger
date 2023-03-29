@@ -1,0 +1,44 @@
+uuid: 72a7a23f-ecc8-4a48-8a7d-6816c634e73b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.barkota_shipping_vessel.field_banner_image
+    - field.field.node.barkota_shipping_vessel.field_code
+    - field.field.node.barkota_shipping_vessel.field_description
+    - field.field.node.barkota_shipping_vessel.field_display_name
+    - field.field.node.barkota_shipping_vessel.field_field_destination_default
+    - field.field.node.barkota_shipping_vessel.field_field_origin_default
+    - field.field.node.barkota_shipping_vessel.field_logo
+    - field.field.node.barkota_shipping_vessel.field_uuid
+    - field.field.node.barkota_shipping_vessel.field_vessel_book
+    - field.field.node.barkota_shipping_vessel.field_vessel_destination
+    - field.field.node.barkota_shipping_vessel.field_vessel_origin
+    - field.field.node.barkota_shipping_vessel.field_weight
+    - node.type.barkota_shipping_vessel
+  module:
+    - user
+id: node.barkota_shipping_vessel.teaser
+targetEntityType: node
+bundle: barkota_shipping_vessel
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_banner_image: true
+  field_code: true
+  field_description: true
+  field_display_name: true
+  field_field_destination_default: true
+  field_field_origin_default: true
+  field_logo: true
+  field_uuid: true
+  field_vessel_book: true
+  field_vessel_destination: true
+  field_vessel_origin: true
+  field_weight: true

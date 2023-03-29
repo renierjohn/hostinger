@@ -1,0 +1,19 @@
+uuid: 49d3dae1-a6da-4642-ba06-674c814dc6b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_route
+    - node.type.table_routes
+id: node.table_routes.field_table_route
+field_name: field_table_route
+entity_type: node
+bundle: table_routes
+label: 'Route Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

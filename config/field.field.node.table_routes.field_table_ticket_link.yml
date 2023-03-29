@@ -1,0 +1,19 @@
+uuid: 54795ebd-848e-42dd-89ee-5a5602efb3a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_ticket_link
+    - node.type.table_routes
+id: node.table_routes.field_table_ticket_link
+field_name: field_table_ticket_link
+entity_type: node
+bundle: table_routes
+label: 'Ticket Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

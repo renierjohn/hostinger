@@ -1,0 +1,12 @@
+uuid: b7c1bafc-30d0-416b-a68f-77caf9de3880
+langcode: en
+status: true
+dependencies: {  }
+id: inquire
+label: 'No Reply'
+recipients:
+  - renify.official@gmail.com
+reply: 'Thankyou For Messaging Us . Please Keep In Touch'
+weight: 0
+message: 'Thankyou For Sending Message. Please Keep in Touch'
+redirect: ''

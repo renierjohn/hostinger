@@ -1,0 +1,19 @@
+uuid: 3f115e89-473f-4b3b-80c6-6bd037d81c76
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.feedback
+    - field.storage.contact_message.field_message
+id: contact_message.feedback.field_message
+field_name: field_message
+entity_type: contact_message
+bundle: feedback
+label: Message
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

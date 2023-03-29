@@ -1,0 +1,19 @@
+uuid: 1516c776-2e8c-4196-957d-73551059f873
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_logo
+    - node.type.barkota_shipping_vessel
+id: node.barkota_shipping_vessel.field_logo
+field_name: field_logo
+entity_type: node
+bundle: barkota_shipping_vessel
+label: Logo
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

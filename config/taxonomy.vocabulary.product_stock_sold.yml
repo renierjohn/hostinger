@@ -1,0 +1,8 @@
+uuid: db7682da-166d-4f6f-bc59-36df557a6d30
+langcode: en
+status: true
+dependencies: {  }
+name: 'Product Stock Sold'
+vid: product_stock_sold
+description: ''
+weight: 0

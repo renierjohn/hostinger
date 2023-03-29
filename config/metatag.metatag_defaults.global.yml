@@ -1,0 +1,34 @@
+uuid: 4fce424c-8515-43c6-8639-6cdaeab8e1d4
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  news_keywords: Travel
+  title: '[current-page:title] | [site:name]'
+  robots: 'index, follow'
+  referrer: strict-origin-when-cross-origin
+  next: '[site:url]/tourist-spots/prayer-mountain/'
+  canonical_url: '[current-page:url]'
+  prev: 'https://renify.store/tourist-spots/malmag-falls/'
+  fb_admins: '376061863589278'
+  fb_pages: '102875864644890'
+  fb_app_id: '376061863589278'
+  thumbnail: '[site:url]/sites/default/files/public/banner/banner.jpg'
+  department: Travel
+  doc_status: published
+  google_rating: '100'
+  audience: all
+  google_plus_name: Renify
+  google_plus_image: 'https://renifysite.com/sites/default/files/public/travel.jpg'
+  google_plus_description: 'Travel While You Can'
+  og_site_name: Renify
+  og_email: renify.official@gmail.com
+  og_type: travel
+  og_url: '[url:absolute]'
+  og_country_name: PH
+  og_title: RENIFY
+  author: Renify

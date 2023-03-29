@@ -1,0 +1,20 @@
+uuid: b33ba0a1-3772-44fd-b344-416c8519a940
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_qr
+  module:
+    - user
+id: user.user.field_qr
+field_name: field_qr
+entity_type: user
+bundle: user
+label: qr
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

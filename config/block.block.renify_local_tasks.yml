@@ -1,0 +1,31 @@
+uuid: d26d7dbd-f506-4ad2-a554-eea502345d06
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - renify
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: renify_local_tasks
+theme: renify
+region: header
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

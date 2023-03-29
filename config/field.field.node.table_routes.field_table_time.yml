@@ -1,0 +1,19 @@
+uuid: ef52c1f9-e284-4245-8848-8d63be22efee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_time
+    - node.type.table_routes
+id: node.table_routes.field_table_time
+field_name: field_table_time
+entity_type: node
+bundle: table_routes
+label: Time
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

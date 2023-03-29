@@ -1,0 +1,23 @@
+uuid: 28a225f1-e981-468f-8c13-d08d9eb6975c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_has_cocaliong_route
+    - node.type.places
+id: node.places.field_has_cocaliong_route
+field_name: field_has_cocaliong_route
+entity_type: node
+bundle: places
+label: 'Has Cocaliong Route'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

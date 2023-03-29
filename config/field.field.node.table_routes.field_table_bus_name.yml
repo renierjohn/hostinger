@@ -1,0 +1,29 @@
+uuid: 5347d993-eafc-43af-a6f5-53db16898687
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_table_bus_name
+    - node.type.table_routes
+    - taxonomy.vocabulary.bus_name
+id: node.table_routes.field_table_bus_name
+field_name: field_table_bus_name
+entity_type: node
+bundle: table_routes
+label: 'Bus Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      bus_name: bus_name
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
