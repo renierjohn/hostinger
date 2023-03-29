@@ -1,0 +1,5 @@
+symlink
+
+mklink /J web\modules\contrib modules\contrib
+mklink /J web\modules\custom modules\custom
+mklink /J web\themes themes
