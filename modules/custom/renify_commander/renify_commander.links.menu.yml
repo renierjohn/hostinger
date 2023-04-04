@@ -1,0 +1,6 @@
+renify_commander.settings_form:
+  title: 'Renify Commander'
+  description: 'Configure Renify Commander.'
+  parent: system.admin_config_system
+  route_name: renify_commander.settings_form
+  weight: 10

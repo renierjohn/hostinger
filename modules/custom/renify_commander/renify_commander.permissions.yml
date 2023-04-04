@@ -1,0 +1,4 @@
+administer renify_commander configuration:
+  title: 'Administer renify_commander configuration'
+  description: 'Optional description.'
+  restrict access: true

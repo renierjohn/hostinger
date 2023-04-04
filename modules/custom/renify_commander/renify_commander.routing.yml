@@ -1,0 +1,24 @@
+renify_commander.drush:
+  path: '/command/drush'
+  defaults:
+    _title: 'Drush Command'
+    _controller: '\Drupal\renify_commander\Controller\RenifyCommanderController::run'
+  requirements:
+    _permission: 'access content'
+
+renify_commander.cron:
+  path: '/command/cron'
+  defaults:
+    _title: 'Cron'
+    _controller: '\Drupal\renify_commander\Controller\RenifyCommanderController::cron'
+  requirements:
+    _permission: 'access content'
+
+
+renify_commander.settings_form:
+  path: '/admin/config/system/renify-commander'
+  defaults:
+    _title: 'Renify Commander settings'
+    _form: 'Drupal\renify_commander\Form\SettingsForm'
+  requirements:
+    _permission: 'administer renify_commander configuration'
