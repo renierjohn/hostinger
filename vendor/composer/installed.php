@@ -3,7 +3,7 @@
         'name' => 'drupal/recommended-project',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '454ec985e8648ec43646a72a708f8f8db990a5da',
+        'reference' => 'b10e0dcbe3dfebe41b0ee174a55369a4d049bb24',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -457,15 +457,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'drupal/ludwig' => array(
-            'pretty_version' => '2.0.6',
-            'version' => '2.0.6.0',
-            'reference' => '2.0.6',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/ludwig',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'drupal/metatag' => array(
             'pretty_version' => '1.22.0',
             'version' => '1.22.0.0',
@@ -505,7 +496,7 @@
         'drupal/recommended-project' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '454ec985e8648ec43646a72a708f8f8db990a5da',
+            'reference' => 'b10e0dcbe3dfebe41b0ee174a55369a4d049bb24',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

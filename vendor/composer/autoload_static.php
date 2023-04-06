@@ -287,7 +287,7 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
-        'Symfony\\Component\\Dotenv\\' =>
+        'Symfony\\Component\\Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
@@ -400,11 +400,11 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
-        'EasyRdf\\' =>
+        'EasyRdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/easyrdf/easyrdf/lib',
         ),
-        'Drush\\' =>
+        'Drush\\' => 
         array (
             0 => __DIR__ . '/..' . '/drush/drush/src',
         ),
@@ -436,7 +436,7 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence',
         ),
-        'Doctrine\\Deprecations\\' =>
+        'Doctrine\\Deprecations\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
         ),
@@ -454,7 +454,7 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
             1 => __DIR__ . '/..' . '/doctrine/event-manager/src',
             2 => __DIR__ . '/..' . '/doctrine/reflection/lib/Doctrine/Common',
         ),
-        'Dflydev\\DotAccessData\\' =>
+        'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
         ),
