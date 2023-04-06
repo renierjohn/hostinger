@@ -44,4 +44,4 @@ codesnippet:
   after: ''
 translation_set: false
 cache: true
-debug: true
+debug: false

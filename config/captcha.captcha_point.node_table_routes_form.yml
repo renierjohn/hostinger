@@ -1,7 +1,0 @@
-uuid: 80b03afa-ec28-44da-9c77-9bafdd39faff
-langcode: en
-status: false
-dependencies: {  }
-formId: node_table_routes_form
-captchaType: default
-label: node_table_routes_form

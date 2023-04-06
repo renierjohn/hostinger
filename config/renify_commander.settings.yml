@@ -1,4 +1,5 @@
 _core:
   default_config_hash: 3Q03q1-ZUvbRaZx-8l_fEEbXTApTeQ4rGJxlg22fBG4
-pub_key:
-md5_key:
+pub_key: e9cc3f037e8ed88090a7ed47d304b129
+private_key: ab45efda67b3d4ce200c80a4f15925ee
+md5_key: ab45efda67b3d4ce200c80a4f15925ee

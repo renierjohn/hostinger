@@ -1,7 +1,0 @@
-uuid: 9bdfb82a-be52-45e8-8f91-25c0af96fed9
-langcode: en
-status: false
-dependencies: {  }
-formId: node_messages_form
-captchaType: default
-label: node_messages_form

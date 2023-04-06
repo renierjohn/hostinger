@@ -7,7 +7,6 @@ dependencies:
   module:
     - comment
     - contact
-    - devel
     - filter
     - search
     - system
@@ -20,7 +19,6 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
-  - 'access devel information'
   - 'access site-wide contact form'
   - 'access user profiles'
   - 'search content'

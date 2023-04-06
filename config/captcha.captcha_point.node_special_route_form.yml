@@ -1,7 +1,0 @@
-uuid: 23f57b65-c549-4661-8771-891db989a82f
-langcode: en
-status: false
-dependencies: {  }
-formId: node_special_route_form
-captchaType: default
-label: node_special_route_form

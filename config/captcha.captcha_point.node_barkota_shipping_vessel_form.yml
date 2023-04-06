@@ -1,7 +1,0 @@
-uuid: 2dded208-35a9-425e-8232-a10660e5c556
-langcode: en
-status: false
-dependencies: {  }
-formId: node_barkota_shipping_vessel_form
-captchaType: default
-label: node_barkota_shipping_vessel_form
