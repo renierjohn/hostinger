@@ -62,7 +62,7 @@
             "core": [
                 "type:drupal-core"
             ],
-            "web/libraries/{$name}": [
+            "libraries/{$name}": [
                 "type:drupal-library"
             ],
             "modules/contrib/{$name}": [
