@@ -16,6 +16,7 @@ class RenifyCommanderController extends ControllerBase {
    * Run Drush.
    */
   public function run(Request $request) {
+    $result = False;
     $query = $request->query->all();
     if (!$this->hasAccess($request)) {
       return new JsonResponse(['status' => False, 'message' => 'wrong key','key' => $query['key']]);
@@ -25,6 +26,7 @@ class RenifyCommanderController extends ControllerBase {
       return new JsonResponse(['status' => False, 'message' => 'wrong command','mode' => $query['mode']]);
     }
     $t1 = time();
+
     if ($command === 'cache') {
       \Drupal::service('cache.render')->invalidateAll();
       \Drupal::service('cache.data')->invalidateAll();
@@ -34,8 +36,13 @@ class RenifyCommanderController extends ControllerBase {
       \Drupal::service('cache.entity')->invalidateAll();
       \Drupal::service('cache.menu')->invalidateAll();
     }
+
+    if ($command === 'composer') {
+     $result =  shell_exec('composer install');
+    }
+
     $t2 = time();
-    return new JsonResponse(['status' => True, 'message' => 'key matched','time' => $t2, 'duration' => $t2 - $t1]);
+    return new JsonResponse(['status' => True, 'result' => $result, 'message' => 'key matched','time' => $t2, 'duration' => $t2 - $t1]);
   }
 
  /**
