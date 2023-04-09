@@ -20,7 +20,6 @@ base:
       css/vendor.css.map: {}
       css/main.css.map: {}
   js:
-    js/bootsrap.gtm.js: {}
     js/gtm.js: {}
     js/jquery.lazy.min.js: {}
     js/jquery.lazy.plugins.min.js: {}
