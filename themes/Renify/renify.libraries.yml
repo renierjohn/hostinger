@@ -20,6 +20,7 @@ base:
       css/vendor.css.map: {}
       css/main.css.map: {}
   js:
+    js/gtm.js: {}
     js/jquery.lazy.min.js: {}
     js/jquery.lazy.plugins.min.js: {}
     js/trunc8.js: {}
