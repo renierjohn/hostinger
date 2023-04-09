@@ -26,6 +26,7 @@
         "drupal/ctools": "^4.0",
         "drupal/devel": "5.1.1",
         "drupal/google_analytics": "^4.0",
+        "drupal/google_tag": "^1.6",
         "drupal/imce": "^2.5",
         "drupal/metatag": "^1.22",
         "drupal/pathauto": "^1.11",
