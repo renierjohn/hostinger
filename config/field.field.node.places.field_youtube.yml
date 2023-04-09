@@ -11,7 +11,7 @@ id: node.places.field_youtube
 field_name: field_youtube
 entity_type: node
 bundle: places
-label: Youtube
+label: 'Youtube Link'
 description: ''
 required: false
 translatable: false

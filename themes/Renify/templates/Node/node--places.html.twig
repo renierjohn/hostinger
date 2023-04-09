@@ -21,6 +21,7 @@
 
 {{ attach_library('core/drupal') }}
 {{ attach_library('data_router/tracker') }}
+{{ attach_library('data_router/modal') }}
 {{ attach_library('renify/video') }}
 
 <!-- BREADCRUMB -->
@@ -313,7 +314,7 @@
 
 
 {# MODAL ABOUT US #}
-<div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
+<div class="row block-1-1 block-tab-full pace-inactive js-modal" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
   <input class="modal-state" id="modal-signup" type="checkbox"  style="display: none;" />
   <div class="modal">
     <label class="modal__bg" for="modal-signup"></label>
@@ -327,7 +328,7 @@
 
 
 {# MODAL BOOK HERE #}
-<div class="row block-1-1 block-tab-full" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
+<div class="row block-1-1 block-tab-full pace-inactive js-modal" style="padding:1rem 2rem;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;background-color: white; border-radius: 6px;">
   <input class="modal-state" id="modal-book" type="checkbox"  style="display: none;" />
   <div class="modal">
     <label class="modal__bg" for="modal-book"></label>

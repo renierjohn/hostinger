@@ -1,4 +1,12 @@
+modal:
+  version: 1.1
+  js:
+    js/modal.js: {}
+  dependencies:
+    - core/jquery
+
 tracker:
+  version: 1.2
   js:
     js/tracker.js: {}
   dependencies:
@@ -30,7 +38,6 @@ weather:
     js/weather.js: {}
   dependencies:
     - core/jquery
-
 
 qr:
   version: 1.10

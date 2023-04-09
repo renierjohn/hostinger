@@ -13,7 +13,11 @@ entity_type_groups:
       google_cse: google_cse
     routes:
       basic: basic
+      advanced: advanced
       open_graph: open_graph
+      twitter_cards: twitter_cards
+      schema_web_site: schema_web_site
+      google_cse: google_cse
   taxonomy_term:
     route_vessels:
       schema_article: schema_article
@@ -34,3 +38,4 @@ tag_trim_maxlength:
   metatag_maxlength_twitter_cards_title: null
   metatag_maxlength_twitter_cards_description: null
   metatag_maxlength_twitter_cards_label2: null
+tag_scroll_max_height: ''
