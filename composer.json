@@ -20,6 +20,7 @@
         "drupal/aggregator": "^2.0",
         "drupal/captcha": "^1.9",
         "drupal/color": "^1.0",
+        "drupal/config_ignore": "^2.4",
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",

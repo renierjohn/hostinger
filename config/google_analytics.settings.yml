@@ -1,6 +1,6 @@
 _core:
   default_config_hash: dwMYPgAnj9KBO77SLEv9Z42NDJAbuxe0uU9eGC8qw3M
-account: 'G-CR2YS6JQRB,UA-163503291-2'
+account: 'G-CR2YS6JQRB,UA-163503291-2,G-LLEN1Z16YX'
 domain_mode: 2
 cross_domains: 'www.renifysite.com,https://gcash.renifysite.com/,https://renifysite.com,www.renifysite.com/'
 visibility:
@@ -44,4 +44,4 @@ codesnippet:
   after: ''
 translation_set: false
 cache: true
-debug: false
+debug: true
