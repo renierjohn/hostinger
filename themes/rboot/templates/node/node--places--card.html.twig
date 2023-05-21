@@ -92,7 +92,8 @@
       <div class="mt-auto align-self-start">
         <a href="{{ url }}" rel="bookmark" class="btn btn-primary">Explore Here</a>
         {% if content.field_google_map|render|striptags|trim %}
-          <a href="{{ content.field_google_map|render|striptags|trim }}" class="btn btn-outline-primary" title="Goto Google Map" target="_blank">Search Map <i class="fa fa-external-link-alt"></i></a>
+          {% set map = content.field_google_map|render|striptags|trim %}
+          <a href="https://maps.google.com/maps?width=60025&amp;height=600&amp;hl=en&amp;q={{map}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B" class="btn btn-outline-primary" title="Goto Google Map" target="_blank"><i class="fa fa-map-marker"></i> Location Here <i class="fa fa-external-link-alt"></i></a>
         {% endif %}
       </div>
     </div>
