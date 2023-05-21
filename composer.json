@@ -27,6 +27,8 @@
         "drupal/core-vendor-hardening": "^9.5.9",
         "drupal/ctools": "^4.0",
         "drupal/devel": "5.1.1",
+        "drupal/field_group": "^3.4",
+        "drupal/fontawesome": "^2.25",
         "drupal/google_analytics": "^4.0",
         "drupal/google_tag": "^1.6",
         "drupal/image_class": "^2.0",
