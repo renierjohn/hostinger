@@ -25,11 +25,11 @@
 {{ attach_library('renify/video') }}
 
 <!-- BREADCRUMB -->
-{% set link = '/store/' %}
+{% set link = '/places/' %}
 {% set category_name = 'Store' %}
 
 {% if category != 'Store' %}
-  {% set link = '/' %}
+  {% set link = '/places' %}
 {% endif %}
 
 {{ drupal_view('banner','banner',id) }}
