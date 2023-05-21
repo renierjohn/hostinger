@@ -7,10 +7,12 @@ dependencies:
     - field.storage.node.field_ticket_link_list
     - field.storage.node.field_tx_table_route
     - node.type.routes
+    - user.role.administrator
   module:
     - image
     - link
     - node
+    - user
 id: routes
 label: Routes
 module: views
@@ -948,7 +950,13 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: false
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
       defaults:
+        access: false
         fields: false
       display_extenders:
         metatag_display_extender:
@@ -966,8 +974,8 @@ display:
             og_see_also: 'https://renifysite.com/vessel/'
             twitter_cards_type: app
             twitter_cards_title: 'Bus Routes | Renify'
-          tokenize: 0
-      path: routes
+          tokenize: false
+      path: routes-legacy
     cache_metadata:
       max-age: -1
       contexts:
@@ -975,6 +983,7 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
+        - user.roles
       tags:
         - 'config:field.storage.node.field_banner_image'
         - 'config:field.storage.node.field_ticket_link_list'

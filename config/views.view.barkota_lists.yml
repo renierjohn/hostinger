@@ -8,6 +8,7 @@ dependencies:
     - field.storage.node.field_field_origin_default
     - field.storage.node.field_vessel_origin
     - node.type.barkota_shipping_vessel
+    - user.role.administrator
   module:
     - image
     - node
@@ -730,7 +731,13 @@ display:
         type: none
         options:
           offset: 0
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
       defaults:
+        access: false
         title: false
         pager: false
         fields: false
@@ -755,15 +762,15 @@ display:
             twitter_cards_title: 'Shipping Lines | Renify'
             twitter_cards_page_url: 'https://renifysite.com/vessel'
             twitter_cards_image: 'https://renifysite.com/themes/Renify/images/route.jpg'
-          tokenize: 0
-      path: vessel
+          tokenize: false
+      path: vessel-legacy
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_banner_image'
         - 'config:field.storage.node.field_field_destination_default'

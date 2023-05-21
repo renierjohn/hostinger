@@ -193,7 +193,7 @@ display:
         metatag_display_extender:
           metatags: {  }
           tokenize: false
-      path: route
+      path: routes
     cache_metadata:
       max-age: -1
       contexts:

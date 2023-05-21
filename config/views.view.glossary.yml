@@ -416,7 +416,7 @@ display:
       menu:
         type: normal
         title: Glossary
-        weight: -46
+        weight: -49
         enabled: false
         menu_name: main
         parent: ''
