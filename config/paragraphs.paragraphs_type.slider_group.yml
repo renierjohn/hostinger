@@ -1,0 +1,10 @@
+uuid: a895db6b-0305-4a99-97b5-e3ad0e21e117
+langcode: en
+status: true
+dependencies: {  }
+id: slider_group
+label: 'Slider Group'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

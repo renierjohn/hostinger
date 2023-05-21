@@ -1,0 +1,30 @@
+uuid: e1dc31c2-e1b6-4e74-b9e1-a769af6cd8d7
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c40bf759-0abf-493a-a12d-1e7eee3901ca'
+  module:
+    - block_content
+    - system
+  theme:
+    - rboot
+id: rboot_productmenu
+theme: rboot
+region: header
+weight: -8
+provider: null
+plugin: 'block_content:c40bf759-0abf-493a-a12d-1e7eee3901ca'
+settings:
+  id: 'block_content:c40bf759-0abf-493a-a12d-1e7eee3901ca'
+  label: 'Product Menu'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/products\r\n/products/*\r\n/cart"

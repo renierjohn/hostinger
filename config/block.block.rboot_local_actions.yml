@@ -1,0 +1,20 @@
+uuid: bd34b970-d2b6-4ae2-bd28-c3813ed93146
+langcode: en
+status: true
+dependencies:
+  theme:
+    - rboot
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: rboot_local_actions
+theme: rboot
+region: content
+weight: -7
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

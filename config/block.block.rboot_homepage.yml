@@ -1,0 +1,30 @@
+uuid: 3188472f-12fc-4789-abe5-de1328fd9278
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:banner:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+  module:
+    - block_content
+    - system
+  theme:
+    - rboot
+id: rboot_homepage
+theme: rboot
+region: header
+weight: -3
+provider: null
+plugin: 'block_content:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+settings:
+  id: 'block_content:5d4f3979-0066-4f95-bf3b-a8bfe4cfebd6'
+  label: Homepage
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /home

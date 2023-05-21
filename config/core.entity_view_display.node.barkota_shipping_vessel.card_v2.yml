@@ -1,0 +1,132 @@
+uuid: 1ee34646-33fd-443b-90be-90dbf0d47454
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_v2
+    - field.field.node.barkota_shipping_vessel.field_banner_image
+    - field.field.node.barkota_shipping_vessel.field_code
+    - field.field.node.barkota_shipping_vessel.field_description
+    - field.field.node.barkota_shipping_vessel.field_display_name
+    - field.field.node.barkota_shipping_vessel.field_field_destination_default
+    - field.field.node.barkota_shipping_vessel.field_field_origin_default
+    - field.field.node.barkota_shipping_vessel.field_logo
+    - field.field.node.barkota_shipping_vessel.field_uuid
+    - field.field.node.barkota_shipping_vessel.field_vessel_book
+    - field.field.node.barkota_shipping_vessel.field_vessel_destination
+    - field.field.node.barkota_shipping_vessel.field_vessel_origin
+    - field.field.node.barkota_shipping_vessel.field_weight
+    - node.type.barkota_shipping_vessel
+  module:
+    - image
+    - text
+    - user
+id: node.barkota_shipping_vessel.card_v2
+targetEntityType: node
+bundle: barkota_shipping_vessel
+mode: card_v2
+content:
+  field_banner_image:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_code:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_display_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_field_destination_default:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_field_origin_default:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_logo:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_uuid:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_vessel_book:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_vessel_destination:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_vessel_origin:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_weight:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

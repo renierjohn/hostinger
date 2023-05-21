@@ -18,9 +18,16 @@
       </tr>
     </thead>
     <tbody class="js-ajax-tbody">
-        {% if rows %}
-          {{ rows }}
-        {% endif %}
+        {% for row in rows %}
+          {%
+            set row_classes = [
+              default_row_class ? 'views-row',
+            ]
+          %}
+          <div{{ row.attributes.addClass(row_classes) }}>
+            {{- row.content -}}
+          </div>
+        {% endfor %}
     </tbody>
   </table>
 </div>

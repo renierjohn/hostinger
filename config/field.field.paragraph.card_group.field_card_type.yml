@@ -1,0 +1,48 @@
+uuid: da6a0411-6bc1-4b0c-837f-fce885000091
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_type
+    - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.card_advanced
+    - paragraphs.paragraphs_type.card_group
+  module:
+    - entity_reference_revisions
+id: paragraph.card_group.field_card_type
+field_name: field_card_type
+entity_type: paragraph
+bundle: card_group
+label: 'Card Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      card: card
+      card_advanced: card_advanced
+    negate: 0
+    target_bundles_drag_drop:
+      banner_cta:
+        weight: 7
+        enabled: false
+      card:
+        weight: 9
+        enabled: true
+      card_advanced:
+        weight: 9
+        enabled: true
+      card_group:
+        weight: 10
+        enabled: false
+      slider:
+        weight: 11
+        enabled: false
+      slider_group:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

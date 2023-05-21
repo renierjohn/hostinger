@@ -1,0 +1,8 @@
+uuid: dc6bfc0c-12fb-409e-897c-652738b6e8b9
+langcode: en
+status: true
+dependencies: {  }
+name: 'Badge Types'
+vid: badge_types
+description: ''
+weight: 0

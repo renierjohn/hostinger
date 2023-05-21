@@ -16,6 +16,11 @@ services:
     tags:
       - { name: theme_negotiator, priority: -50 }
 
+  theme.negotiator.data_router_legacy_theme:
+    class: Drupal\data_router\Theme\RenifyTheme
+    tags:
+      - { name: theme_negotiator, priority: -50 }
+
   theme.negotiator.data_router_imce:
     class: Drupal\data_router\Theme\ImceOverrideTheme
     tags:

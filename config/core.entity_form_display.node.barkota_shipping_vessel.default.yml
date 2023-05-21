@@ -18,10 +18,50 @@ dependencies:
     - image.style.thumbnail
     - node.type.barkota_shipping_vessel
   module:
+    - field_group
     - image
     - imce
     - path
     - text
+third_party_settings:
+  field_group:
+    group_routes:
+      children:
+        - field_field_origin_default
+        - field_field_destination_default
+        - field_vessel_origin
+        - field_vessel_destination
+      label: Routes
+      region: content
+      parent_name: ''
+      weight: 10
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_advance_setting:
+      children:
+        - field_uuid
+        - field_vessel_book
+        - field_code
+        - field_logo
+        - field_weight
+      label: 'Advance Setting'
+      region: content
+      parent_name: ''
+      weight: 11
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: node.barkota_shipping_vessel.default
 targetEntityType: node
 bundle: barkota_shipping_vessel
@@ -29,7 +69,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -45,7 +85,7 @@ content:
         enabled: true
   field_code:
     type: string_textfield
-    weight: 11
+    weight: 10
     region: content
     settings:
       size: 60
@@ -53,7 +93,7 @@ content:
     third_party_settings: {  }
   field_description:
     type: text_textarea
-    weight: 17
+    weight: 12
     region: content
     settings:
       rows: 5
@@ -69,7 +109,7 @@ content:
     third_party_settings: {  }
   field_field_destination_default:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS
@@ -79,7 +119,7 @@ content:
     third_party_settings: {  }
   field_field_origin_default:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 16
     region: content
     settings:
       match_operator: CONTAINS
@@ -89,7 +129,7 @@ content:
     third_party_settings: {  }
   field_logo:
     type: string_textfield
-    weight: 12
+    weight: 11
     region: content
     settings:
       size: 60
@@ -97,7 +137,7 @@ content:
     third_party_settings: {  }
   field_uuid:
     type: string_textfield
-    weight: 10
+    weight: 8
     region: content
     settings:
       size: 60
@@ -105,14 +145,14 @@ content:
     third_party_settings: {  }
   field_vessel_book:
     type: boolean_checkbox
-    weight: 1
+    weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_vessel_destination:
     type: entity_reference_autocomplete_tags
-    weight: 14
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS
@@ -122,7 +162,7 @@ content:
     third_party_settings: {  }
   field_vessel_origin:
     type: entity_reference_autocomplete_tags
-    weight: 13
+    weight: 18
     region: content
     settings:
       match_operator: CONTAINS
@@ -132,34 +172,34 @@ content:
     third_party_settings: {  }
   field_weight:
     type: number
-    weight: 18
+    weight: 12
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 4
+    weight: 3
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
@@ -174,7 +214,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS

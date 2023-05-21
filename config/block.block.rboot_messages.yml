@@ -1,0 +1,22 @@
+uuid: 7b8ee67a-4878-4111-81ee-2b911572439c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rboot
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: rboot_messages
+theme: rboot
+region: header
+weight: -4
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

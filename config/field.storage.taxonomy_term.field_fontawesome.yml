@@ -1,0 +1,19 @@
+uuid: 4e3d0c8d-2c8b-407b-94d2-2e2c4359a11d
+langcode: en
+status: true
+dependencies:
+  module:
+    - fontawesome
+    - taxonomy
+id: taxonomy_term.field_fontawesome
+field_name: field_fontawesome
+entity_type: taxonomy_term
+type: fontawesome_icon
+settings: {  }
+module: fontawesome
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

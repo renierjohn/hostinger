@@ -1,0 +1,107 @@
+uuid: 35877839-d06b-438e-88f4-c9a59d2dad85
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_v2
+    - field.field.node.routes.field_banner_image
+    - field.field.node.routes.field_description
+    - field.field.node.routes.field_route_class
+    - field.field.node.routes.field_route_destination
+    - field.field.node.routes.field_route_origin
+    - field.field.node.routes.field_route_price
+    - field.field.node.routes.field_thumbnails
+    - field.field.node.routes.field_ticket_link_list
+    - field.field.node.routes.field_tx_table_route
+    - node.type.routes
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.routes.card_v2
+targetEntityType: node
+bundle: routes
+mode: card_v2
+content:
+  field_banner_image:
+    type: image_url
+    label: above
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_route_class:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_route_destination:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_route_origin:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_route_price:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_thumbnails:
+    type: image_url
+    label: above
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_ticket_link_list:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_tx_table_route:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

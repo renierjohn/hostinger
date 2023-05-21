@@ -1,0 +1,20 @@
+uuid: 2c441678-560f-401d-844f-60b4f5d7fe4e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - taxonomy
+id: paragraph.field_card_adv_badge
+field_name: field_card_adv_badge
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 3
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,52 @@
+uuid: c6190fb9-6cdd-4a6b-8f8e-d17081243b23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_group_list
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.group
+  module:
+    - entity_reference_revisions
+id: paragraph.group.field_group_list
+field_name: field_group_list
+entity_type: paragraph
+bundle: group
+label: 'Group List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 9
+        enabled: true
+      banner_cta:
+        weight: 10
+        enabled: false
+      card:
+        weight: 11
+        enabled: false
+      card_advanced:
+        weight: 12
+        enabled: false
+      card_group:
+        weight: 13
+        enabled: false
+      group:
+        weight: 14
+        enabled: false
+      slider:
+        weight: 15
+        enabled: false
+      slider_group:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

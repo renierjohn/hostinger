@@ -1,0 +1,10 @@
+uuid: c59cf343-344b-4add-8351-0b0c22981afa
+langcode: en
+status: true
+dependencies: {  }
+id: card_advanced
+label: 'Card Advanced'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

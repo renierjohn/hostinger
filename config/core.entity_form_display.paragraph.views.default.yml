@@ -1,0 +1,41 @@
+uuid: c8f75d8c-a77a-488c-8cf1-84adc7d426bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.views.field_list_items
+    - field.field.paragraph.views.field_sub_title
+    - field.field.paragraph.views.field_title
+    - paragraphs.paragraphs_type.views
+  module:
+    - viewsreference
+id: paragraph.views.default
+targetEntityType: paragraph
+bundle: views
+mode: default
+content:
+  field_list_items:
+    type: viewsreference_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sub_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 100
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

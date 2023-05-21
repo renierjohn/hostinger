@@ -17,7 +17,7 @@ dependencies:
   module:
     - image
     - imce
-    - link
+    - link_class
     - path
     - text
 id: node.routes.default
@@ -92,12 +92,15 @@ content:
       imce:
         enabled: true
   field_ticket_link_list:
-    type: link_default
+    type: link_class_field_widget
     weight: 9
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+      link_class_mode: force_class
+      link_class_force: 'btn btn-outline-primary'
+      link_class_select: ''
     third_party_settings: {  }
   field_tx_table_route:
     type: entity_reference_autocomplete

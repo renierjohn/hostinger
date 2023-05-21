@@ -1,0 +1,22 @@
+uuid: 6d6c7bab-3a3a-4095-b46c-bcb3a757a945
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - rboot
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: rboot_breadcrumbs
+theme: rboot
+region: breadcrumb
+weight: -6
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

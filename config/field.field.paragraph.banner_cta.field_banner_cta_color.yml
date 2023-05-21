@@ -1,0 +1,21 @@
+uuid: 117ec580-76c7-4dac-8226-0929e24248b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_banner_cta_color
+    - paragraphs.paragraphs_type.banner_cta
+  module:
+    - options
+id: paragraph.banner_cta.field_banner_cta_color
+field_name: field_banner_cta_color
+entity_type: paragraph
+bundle: banner_cta
+label: 'Banner CTA Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

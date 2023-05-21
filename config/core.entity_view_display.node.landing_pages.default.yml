@@ -1,0 +1,45 @@
+uuid: 5fffec3c-c25b-401e-b71d-53a70157962a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.landing_pages.body
+    - field.field.node.landing_pages.field_component_banner
+    - field.field.node.landing_pages.field_components
+    - node.type.landing_pages
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.landing_pages.default
+targetEntityType: node
+bundle: landing_pages
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_component_banner:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_components:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  links: true

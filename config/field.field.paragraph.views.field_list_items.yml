@@ -1,0 +1,60 @@
+uuid: 7090e634-c892-4cec-b0a5-c09d46cd2363
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_list_items
+    - paragraphs.paragraphs_type.views
+  module:
+    - viewsreference
+id: paragraph.views.field_list_items
+field_name: field_list_items
+entity_type: paragraph
+bundle: views
+label: 'List Items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: 0
+  plugin_types:
+    block: block
+    default: 0
+    page: 0
+    rest_export: 0
+    feed: 0
+    attachment: 0
+  preselect_views:
+    barkota_v2: barkota_v2
+    routes_v2: routes_v2
+    banner: 0
+    barkota_lists: 0
+    block_content: 0
+    cocaliong: 0
+    comment: 0
+    comments_recent: 0
+    content: 0
+    dashboard: 0
+    dashboard_content: 0
+    debug: 0
+    files: 0
+    frontpage: 0
+    glossary: 0
+    messages: 0
+    myplace: 0
+    places: 0
+    product_category: 0
+    product_list_json: 0
+    product_owner: 0
+    related_places: 0
+    routes: 0
+    store: 0
+    table_routes: 0
+    user_admin_people: 0
+    watchdog: 0
+field_type: viewsreference

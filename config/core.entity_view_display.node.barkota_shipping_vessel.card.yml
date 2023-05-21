@@ -1,0 +1,114 @@
+uuid: 2fdca170-feaf-49a7-bddb-f4cadf2fd3de
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.barkota_shipping_vessel.field_banner_image
+    - field.field.node.barkota_shipping_vessel.field_code
+    - field.field.node.barkota_shipping_vessel.field_description
+    - field.field.node.barkota_shipping_vessel.field_display_name
+    - field.field.node.barkota_shipping_vessel.field_field_destination_default
+    - field.field.node.barkota_shipping_vessel.field_field_origin_default
+    - field.field.node.barkota_shipping_vessel.field_logo
+    - field.field.node.barkota_shipping_vessel.field_uuid
+    - field.field.node.barkota_shipping_vessel.field_vessel_book
+    - field.field.node.barkota_shipping_vessel.field_vessel_destination
+    - field.field.node.barkota_shipping_vessel.field_vessel_origin
+    - field.field.node.barkota_shipping_vessel.field_weight
+    - image.style.card_wide
+    - node.type.barkota_shipping_vessel
+  module:
+    - image
+    - image_class
+    - text
+    - user
+id: node.barkota_shipping_vessel.card
+targetEntityType: node
+bundle: barkota_shipping_vessel
+mode: card
+content:
+  field_banner_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: card_wide
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      image_class:
+        class: img-fluid
+    weight: 7
+    region: content
+  field_description:
+    type: text_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_display_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_field_destination_default:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_field_origin_default:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_logo:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_vessel_book:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_vessel_destination:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_vessel_origin:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  field_code: true
+  field_uuid: true
+  field_weight: true
+  links: true

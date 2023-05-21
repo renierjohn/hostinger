@@ -1,0 +1,125 @@
+<?php
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function renify_preprocess(&$variables, $hook){
+  $variables['user_profile'] = '/sites/default/files/public/profile/r.png';
+  $variables['sitekey']      = \Drupal::service('data_router.account')->getCapchaSiteKey();
+  $current_user              = \Drupal::currentUser();
+  if($current_user->isAuthenticated()) {
+    $uid          = $current_user->id();
+    $user         = \Drupal\user\Entity\User::load($uid);
+    $user_profile = $user->user_picture->getValue();
+    if(empty($user_profile)){
+      return $variables;
+    }
+
+    $fid = $user_profile[0]['target_id'];
+    $uri = \Drupal\file\Entity\File::load($fid);
+    $uri = $uri->get('uri')->getValue();
+    if(!empty($uri)){
+      $uri = $uri[0]['value'];
+      $uri = str_replace('public://','/sites/default/files/public/',$uri);
+      $variables['user_profile'] = $uri;
+    }
+  }
+  return $variables;
+}
+
+function renify_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
+}
+
+function renify_preprocess_node(&$variables){
+  $node   = $variables['node'];
+  $nid    = $node->id();
+  $bundle = $node->bundle();
+  $result = [];
+  $routes_relation = [];
+  if($bundle == 'messages' || $bundle == 'config'){
+    
+  }
+
+  if($bundle == 'places'){
+    $routes_relation = \Drupal::service('data_router.aliases_path')->setNode($node)->getRoutesRelation();
+  }
+
+  $result = \Drupal::service('data_router.aliases_path')->setID($nid)->setBundle($bundle)->getContentPagination();
+  $variables['pagination']      = $result;
+  $variables['routes_relation'] = $routes_relation;
+  
+}
+
+function renify_preprocess_taxonomy_term(&$variables){
+  
+}
+
+function renify_preprocess_block(&$variables){
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $variables['node_title']         = 'Renify';
+  $variables['node_url']           = '/';
+  $variables['is_front']           = \Drupal::service('path.matcher')->isFrontPage();
+  $variables['#cache']             = 
+    [
+        'max-age' => 0,
+        'contexts' => ['url.path.is_front '],
+    ];
+
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $variables['node_title'] = $node->getTitle();
+    $node_url  = !empty($node->path->getValue()[0]) ? $node->path->getValue()[0]: FALSE;
+    $variables['node_url']   = !empty($node_url['alias']) ? $node_url['alias'] : '/node/'.$node->id();
+  }
+}
+
+function renify_preprocess_html(&$variables){
+  if(\Drupal::service('path.matcher')->isFrontPage()){
+    $variables['head_title']['title'] = 'Renify';
+  }
+  if(\Drupal::service('current_route_match')->getRouteName() == 'search.view_node_search'){
+    $title = \Drupal::request()->query->get('keys');
+    if(empty($title)){
+      $variables['head_title']['title'] = 'No Result | Renify';
+    }
+    else{
+      $variables['head_title']['title'] = $title.' | Renify';
+    }
+    $variables['form_title'] = $title;
+  }
+}
+
+function renify_preprocess_menu(&$variables){
+  if(!\Drupal::service('path.matcher')->isFrontPage()){
+    // $variables['menus'][] = ['url' => '#gallery','title'=>'Gallery'];
+    // $variables['menus'][] = ['url' => '#video','title'=>'Video'];
+  }
+}
+
+function renify_preprocess_form(&$variables){
+  if(\Drupal::service('current_route_match')->getRouteName() == 'search.view_node_search'){
+    $title = \Drupal::request()->query->get('keys');
+    if(empty($title)){
+      $title = 'None';
+    }
+    $variables['form_title'] = $title;
+  }
+}
+
+function renify_preprocess_views_view_unformatted(&$variables){
+  // Cocaliong ajax search
+  $variables['ajaxform'] = \Drupal::service('data_router.ajaxroute')->getRouteLists();
+}
+
+function renify_preprocess_views_view_fields(&$variables){
+  $variables['current_route_name'] = \Drupal::routeMatch()->getRouteName();
+  $variables['current_category'] = False;
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if(!empty($node)){
+    if($node->bundle() == 'products'){
+        $variables['current_category'] =  $node->field_product_category->target_id;
+    }
+  }
+
+}

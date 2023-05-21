@@ -1,0 +1,10 @@
+uuid: d7b9d287-db67-4ba5-957a-4b7e9ad9ac7e
+langcode: en
+status: true
+dependencies: {  }
+id: group
+label: 'Group (General Purpose)'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

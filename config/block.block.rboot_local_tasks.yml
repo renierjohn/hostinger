@@ -1,0 +1,31 @@
+uuid: cf0100ff-b221-4dc1-80f4-b3b5f942a9e0
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - rboot
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: rboot_local_tasks
+theme: rboot
+region: header
+weight: -5
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

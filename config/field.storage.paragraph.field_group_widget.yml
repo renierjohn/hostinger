@@ -1,0 +1,30 @@
+uuid: 1220e27e-5bfd-4775-b58d-0e727a55bf91
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_group_widget
+field_name: field_group_widget
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: accordion
+      label: Accordion
+    -
+      value: list
+      label: 'Image List'
+    -
+      value: tab
+      label: Tabs
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

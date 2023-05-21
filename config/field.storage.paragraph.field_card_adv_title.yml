@@ -1,0 +1,19 @@
+uuid: 8defe7b6-abb6-4d22-b5c0-0125d22b3bc3
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_card_adv_title
+field_name: field_card_adv_title
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

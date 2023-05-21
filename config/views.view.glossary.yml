@@ -416,7 +416,8 @@ display:
       menu:
         type: normal
         title: Glossary
-        weight: 0
+        weight: -46
+        enabled: false
         menu_name: main
         parent: ''
     cache_metadata:

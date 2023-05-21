@@ -1,0 +1,29 @@
+uuid: 18fe68a3-9ef3-45d7-9707-c63cc6b14f7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_adv_badge
+    - paragraphs.paragraphs_type.card_advanced
+    - taxonomy.vocabulary.badge_types
+id: paragraph.card_advanced.field_card_adv_badge
+field_name: field_card_adv_badge
+entity_type: paragraph
+bundle: card_advanced
+label: Badge
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      badge_types: badge_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

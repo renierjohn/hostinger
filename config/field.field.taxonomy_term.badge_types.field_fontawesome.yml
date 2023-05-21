@@ -1,0 +1,21 @@
+uuid: e7ffccfb-bf94-4fed-8d88-12553ee1e3c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_fontawesome
+    - taxonomy.vocabulary.badge_types
+  module:
+    - fontawesome
+id: taxonomy_term.badge_types.field_fontawesome
+field_name: field_fontawesome
+entity_type: taxonomy_term
+bundle: badge_types
+label: fontawesome
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fontawesome_icon

@@ -1,0 +1,22 @@
+uuid: 6648c777-a356-43ad-b9c5-00ef618b21c7
+langcode: en
+status: false
+dependencies:
+  module:
+    - help
+  theme:
+    - rboot
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: rboot_help
+theme: rboot
+region: content
+weight: -5
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

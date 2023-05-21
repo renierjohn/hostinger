@@ -1,0 +1,39 @@
+.r-category {
+  max-width: fit-content;
+}
+
+.r-card-footer-scroll {
+   color: black !important;
+   background-color: white !important;
+  :hover {
+     color: black !important;
+     background-color: white !important;
+  }
+}
+
+.r-node-card-scroll {
+  :hover {
+    transition: 0.2s;
+    color: white;
+    background-color: black;
+  }
+
+  ol {
+    :hover {
+      text-decoration: none;
+      color: black;
+      background-color: white;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+    .card-group.card-group-scroll {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+}
+
+.card-group.card-group-scroll > .card {
+    flex-basis: 35%;
+}

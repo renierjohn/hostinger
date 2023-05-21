@@ -1,0 +1,15 @@
+uuid: 336ca684-9ff9-4b63-9a3d-14d07c7f67ea
+langcode: en
+status: true
+dependencies: {  }
+name: card
+label: 'Card ( 900 x 600 )'
+effects:
+  b6d55bab-39cd-4b4b-9bd8-6e9a1076b54f:
+    uuid: b6d55bab-39cd-4b4b-9bd8-6e9a1076b54f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 300
+      anchor: center-center

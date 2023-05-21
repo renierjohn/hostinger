@@ -1,0 +1,10 @@
+uuid: e70f11fe-f4e8-4f20-842f-0a25df5398fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.card_v2
+label: 'Card Advance'
+targetEntityType: node
+cache: true

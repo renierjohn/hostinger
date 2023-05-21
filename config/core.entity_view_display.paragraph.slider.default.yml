@@ -1,0 +1,34 @@
+uuid: 50c196fd-b871-4b0c-8cdf-f98ec02fbdce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slider.field_slider_image
+    - field.field.paragraph.slider.field_slider_label
+    - field.field.paragraph.slider.field_slider_link
+    - image.style.banner
+    - paragraphs.paragraphs_type.slider
+  module:
+    - image
+    - image_class
+id: paragraph.slider.default
+targetEntityType: paragraph
+bundle: slider
+mode: default
+content:
+  field_slider_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: banner
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      image_class:
+        class: 'd-block w-100'
+    weight: 0
+    region: content
+hidden:
+  field_slider_label: true
+  field_slider_link: true

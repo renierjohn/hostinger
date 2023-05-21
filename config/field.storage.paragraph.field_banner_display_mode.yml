@@ -1,0 +1,30 @@
+uuid: 0f8830ce-78df-4176-a668-4b49654bed02
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_banner_display_mode
+field_name: field_banner_display_mode
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: 'Left Align'
+    -
+      value: '2'
+      label: 'Center Align'
+    -
+      value: '3'
+      label: 'Right Align'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

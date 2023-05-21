@@ -1,0 +1,75 @@
+uuid: 1c020dff-ec09-4b74-940c-e4bfc7a46dd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_scroll
+    - field.field.node.routes.field_banner_image
+    - field.field.node.routes.field_description
+    - field.field.node.routes.field_route_class
+    - field.field.node.routes.field_route_destination
+    - field.field.node.routes.field_route_origin
+    - field.field.node.routes.field_route_price
+    - field.field.node.routes.field_thumbnails
+    - field.field.node.routes.field_ticket_link_list
+    - field.field.node.routes.field_tx_table_route
+    - image.style.card
+    - node.type.routes
+  module:
+    - image
+    - image_class
+    - link
+    - text
+    - user
+id: node.routes.card_scroll
+targetEntityType: node
+bundle: routes
+mode: card_scroll
+content:
+  field_banner_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: card
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      image_class:
+        class: img-fluid
+    weight: 0
+    region: content
+  field_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_ticket_link_list:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_tx_table_route:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_route_class: true
+  field_route_destination: true
+  field_route_origin: true
+  field_route_price: true
+  field_thumbnails: true
+  links: true

@@ -1,0 +1,118 @@
+uuid: f21b173c-861f-400f-b697-aef09acd3156
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.banner_cta.field_banner_cta
+    - field.field.paragraph.banner_cta.field_banner_cta_color
+    - field.field.paragraph.banner_cta.field_banner_display_mode
+    - field.field.paragraph.banner_cta.field_banner_image
+    - field.field.paragraph.banner_cta.field_banner_short_text
+    - image.style.banner
+    - paragraphs.paragraphs_type.banner_cta
+  module:
+    - field_group
+    - image
+    - image_class
+    - link
+third_party_settings:
+  field_group:
+    group_title_cta:
+      children:
+        - group_short_text_wrapper
+        - field_banner_cta
+      label: Title-CTA
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'col-xl-6 col-lg-6 col-md-12'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_image:
+      children:
+        - field_banner_image
+      label: Image
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: 'col-xl-6 col-lg-6 col-md-12'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_short_text_wrapper:
+      children:
+        - field_banner_short_text
+      label: 'Short Text Wrapper'
+      parent_name: group_title_cta
+      region: content
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: 'text-black display-4 fw-bold pe-lg-8'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.banner_cta.default
+targetEntityType: paragraph
+bundle: banner_cta
+mode: default
+content:
+  field_banner_cta:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  field_banner_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: banner
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      image_class:
+        class: img-fluid
+    weight: 2
+    region: content
+  field_banner_short_text:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 21
+    region: content
+hidden:
+  field_banner_cta_color: true
+  field_banner_display_mode: true

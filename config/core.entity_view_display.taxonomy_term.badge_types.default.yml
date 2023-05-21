@@ -1,0 +1,24 @@
+uuid: 5adf506f-5aaa-441d-99a6-d987d1f31eeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.badge_types.field_fontawesome
+    - taxonomy.vocabulary.badge_types
+  module:
+    - fontawesome
+id: taxonomy_term.badge_types.default
+targetEntityType: taxonomy_term
+bundle: badge_types
+mode: default
+content:
+  field_fontawesome:
+    type: fontawesome_icon_formatter
+    label: hidden
+    settings:
+      layers: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  description: true

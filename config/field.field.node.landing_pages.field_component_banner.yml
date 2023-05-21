@@ -1,0 +1,48 @@
+uuid: 175b153c-dead-40d5-bbe9-46c9250e95b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_component_banner
+    - node.type.landing_pages
+    - paragraphs.paragraphs_type.banner_cta
+    - paragraphs.paragraphs_type.slider_group
+  module:
+    - entity_reference_revisions
+id: node.landing_pages.field_component_banner
+field_name: field_component_banner
+entity_type: node
+bundle: landing_pages
+label: 'Component Banner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      banner_cta: banner_cta
+      slider_group: slider_group
+    negate: 0
+    target_bundles_drag_drop:
+      banner_cta:
+        weight: 5
+        enabled: true
+      banner_group:
+        weight: 6
+        enabled: false
+      card:
+        weight: 3
+        enabled: false
+      card_group:
+        weight: 10
+        enabled: false
+      slider:
+        weight: 4
+        enabled: false
+      slider_group:
+        weight: 12
+        enabled: true
+field_type: entity_reference_revisions

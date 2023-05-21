@@ -1,0 +1,10 @@
+uuid: ac06096c-7519-4953-aec8-89461126e935
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.card_scroll
+label: 'Card Scroll'
+targetEntityType: node
+cache: true

@@ -1,0 +1,23 @@
+uuid: f2436fee-60b9-46de-8954-b76d6fb14b58
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_group_widget
+    - paragraphs.paragraphs_type.group
+  module:
+    - options
+id: paragraph.group.field_group_widget
+field_name: field_group_widget
+entity_type: paragraph
+bundle: group
+label: 'Group Widget'
+description: 'http://renifysite.local/admin/structure/paragraphs_type/group/fields'
+required: true
+translatable: false
+default_value:
+  -
+    value: accordion
+default_value_callback: ''
+settings: {  }
+field_type: list_string

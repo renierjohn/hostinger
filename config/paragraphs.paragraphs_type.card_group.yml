@@ -1,0 +1,10 @@
+uuid: 6999caa1-a4dd-4afa-9d1f-8532b03562de
+langcode: en
+status: true
+dependencies: {  }
+id: card_group
+label: 'Card Group'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,83 @@
+uuid: aac5cca1-4c74-4cc9-946a-673ec0a43654
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_group.field_card_group_sub_title
+    - field.field.paragraph.card_group.field_card_group_title
+    - field.field.paragraph.card_group.field_card_type
+    - paragraphs.paragraphs_type.card_group
+  module:
+    - entity_reference_revisions
+    - field_group
+third_party_settings:
+  field_group:
+    group_card_group_title_wrapper:
+      children:
+        - field_card_group_title
+        - field_card_group_sub_title
+      label: 'Card Group Title Wrapper'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'col-12 text-center mb-4'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_card_list_wrapper:
+      children:
+        - field_card_type
+      label: 'Card List Wrapper'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: container
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.card_group.default
+targetEntityType: paragraph
+bundle: card_group
+mode: default
+content:
+  field_card_group_sub_title:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_card_group_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_card_type:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

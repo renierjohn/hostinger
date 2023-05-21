@@ -1,0 +1,19 @@
+uuid: eb6bd7b9-5f13-45e4-9205-f6ffe83e4e86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_group_sub_title
+    - paragraphs.paragraphs_type.card_group
+id: paragraph.card_group.field_card_group_sub_title
+field_name: field_card_group_sub_title
+entity_type: paragraph
+bundle: card_group
+label: 'Card Group Sub Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

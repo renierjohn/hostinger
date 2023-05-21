@@ -1,0 +1,35 @@
+.r-category {
+  max-width: fit-content;
+}
+
+.r-card-footer-scroll {
+  color: black !important;
+  background-color: white !important;
+}
+.r-card-footer-scroll :hover {
+  color: black !important;
+  background-color: white !important;
+}
+
+.r-node-card-scroll :hover {
+  transition: 0.2s;
+  color: white;
+  background-color: black;
+}
+.r-node-card-scroll ol :hover {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+}
+
+@media (min-width: 576px) {
+  .card-group.card-group-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+}
+.card-group.card-group-scroll > .card {
+  flex-basis: 35%;
+}
+
+/*# sourceMappingURL=node.css.map */

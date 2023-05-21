@@ -1,0 +1,86 @@
+uuid: 98c44ed5-b412-4906-915b-ea386055713f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_advanced.field_card_adv_badge
+    - field.field.paragraph.card_advanced.field_card_adv_body
+    - field.field.paragraph.card_advanced.field_card_adv_image
+    - field.field.paragraph.card_advanced.field_card_adv_title
+    - image.style.facebook
+    - paragraphs.paragraphs_type.card_advanced
+  module:
+    - field_group
+    - image
+    - image_class
+    - link
+third_party_settings:
+  field_group:
+    group_card_adv_body_wrapper:
+      children:
+        - field_card_adv_badge
+        - field_card_adv_title
+        - field_card_adv_body
+      label: 'Card Adv Body Wrapper'
+      parent_name: ''
+      region: content
+      weight: 1
+      format_type: html_element
+      format_settings:
+        classes: card-body
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: paragraph.card_advanced.default
+targetEntityType: paragraph
+bundle: card_advanced
+mode: default
+content:
+  field_card_adv_badge:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_card_adv_body:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_card_adv_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: facebook
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      image_class:
+        class: 'img-fluid  rounded-top-md mb-2'
+    weight: 0
+    region: content
+  field_card_adv_title:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden: {  }

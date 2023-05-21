@@ -1,0 +1,20 @@
+uuid: 78f03f50-212e-4ee9-9aad-4d718508c70c
+langcode: en
+status: false
+dependencies:
+  theme:
+    - rboot
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: rboot_page_title
+theme: rboot
+region: content
+weight: -4
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
