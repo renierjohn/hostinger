@@ -1,0 +1,23 @@
+uuid: 9ae2c237-7552-4ea3-852d-82a814e8fcec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accordion_flag
+    - paragraphs.paragraphs_type.accordion
+id: paragraph.accordion.field_accordion_flag
+field_name: field_accordion_flag
+entity_type: paragraph
+bundle: accordion
+label: Show
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'TRUE'
+  off_label: 'FALSE'
+field_type: boolean

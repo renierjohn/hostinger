@@ -47,10 +47,40 @@
     not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
+
+
+{% set control = 'accordion' ~ content.field_accordion_title['#object'].id() %}
+{% set accordion_expand = 'false' %}
+{% set accordion_show = '' %}
+{% set collapsed = 'collapsed' %}
+
+{% if  content.field_accordion_flag.0['#markup'] == 'TRUE' %}
+  {% set accordion_expand = 'true' %}
+  {% set accordion_show = 'show' %}
+  {% set collapsed = '' %}
+{% endif %}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content }}
+      <h2 class="accordion-header">
+        <button class="accordion-button {{ collapsed }}"
+         type="button"
+         data-bs-toggle="collapse"
+         data-bs-target="#{{ control }}"
+         aria-expanded="{{ accordion_expand }}"
+         aria-controls="{{ control }}">
+          {{ content.field_accordion_title }}
+        </button>
+      </h2>
+      <div id="{{ control }}"
+         class="accordion-collapse collapse {{ accordion_show }}"
+         aria-labelledby="{{ control }}"
+         data-bs-parent="#{{ control }}">
+        <div class="accordion-body">
+          {{ content.field_accordion_body }}
+        </div>
+      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}
