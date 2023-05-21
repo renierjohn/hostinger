@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Update links
+ * */
+function data_router_update_9001(&$sandbox) {
+  $nids = \Drupal::entityQuery('node')->condition('type', 'places')->execute();
+  foreach ($nids as $nid) {
+    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+    $uri = $node->get('field_youtube')->getValue()[0]['uri'];
+    $node->field_youtube = [
+      'uri' => $uri,
+      'title' => 'Watch Here',
+      'options' => [
+          'attributes' => [
+            'target' => '_blank','class'=>['btn','btn-primary']
+          ],
+        ]
+    ];
+   $node->save();
+  }
+}
