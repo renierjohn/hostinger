@@ -16,7 +16,7 @@ class RenifyTheme implements ThemeNegotiatorInterface {
   public function applies(RouteMatchInterface $route_match) {
     $route = $route_match->getRouteObject();
 
-    if(!empty($route) && $route->getPath() == '/user/login'){
+    if(!empty($route) && ($route->getPath() == '/user/login' || $route->getPath() == '/user/register' || $route->getPath() == '/node/add/places')){
         return TRUE;
     }
     $type = '';
