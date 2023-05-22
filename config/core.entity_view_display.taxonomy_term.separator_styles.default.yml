@@ -1,0 +1,21 @@
+uuid: 762f4a82-0afa-45a3-9b3a-74d9765c5470
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.separator_styles
+  module:
+    - text
+id: taxonomy_term.separator_styles.default
+targetEntityType: taxonomy_term
+bundle: separator_styles
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

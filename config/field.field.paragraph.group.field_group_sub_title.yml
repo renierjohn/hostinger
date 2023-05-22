@@ -1,0 +1,19 @@
+uuid: eb0082da-85cd-4a9d-b2e1-42aaff32c1e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_group_sub_title
+    - paragraphs.paragraphs_type.group
+id: paragraph.group.field_group_sub_title
+field_name: field_group_sub_title
+entity_type: paragraph
+bundle: group
+label: 'Group Sub Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

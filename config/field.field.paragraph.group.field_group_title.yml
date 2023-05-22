@@ -1,0 +1,19 @@
+uuid: 858d96cf-b45a-4907-9d08-19523427fdeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_group_title
+    - paragraphs.paragraphs_type.group
+id: paragraph.group.field_group_title
+field_name: field_group_title
+entity_type: paragraph
+bundle: group
+label: 'Group Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

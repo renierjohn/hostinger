@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.slider_group.field_separator_style
     - field.field.paragraph.slider_group.field_slider_type
     - paragraphs.paragraphs_type.slider_group
   module:
@@ -12,6 +13,14 @@ targetEntityType: paragraph
 bundle: slider_group
 mode: default
 content:
+  field_separator_style:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_slider_type:
     type: entity_reference_revisions_entity_view
     label: hidden

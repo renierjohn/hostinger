@@ -4,11 +4,33 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.views.field_list_items
+    - field.field.paragraph.views.field_separator_style
     - field.field.paragraph.views.field_sub_title
     - field.field.paragraph.views.field_title
     - paragraphs.paragraphs_type.views
   module:
+    - field_group
     - viewsreference
+third_party_settings:
+  field_group:
+    group_advance_settings:
+      children:
+        - field_title
+        - field_sub_title
+        - field_separator
+        - field_separator_style
+      label: 'Advance Settings'
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: paragraph.views.default
 targetEntityType: paragraph
 bundle: views
@@ -16,13 +38,19 @@ mode: default
 content:
   field_list_items:
     type: viewsreference_select
-    weight: 2
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_separator_style:
+    type: options_select
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_sub_title:
     type: string_textfield
-    weight: 1
+    weight: 2
     region: content
     settings:
       size: 100
@@ -30,7 +58,7 @@ content:
     third_party_settings: {  }
   field_title:
     type: string_textfield
-    weight: 0
+    weight: 1
     region: content
     settings:
       size: 60

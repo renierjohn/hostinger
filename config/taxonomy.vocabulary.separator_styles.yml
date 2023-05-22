@@ -1,0 +1,8 @@
+uuid: e26c4bfe-b1d7-4940-a104-3202455102f4
+langcode: en
+status: true
+dependencies: {  }
+name: 'Separator Styles'
+vid: separator_styles
+description: ''
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 16cb2c0d-158c-44d1-a9a4-ec4e2a88d5df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_separator_style
+    - paragraphs.paragraphs_type.slider_group
+    - taxonomy.vocabulary.separator_styles
+id: paragraph.slider_group.field_separator_style
+field_name: field_separator_style
+entity_type: paragraph
+bundle: slider_group
+label: 'Separator Style'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      separator_styles: separator_styles
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

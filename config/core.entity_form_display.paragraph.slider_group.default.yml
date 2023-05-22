@@ -3,18 +3,44 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.slider_group.field_separator_style
     - field.field.paragraph.slider_group.field_slider_type
     - paragraphs.paragraphs_type.slider_group
   module:
+    - field_group
     - paragraphs
+third_party_settings:
+  field_group:
+    group_advance_settings:
+      children:
+        - field_separator
+        - field_separator_style
+      label: 'Advance Settings'
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: paragraph.slider_group.default
 targetEntityType: paragraph
 bundle: slider_group
 mode: default
 content:
+  field_separator_style:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_slider_type:
     type: paragraphs
-    weight: 0
+    weight: 1
     region: content
     settings:
       title: Paragraph
