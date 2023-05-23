@@ -52,8 +52,8 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       <div class="text-center">
-        <h2 class="text-uppercase">{{ content.field_title }}</h2>
-        <p>{{ content.field_sub_title }}</p>
+        <h2 class="text-uppercase display-3">{{ content.field_title }}</h2>
+        <h6 class="display-6">{{ content.field_sub_title }}</h6>
       </div>
       {{ content.field_list_items }}
     {% endblock %}

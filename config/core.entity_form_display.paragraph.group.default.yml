@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.group.field_group_align_text
     - field.field.paragraph.group.field_group_list
     - field.field.paragraph.group.field_group_sub_title
     - field.field.paragraph.group.field_group_title
@@ -18,7 +19,7 @@ third_party_settings:
       children:
         - field_group_title
         - field_group_sub_title
-        - field_separator
+        - field_group_align_text
         - field_separator_style
       label: 'Advance Settings'
       region: content
@@ -37,6 +38,12 @@ targetEntityType: paragraph
 bundle: group
 mode: default
 content:
+  field_group_align_text:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_group_list:
     type: paragraphs
     weight: 4
@@ -80,7 +87,7 @@ content:
     third_party_settings: {  }
   field_separator_style:
     type: options_select
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

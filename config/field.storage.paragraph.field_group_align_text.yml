@@ -1,0 +1,30 @@
+uuid: ad434d90-974a-4ad5-853b-289e55816b6f
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_group_align_text
+field_name: field_group_align_text
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: text-start
+      label: 'Left Align'
+    -
+      value: text-center
+      label: 'Center Align'
+    -
+      value: text-end
+      label: 'Right Align'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -6,52 +6,12 @@ dependencies:
     - field.field.paragraph.card_group.field_card_group_sub_title
     - field.field.paragraph.card_group.field_card_group_title
     - field.field.paragraph.card_group.field_card_type
+    - field.field.paragraph.card_group.field_group_align_text
     - field.field.paragraph.card_group.field_separator_style
     - paragraphs.paragraphs_type.card_group
   module:
     - entity_reference_revisions
-    - field_group
-third_party_settings:
-  field_group:
-    group_card_group_title_wrapper:
-      children:
-        - field_card_group_title
-        - field_card_group_sub_title
-      label: 'Card Group Title Wrapper'
-      parent_name: ''
-      region: content
-      weight: 0
-      format_type: html_element
-      format_settings:
-        classes: 'col-12 text-center mb-4'
-        show_empty_fields: false
-        id: ''
-        element: div
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
-    group_card_list_wrapper:
-      children:
-        - field_card_type
-      label: 'Card List Wrapper'
-      parent_name: ''
-      region: content
-      weight: 1
-      format_type: html_element
-      format_settings:
-        classes: container
-        show_empty_fields: false
-        id: ''
-        element: div
-        show_label: false
-        label_element: h3
-        label_element_classes: ''
-        attributes: ''
-        effect: none
-        speed: fast
+    - options
 id: paragraph.card_group.default
 targetEntityType: paragraph
 bundle: card_group
@@ -81,6 +41,13 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_group_align_text:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_separator_style:
     type: entity_reference_entity_view
     label: hidden
@@ -88,6 +55,6 @@ content:
       view_mode: default
       link: true
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
 hidden: {  }

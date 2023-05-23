@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.group.field_group_align_text
     - field.field.paragraph.group.field_group_list
     - field.field.paragraph.group.field_group_sub_title
     - field.field.paragraph.group.field_group_title
@@ -17,6 +18,13 @@ targetEntityType: paragraph
 bundle: group
 mode: default
 content:
+  field_group_align_text:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_group_list:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -28,14 +36,14 @@ content:
     region: content
   field_group_sub_title:
     type: basic_string
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 3
     region: content
   field_group_title:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -50,7 +58,7 @@ content:
     region: content
   field_separator_style:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }

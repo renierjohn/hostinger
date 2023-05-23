@@ -1,0 +1,23 @@
+uuid: 9869fd69-c7e2-45d8-a5d0-f91c0673080e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_group_align_text
+    - paragraphs.paragraphs_type.group
+  module:
+    - options
+id: paragraph.group.field_group_align_text
+field_name: field_group_align_text
+entity_type: paragraph
+bundle: group
+label: 'Text Alignment'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: text-center
+default_value_callback: ''
+settings: {  }
+field_type: list_string

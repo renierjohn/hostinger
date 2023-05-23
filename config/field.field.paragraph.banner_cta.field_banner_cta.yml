@@ -11,7 +11,7 @@ id: paragraph.banner_cta.field_banner_cta
 field_name: field_banner_cta
 entity_type: paragraph
 bundle: banner_cta
-label: 'Banner CTA'
+label: CTA
 description: ''
 required: false
 translatable: false

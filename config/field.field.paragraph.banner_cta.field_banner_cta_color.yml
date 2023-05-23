@@ -11,7 +11,7 @@ id: paragraph.banner_cta.field_banner_cta_color
 field_name: field_banner_cta_color
 entity_type: paragraph
 bundle: banner_cta
-label: 'Banner CTA Color'
+label: 'CTA Color'
 description: ''
 required: false
 translatable: false
