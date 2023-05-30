@@ -143,13 +143,13 @@ class BookingForm extends FormBase {
     $form['gender'] = [
       '#type'   => 'select',
       '#title'  => $this->t('Gender'),
-      '#size'   => '50',
-      '#value' => 'male',
+      '#title_display' => $this->t('Gender'),
+      '#default_value' => 'male',
       '#options' => [
-        'male'   => 'Male',
-        'female' => 'Female',
+        'male'   => $this->t('Male'),
+        'female' => $this->t('Female'),
       ],
-      // '#required'  => TRUE,
+      '#required'  => TRUE,
     ];
 
     $form['birthday'] = [
