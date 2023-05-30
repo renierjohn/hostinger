@@ -79,9 +79,104 @@ class BookingConfigForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    // $form['#tree'] = TRUE;
     $files = scandir(self::BOOK_PATH);
-    unset($files[0]);unset($files[1]);unset($files[2]);
-    
+    unset($files[0]);unset($files[1]);unset($files[2]);unset($files[3]);
+
+    $form['tickets'] = [
+      '#type' => 'details',
+      '#title' => t('Submissions'),
+      '#collapsible' => TRUE, // Added
+      '#collapsed' => TRUE,  // Added
+    ];
+
+    foreach ($files as $index => $hash) {
+      $data = $this->getData($hash);
+
+     $form['tickets']['detail'][$index] = [
+      '#type' => 'details',
+      '#title' =>  $data['name'] . ' ' .  $data['lastname'] . ' , ' . $hash,
+      '#collapsible' => TRUE, // Added
+      '#collapsed' => TRUE,  // Added
+     ];
+
+      $ticket_status = $data['pending'] ?
+        'Status:  <i>In Progress</i>' :
+        'Status:  <i>Done</i>';
+
+      $form['tickets']['detail'][$index]['boolean'] = [
+        '#type' => 'checkbox',
+        '#title' => $data['hash'],
+        '#value' => $data['hash'],
+        '#prefix' => '<br>',
+        '#suffix' => $ticket_status .'<br> Total Balance: <b>PHP ' . $data['price'] . '<b>'
+      ];
+
+      $form['tickets']['detail'][$index]['vessel'] = [
+        '#type' => 'textfield',
+        '#title' => 'Vessel',
+        '#disabled' => True,
+        '#value' => $data['vessel'],
+      ];
+
+      $form['tickets']['detail'][$index]['accomodation'] = [
+        '#type' => 'textfield',
+        '#title' => 'Accomodation',
+        '#disabled' => True,
+        '#value' => $data['accomodation'],
+      ];
+
+      $form['tickets']['detail'][$index]['datetime'] = [
+        '#type' => 'textfield',
+        '#title' => 'Date & Time',
+        '#disabled' => True,
+        '#value' => $data['datetime'],
+      ];
+
+      $form['tickets']['detail'][$index]['route'] = [
+        '#type' => 'textfield',
+        '#title' => 'Route',
+        '#disabled' => True,
+        '#value' => 'from ' . $data['origin'] .' ~ to ' . $data['destination'] ,
+      ];
+
+      $form['tickets']['detail'][$index]['name'] = [
+        '#type' => 'textfield',
+        '#title' => 'Name',
+        '#disabled' => True,
+        '#value' => $data['name'],
+      ];
+
+      $form['tickets']['detail'][$index]['lastname'] = [
+        '#type' => 'textfield',
+        '#title' => 'Lastname',
+        '#disabled' => True,
+        '#value' => $data['lastname'],
+      ];
+
+      $form['tickets']['detail'][$index]['bday'] = [
+        '#type' => 'textfield',
+        '#title' => 'Birthday',
+        '#disabled' => True,
+        '#value' => $data['birthday'],
+      ];
+
+      $form['tickets']['detail'][$index]['gender'] = [
+        '#type' => 'textfield',
+        '#title' => 'Gender',
+        '#disabled' => True,
+        '#value' => $data['gender'],
+      ];
+
+      $form['tickets']['detail'][$index]['number'] = [
+        '#type' => 'textfield',
+        '#title' => 'Number',
+        '#disabled' => True,
+        '#value' => $data['number'],
+      ];
+    }
+
+
     $form['book_list'] = [
       '#type'    => 'select',
       '#title'   => $this->t('Select Hash'),
@@ -108,14 +203,11 @@ class BookingConfigForm extends FormBase {
       '#default_value' => TRUE,
     ];
 
-
     $form['submit'] = [
       '#type'   => 'submit',
       '#value'  => 'Set Book Ticket',
-  
     ];
 
-  // \Drupal::messenger()->addMessage('ThankYou For Booking Visit');
 
     return $form;
   }
@@ -123,16 +215,15 @@ class BookingConfigForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $curent_path = \Drupal::request()->getRequestUri();
     $values    = $form_state->getValues();
-    // $input   = $form_state->getUserInput();
+    $input   = $form_state->getUserInput();
     $hash    = $values['book_list'];
     $price   = $values['price'];
     $remarks = $values['remarks'];
@@ -143,7 +234,7 @@ class BookingConfigForm extends FormBase {
     fclose($file);
 
     $data = json_decode($data,TRUE);
-    $old_status      = $data['pending']; 
+    $old_status      = $data['pending'];
     $data['pending'] = $status;
     
     if(!empty($remarks)){
@@ -162,11 +253,30 @@ class BookingConfigForm extends FormBase {
     \Drupal::messenger()->addMessage('Success');
   }
 
-  private function storeFile($hash,$data){
+  protected function storeFile($hash,$data){
     $file = fopen(self::BOOK_PATH . $hash, 'w');
     $data = json_encode($data);
     fwrite($file,$data);
     fclose($file);
   }
 
+  protected function getData($hash) {
+    try {
+      $file = fopen(self::BOOK_PATH . $hash, 'r+');
+    }
+    catch(e) {
+      $file = False;
+    }
+
+    if (empty($file)) {
+      return;
+    }
+
+    $data = fread($file,10000);
+    $data = json_decode($data,TRUE);
+    fclose($file);
+    return $data;
+  }
+
 }
+
