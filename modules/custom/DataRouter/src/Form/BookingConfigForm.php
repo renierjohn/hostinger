@@ -46,6 +46,8 @@ class BookingConfigForm extends FormBase {
 
   protected $bookingTemplate;
 
+  const BOOK_PATH = 'private://book/';
+
   public function __construct(EntityTypeManager $entityTypeManager,AccountService $account,EmailValidatorInterface $emailValidator,FloodInterface $flood,BookingService $bookingTemplate) {
     $this->entityTypeManager = $entityTypeManager;
     $this->emailValidator    = $emailValidator;
@@ -77,7 +79,7 @@ class BookingConfigForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $files = scandir('private://book');
+    $files = scandir(self::BOOK_PATH);
     unset($files[0]);unset($files[1]);unset($files[2]);
     
     $form['book_list'] = [
@@ -106,7 +108,6 @@ class BookingConfigForm extends FormBase {
       '#default_value' => TRUE,
     ];
 
-   
 
     $form['submit'] = [
       '#type'   => 'submit',
@@ -137,7 +138,7 @@ class BookingConfigForm extends FormBase {
     $remarks = $values['remarks'];
     $status  = $values['status'];
 
-    $file = fopen('private://book/'.$hash,'r');
+    $file = fopen(self::BOOK_PATH . $hash, 'r');
     $data = fread($file,10000);
     fclose($file);
 
@@ -162,7 +163,7 @@ class BookingConfigForm extends FormBase {
   }
 
   private function storeFile($hash,$data){
-    $file = fopen('private://book/'.$hash,'w');
+    $file = fopen(self::BOOK_PATH . $hash, 'w');
     $data = json_encode($data);
     fwrite($file,$data);
     fclose($file);

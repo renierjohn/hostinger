@@ -47,6 +47,8 @@ class BookingForm extends FormBase {
 
   const HASH = 'renify1234abcd';
 
+  const BOOK_PATH = 'private://book/';
+
   public function __construct(EntityTypeManager $entityTypeManager,AccountService $account,EmailValidatorInterface $emailValidator,FloodInterface $flood,BookingService $bookingTemplate) {
     $this->entityTypeManager = $entityTypeManager;
     $this->emailValidator    = $emailValidator;
@@ -293,7 +295,7 @@ class BookingForm extends FormBase {
     $values['datetime'] = $bookDate;
     $values['url']      = $curent_path;
     $values['pending']  = TRUE;
-    $values['remarks']  = 'Please Pay using GCash';
+    $values['remarks']  = '"Please Pay using GCash<br><br><br> <b><h4>Note:</h4></b> <i><h3>Once Paid, Processing will take 5 ~ 10 min. Thank you.</h3></i>';
 
     $hash = time();
     $hash = 'r.'.md5($hash).'-'.$hash;
@@ -302,12 +304,15 @@ class BookingForm extends FormBase {
     $this->storeFile($hash,$values);
 
     $this->bookingTemplate->formatBookingMessage($values)->sendMailManual();
-    
-    \Drupal::messenger()->addMessage('ThankYou For Booking . Youre Booking Status is https://renifysite.com/book/'.$hash);
+
+    $url = 'https://renifysite.com/book/' . $hash;
+    \Drupal::messenger()->addMessage(t('ThankYou For Booking . Youre Booking Status is <a href="@link" target="_blank">@link</a>', [
+      '@link' => $url,
+    ]));
   }
 
   private function storeFile($hash,$data){
-    $file = fopen('private://book/'.$hash,'w');
+    $file = fopen(self::BOOK_PATH . $hash, 'w');
     $data = json_encode($data);
     fwrite($file,$data);
     fclose($file);
