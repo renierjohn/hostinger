@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Routes V2'
+      title: 'Bus Routes'
       fields:
         title:
           id: title
