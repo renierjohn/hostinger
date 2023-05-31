@@ -126,6 +126,13 @@ class BookingConfigForm extends FormBase {
         '#upload_location' => 'private://etickets',
       ];
 
+      $form['tickets']['detail'][$index]['mail'] = [
+        '#type' => 'textfield',
+        '#title' => 'E-Mail',
+        '#disabled' => TRUE,
+        '#value' => $data['mail'],
+      ];
+
       $form['tickets']['detail'][$index]['hash'] = [
         '#type' => 'textfield',
         '#title' => 'Vessel',
@@ -230,7 +237,7 @@ class BookingConfigForm extends FormBase {
     $form['status'] = [
       '#type'      => 'checkbox',
       '#title'     => $this->t('Pending'),
-      '#default_value' => TRUE,
+      '#default_value' => FALSE,
     ];
 
     $form['submit'] = [
