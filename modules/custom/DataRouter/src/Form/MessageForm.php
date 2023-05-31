@@ -2,14 +2,12 @@
 
 namespace Drupal\data_router\Form;
 
-use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\data_router\Service\AccountService;
 use Drupal\Component\Utility\EmailValidatorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -42,7 +40,10 @@ class MessageForm extends FormBase {
    */
   protected $emailValidator;
 
-  public function __construct(EntityTypeManager $entityTypeManager,AccountService $account,EmailValidatorInterface $emailValidator,FloodInterface $flood) {
+  /**
+   *
+   */
+  public function __construct(EntityTypeManager $entityTypeManager, AccountService $account, EmailValidatorInterface $emailValidator, FloodInterface $flood) {
     $this->entityTypeManager = $entityTypeManager;
     $this->emailValidator    = $emailValidator;
     $this->account           = $account;
@@ -87,7 +88,7 @@ class MessageForm extends FormBase {
       '#type'   => 'textarea',
       '#title'  => $this->t('Message'),
       '#size'   => '600',
-      '#suffix' => '<div class="g-recaptcha" data-size="normal" data-tabindex="10" data-sitekey='.$captcha.'></div>',
+      '#suffix' => '<div class="g-recaptcha" data-size="normal" data-tabindex="10" data-sitekey=' . $captcha . '></div>',
       '#attributes' => [
         'class'       => ['full-width'],
         'placeholder' => 'Your message (Max 600 characters)',
@@ -112,35 +113,37 @@ class MessageForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $emailValidator = $this->emailValidator;
-    $account = $this->account;
-    $input   = $form_state->getUserInput();
-    $token   = $input['g-recaptcha-response'];
-    $email   = $input['mail'];
+    $account        = $this->account;
+    $input          = $form_state->getUserInput();
+    $token          = $input['g-recaptcha-response'];
+    $email          = $input['mail'];
 
     $anonyms = \Drupal::currentUser()->isAnonymous();
-    if(!$emailValidator->isValid($email) && $anonyms){
-      return $form_state->setErrorByName('email','Email Not Valid');
+    if (!$emailValidator->isValid($email) && $anonyms) {
+      return $form_state->setErrorByName('email', 'Email Not Valid');
     }
 
-    if(empty($token)){
-      return $form_state->setErrorByName('captcha','Please Use Captcha');
+    if (empty($token)) {
+      return $form_state->setErrorByName('captcha', 'Please Use Captcha');
     }
 
     $response = $account->setToken($token)->checkCaptcha();
-    if($response == false){
-      return $form_state->setErrorByName('captcha','Sorry , Youre Captcha was expired. Please Login again');
+    if ($response == FALSE) {
+      return $form_state->setErrorByName('captcha', 'Sorry , Youre Captcha was expired. Please Login again');
     }
   }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $curent_path = \Drupal::request()->getRequestUri();
-    $account = $this->account;
-    $values  = $form_state->getValues();
-    $email   = $values['mail'];
-    $message = $values['message'];
-    $result  = $account->setEmail($email)->setMessage('path : '.$curent_path.'</br> message: '.$message)->store_message();
+    $account     = $this->account;
+    $values      = $form_state->getValues();
+    $email       = $values['mail'];
+    $message     = $values['message'];
+    $result      = $account->setEmail($email)->setMessage('path : ' . $curent_path . '</br> message: ' . $message)->store_message();
     \Drupal::messenger()->addMessage('Thankyou For Messaging Us . Please Keep in Touch');
   }
+
 }

@@ -62,7 +62,7 @@ class BookingService
 	  $status           = 'SUCCESS';
 	  $status_bg_color  = 'green';
 	  $status_txt_color = 'white';
-  	$link_tag         = '<a href="https://renifysite.com/sites/default/files/public/book/tickets/'.$data['hash'].'.pdf" title="link" target="_blank">Download Youre Ticket Here</a>';
+  	$link_tag         = '<a href="https://renifysite.com/sites/default/files/public/etickets/'.$data['hash'].'.pdf" title="link" target="_blank">Download Youre Ticket Here</a>';
 
     if($data['pending']){
       $status           = 'PENDING';

@@ -19,7 +19,7 @@ function data_router_preprocess_page(&$variables){
     unset($conf['apiKey']);
    }
    $variables['#attached']['drupalSettings']['firebase'] = $conf;
-} 
+}
 
 function data_router_form_alter(&$form,&$form_state,&$form_id){
   if($form_id == 'user_login_form'){
@@ -36,7 +36,7 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
     $form['status']['widget']['value']['#default_value'] = FALSE;
     $form['actions']['submit']['#submit'][] = 'send_email_add';
   }
-// ksm($form_id);
+
   if($form_id == 'node_places_edit_form'){
    // $node = \Drupal::entityTypeManager()->getStorage('node')->load(288);
    // $uri = $node->get('field_youtube')->getValue();

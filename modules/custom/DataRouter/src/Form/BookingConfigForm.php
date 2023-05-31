@@ -2,13 +2,11 @@
 
 namespace Drupal\data_router\Form;
 
-use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Component\Utility\EmailValidatorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\data_router\Service\AccountService;
@@ -48,7 +46,12 @@ class BookingConfigForm extends FormBase {
 
   const BOOK_PATH = 'private://book/';
 
-  public function __construct(EntityTypeManager $entityTypeManager,AccountService $account,EmailValidatorInterface $emailValidator,FloodInterface $flood,BookingService $bookingTemplate) {
+  const ETICKET_PDF = 'public://etickets/';
+
+  /**
+   *
+   */
+  public function __construct(EntityTypeManager $entityTypeManager, AccountService $account, EmailValidatorInterface $emailValidator, FloodInterface $flood, BookingService $bookingTemplate) {
     $this->entityTypeManager = $entityTypeManager;
     $this->emailValidator    = $emailValidator;
     $this->account           = $account;
@@ -79,108 +82,135 @@ class BookingConfigForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // $form['#tree'] = TRUE;
+    $form['#tree'] = TRUE;
     $files = scandir(self::BOOK_PATH);
-    unset($files[0]);unset($files[1]);unset($files[2]);unset($files[3]);
+    unset($files[0]);
+    unset($files[1]);
+    unset($files[2]);
+    unset($files[3]);
 
     $form['tickets'] = [
       '#type' => 'details',
       '#title' => t('Submissions'),
-      '#collapsible' => TRUE, // Added
-      '#collapsed' => TRUE,  // Added
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
     ];
 
     foreach ($files as $index => $hash) {
       $data = $this->getData($hash);
 
-     $form['tickets']['detail'][$index] = [
-      '#type' => 'details',
-      '#title' =>  $data['name'] . ' ' .  $data['lastname'] . ' , ' . $hash,
-      '#collapsible' => TRUE, // Added
-      '#collapsed' => TRUE,  // Added
-     ];
-
       $ticket_status = $data['pending'] ?
-        'Status:  <i>In Progress</i>' :
+        'Status:  <i>Pending</i>' :
         'Status:  <i>Done</i>';
 
-      $form['tickets']['detail'][$index]['boolean'] = [
+      $form['tickets']['detail'][$index] = [
+        '#type' => 'details',
+        '#title' => $data['name'] . ' ' . $data['lastname'] . ' , ' . $hash,
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      ];
+
+      $form['tickets']['detail'][$index]['selected'] = [
         '#type' => 'checkbox',
         '#title' => $data['hash'],
-        '#value' => $data['hash'],
-        '#prefix' => '<br>',
-        '#suffix' => $ticket_status .'<br> Total Balance: <b>PHP ' . $data['price'] . '<b>'
+        '#prefix' => '<br>' . $ticket_status . '</br> Total Balance: PHP ' . $data['price'],
       ];
+
+      $form['tickets']['detail'][$index]['pdf'] = [
+        '#type' => 'file',
+        '#title' => $this->t('Upload E ticket'),
+        '#type' => 'managed_file',
+        '#size' => 20,
+        '#description' => t('PDF format only'),
+        '#upload_validators' => ['pdf'],
+        '#upload_location' => 'private://etickets',
+      ];
+
+      $form['tickets']['detail'][$index]['hash'] = [
+        '#type' => 'textfield',
+        '#title' => 'Vessel',
+        '#disabled' => TRUE,
+        '#hidden' => TRUE,
+        '#value' => $hash,
+      ];
+
+      $form['tickets']['detail'][$index]['status'] = [
+        '#type' => 'textfield',
+        '#title' => 'Vessel',
+        '#disabled' => TRUE,
+        '#hidden' => TRUE,
+        '#value' => $data['pending'],
+      ];
+
 
       $form['tickets']['detail'][$index]['vessel'] = [
         '#type' => 'textfield',
         '#title' => 'Vessel',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['vessel'],
       ];
 
       $form['tickets']['detail'][$index]['accomodation'] = [
         '#type' => 'textfield',
         '#title' => 'Accomodation',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['accomodation'],
       ];
 
       $form['tickets']['detail'][$index]['datetime'] = [
         '#type' => 'textfield',
         '#title' => 'Date & Time',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['datetime'],
       ];
 
       $form['tickets']['detail'][$index]['route'] = [
         '#type' => 'textfield',
         '#title' => 'Route',
-        '#disabled' => True,
-        '#value' => 'from ' . $data['origin'] .' ~ to ' . $data['destination'] ,
+        '#disabled' => TRUE,
+        '#value' => 'from ' . $data['origin'] . ' ~ to ' . $data['destination'] ,
       ];
 
       $form['tickets']['detail'][$index]['name'] = [
         '#type' => 'textfield',
         '#title' => 'Name',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['name'],
       ];
 
       $form['tickets']['detail'][$index]['lastname'] = [
         '#type' => 'textfield',
         '#title' => 'Lastname',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['lastname'],
       ];
 
       $form['tickets']['detail'][$index]['bday'] = [
         '#type' => 'textfield',
         '#title' => 'Birthday',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['birthday'],
       ];
 
       $form['tickets']['detail'][$index]['gender'] = [
         '#type' => 'textfield',
         '#title' => 'Gender',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['gender'],
       ];
 
       $form['tickets']['detail'][$index]['number'] = [
         '#type' => 'textfield',
         '#title' => 'Number',
-        '#disabled' => True,
+        '#disabled' => TRUE,
         '#value' => $data['number'],
       ];
     }
 
-
     $form['book_list'] = [
       '#type'    => 'select',
       '#title'   => $this->t('Select Hash'),
-      '#options' => array_combine($files,$files),
+      '#options' => array_combine($files, $files),
     ];
 
     $form['price'] = [
@@ -208,7 +238,6 @@ class BookingConfigForm extends FormBase {
       '#value'  => 'Set Book Ticket',
     ];
 
-
     return $form;
   }
 
@@ -222,12 +251,25 @@ class BookingConfigForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $curent_path = \Drupal::request()->getRequestUri();
-    $values    = $form_state->getValues();
-    $input   = $form_state->getUserInput();
-    $hash    = $values['book_list'];
-    $price   = $values['price'];
-    $remarks = $values['remarks'];
-    $status  = $values['status'];
+    $values      = $form_state->getValues();
+    $items        = $this->getItem($values['tickets']['detail']);
+    if (empty($items)) {
+     \Drupal::messenger()->addWarning('Please Select Item');
+      return;
+    }
+    $price       = $values['price'];
+    $remarks     = $values['remarks'];
+    $status      = $values['status'];
+
+    $hash        = $items ? $items['hash'] : FALSE;
+    $pdf_id      = !empty($items['pdf']) ? $items['pdf'][0] : FALSE;
+
+    if (!empty($pdf_id)) {
+      $file = \Drupal::entityTypeManager()->getStorage('file')->load($pdf_id);
+      $source_uri = $file->getFileUri();
+      $destination_uri = self::ETICKET_PDF . $hash . '.pdf';
+      \Drupal::service('file_system')->copy($source_uri, $destination_uri);
+    }
 
     $file = fopen(self::BOOK_PATH . $hash, 'r');
     $data = fread($file,10000);
@@ -236,47 +278,65 @@ class BookingConfigForm extends FormBase {
     $data = json_decode($data,TRUE);
     $old_status      = $data['pending'];
     $data['pending'] = $status;
-    
-    if(!empty($remarks)){
+
+    $data['pending'] = $status;
+    if (!empty($remarks)) {
       $data['remarks'] = $remarks;
     }
-
-    if(!empty($price)){
+    if (!empty($price)) {
       $data['price'] = $price;
     }
 
-    if($status == FALSE && $old_status == TRUE){
+    // Detect if transiion from pending to Done.
+    If ($status == FALSE && $old_status == TRUE) {
       $this->bookingTemplate->formatBookingMessage($data)->sendMailManual();
+      $this->storeFile($hash, $data);
     }
-
-    $this->storeFile($hash,$data);
     \Drupal::messenger()->addMessage('Success');
   }
 
-  protected function storeFile($hash,$data){
+  /**
+   *
+   */
+  protected function storeFile($hash, $data) {
     $file = fopen(self::BOOK_PATH . $hash, 'w');
     $data = json_encode($data);
-    fwrite($file,$data);
+    fwrite($file, $data);
     fclose($file);
   }
 
+  /**
+   *
+   */
+  protected function getItem($hashes) {
+    $data = FALSE;
+    foreach ($hashes as $item) {
+      if ($item['selected']) {
+        $data = $item;
+      }
+    }
+    return $data;
+  }
+
+  /**
+   *
+   */
   protected function getData($hash) {
     try {
       $file = fopen(self::BOOK_PATH . $hash, 'r+');
     }
-    catch(e) {
-      $file = False;
+    catch (e) {
+      $file = FALSE;
     }
 
     if (empty($file)) {
       return;
     }
 
-    $data = fread($file,10000);
-    $data = json_decode($data,TRUE);
+    $data = fread($file, 10000);
+    $data = json_decode($data, TRUE);
     fclose($file);
     return $data;
   }
 
 }
-
