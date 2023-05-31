@@ -121,6 +121,7 @@ class BookingConfigForm extends FormBase {
         '#title' => $this->t('Upload E ticket'),
         '#type' => 'managed_file',
         '#size' => 20,
+        '#default_value' => !empty($data['fid']) ? [$data['fid']] : FALSE,
         '#description' => t('PDF format only'),
         '#upload_validators' => ['pdf'],
         '#upload_location' => 'private://etickets',
@@ -300,6 +301,7 @@ class BookingConfigForm extends FormBase {
         \Drupal::messenger()->addWarning('PDF Not Uploaded');
         return;
       }
+      $data['fid'] = $pdf_id;
       $this->bookingTemplate->formatBookingMessage($data)->sendMailManual();
     }
     $this->storeFile($hash, $data);
