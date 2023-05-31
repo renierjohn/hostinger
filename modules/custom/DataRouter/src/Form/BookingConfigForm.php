@@ -297,8 +297,8 @@ class BookingConfigForm extends FormBase {
     // Detect if transiion from pending to Done.
     If ($status == FALSE && $old_status == TRUE) {
       $this->bookingTemplate->formatBookingMessage($data)->sendMailManual();
-      $this->storeFile($hash, $data);
     }
+    $this->storeFile($hash, $data);
     \Drupal::messenger()->addMessage('Success');
   }
 
