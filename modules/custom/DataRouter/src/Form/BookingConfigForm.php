@@ -296,7 +296,7 @@ class BookingConfigForm extends FormBase {
 
     // Detect if transiion from pending to Done.
     If ($status == FALSE && $old_status == TRUE) {
-      if (!empty($pdf_id)) {
+      if (empty($pdf_id)) {
         \Drupal::messenger()->addWarning('PDF Not Uploaded');
         return;
       }
