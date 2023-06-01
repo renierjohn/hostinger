@@ -6,7 +6,7 @@ dependencies:
     - field.field.paragraph.slider.field_slider_image
     - field.field.paragraph.slider.field_slider_label
     - field.field.paragraph.slider.field_slider_link
-    - image.style.banner
+    - image.style.slider
     - paragraphs.paragraphs_type.slider
   module:
     - image
@@ -21,7 +21,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: banner
+      image_style: slider
       image_loading:
         attribute: lazy
     third_party_settings:

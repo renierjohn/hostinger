@@ -2,14 +2,12 @@
 
 namespace Drupal\data_router\Form;
 
-use Drupal\Core\Site\Settings;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\data_router\Service\AccountService;
 use Drupal\Component\Utility\EmailValidatorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\data_router\Service\BookingService;
 
@@ -49,7 +47,10 @@ class BookingForm extends FormBase {
 
   const BOOK_PATH = 'private://book/';
 
-  public function __construct(EntityTypeManager $entityTypeManager,AccountService $account,EmailValidatorInterface $emailValidator,FloodInterface $flood,BookingService $bookingTemplate) {
+  /**
+   *
+   */
+  public function __construct(EntityTypeManager $entityTypeManager, AccountService $account, EmailValidatorInterface $emailValidator, FloodInterface $flood, BookingService $bookingTemplate) {
     $this->entityTypeManager = $entityTypeManager;
     $this->emailValidator    = $emailValidator;
     $this->account           = $account;
@@ -246,51 +247,52 @@ class BookingForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $emailValidator = $this->emailValidator;
-    $account = $this->account;
-    $input   = $form_state->getUserInput();
-    $values  = $form_state->getValues();
-    $token   = $input['g-recaptcha-response'];
-    $email     = $input['mail'];
-    $bookDate  = $values['datetime'];
+    $account        = $this->account;
+    $input          = $form_state->getUserInput();
+    $values         = $form_state->getValues();
+    $token          = $input['g-recaptcha-response'];
+    $email          = $input['mail'];
+    $bookDate       = $values['datetime'];
 
-    if(empty($email)){
-      return  $form_state->setErrorByName('email','Please Type Youre Email . Thankyou');
+    if (empty($email)) {
+      return $form_state->setErrorByName('email', 'Please Type Youre Email . Thankyou');
     }
 
-    if(empty($bookDate)){
-      return  $form_state->setErrorByName('email','Please Select @ Rates & Schedules Tab to Proceed Booking . Thankyou');
+    if (empty($bookDate)) {
+      return $form_state->setErrorByName('email', 'Please Select @ Rates & Schedules Tab to Proceed Booking . Thankyou');
     }
 
     $hash  = $values['hash'];
     $price = $values['price'];
 
-    $genHash = md5($price.self::HASH);
-    if($hash != $genHash){
-      return  $form_state->setErrorByName('email',"Please Don't Change the Rate. Thankyou");
-    }
-  
-    $anonyms = \Drupal::currentUser()->isAnonymous();
-    if(!$emailValidator->isValid($email) && $anonyms){
-      return $form_state->setErrorByName('email','Email Not Valid');
+    $genHash = md5($price . self::HASH);
+    if ($hash != $genHash) {
+      return $form_state->setErrorByName('email', "Please Don't Change the Rate. Thankyou");
     }
 
-    if(empty($token)){
-      return $form_state->setErrorByName('captcha','Please Use Captcha');
+    $anonyms = \Drupal::currentUser()->isAnonymous();
+    if (!$emailValidator->isValid($email) && $anonyms) {
+      return $form_state->setErrorByName('email', 'Email Not Valid');
+    }
+
+    if (empty($token)) {
+      return $form_state->setErrorByName('captcha', 'Please Use Captcha');
     }
 
     $response = $account->setToken($token)->checkCaptcha();
-    if($response == false){
-      return $form_state->setErrorByName('captcha','Sorry , Youre Captcha was expired. Please Login again');
+    if ($response == FALSE) {
+      return $form_state->setErrorByName('captcha', 'Sorry , Youre Captcha was expired. Please Login again');
     }
   }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $curent_path = \Drupal::request()->getRequestUri();
-    $values    = $form_state->getValues();
-    $email     = $values['mail'];
-    $bookDate  = $values['datetime']->__toString();
+    $values      = $form_state->getValues();
+    $email       = $values['mail'];
+    $bookDate    = $values['datetime']->__toString();
 
     $values['datetime'] = $bookDate;
     $values['url']      = $curent_path;
@@ -298,10 +300,10 @@ class BookingForm extends FormBase {
     $values['remarks']  = '"Please Pay using GCash<br><br><br> <b><h4>Note:</h4></b> <i><h3>Once Paid, Processing will take 5 ~ 10 min. Thank you.</h3></i>';
 
     $hash = time();
-    $hash = 'r.'.md5($hash).'-'.$hash;
-    $values['hash']  = $hash;
+    $hash = 'r.' . md5($hash) . '-' . $hash;
+    $values['hash'] = $hash;
     $data = json_encode($values);
-    $this->storeFile($hash,$values);
+    $this->storeFile($hash, $values);
 
     $this->bookingTemplate->formatBookingMessage($values)->sendMailManual();
 
@@ -311,10 +313,13 @@ class BookingForm extends FormBase {
     ]));
   }
 
-  private function storeFile($hash,$data){
+  /**
+   *
+   */
+  private function storeFile($hash, $data) {
     $file = fopen(self::BOOK_PATH . $hash, 'w');
     $data = json_encode($data);
-    fwrite($file,$data);
+    fwrite($file, $data);
     fclose($file);
   }
 

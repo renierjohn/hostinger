@@ -1,0 +1,29 @@
+uuid: fc044131-7bd0-42f7-b686-8b045eb9ce3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.barkota_v2
+  module:
+    - system
+    - views
+  theme:
+    - rboot
+id: views_block__barkota_v2_scroll
+theme: rboot
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:barkota_v2-scroll'
+settings:
+  id: 'views_block:barkota_v2-scroll'
+  label: 'Find Schedules Here'
+  label_display: '0'
+  provider: views
+  views_label: 'Find Schedules Here'
+  items_per_page: '3'
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/main\r\n/vessel"

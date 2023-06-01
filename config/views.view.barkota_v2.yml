@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Barkota V2'
+      title: 'Shipping Vessels'
       fields:
         title:
           id: title
@@ -225,8 +225,23 @@ display:
         pager: false
         style: false
         row: false
+        header: false
         footer: false
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: false
+          content:
+            value: '<h2 class="display-3">Find Schedules Here</h2>'
+            format: basic_html
+          tokenize: false
       footer:
         area_text_custom:
           id: area_text_custom
