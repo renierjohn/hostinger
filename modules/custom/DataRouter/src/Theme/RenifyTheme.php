@@ -20,7 +20,8 @@ class RenifyTheme implements ThemeNegotiatorInterface {
       $route->getPath() == '/user/login' ||
       $route->getPath() == '/user/register' ||
       $route->getPath() == '/node/add/places' ||
-      $route->getPath() == '/vessel/cocaliong'
+      $route->getPath() == '/vessel/cocaliong' ||
+      $route->getPath() == '/store'
     ))
     {
         return TRUE;
