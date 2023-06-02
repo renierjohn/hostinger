@@ -47,8 +47,10 @@
     }
 
     .header-logo img {
-        width: 130px;
-
+      * width: 130px;
+      width: 10vh;
+      position: relative;
+      left: 2rem;
         /* height: 36px; */
     }
 
