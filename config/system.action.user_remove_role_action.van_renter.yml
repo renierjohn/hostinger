@@ -1,0 +1,14 @@
+uuid: dec00997-c105-4df5-bb62-bea4bcfcb8f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.van_renter
+  module:
+    - user
+id: user_remove_role_action.van_renter
+label: 'Remove the Van Renter role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: van_renter

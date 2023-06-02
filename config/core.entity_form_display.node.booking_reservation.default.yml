@@ -1,0 +1,107 @@
+uuid: 50bbe39b-4646-4819-8b7b-3f798df1d8a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.booking_reservation.field_booking_reference
+    - field.field.node.booking_reservation.field_booking_resrv_count
+    - field.field.node.booking_reservation.field_booking_resrv_name
+    - field.field.node.booking_reservation.field_booking_resrv_phone_num
+    - field.field.node.booking_reservation.field_booking_resrv_remarks
+    - node.type.booking_reservation
+  module:
+    - path
+id: node.booking_reservation.default
+targetEntityType: node
+bundle: booking_reservation
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_booking_reference:
+    type: options_buttons
+    weight: 121
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_booking_resrv_count:
+    type: number
+    weight: 124
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_booking_resrv_name:
+    type: string_textfield
+    weight: 122
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_booking_resrv_phone_num:
+    type: string_textfield
+    weight: 123
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_booking_resrv_remarks:
+    type: string_textarea
+    weight: 125
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

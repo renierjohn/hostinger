@@ -1,0 +1,25 @@
+uuid: 19a29c84-4778-4c76-b1f6-a2b094fb8ae3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_booking_resrv_count
+    - node.type.booking_reservation
+id: node.booking_reservation.field_booking_resrv_count
+field_name: field_booking_resrv_count
+entity_type: node
+bundle: booking_reservation
+label: 'Booking Resrv Count'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

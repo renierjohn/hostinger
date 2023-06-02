@@ -1,0 +1,25 @@
+uuid: 3e77aece-d3a2-499e-9bb0-fd2c5ff83606
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.header
+  module:
+    - system
+  theme:
+    - rboot
+id: header_2
+theme: rboot
+region: header
+weight: -7
+provider: null
+plugin: 'system_menu_block:header'
+settings:
+  id: 'system_menu_block:header'
+  label: Header
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

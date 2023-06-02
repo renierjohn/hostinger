@@ -1,0 +1,18 @@
+uuid: cb057fc3-25ea-475d-aa03-c0a27c4583de
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Booking Reservation'
+type: booking_reservation
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

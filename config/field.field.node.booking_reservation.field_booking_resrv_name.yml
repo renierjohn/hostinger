@@ -1,0 +1,19 @@
+uuid: 9e2ab6c0-4f31-4848-a4b5-58545645953a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_booking_resrv_name
+    - node.type.booking_reservation
+id: node.booking_reservation.field_booking_resrv_name
+field_name: field_booking_resrv_name
+entity_type: node
+bundle: booking_reservation
+label: 'Booking Resrv Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

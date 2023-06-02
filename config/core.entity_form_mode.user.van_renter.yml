@@ -1,0 +1,10 @@
+uuid: 0a8d3cae-c09d-4ba2-b231-7cc9f0022714
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.van_renter
+label: 'Van Renter'
+targetEntityType: user
+cache: true

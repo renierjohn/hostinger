@@ -1,0 +1,25 @@
+uuid: 58a10961-6a9a-4220-a027-143b8f5941ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_booking_capacity
+    - node.type.bookings
+id: node.bookings.field_booking_capacity
+field_name: field_booking_capacity
+entity_type: node
+bundle: bookings
+label: 'Booking Capacity'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

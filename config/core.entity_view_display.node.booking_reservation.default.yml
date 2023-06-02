@@ -1,0 +1,64 @@
+uuid: 4869e319-ba39-4153-97a1-42b7729e9937
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.booking_reservation.field_booking_reference
+    - field.field.node.booking_reservation.field_booking_resrv_count
+    - field.field.node.booking_reservation.field_booking_resrv_name
+    - field.field.node.booking_reservation.field_booking_resrv_phone_num
+    - field.field.node.booking_reservation.field_booking_resrv_remarks
+    - node.type.booking_reservation
+  module:
+    - user
+id: node.booking_reservation.default
+targetEntityType: node
+bundle: booking_reservation
+mode: default
+content:
+  field_booking_reference:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_booking_resrv_count:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_booking_resrv_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_booking_resrv_phone_num:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_booking_resrv_remarks:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

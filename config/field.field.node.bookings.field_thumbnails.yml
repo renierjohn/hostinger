@@ -1,0 +1,38 @@
+uuid: 5bc723e9-3069-45b4-8de8-7fa4e2349dd1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_thumbnails
+    - node.type.bookings
+  module:
+    - image
+id: node.bookings.field_thumbnails
+field_name: field_thumbnails
+entity_type: node
+bundle: bookings
+label: Images
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: image_bookings
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: 2mb
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

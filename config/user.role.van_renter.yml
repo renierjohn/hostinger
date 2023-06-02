@@ -1,0 +1,9 @@
+uuid: 01bdf8b7-ea7e-4983-bc39-8dff33d6314d
+langcode: en
+status: true
+dependencies: {  }
+id: van_renter
+label: 'Van Renter'
+weight: 7
+is_admin: null
+permissions: {  }

@@ -1,0 +1,22 @@
+uuid: 54591e92-9532-41d0-8a26-5680cc05168a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.bookings
+id: node.bookings.promote
+field_name: promote
+entity_type: node
+bundle: bookings
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

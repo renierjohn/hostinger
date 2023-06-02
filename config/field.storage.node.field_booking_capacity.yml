@@ -1,0 +1,20 @@
+uuid: 09b670dd-2617-46b3-9439-be8318a43723
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_booking_capacity
+field_name: field_booking_capacity
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

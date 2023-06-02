@@ -12,7 +12,7 @@ dependencies:
 id: rboot_productmenu
 theme: rboot
 region: header
-weight: -8
+weight: -9
 provider: null
 plugin: 'block_content:c40bf759-0abf-493a-a12d-1e7eee3901ca'
 settings:

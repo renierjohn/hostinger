@@ -1,0 +1,21 @@
+uuid: ee8d00c8-e8dc-4fdb-80f2-8a7bdf27bc93
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_booking_resrv_phone_num
+field_name: field_booking_resrv_phone_num
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

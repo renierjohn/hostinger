@@ -1,0 +1,30 @@
+uuid: 2d242a83-f70b-4ec8-8cd4-c63e5779b750
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.booking_reservation.field_booking_reference
+    - field.field.node.booking_reservation.field_booking_resrv_count
+    - field.field.node.booking_reservation.field_booking_resrv_name
+    - field.field.node.booking_reservation.field_booking_resrv_phone_num
+    - field.field.node.booking_reservation.field_booking_resrv_remarks
+    - node.type.booking_reservation
+  module:
+    - user
+id: node.booking_reservation.teaser
+targetEntityType: node
+bundle: booking_reservation
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_booking_reference: true
+  field_booking_resrv_count: true
+  field_booking_resrv_name: true
+  field_booking_resrv_phone_num: true
+  field_booking_resrv_remarks: true

@@ -1,0 +1,65 @@
+<div class="s-menu">
+ <div class="row">
+  <div class="header-logo">
+    <a class="site-logo" href="/">
+      <img src="/themes/Renify/favicon.ico" alt="Homepage" />
+    </a>
+  </div>
+  <nav class="header-nav-wrap">
+    {% if items %}
+      <ul class="header-main-nav">
+        {% for item in items %}
+          <li>
+            {{ link(item.title, item.url, { 'class': '' }) }}
+          </li>
+        {% endfor %}
+    {% endif %}
+          <li>
+            <a href="/routes/">Bus</a>
+          </li>
+
+        {% if logged_in %}
+          <li>
+            <a href="/myplace/">My Places</a>
+          </li>
+          <li>
+            <a href="/node/add/places/">Add Place</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="#signup">Signup</a>
+          </li>
+        {% endif %}
+        <li>
+          <div>
+            <form action="/search/result/" method="get" accept-charset="utf-8" class="search-form">
+              <input type="text"   name="keys" placeholder="Search" class="input">
+              <input type="submit" name="" value="Search" class="submit">
+            </form>
+           </div>
+        </li>
+      </ul>
+
+    {% if logged_in %}
+      <div class="header-cta">
+        <a href="/user/logout/" class="btn btn--primary header-cta__btn padding--left--0">
+          <ul>
+            <li>
+              <img src='{{user_profile}}'  class="img-no-radius" alt="...">
+            </li>
+            <li>
+              Logout
+            </li>
+          </ul>
+        </a>
+      </div>
+    {% else %}
+      <div class="header-cta">
+        <a href="/user/login/" class="btn btn--stroke--reverse header-cta__btn"><i class="fas fa-user"></i>Login Now</a>
+      </div>
+    {% endif %}
+  </nav>
+
+  <a class="header-menu-toggle" href="#"><span>Menu</span></a>
+</div>
+</div>

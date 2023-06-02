@@ -1,0 +1,34 @@
+uuid: c7ced4e0-80cf-43d8-a2fb-26af2f64bc37
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.bookings.field_booking_capacity
+    - field.field.node.bookings.field_booking_date
+    - field.field.node.bookings.field_booking_owner
+    - field.field.node.bookings.field_booking_remaining
+    - field.field.node.bookings.field_booking_remarks
+    - field.field.node.bookings.field_booking_total
+    - field.field.node.bookings.field_thumbnails
+    - node.type.bookings
+  module:
+    - user
+id: node.bookings.teaser
+targetEntityType: node
+bundle: bookings
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_booking_capacity: true
+  field_booking_date: true
+  field_booking_owner: true
+  field_booking_remaining: true
+  field_booking_remarks: true
+  field_booking_total: true
+  field_thumbnails: true

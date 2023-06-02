@@ -1,0 +1,25 @@
+uuid: 5fd55c09-e084-4bad-bf57-735e03495c2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_booking_remaining
+    - node.type.bookings
+id: node.bookings.field_booking_remaining
+field_name: field_booking_remaining
+entity_type: node
+bundle: bookings
+label: 'Booking Remaining'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

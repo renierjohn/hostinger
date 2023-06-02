@@ -1,60 +1,39 @@
-{#
-/**
- * @file
- * Default theme implementation to display a menu.
- *
- * Available variables:
- * - menu_name: The machine name of the menu.
- * - items: A nested list of menu items. Each menu item contains:
- *   - attributes: HTML attributes for the menu item.
- *   - below: The menu item child items.
- *   - title: The menu link title.
- *   - url: The menu link url, instance of \Drupal\Core\Url
- *   - localized_options: Menu link localized options.
- *   - is_expanded: TRUE if the link has visible children within the current
- *     menu tree.
- *   - is_collapsed: TRUE if the link has children within the current menu tree
- *     that are not currently visible.
- *   - in_active_trail: TRUE if the link is in the active trail.
- *
- * @ingroup themeable
- */
-#}
-{% import _self as menus %}
-
-{#
-  We call a macro which calls itself to render the full tree.
-  @see https://twig.symfony.com/doc/1.x/tags/macro.html
-#}
-{{ menus.menu_links(items, attributes.addClass(['menu_bootstrap', 'navbar-nav']), 0) }}
-
-
-{% import _self as menus %}
-{% macro menu_links(items, attributes, menu_level) %}
-<nav class="navbar navbar-expand-lg sticky-sm-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">RENIFY</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-        {% if items %}
-          {% if menu_level == 0 %}
-            <ul{{ attributes }}>
-          {% else %}
-            <ul>
-          {% endif %}
-          {% for item in items %}
-            <li{{ item.attributes.addClass(['menu_bootstrap_sublevel', 'nav-link']) }}>
-              {{ link(item.title, item.url) }}
-              {% if item.below %}
-                {{ menus.menu_links(item.below, attributes.addClass(['menu_bootstrap_sublevel_2', 'nav-item dropdown']), menu_level + 1) }}
-              {% endif %}
-            </li>
-          {% endfor %}
-          </ul>
+<header class="s-header top-header sticky" id='header'>
+    <div class="row">
+        <div class="header-logo">
+        {% if logged_in %}
+          <a class="site-logo" href="/dashboard">
+            <img src="/themes/rboot/favicon.ico" alt="Homepage" />
+          </a>
+        {% else %}
+          <a class="site-logo" href="/">
+            <img src="/themes/rboot/favicon.ico" alt="Homepage" />
+          </a>
         {% endif %}
-     </div>
-  </div>
-</nav>
-{% endmacro %}
+
+      </div>
+      <nav class="header-nav-wrap">
+        <ul class="header-main-nav">
+          {% if logged_in %}
+            <li>
+              <a href="/dashboard" >Dashboard</a>
+            </li>
+          {% else %}
+             <li>
+              <a href="/" class="is-active">Home</a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="/places/">Places</a>
+          </li>
+          <li>
+            <a href="/routes/">Bus Routes</a>
+          </li>
+          <li>
+            <a href="/vessel/">Shippping Vessels</a>
+          </li>
+        </ul>
+      </nav>
+      <a class="header-menu-toggle" ><span>Menu</span></a>
+    </div>
+</header>
