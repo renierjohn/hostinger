@@ -1,10 +1,14 @@
-export const GroupData =
+import { ComponentBaseData } from '../redux/store';
+
+const data =
   {
     'id': 1,
-    'title': 'Accordion Sample',
-    'subtitle': 'Lorem ipsum subtitle',
+    'key': `group`,
+    'type': `paragraph`,
+    'title': `Accordion Sample`,
+    'subtitle': `Lorem ipsum subtitle`,
     'list':[
-        {
+      {
       'id': 201,
       },
       {
@@ -16,3 +20,8 @@ export const GroupData =
     ]
   }
 
+export const GroupData = ComponentBaseData(data);
+
+export default {
+    GroupData,
+}

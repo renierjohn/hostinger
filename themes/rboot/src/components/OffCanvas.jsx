@@ -1,4 +1,4 @@
-import { ComponentsData } from '../api/ComponentsData';
+import { SideBarData } from '../api/SideBarData';
 import * as drag_fn from '../functions/DragFunction'
 import * as util_fn from '../functions/UtilsFunction'
 
@@ -8,7 +8,7 @@ import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd';
 
 function OffCanvas(props) {
 
-  const [components, setComponents] = useState(ComponentsData);
+  const [components, setComponents] = useState(SideBarData);
 
   const getListStyle = drag_fn.default.getListStyle;
 

@@ -30,7 +30,7 @@ function Accordion(props) {
   };
 
   useEffect( () => {
-    const [dataObj] = AccordionData.filter( (item, index) => {
+    const [dataObj] = AccordionData.list.filter( (item, index) => {
       return item.id === props.id
     });
 

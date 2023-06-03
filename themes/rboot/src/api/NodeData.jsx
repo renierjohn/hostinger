@@ -1,6 +1,10 @@
-export const NodeData =
+import { ComponentBaseData } from '../redux/store';
+
+const data =
   {
     'id': 1,
+    'type': `node`,
+    'key': `main`,
     'title': `Landing Page`,
     'body': `Lorem ipsum subtitle`,
     'component_banner': {
@@ -11,12 +15,19 @@ export const NodeData =
       [
         {
           'id': 2,
-          'type': 'group',
+          'key': 'group',
+          'type': 'paragraph'
         },
         {
           'id': 13,
-          'type': 'card_group'
+          'key': 'card_group',
+          'type': 'paragraph'
         }
       ]
   }
 
+export const NodeData = ComponentBaseData(data);
+
+export default {
+    NodeData,
+}

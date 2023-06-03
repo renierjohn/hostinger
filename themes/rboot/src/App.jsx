@@ -1,7 +1,8 @@
-import { ComponentsData } from './api/ComponentsData';
+
 import { GroupData } from './api/GroupData';
 import { AccordionData } from './api/AccordionData';
 import { NodeData } from './api/NodeData';
+
 import CardGroup from './components/CardGroupDrag'
 import Group from './components/GroupDrag'
 import Modal from './components/ModalCore'
@@ -51,15 +52,15 @@ function App() {
 
   useEffect(() =>{
     const render = components.map((item, index) => {
-      if (item.type === 'group') {
+      if (item.key === 'group') {
         return <Group { ...item } dragType = { dragType.group } key = { index } ><EmptySection index = { index } /></Group>
       }
-      if (item.type === 'card_group') {
+      if (item.key === 'card_group') {
         return <CardGroup { ...item } dragType = { dragType.card_group } key = { index } ><EmptySection index = { index } /></CardGroup>
       }
     });
     setRenderComponents(render);
-console.log('render components',dragType);
+
   },[dragType])
 
   return (

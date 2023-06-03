@@ -1,5 +1,10 @@
+import { ComponentState } from '../redux/Store';
+
  const onDragEnd = (data, fn) => {
    console.log(data, fn)
+    console.log(ComponentState(0))
+    // store.dispatch(Dragstates.actions.incremented())
+    // store.dispatch(Dragstates.actions.incrementByAmount(5))
     // if (!data.destination) return;
     // const startIndex = data.source.index;
     // const endIndex = data.destination.index;
@@ -43,6 +48,7 @@
   }
 
   const onBeforeDragStart = (result, fn) => {
+        // store.subscribe(() => console.log(store.getState()))
     //  if (result.source.droppableId === 'offcanvas') {
     //   if (result.draggableId == 'card_simple') {
     //     fn.setDragType({
@@ -59,30 +65,11 @@
     //     })
     //   }
     // }
+
     console.log(`before dragStart`, result)
   }
 
-  const onDragStart = (result, fn) => {
-    // fn.setDragType(`component`)
-    // if (result.source.droppableId === 'offcanvas') {
-    //   if (result.draggableId == 'card_simple') {
-    //     fn.setDragType((...prevData) => {
-    //       prevData['group'] = 'disable';
-    //       prevData['card_group'] = 'enable';
-    //       return prevData;
-    //     })
-    //   }
-    //   if (result.draggableId == 'accordion') {
-    //     // fn.setDragType((...prevData) => {
-    //     //   prevData['group'] = 'enable';
-    //     //   prevData['card_group'] = 'disable';
-    //     //   return prevData;
-    //     // })
-    //     fn.setDragType({...fn.dragType, group: `enable`, card_group: `disable` })
-    //   }
-    // console.log(`Start`, result)
-    // }
-  }
+  const onDragStart = (result, fn) => {}
 
   const onDragUpdate = (result, fn) => {
     // if (result.source.droppableId === 'offcanvas') {

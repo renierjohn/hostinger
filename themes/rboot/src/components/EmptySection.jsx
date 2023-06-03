@@ -1,5 +1,3 @@
-import { ComponentsData } from '../api/ComponentsData';
-
 import { useState, useEffect, useRef } from 'react'
 
 import * as Core from '@coreui/react';
@@ -11,8 +9,6 @@ import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd';
 function EmptySection(props) {
 
   const [visible, setVisible] = useState(false);
-
-  const [components, setComponents] = useState(ComponentsData);
 
   const getListStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "lightgreen" : "lightgrey",

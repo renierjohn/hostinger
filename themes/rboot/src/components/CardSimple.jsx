@@ -32,7 +32,7 @@ function CardSimple(props) {
   };
 
   useEffect( () => {
-    const [dataObj] = CardSimpleData.filter( (item, index) => {
+    const [dataObj] = CardSimpleData.list.filter( (item, index) => {
       return item.id === props.id
     });
 

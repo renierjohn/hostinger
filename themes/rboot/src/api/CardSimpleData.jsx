@@ -1,5 +1,11 @@
-export const CardSimpleData = [
-  {
+import { ComponentBaseData } from '../redux/store';
+
+const data = {
+  'id': 1,
+  'key': `card_simple`,
+  'type': `paragraph`,
+  'list':
+    [{
       'id': 20,
       'title': `Your'e Bucket List`,
       'body': `Check here youre next bucket list. Travel gives us our greatest stories, our most cherished memories and countless irreplaceable learnings that we can choose to pay forward to others. It teaches us about ourselves and each other, it broadens our horizons and, just like a reset button, it forces us to refocus on what really matters.`,
@@ -69,5 +75,12 @@ export const CardSimpleData = [
             'name': `Bus Routes Here`,
             'url': `/routes`
           }
-    }
-]
+    }]
+}
+
+
+export const CardSimpleData = ComponentBaseData(data);
+
+export default {
+    CardSimpleData,
+}
