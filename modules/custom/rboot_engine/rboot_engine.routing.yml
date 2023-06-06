@@ -1,0 +1,15 @@
+rboot_engine.example:
+  path: '/rboot-engine/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\rboot_engine\Controller\RbootEngineController::build'
+  requirements:
+    _permission: 'access content'
+
+rboot_engine.settings_form:
+  path: '/admin/config/system/rboot-engine'
+  defaults:
+    _title: 'rboot_engine settings'
+    _form: 'Drupal\rboot_engine\Form\SettingsForm'
+  requirements:
+    _permission: 'administer rboot_engine configuration'

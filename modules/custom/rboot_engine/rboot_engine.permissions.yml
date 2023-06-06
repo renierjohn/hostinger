@@ -1,0 +1,4 @@
+administer rboot_engine configuration:
+  title: 'Administer rboot_engine configuration'
+  description: 'Optional description.'
+  restrict access: true

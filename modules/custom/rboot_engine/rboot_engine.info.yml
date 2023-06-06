@@ -1,0 +1,7 @@
+name: RbooT Engine
+type: module
+description: Provides data for drag and drop.
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - paragraphs

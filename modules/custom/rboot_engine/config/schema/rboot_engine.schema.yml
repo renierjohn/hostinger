@@ -1,0 +1,8 @@
+# Schema for the configuration files of the rboot_engine module.
+rboot_engine.settings:
+  type: config_object
+  label: 'rboot_engine settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'
