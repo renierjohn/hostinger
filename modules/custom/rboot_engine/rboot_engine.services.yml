@@ -1,0 +1,4 @@
+services:
+  rboot_engine.data:
+    class: Drupal\rboot_engine\RbootEngineService
+    arguments: ['@entity_type.manager', '@request_stack', '@logger.factory', '@entity_field.manager']

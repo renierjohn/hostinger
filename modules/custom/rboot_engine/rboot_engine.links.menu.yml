@@ -1,5 +1,5 @@
 rboot_engine.settings_form:
-  title: 'rboot_engine'
+  title: 'RBooT Engine'
   description: 'Configure rboot_engine.'
   parent: system.admin_config_system
   route_name: rboot_engine.settings_form

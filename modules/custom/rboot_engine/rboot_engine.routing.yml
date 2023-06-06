@@ -1,8 +1,8 @@
 rboot_engine.example:
-  path: '/rboot-engine/example'
+  path: '/api/v1/rboot/{type}/{id}'
   defaults:
     _title: 'Example'
-    _controller: '\Drupal\rboot_engine\Controller\RbootEngineController::build'
+    _controller: '\Drupal\rboot_engine\Controller\RbootEngineController::request'
   requirements:
     _permission: 'access content'
 
