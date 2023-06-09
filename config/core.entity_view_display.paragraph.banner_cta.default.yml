@@ -22,9 +22,9 @@ third_party_settings:
         - group_short_text_wrapper
         - field_banner_cta
       label: Title-CTA
-      parent_name: ''
+      parent_name: group_row_wrapper
       region: content
-      weight: 0
+      weight: 21
       format_type: html_element
       format_settings:
         classes: 'col-xl-6 col-lg-6 col-md-12'
@@ -41,9 +41,9 @@ third_party_settings:
       children:
         - field_banner_image
       label: Image
-      parent_name: ''
+      parent_name: group_row_wrapper
       region: content
-      weight: 1
+      weight: 22
       format_type: html_element
       format_settings:
         classes: 'col-xl-6 col-lg-6 col-md-12'
@@ -62,10 +62,49 @@ third_party_settings:
       label: 'Short Text Wrapper'
       parent_name: group_title_cta
       region: content
-      weight: 20
+      weight: 21
       format_type: html_element
       format_settings:
         classes: 'text-black display-4 fw-bold pe-lg-8'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_main_wrapper:
+      children:
+        - group_row_wrapper
+      label: 'Main Wrapper'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'container bg-white me-5 ms-5 mb-2'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_row_wrapper:
+      children:
+        - group_title_cta
+        - group_image
+      label: 'Row Wrapper'
+      parent_name: group_main_wrapper
+      region: hidden
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: 'row align-items-center g-0'
         show_empty_fields: false
         id: ''
         element: div
