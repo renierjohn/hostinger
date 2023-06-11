@@ -12,11 +12,11 @@ class RbootEngineController extends ControllerBase {
   /**
    * Builds the response.
    */
-  public function build() {
+  public function request($type, $id = False) {
 
     $build['content'] = [
       '#type' => 'item',
-      '#markup' => $this->t('It works!'),
+      '#markup' => $this->t('It works!' . $type . $id ),
     ];
 
     return $build;

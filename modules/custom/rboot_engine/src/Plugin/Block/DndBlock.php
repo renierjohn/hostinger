@@ -8,12 +8,12 @@ use Drupal\Core\Block\BlockBase;
  * Provides an example block.
  *
  * @Block(
- *   id = "rboot_engine_example",
- *   admin_label = @Translation("Example"),
+ *   id = "rboot_engine_dnd",
+ *   admin_label = @Translation("Rboot DND"),
  *   category = @Translation("rboot_engine")
  * )
  */
-class ExampleBlock extends BlockBase {
+class DndBlock extends BlockBase {
 
   /**
    * {@inheritdoc}

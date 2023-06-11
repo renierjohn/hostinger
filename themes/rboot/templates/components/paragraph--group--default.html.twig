@@ -55,15 +55,8 @@
 
 {% block paragraph %}
   {% block content %}
-    <div class="container mt-4 mb-4">
-      {% if content.field_group_title %}
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 {{ alignment }}">
-          <h5 class="display-3">{{ content.field_group_title }}</h2>
-        </div>
-      {% endif %}
-      <div{{ attributes.addClass(classes) }}>
-          {{ content.field_group_list }}
-      </div>
+    <div{{ attributes.addClass(classes) }}>
+        {{ content }}
     </div>
   {% endblock %}
 {% endblock paragraph %}

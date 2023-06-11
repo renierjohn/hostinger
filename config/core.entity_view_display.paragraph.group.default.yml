@@ -12,19 +12,92 @@ dependencies:
     - paragraphs.paragraphs_type.group
   module:
     - entity_reference_revisions
-    - options
+    - field_group
+third_party_settings:
+  field_group:
+    group_main_wrapper:
+      children:
+        - group_title_wrapper
+        - group_subtitle_wrapper
+        - group_list_wrapper
+      label: 'Main Wrapper'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'container mt-4 mb-4'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_title_wrapper:
+      children:
+        - field_group_title
+      label: 'Title Wrapper'
+      parent_name: group_main_wrapper
+      region: content
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: 'col-xl-12 col-lg-12 col-md-12 col-sm-12 display-3'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_list_wrapper:
+      children:
+        - field_group_list
+      label: 'List Wrapper'
+      parent_name: group_main_wrapper
+      region: content
+      weight: 22
+      format_type: html_element
+      format_settings:
+        classes: 'col-xl-12 col-lg-12 col-md-12 col-sm-12 accordion'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_subtitle_wrapper:
+      children:
+        - field_group_sub_title
+      label: 'SubTitle Wrapper'
+      parent_name: group_main_wrapper
+      region: content
+      weight: 21
+      format_type: html_element
+      format_settings:
+        classes: 'col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1 display-6'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
 id: paragraph.group.default
 targetEntityType: paragraph
 bundle: group
 mode: default
 content:
-  field_group_align_text:
-    type: list_key
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
-    region: content
   field_group_list:
     type: entity_reference_revisions_entity_view
     label: hidden
@@ -32,14 +105,14 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 0
+    weight: 23
     region: content
   field_group_sub_title:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 21
     region: content
   field_group_title:
     type: string
@@ -47,21 +120,9 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 21
     region: content
-  field_group_widget:
-    type: list_key
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_separator_style:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
-    region: content
-hidden: {  }
+hidden:
+  field_group_align_text: true
+  field_group_widget: true
+  field_separator_style: true

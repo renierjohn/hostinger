@@ -17,16 +17,6 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_accordion_flag:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
     weight: 2
     region: content
   field_accordion_title:
@@ -35,6 +25,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_accordion_flag: true

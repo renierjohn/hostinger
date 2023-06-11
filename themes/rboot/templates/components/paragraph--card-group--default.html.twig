@@ -40,29 +40,17 @@
 #}
 {%
   set classes = [
-    'container',
     'paragraph',
-    'mt-2',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
 
-{% set alignment = content.field_group_align_text|raw|render|striptags %}
-
 {% block paragraph %}
-  <div class="shadow-sm bg-light mt-4 mb-4">
-    <div{{ attributes.addClass(classes) }}>
-      {% if content.field_card_group_title %}
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 {{ alignment }}">
-          <h2 class="display-3">{{ content.field_card_group_title }}</h2>
-          <h6 class="display-6">{{ content.field_card_group_sub_title }}</h6>
-        </div>
-      {% endif %}
+   <div{{ attributes.addClass(classes) }}>
       {% block content %}
-        {{ content.field_card_type }}
+        {{ content }}
       {% endblock %}
     </div>
-  </div>
 {% endblock paragraph %}

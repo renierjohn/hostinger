@@ -22721,5 +22721,19 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
+.row .r-col {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+  width: 33.333%;
+  float: left;
+}
+
+.row .paragraph--type--card {
+  display: inheret;
+}
 
 /*# sourceMappingURL=bootstrap.css.map */

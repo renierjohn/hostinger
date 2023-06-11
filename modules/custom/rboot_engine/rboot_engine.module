@@ -4,3 +4,25 @@
  * @file
  * Primary module hooks for rboot_engine module.
  */
+function rboot_engine_form_alter(&$form, &$form_state, &$form_id) {
+  if ($form_id === 'devel_admin_settings_form') {
+    $paragraph_type = 'banner_cta';
+
+    $settings = \Drupal::entityTypeManager()->getStorage('entity_view_display')->load('paragraph.' . $paragraph_type . '.default')->toArray();
+    $id = $settings['bundle'];
+    $fields = $settings['content'];
+    $field_group = $settings['third_party_settings']['field_group'];
+
+    ksm($fields,$field_group);
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function rboot_engine_entity_bundle_info_alter(array &$bundles): void {
+  if (isset($bundles['node']['article'])) {
+    $bundles['node']['article']['class'] = \Drupal\rboot_engine\Entity\Bundle\ArticleBundle::class;
+  }
+}
+

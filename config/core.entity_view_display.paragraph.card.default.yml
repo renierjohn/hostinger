@@ -18,16 +18,112 @@ third_party_settings:
   field_group:
     group_card_body_wrapper:
       children:
-        - field_card_title
-        - field_card_body
-        - field_card_cta
+        - group_title_wrapper
+        - group_body_wrapper
+        - group_cta_wrapper
       label: 'Card Body Wrapper'
-      parent_name: ''
+      parent_name: group_card_wrapper
       region: content
-      weight: 2
+      weight: 4
       format_type: html_element
       format_settings:
         classes: 'card-body d-flex flex-column'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_title_wrapper:
+      children:
+        - field_card_title
+      label: 'Title Wrapper'
+      parent_name: group_card_body_wrapper
+      region: content
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: card-title
+        show_empty_fields: false
+        id: ''
+        element: h5
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_body_wrapper:
+      children:
+        - field_card_body
+      label: 'Body Wrapper'
+      parent_name: group_card_body_wrapper
+      region: content
+      weight: 21
+      format_type: html_element
+      format_settings:
+        classes: 'card-text mb-4'
+        show_empty_fields: false
+        id: ''
+        element: p
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_cta_wrapper:
+      children:
+        - field_card_cta
+      label: 'CTA Wrapper'
+      parent_name: group_card_body_wrapper
+      region: content
+      weight: 22
+      format_type: html_element
+      format_settings:
+        classes: 'mt-auto align-self-start'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_main_wrapper:
+      children:
+        - group_card_wrapper
+      label: 'Main Wrapper'
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'r-col col-lg-4 col-md-6 mb-3 d-flex align-items-stretch'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_card_wrapper:
+      children:
+        - field_card_image
+        - group_card_body_wrapper
+      label: 'Card Wrapper'
+      parent_name: group_main_wrapper
+      region: hidden
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: card
         show_empty_fields: false
         id: ''
         element: div
@@ -47,7 +143,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 5
+    weight: 22
     region: content
   field_card_cta:
     type: link
@@ -59,7 +155,7 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    weight: 6
+    weight: 23
     region: content
   field_card_image:
     type: image
@@ -72,7 +168,7 @@ content:
     third_party_settings:
       image_class:
         class: card-img-top
-    weight: 1
+    weight: 3
     region: content
   field_card_title:
     type: string
@@ -80,6 +176,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 21
     region: content
 hidden: {  }
