@@ -1,19 +1,18 @@
 <div class="s-menu">
- <div class="row">
   <div class="header-logo">
     <a class="site-logo" href="/">
       <img src="/themes/Renify/favicon.ico" alt="Homepage" />
     </a>
   </div>
   <nav class="header-nav-wrap">
-    {% if items %}
-      <ul class="header-main-nav">
-        {% for item in items %}
-          <li>
-            {{ link(item.title, item.url, { 'class': '' }) }}
-          </li>
-        {% endfor %}
-    {% endif %}
+    <ul class="header-main-nav">
+      {% if items %}
+          {% for item in items %}
+            <li>
+              {{ link(item.title, item.url, { 'class': '' }) }}
+            </li>
+          {% endfor %}
+      {% endif %}
           <li>
             <a href="/routes/">Bus</a>
           </li>
@@ -61,5 +60,4 @@
   </nav>
 
   <a class="header-menu-toggle" href="#"><span>Menu</span></a>
-</div>
 </div>

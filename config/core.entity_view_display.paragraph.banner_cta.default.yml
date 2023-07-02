@@ -84,7 +84,7 @@ third_party_settings:
       weight: 0
       format_type: html_element
       format_settings:
-        classes: 'container bg-white me-5 ms-5 mb-2'
+        classes: 'container bg-white mb-2'
         show_empty_fields: false
         id: ''
         element: div
