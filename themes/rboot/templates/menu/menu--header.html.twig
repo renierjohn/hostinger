@@ -1,42 +1,40 @@
 <header class="s-header top-header sticky" id='header'>
-    <div class="row">
-        <div class="header-logo">
-        {% if logged_in %}
-          <a class="site-logo" href="/dashboard">
-            <img src="/themes/rboot/favicon.ico" alt="Homepage" />
-          </a>
-        {% else %}
-          <a class="site-logo" href="/">
-            <img src="/themes/rboot/favicon.ico" alt="Homepage" />
-          </a>
-        {% endif %}
+  <div class="header-logo">
+  {% if logged_in %}
+    <a class="site-logo" href="/dashboard">
+      <img src="/themes/rboot/favicon.ico" alt="Homepage" />
+    </a>
+  {% else %}
+    <a class="site-logo" href="/">
+      <img src="/themes/rboot/favicon.ico" alt="Homepage" />
+    </a>
+  {% endif %}
 
-      </div>
-      <nav class="header-nav-wrap">
-        <ul class="header-main-nav">
-          {% if logged_in %}
-            <li>
-              <a href="/dashboard" >Dashboard</a>
-            </li>
-          {% else %}
-             <li>
-              <a href="/" class="is-active">Home</a>
-            </li>
-          {% endif %}
-          <li>
-            <a href="/places/">Places</a>
-          </li>
-          <li>
-            <a href="/routes/">Bus Routes</a>
-          </li>
-          <li>
-            <a href="/vessel/">Shippping Vessels</a>
-          </li>
-          <li>
-            <a href="/store/">Stores</a>
-          </li>
-        </ul>
-      </nav>
-      <a class="header-menu-toggle" ><span>Menu</span></a>
-    </div>
+</div>
+<nav class="header-nav-wrap">
+  <ul class="header-main-nav">
+    {% if logged_in %}
+      <li>
+        <a href="/dashboard" >Dashboard</a>
+      </li>
+    {% else %}
+       <li>
+        <a href="/" class="is-active">Home</a>
+      </li>
+    {% endif %}
+    <li>
+      <a href="/places/">Places</a>
+    </li>
+    <li>
+      <a href="/routes/">Bus Routes</a>
+    </li>
+    <li>
+      <a href="/vessel/">Shippping Vessels</a>
+    </li>
+    <li>
+      <a href="/store/">Stores</a>
+    </li>
+  </ul>
+</nav>
+<a class="header-menu-toggle" ><span>Menu</span></a>
 </header>
