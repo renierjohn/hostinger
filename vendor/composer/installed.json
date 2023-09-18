@@ -1619,60 +1619,6 @@
             "install-path": "../../modules/contrib/admin_toolbar"
         },
         {
-            "name": "drupal/advance_importer",
-            "version": "1.3.0-beta1",
-            "version_normalized": "1.3.0.0-beta1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/advance_importer.git",
-                "reference": "1.3.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/advance_importer-1.3.0-beta1.zip",
-                "reference": "1.3.0-beta1",
-                "shasum": "1079e39d33d7fd84f07e8c59c71976417dffc78b"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "1.3.0-beta1",
-                    "datestamp": "1690576512",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "installation-source": "dist",
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Renier John _renify_",
-                    "homepage": "https://www.drupal.org/u/_renify_",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Import / Export Contents with different formats",
-            "homepage": "https://www.drupal.org/project/advance_importer",
-            "keywords": [
-                "Drupal",
-                "Export",
-                "Imporrt"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/advance_importer",
-                "issues": "https://www.drupal.org/project/issues/advance_importer"
-            },
-            "install-path": "../../modules/contrib/advance_importer"
-        },
-        {
             "name": "drupal/aggregator",
             "version": "2.0.2",
             "version_normalized": "2.0.2.0",
@@ -1942,18 +1888,12 @@
         },
         {
             "name": "drupal/config_ignore",
-            "version": "2.4.0",
-            "version_normalized": "2.4.0.0",
+            "version": "dev-2.x",
+            "version_normalized": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/config_ignore.git",
-                "reference": "8.x-2.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_ignore-8.x-2.4.zip",
-                "reference": "8.x-2.4",
-                "shasum": "e0e45dde2d6927c5d26de59f352792fb6cf26554"
+                "reference": "bbdb8d39d970ecde407c658dabc7fdb21c97947f"
             },
             "require": {
                 "drupal/config_filter": "^1 || ^2",
@@ -1961,16 +1901,19 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-2.4",
-                    "datestamp": "1676045435",
+                    "version": "8.x-2.3+1-dev",
+                    "datestamp": "1662296469",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
                 "GPL-2.0-or-later"
@@ -3119,50 +3062,6 @@
                 "docs": "https://www.drupal.org/docs/8/modules/metatag"
             },
             "install-path": "../../modules/contrib/metatag"
-        },
-        {
-            "name": "drupal/page_view_counter",
-            "version": "dev-1.0.x",
-            "version_normalized": "dev-1.0.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/page_view_counter.git",
-                "reference": "80813d2cebdd4f5de4a16cf25479e8611531bf12"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.0.x": "1.0.x-dev"
-                },
-                "drupal": {
-                    "version": "1.0.3+1-dev",
-                    "datestamp": "1694943716",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "installation-source": "source",
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "_renify_",
-                    "homepage": "https://www.drupal.org/user/3622561"
-                }
-            ],
-            "description": "Provides additional functionality for the site.",
-            "homepage": "https://www.drupal.org/project/page_view_counter",
-            "support": {
-                "source": "https://git.drupalcode.org/project/page_view_counter"
-            },
-            "install-path": "../../modules/contrib/page_view_counter"
         },
         {
             "name": "drupal/paragraphs",

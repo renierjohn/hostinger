@@ -1,0 +1,17 @@
+{
+    "name": "drupal/twig_attributes",
+    "description": "Provides the ability to add attributes to child render arrays in Twig templates.",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Rick Hawkins (rlhawk)",
+            "homepage": "https://www.drupal.org/u/rlhawk",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/twig_attributes",
+        "source": "http://cgit.drupalcode.org/twig_attributes"
+    }
+}

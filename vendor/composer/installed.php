@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'drupal/recommended-project',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '81aa22c0ff386e6ba1ac302ca5ac150b1495ab1a',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '68044e4430d824c446d24550e817741a86cf5cbf',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -199,15 +199,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'drupal/advance_importer' => array(
-            'pretty_version' => '1.3.0-beta1',
-            'version' => '1.3.0.0-beta1',
-            'reference' => '1.3.0-beta1',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/advance_importer',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'drupal/aggregator' => array(
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
@@ -245,12 +236,14 @@
             'dev_requirement' => false,
         ),
         'drupal/config_ignore' => array(
-            'pretty_version' => '2.4.0',
-            'version' => '2.4.0.0',
-            'reference' => '8.x-2.4',
+            'pretty_version' => 'dev-2.x',
+            'version' => 'dev-2.x',
+            'reference' => 'bbdb8d39d970ecde407c658dabc7fdb21c97947f',
             'type' => 'drupal-module',
             'install_path' => __DIR__ . '/../../modules/contrib/config_ignore',
-            'aliases' => array(),
+            'aliases' => array(
+                0 => '2.x-dev',
+            ),
             'dev_requirement' => false,
         ),
         'drupal/core' => array(
@@ -547,17 +540,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'drupal/page_view_counter' => array(
-            'pretty_version' => 'dev-1.0.x',
-            'version' => 'dev-1.0.x',
-            'reference' => '80813d2cebdd4f5de4a16cf25479e8611531bf12',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../modules/contrib/page_view_counter',
-            'aliases' => array(
-                0 => '1.0.x-dev',
-            ),
-            'dev_requirement' => false,
-        ),
         'drupal/paragraphs' => array(
             'pretty_version' => '1.15.0',
             'version' => '1.15.0.0',
@@ -595,9 +577,9 @@
             'dev_requirement' => false,
         ),
         'drupal/recommended-project' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '81aa22c0ff386e6ba1ac302ca5ac150b1495ab1a',
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '68044e4430d824c446d24550e817741a86cf5cbf',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

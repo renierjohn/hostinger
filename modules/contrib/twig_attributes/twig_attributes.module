@@ -1,0 +1,123 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations and global functions.
+ */
+
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Link;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function twig_attributes_theme_registry_alter(&$theme_registry) {
+  // Add variables to the "image_formatter" template.
+  if (isset($theme_registry['image_formatter'])) {
+    $theme_registry['image_formatter']['variables']['image_attributes'] = NULL;
+    $theme_registry['image_formatter']['variables']['link_attributes'] = NULL;
+  }
+
+  // Add variables to the "file_link" template.
+  if (isset($theme_registry['file_link'])) {
+    $theme_registry['file_link']['variables']['link_attributes'] = NULL;
+  }
+
+  // Add variables to the "responsive_image_formatter" template.
+  if (isset($theme_registry['responsive_image_formatter'])) {
+    $theme_registry['responsive_image_formatter']['variables']['image_attributes'] = NULL;
+    $theme_registry['responsive_image_formatter']['variables']['link_attributes'] = NULL;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for image_formatter.
+ */
+function twig_attributes_preprocess_image_formatter(&$variables) {
+  if (isset($variables['image_attributes']) && isset($variables['image'])) {
+    $variables['image']['#attributes'] += [];
+    $variables['image']['#attributes'] = NestedArray::mergeDeepArray([
+      $variables['image']['#attributes'],
+      $variables['image_attributes'],
+    ]);
+  }
+  if (isset($variables['link_attributes']) && isset($variables['url'])) {
+    $variables['url']->mergeOptions(['attributes' => $variables['link_attributes']]);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for file_link.
+ *
+ * This is mostly copied from template_preprocess_file_link() in order to
+ * regenerate the link with attributes added.
+ */
+function twig_attributes_preprocess_file_link(&$variables) {
+  $file = $variables['file'];
+  $options = [];
+
+  // @todo Wrap in file_url_transform_relative(). This is currently
+  // impossible. As a work-around, we currently add the 'url.site' cache context
+  // to ensure different file URLs are generated for different sites in a
+  // multisite setup, including HTTP and HTTPS versions of the same site.
+  // Fix in https://www.drupal.org/node/2646744.
+  $url = $file->createFileUrl(FALSE);
+  $variables['#cache']['contexts'][] = 'url.site';
+
+  $mime_type = $file->getMimeType();
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  $options['attributes']['type'] = $mime_type . '; length=' . $file->getSize();
+
+  // Use the description as the link text if available.
+  if (empty($variables['description'])) {
+    $link_text = $file->getFilename();
+  }
+  else {
+    $link_text = $variables['description'];
+    $options['attributes']['title'] = $file->getFilename();
+  }
+
+  // Add any link attributes to the options for the link.
+  if (isset($variables['link_attributes']) && isset($options['attributes'])) {
+    $options['attributes'] = NestedArray::mergeDeepArray([
+      $options['attributes'],
+      $variables['link_attributes'],
+    ]);
+  }
+
+  $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for responsive_image_formatter.
+ *
+ * Creates an Attribute object for link attributes. To render it, include
+ * it in an anchor tag within a responsive image formatter template.
+ *
+ * Example:
+ * @code
+ * <a{{ link_attributes|without('href') }} href="{{ url }}">
+ *   {{ responsive_image }}
+ * </a>
+ * @endcode
+ */
+function twig_attributes_preprocess_responsive_image_formatter(&$variables) {
+  if (isset($variables['link_attributes'])) {
+    // Create the Attribute object.
+    $link_attributes = new Attribute($variables['link_attributes']);
+    $variables['link_attributes'] = $link_attributes;
+  }
+
+  // Add image attributes.
+  if (isset($variables['image_attributes']) && isset($variables['responsive_image'])) {
+    $variables['responsive_image']['#attributes'] += [];
+    $variables['responsive_image']['#attributes'] = NestedArray::mergeDeepArray([
+      $variables['responsive_image']['#attributes'],
+      $variables['image_attributes'],
+    ]);
+  }
+
+}
