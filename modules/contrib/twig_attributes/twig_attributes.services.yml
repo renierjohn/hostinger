@@ -1,0 +1,5 @@
+services:
+  twig_attributes.twig_extension:
+    class: Drupal\twig_attributes\TwigExtension
+    tags:
+      - { name: twig.extension, priority: 100 }
