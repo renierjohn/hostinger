@@ -13,7 +13,9 @@ label: 'Booking Link'
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: 'https://www.booking.com/city/ph/dauin.en-gb.html?label=City&sid=0cc8b79a4ed2ecaee6475ac550edb5b5&aid=7922214'
 default_value_callback: ''
 settings: {  }
 field_type: string

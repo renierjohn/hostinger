@@ -377,8 +377,8 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: ''
-            format: basic_html
+            value: '<iframe src="https://www.google.com/maps/d/embed?mid=1hgy0XkX4NhOb4HVxFyBCIV7qSvN0Sahd&ehbc=2E312F" width="640" height="480"></iframe>'
+            format: full_html
           tokenize: false
       display_extenders: {  }
     cache_metadata:
@@ -414,8 +414,8 @@ display:
             twitter_cards_type: app
             twitter_cards_title: 'Cocaliong | Vessel | Renify'
             twitter_cards_creator: '@renify_official'
-          tokenize: 0
-      path: vessel/cocaliong
+          tokenize: false
+      path: vessel/cokaliong
     cache_metadata:
       max-age: -1
       contexts:
