@@ -69,21 +69,9 @@ See [rendering blocks with Twig Tweak](blocks.md#block-plugin) for details.
 
 ## Drupal Field
 ```twig
-{# Render field_image from node 1 in view_mode "full" (default). #}
 {{ drupal_field('field_image', 'node', 1) }}
-
-{# Render field_image from node 1 in view_mode "teaser". #}
 {{ drupal_field('field_image', 'node', 1, 'teaser') }}
-
-{# Render field_image from node 1 and instead of a view mode, provide an array of display
-options, which is documented here: https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Entity!EntityViewBuilderInterface.php/function/EntityViewBuilderInterface%3A%3AviewField #}
 {{ drupal_field('field_image', 'node', 1, {type: 'image_url', settings: {image_style: 'large'}}) }}
-
-{# Render field_image from node 1 in view_mode "teaser" in English with access check disabled. #}
-{{ drupal_field('field_image', 'node', 1, 'teaser', 'en', FALSE) }}
-
-{# Render field_image from node 1 in view_mode "full" (default) with access check disabled (named argument). #}
-{{ drupal_field('field_image', 'node', 1, check_access=false) }}
 ```
 
 ## Drupal Menu
@@ -114,7 +102,7 @@ options, which is documented here: https://api.drupal.org/api/drupal/core!lib!Dr
 {# Render image using 'thumbnail' image style and custom attributes. #}
 {{ drupal_image('public://ocean.jpg', 'thumbnail', {alt: 'The alternative text'|t, title: 'The title text'|t}) }}
 
-{# Render responsive image (using a named argument). #}
+{# Render responsive image. #}
 {{ drupal_image('public://ocean.jpg', 'wide', responsive=true) }}
 ```
 
@@ -238,7 +226,6 @@ images when used in an `<img/>` tag.
 ```
 
 ## Format size
-Generates a string representation for the given byte count.
 ```twig
 {{ 12345|format_size }}
 ```

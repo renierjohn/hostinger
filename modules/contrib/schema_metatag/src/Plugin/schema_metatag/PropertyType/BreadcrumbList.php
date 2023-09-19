@@ -114,9 +114,9 @@ class BreadcrumbList extends ItemListElement {
       foreach ($breadcrumbs as $item) {
         // Modules that add the current page to the breadcrumb set it to an
         // empty path, so an empty path is the current path.
-        $url = $item->getUrl()->setAbsolute()->toString(TRUE)->getGeneratedUrl();
+        $url = $item->getUrl()->setAbsolute()->toString();
         if (empty($url)) {
-          $url = Url::fromRoute('<current>')->setAbsolute()->toString(TRUE)->getGeneratedUrl();
+          $url = Url::fromRoute('<current>')->setAbsolute()->toString();
         }
         $text = $item->getText();
         $text = is_array($text) ? $this->renderer->renderPlain($text) : $text;

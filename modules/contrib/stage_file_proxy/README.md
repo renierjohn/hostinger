@@ -1,56 +1,58 @@
-# Stage File Proxy
+CONTENTS OF THIS FILE
+---------------------
 
-Stage File Proxy is a general solution for getting production files
-on a development server on demand. It saves you time and disk space
-by sending requests to your development environment's files directory
-to the production environment and making a copy of the production file
-in your development site. You should not need to enable this module
-in production.
-
-For a full description of the module, visit the
-[project page](https://www.drupal.org/project/stage_file_proxy).
-
-Submit bug reports and feature suggestions, or track changes in the
-[issue queue](https://www.drupal.org/project/issues/stage_file_proxy).
+* Introduction
+* Requirements
+* Installation
+* Configuration
+* Maintainers
 
 
-## Table of contents
+INTRODUCTION
+------------
 
-- Requirements
-- Installation
-- Configuration
-- Nginx compatibility
-- Maintainers
+The Stage File Proxy module saves you time and disk space by sending requests to
+your development environment's files directory to the production environment and
+making a copy of the production file in your development site. It makes it
+easier to manage local development environments. This module should not be
+installed on a server that faces the internet.
+
+* For a full description of the module visit
+https://www.drupal.org/project/stage_file_proxy
+
+* To submit bug reports and feature suggestions, or to track changes visit
+https://www.drupal.org/project/issues/stage_file_proxy
 
 
-## Requirements
+REQUIREMENTS
+------------
 
 This module does not require any additional modules outside of Drupal core.
 
 
-## Installation
+INSTALLATION
+------------
 
-Install as you would normally install a contributed Drupal module. For further
-information, see
-[Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
+Install the Stage File Proxy module as you would normally install a contributed
+Drupal module. Visit https://www.drupal.org/node/1897420 for more information.
 
 
-## Configuration
+CONFIGURATION
+-------------
 
 1. Enable Stage File Proxy, either via "Extend" (/admin/modules) or via drush:
-   $ drush en --yes stage_file_proxy
+$ drush en --yes stage_file_proxy
 
 2. Configure connection to the source. This is available via the UI, at
-   Configuration > Stage File Proxy Settings (admin/config/system/stage_file_proxy)
+Configuration > Stage File Proxy Settings (admin/config/system/stage_file_proxy)
 
 As this module should only be used on non-production sites, it is preferable to
 configure this within your settings.php or settings.local.php file. Detailed
 descriptions of each setting, and syntax for defining the configuration in code
 is in INSTALL.md
 
-
-## Nginx compatibility
-
+NGINX COMPATIBILITY
+-------------------
 The recommended NGINX configuration for Drupal includes rewrites that bypass
 Drupal for 404's inside certain directories or with certain file extensions.
 Make the following change to your NGINX configuration:
@@ -71,16 +73,10 @@ location ~ ^/sites/.*/files/ {
 }
 ```
 
+MAINTAINERS
+-----------
 
-## Maintainers
-
-- Stephen Mustgrave - [smustgrave](https://www.drupal.org/u/smustgrave)
-- Greg Knaddison - [greggles](https://www.drupal.org/u/greggles)
-- Merlin Axel Rutz - [geek-merlin](https://www.drupal.org/u/geek-merlin)
-- Mark Dorison - [markdorison](https://www.drupal.org/u/markdorison)
-- Baris Wanschers - [BarisW](https://www.drupal.org/u/barisw)
-- Baris Wanschers - [BarisW](https://www.drupal.org/u/barisw)
-- Moshe Weitzman - [moshe weitzman](https://www.drupal.org/u/moshe-weitzman)
-- Mark Sonnabaum - [msonnabaum](https://www.drupal.org/u/msonnabaum)
-- netaustin - [netaustin](https://www.drupal.org/user/199298)
-- Rob Wilmshurst - [robwilmshurst](https://www.drupal.org/u/robwilmshurst)
+* Baris Wanschers (BarisW) - https://www.drupal.org/u/barisw
+* Greg Knaddison (greggles) - https://www.drupal.org/u/greggles
+* Rob Wilmshurst (robwilmshurst) - https://www.drupal.org/u/robwilmshurst
+* netaustin - https://www.drupal.org/user/199298

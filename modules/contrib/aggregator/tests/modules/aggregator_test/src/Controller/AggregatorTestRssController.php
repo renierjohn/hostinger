@@ -70,8 +70,8 @@ class AggregatorTestRssController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    *   A response that redirects users to the test feed.
    */
-  public function testRedirect(int $status_code) {
-    return $this->redirect('aggregator_test.feed', [], [], $status_code);
+  public function testRedirect() {
+    return $this->redirect('aggregator_test.feed', [], [], 301);
   }
 
 }

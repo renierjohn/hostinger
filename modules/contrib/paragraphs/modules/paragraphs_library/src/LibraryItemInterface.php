@@ -23,7 +23,7 @@ interface LibraryItemInterface extends ContentEntityInterface, EntityOwnerInterf
    * @throws \Exception
    *   If a conversion is attempted for bundles that don't support it.
    *
-   * @return static
+   * @return \Drupal\paragraphs_library\LibraryItemInterface
    *   The library item entity.
    */
   public static function createFromParagraph(ParagraphInterface $paragraph);
@@ -42,7 +42,7 @@ interface LibraryItemInterface extends ContentEntityInterface, EntityOwnerInterf
    * @param int $timestamp
    *   The library item creation timestamp.
    *
-   * @return $this
+   * @return \Drupal\paragraphs_library\LibraryItemInterface
    *   The called library item entity.
    */
   public function setCreatedTime($timestamp);

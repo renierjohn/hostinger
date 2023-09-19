@@ -19,8 +19,10 @@ class LibraryItemRouteProvider extends DefaultHtmlRouteProvider {
       // Display library items using default theme.
       $canonical_route->setOption('_admin_route', FALSE);
 
-      // Restrict access to users who are allowed to update the entity.
-      $canonical_route->setRequirement('_entity_access', "{$entity_type->id()}.update");
+      // Restrict access based on permission.
+      $canonical_route->addRequirements([
+        '_permission' => 'administer paragraphs library+create paragraph library item+edit paragraph library item',
+      ]);
     }
     return $route_collection;
   }

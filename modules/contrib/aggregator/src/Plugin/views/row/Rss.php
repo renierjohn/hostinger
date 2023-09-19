@@ -52,11 +52,6 @@ class Rss extends RssPluginBase {
       $item->{$name} = $field->value;
     }
 
-    // Item descriptions must be render arrays.
-    if (isset($item->description) && !is_array($item->description)) {
-      $item->description = ['#markup' => $item->description];
-    }
-
     $item->elements = [
       [
         'key' => 'pubDate',

@@ -20,7 +20,7 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
  /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stark';
+  protected $defaultTheme = 'stable';
 
   /**
    * Modules to enable.

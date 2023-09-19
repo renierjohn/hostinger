@@ -10,3 +10,8 @@ dependencies:
   - drupal:filter
 test_dependencies:
   - drupal:ckeditor
+
+# Information added by Drupal.org packaging script on 2022-09-13
+version: '1.0.3'
+project: 'quickedit'
+datestamp: 1663069883

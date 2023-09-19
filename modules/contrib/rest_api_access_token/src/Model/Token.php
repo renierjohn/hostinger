@@ -33,16 +33,6 @@ class Token {
   protected $userId;
 
   /**
-   * @var \DateTime
-   */
-  private $createdAt;
-
-  /**
-   * @var \DateTime
-   */
-  private $refreshedAt;
-
-  /**
    * Token constructor.
    *
    * @param string $public
@@ -52,12 +42,10 @@ class Token {
    * @param int $userId
    *   User id.
    */
-  public function __construct(string $public, string $secret, int $userId, \DateTime $createdAt = NULL, \DateTime $refreshedAt = NULL) {
+  public function __construct(string $public, string $secret, int $userId) {
     $this->public = $public;
     $this->secret = $secret;
     $this->userId = $userId;
-    $this->createdAt = $createdAt ?? new \DateTime();
-    $this->refreshedAt = $refreshedAt ?? new \DateTime();
   }
 
   /**
@@ -88,20 +76,6 @@ class Token {
    */
   public function getUserId(): int {
     return $this->userId;
-  }
-
-  /**
-   * @return \DateTime
-   */
-  public function getCreatedAt(): \DateTime {
-    return $this->createdAt;
-  }
-
-  /**
-   * @return \DateTime
-   */
-  public function getRefreshedAt(): \DateTime {
-    return $this->refreshedAt;
   }
 
 }

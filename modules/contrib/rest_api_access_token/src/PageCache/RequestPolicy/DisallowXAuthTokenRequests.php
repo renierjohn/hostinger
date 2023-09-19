@@ -3,7 +3,6 @@
 namespace Drupal\rest_api_access_token\PageCache\RequestPolicy;
 
 use Drupal\Core\PageCache\RequestPolicyInterface;
-use Drupal\rest_api_access_token\Authentication\Provider\AccessTokenProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -13,11 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DisallowXAuthTokenRequests implements RequestPolicyInterface {
 
+  const TOKEN = 'X-AUTH-TOKEN';
+
   /**
    * {@inheritdoc}
    */
   public function check(Request $request) {
-    if (!(empty($request->headers->get(AccessTokenProvider::TOKEN)) && empty($request->query->get(AccessTokenProvider::TOKEN)))) {
+    if (!(empty($request->headers->get(self::TOKEN)) && empty($request->query->get(self::TOKEN)))) {
       return self::DENY;
     }
   }

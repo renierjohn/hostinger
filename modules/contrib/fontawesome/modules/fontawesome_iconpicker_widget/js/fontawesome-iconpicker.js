@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings, once) {
+(function ($, Drupal, drupalSettings) {
   'use strict';
 
   Drupal.behaviors.iconPicker = {
@@ -7,28 +7,26 @@
       // Get icons list.
       var $icons = drupalSettings.fontawesomeIcons.icons;
       var $terms = drupalSettings.fontawesomeIcons.terms;
-      const $iconPickerIcon = $(once('iconPickerIcon', 'input.fontawesome-iconpicker-icon', context));
-      $iconPickerIcon.each(function (index, element) {
+      $context.find('input.fontawesome-iconpicker-icon').once('iconPickerIcon').each(function(index, element) {
         var $element = $(element);
         if ($icons != 'undefined') {
-          $element.fontIconPicker({
-            source: $icons,
-            searchSource: $terms,
+          $element.fontIconPicker({ 
+            source: $icons, 
+            searchSource: $terms 
           });
         }
       });
       // Mask.
-      const $iconPickerMask = $(once('iconPickerMask', 'input.fontawesome-iconpicker-mask', context));
-      $iconPickerMask.each(function (index, element) {
+      $context.find('input.fontawesome-iconpicker-mask').once('iconPickerMask').each(function(index, element) {
         var $element = $(element);
         if ($icons != 'undefined') {
           $element.fontIconPicker({
             source: $icons,
-            searchSourc: $terms,
+            searchSourc: $terms
           });
         }
       });
     }
   };
 
-})(jQuery, Drupal, drupalSettings, once);
+})(jQuery, Drupal, drupalSettings);

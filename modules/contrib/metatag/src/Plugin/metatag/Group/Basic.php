@@ -9,7 +9,7 @@ namespace Drupal\metatag\Plugin\metatag\Group;
  *   id = "basic",
  *   label = @Translation("Basic tags"),
  *   description = @Translation("Simple meta tags."),
- *   weight = -10
+ *   weight = 1
  * )
  */
 class Basic extends GroupBase {

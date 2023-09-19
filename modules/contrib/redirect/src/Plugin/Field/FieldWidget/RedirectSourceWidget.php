@@ -2,6 +2,7 @@
 
 namespace Drupal\redirect\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
@@ -45,9 +46,7 @@ class RedirectSourceWidget extends WidgetBase {
       '#default_value' => $default_url_value,
       '#maxlength' => 2048,
       '#required' => $element['#required'],
-      // Add a trailing slash to make it more clear that a redirect should not
-      // start with a leading slash.
-      '#field_prefix' => \Drupal::request()->getSchemeAndHttpHost() . '/',
+      '#field_prefix' => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       '#attributes' => ['data-disable-refocus' => 'true'],
     ];
 

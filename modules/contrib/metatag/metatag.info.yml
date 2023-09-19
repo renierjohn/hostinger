@@ -9,3 +9,8 @@ dependencies:
   - token:token
 test_dependencies:
   - devel:devel
+
+# Information added by Drupal.org packaging script on 2022-09-29
+version: '8.x-1.22'
+project: 'metatag'
+datestamp: 1664472821

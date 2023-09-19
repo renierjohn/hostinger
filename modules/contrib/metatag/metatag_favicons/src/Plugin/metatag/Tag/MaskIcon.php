@@ -77,22 +77,21 @@ class MaskIcon extends LinkRelBase {
     }
 
     // Build the output.
-    if (!empty($values['href'])) {
-      $href = $this->tidy($values['href']);
-      if ($href != '') {
-        $element['#tag'] = 'link';
-        $element['#attributes'] = [
-          'rel' => $this->name(),
-          'href' => $href,
-        ];
+    $href = $this->tidy($values['href']);
+    if ($href != '') {
+      $this->tidy($values['href']);
+      $element['#tag'] = 'link';
+      $element['#attributes'] = [
+        'rel' => $this->name(),
+        'href' => $href,
+      ];
 
-        // Add the 'color' element.
-        if (!empty($values['color'])) {
-          $element['#attributes']['color'] = $this->tidy($values['color']);
-        }
-
-        return $element;
+      // Add the 'color' element.
+      if (!empty($values['color'])) {
+        $element['#attributes']['color'] = $this->tidy($values['color']);
       }
+
+      return $element;
     }
 
     return '';

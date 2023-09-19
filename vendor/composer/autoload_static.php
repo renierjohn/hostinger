@@ -442,7 +442,7 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         ),
         'Doctrine\\Common\\Lexer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
         ),
         'Doctrine\\Common\\Annotations\\' => 
         array (

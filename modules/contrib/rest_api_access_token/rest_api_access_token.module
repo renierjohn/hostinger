@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Site\Settings;
 
 /**
  * Implements hook_help().
@@ -30,28 +29,4 @@ function rest_api_access_token_help($route_name, RouteMatchInterface $route_matc
       }
   }
   return NULL;
-}
-
-
-/**
- * Implements your_module_name_cron()
- *
- * @throws \Exception
- */
-function rest_api_access_token_cron() {
-  $interval = 3600; // 3600 seconds -> 1 hour
-  $stateKey = 'rest_api_access_token.cron.next_execution';
-  $next_execution = (int) \Drupal::state()
-    ->get($stateKey, 0);
-
-  if (\Drupal::time()->getRequestTime() >= $next_execution) {
-    \Drupal::state()->set($stateKey, \Drupal::time()
-        ->getRequestTime() + $interval);
-    $lifetimeHours = (int) Settings::get('rest_api_access_token.authentication.token_lifetime_hours', 24);
-    /** @var \Drupal\rest_api_access_token\Repository\TokenRepository $repository */
-    $repository = \Drupal::service('rest_api_access_token.authentication.token_repository');
-    $date = new \DateTime();
-    $date->setTimestamp($date->getTimestamp() - $lifetimeHours * 60 * 60);
-    $repository->removeExpired($date);
-  }
 }

@@ -101,11 +101,6 @@ abstract class ItemResourceTestBase extends EntityResourceTestBase {
           'value' => 1,
         ],
       ],
-      'uuid' => [
-        [
-          'value' => $this->entity->uuid(),
-        ],
-      ],
       'langcode' => [
         [
           'value' => 'en',

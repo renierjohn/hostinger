@@ -3,7 +3,7 @@
 namespace Drupal\rest_api_access_token\Authentication\Event;
 
 use Drupal\rest_api_access_token\Model\Token;
-use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class TokenResponseEvent extends Event.

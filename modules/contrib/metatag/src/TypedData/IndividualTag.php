@@ -13,10 +13,6 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
  * Required settings (below the definition's 'settings' key) are:
  *  - tag_name: The tag to be processed.
  *    Examples: "title", "description".
- *
- * @deprecated in metatag:8.x-1.23 and is removed from metatag:2.0.0. A replacement will be provided separately.
- *
- * @see https://www.drupal.org/node/3326104
  */
 class IndividualTag extends TypedData {
 
@@ -24,8 +20,6 @@ class IndividualTag extends TypedData {
 
   /**
    * Cached processed value.
-   *
-   * @var string
    */
   protected $value;
 
@@ -74,24 +68,30 @@ class IndividualTag extends TypedData {
     ];
     $values = $metatagManager->generateRawElements($tags, $entity);
 
-    if (!empty($values)) {
-      $all_tags = [];
-      foreach (\Drupal::service('plugin.manager.metatag.tag')->getDefinitions() as $tag_name => $tag_spec) {
-        $all_tags[$tag_name] = new $tag_spec['class']([], $tag_name, $tag_spec);
-      }
+    $all_tags = [];
+    foreach (\Drupal::service('plugin.manager.metatag.tag')->getDefinitions() as $tag_name => $tag_spec) {
+      $all_tags[$tag_name] = new $tag_spec['class']([], $tag_name, $tag_spec);
+    }
 
-      // Because the values are an array, loop through the output to to support
-      // both single and multi-value tags.
-      $tag = $all_tags[$property_name];
-      if (!empty($values)) {
-        $attribute_name = $tag->getHtmlValueAttribute();
-        $attribute_values = [];
-        foreach ($values as $value) {
-          if (isset($value['#attributes'][$attribute_name])) {
-            $attribute_values[] = $value['#attributes'][$attribute_name];
-          }
-        }
-        $this->value = implode(' ', $attribute_values);
+    // If this tag has a value set the property value.
+    if (isset($values[$property_name])) {
+      $attribute_name = $all_tags[$property_name]->getHtmlValueAttribute();
+
+      // It should be possible to extract the HTML attribute that stores the
+      // value, but in some cases it might not be possible.
+      if (isset($values[$property_name]['#attributes'][$attribute_name])) {
+        $this->value = $values[$property_name]['#attributes'][$attribute_name];
+      }
+      else {
+        \Drupal::service('logger.factory')
+          ->get('metatag')
+          ->notice('Attribute value not mapped for "%property_name" - entity_type: %type, entity_bundle: %bundle, id: %id. See src/TypedData/Metatags.php.', [
+            '%property_name' => $property_name,
+            '%type' => $entity->getEntityTypeId(),
+            '%bundle' => $entity->bundle(),
+            '%id' => $entity->id(),
+          ]);
+        return FALSE;
       }
     }
 

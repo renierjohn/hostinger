@@ -35,10 +35,7 @@ class DefaultParser implements ParserInterface {
     }
     catch (ExceptionInterface $e) {
       watchdog_exception('aggregator', $e);
-      $this->messenger()->addError(new TranslatableMarkup('The feed from %url seems to be broken because of error "%error".', [
-        '%url' => $feed->getUrl(),
-        '%error' => $e->getMessage(),
-      ]));
+      $this->messenger()->addError(new TranslatableMarkup('The feed from %site seems to be broken because of error "%error".', ['%site' => $feed->label(), '%error' => $e->getMessage()]));
 
       return FALSE;
     }
