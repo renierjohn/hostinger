@@ -158,6 +158,11 @@ interface FeedInterface extends ContentEntityInterface {
    *
    * @return string
    *   The calculated hash of the feed data.
+   *
+   * @deprecated in aggregator:2.1.0 and is removed from aggregator:3.0.0.  Use
+   *   \Drupal::service('aggregator.items.importer')->getHash($feed); instead.
+   *
+   * @see https://www.drupal.org/node/3386907
    */
   public function getHash();
 
@@ -170,6 +175,12 @@ interface FeedInterface extends ContentEntityInterface {
    *
    * @return $this
    *   The class instance that this method is called on.
+   *
+   * @deprecated in aggregator:2.1.0 and is removed from aggregator:3.0.0.  Use
+   *   \Drupal::service('aggregator.items.importer')->setHash($feed, $hash);
+   *   instead.
+   *
+   * @see https://www.drupal.org/node/3386907
    */
   public function setHash($hash);
 

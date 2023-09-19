@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\aggregator\Functional;
 
+use Drupal\aggregator\Entity\Item;
 use Drupal\views\Entity\View;
 
 /**
@@ -96,8 +97,26 @@ class AggregatorRenderingTest extends AggregatorTestBase {
 
     // Create a feed with 30 items.
     $this->createSampleNodes(30);
+
+    // Request the /aggregator page so that it is cached.
+    $this->drupalGet('aggregator');
+
     $feed = $this->createFeed();
     $this->updateFeedItems($feed, 30);
+    // Change the post date for an item to be the most recent item to ensure
+    // consistency in sorting.
+    /** @var \Drupal\aggregator\Entity\Item $latest_item */
+    $latest_item = Item::load(30);
+    $latest_item->setPostedTime(time() + 1000);
+    $latest_item->save();
+
+    // Verify that items are loaded on the page by checking for the pager.
+    $this->drupalGet('aggregator');
+    $this->assertSession()->elementExists('xpath', '//ul[contains(@class, "pager__items")]');
+
+    // Save the feed entity to invalidate the cache so that the paginated cache
+    // context can be tested.
+    $feed->save();
 
     // Request page with no feed items to ensure cache context is set correctly.
     $this->drupalGet('aggregator', ['query' => ['page' => 2]]);
@@ -125,13 +144,27 @@ class AggregatorRenderingTest extends AggregatorTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->responseHeaderEquals('Content-Type', 'application/rss+xml; charset=utf-8');
 
+    // We can't use Mink xpath queries for checking the content of the RSS and
+    // OPML pages because they are XML. Mink only supports HTML.
+    $rss_content = $this->getSession()->getPage()->getContent();
+    $rss_xml = simplexml_load_string($rss_content);
+    $rss_xml->registerXPathNamespace('dc', 'http://purl.org/dc/elements/1.1/');
+    $rss = $rss_xml->xpath('//rss/channel');
+    $this->assertEquals((string) $rss[0]->title, 'Aggregator RSS feed');
+    $this->assertEquals(count($rss[0]->item), 10, 'Found 10 feed items.');
+
+    // Check for item content in the RSS feed.
+    $this->assertEquals((string) $rss[0]->item[0]->title, $latest_item->label());
+    $this->assertEquals((string) $rss[0]->item[0]->description, $latest_item->getDescription());
+    $this->assertEquals((string) $rss[0]->item[0]->pubDate, gmdate('r', $latest_item->getPostedTime()));
+    $this->assertEquals((string) $rss[0]->item[0]->xpath('//dc:creator')[0], $latest_item->getAuthor());
+    $this->assertEquals((string) $rss[0]->item[0]->guid, $latest_item->getGuid());
+
     // Check the opml aggregator page.
     $this->drupalGet('aggregator/opml');
-    $content = $this->getSession()->getPage()->getContent();
-    // We can't use Mink xpath queries here because it only supports HTML pages,
-    // but we are dealing with XML here.
-    $xml = simplexml_load_string($content);
-    $attributes = $xml->xpath('//outline[1]')[0]->attributes();
+    $opml_content = $this->getSession()->getPage()->getContent();
+    $opml_xml = simplexml_load_string($opml_content);
+    $attributes = $opml_xml->xpath('//outline[1]')[0]->attributes();
     $this->assertEquals('rss', $attributes->type);
     $this->assertEquals($feed->label(), $attributes->text);
     $this->assertEquals($feed->getUrl(), $attributes->xmlUrl);

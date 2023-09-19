@@ -158,7 +158,7 @@ trait ViewsReferenceTrait {
 
     // Construct the html.
     $response = new AjaxResponse();
-    $response->addCommand(new ReplaceCommand($element_class_selector, render($display_id_field)));
+    $response->addCommand(new ReplaceCommand($element_class_selector, \Drupal::service('renderer')->render($display_id_field)));
     return $response;
   }
 

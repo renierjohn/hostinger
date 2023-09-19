@@ -13,8 +13,7 @@
   },
   "require": {
     "php": "^7.0|^8.0",
-    "drupal/core": "^8.6|^9.0",
-    "squizlabs/php_codesniffer": "*"
+    "drupal/core": "^9.3 || ^10"
   },
   "require-dev": {
     "composer/installers": "^1.2",

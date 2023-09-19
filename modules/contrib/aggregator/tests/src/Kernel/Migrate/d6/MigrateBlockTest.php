@@ -96,9 +96,9 @@ class MigrateBlockTest extends MigrateDrupal6TestBase {
     // Check aggregator block.
     $settings = [
       'id' => 'aggregator_feed_block',
-      'label' => '',
+      'label' => 'Know Your Meme',
       'provider' => 'aggregator',
-      'label_display' => '0',
+      'label_display' => 'visible',
       'block_count' => 7,
       'feed' => '5',
     ];

@@ -174,7 +174,7 @@ final class ImageViewBuilderTest extends AbstractTestCase {
   private function renderPlain(array $build): string {
     $html = $this->container->get('renderer')->renderPlain($build);
     $html = preg_replace('#src=".+/files/#s', 'src="/files/', $html);
-    $html = preg_replace('#\?itok=.+"#', '?itok=abc"', $html);
+    $html = preg_replace('#\?itok=.+?"#', '?itok=abc"', $html);
     $html = preg_replace(['#\s{2,}#', '#\n#'], '', $html);
     return rtrim($html);
   }

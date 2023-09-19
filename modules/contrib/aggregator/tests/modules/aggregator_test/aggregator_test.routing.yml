@@ -9,7 +9,7 @@ aggregator_test.feed:
     _access: 'TRUE'
 
 aggregator_test.redirect:
-  path: '/aggregator/redirect'
+  path: '/aggregator/redirect/{status_code}'
   defaults:
     _controller: '\Drupal\aggregator_test\Controller\AggregatorTestRssController::testRedirect'
     _title: 'Test feed with a redirect'

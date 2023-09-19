@@ -5,9 +5,7 @@ namespace Drupal\ctools_wizard_test\Wizard;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ctools\Wizard\FormWizardBase;
 
-/**
- *
- */
+
 class WizardTest extends FormWizardBase {
 
   /**

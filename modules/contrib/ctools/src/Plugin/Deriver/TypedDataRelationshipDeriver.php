@@ -8,9 +8,7 @@ use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
 use Drupal\Core\TypedData\DataDefinitionInterface;
 use Drupal\field\FieldConfigInterface;
 
-/**
- *
- */
+
 class TypedDataRelationshipDeriver extends TypedDataPropertyDeriverBase implements ContainerDeriverInterface {
 
   /**

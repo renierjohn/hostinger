@@ -11,6 +11,9 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\aggregator\Entity\Feed;
 use Drupal\Core\Routing\RouteMatchInterface;
+use \Drupal\migrate\Plugin\MigrationInterface;
+use \Drupal\migrate\Plugin\MigrateSourceInterface;
+use \Drupal\migrate\Row;
 
 /**
  * Implements hook_help().
@@ -166,7 +169,7 @@ function aggregator_cron() {
 
   $ids = \Drupal::entityTypeManager()->getStorage('aggregator_feed')->getFeedIdsToRefresh();
   foreach (Feed::loadMultiple($ids) as $feed) {
-    if ($queue->createItem($feed)) {
+    if ($queue->createItem($feed->id())) {
       // Add timestamp to avoid queueing item more than once.
       $feed->setQueuedTime(REQUEST_TIME);
       $feed->save();
@@ -189,18 +192,6 @@ function aggregator_cron() {
 }
 
 /**
- * Gets the list of allowed tags.
- *
- * @return array
- *   The list of allowed tags.
- *
- * @internal
- */
-function _aggregator_allowed_tags() {
-  return preg_split('/\s+|<|>/', \Drupal::config('aggregator.settings')->get('items.allowed_html'), -1, PREG_SPLIT_NO_EMPTY);
-}
-
-/**
  * Implements hook_preprocess_HOOK() for block templates.
  */
 function aggregator_preprocess_block(&$variables) {
@@ -217,4 +208,25 @@ function aggregator_jsonapi_aggregator_feed_filter_access(EntityTypeInterface $e
   return ([
     JSONAPI_FILTER_AMONG_ALL => AccessResult::allowedIfHasPermission($account, 'access news feeds'),
   ]);
+}
+
+/**
+ * Implements hook_migrate_prepare_row().
+ *
+ * Set feed block labels to the feed title as they were in Drupal 6 and Drupal7.
+ */
+function aggregator_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
+  if (in_array($migration->id(), ['d6_block', 'd7_block']) && $row->getSourceProperty('module') == 'aggregator' && empty($row->getSourceProperty('title'))) {
+    // Extract the fid from the block's delta value, which is formatted like
+    // 'feed-{ID}', for example 'feed-1'.
+    $delta = $row->getSourceProperty('delta');
+    $feed_id = substr($delta, 5);
+    $query = $source->getDatabase()->select('aggregator_feed','af');
+    $query->addField('af', 'title');
+    $results = $query->condition('fid', $feed_id)
+      ->execute();
+    $titles = $results->fetchCol();
+    $feed_title = reset($titles);
+    $row->setSourceProperty('title', $feed_title);
+  }
 }

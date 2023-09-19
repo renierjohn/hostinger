@@ -59,7 +59,6 @@ abstract class FeedResourceTestBase extends EntityResourceTestBase {
       ->setQueuedTime(123456789)
       ->setWebsiteUrl('http://example.com')
       ->setImage('http://example.com/feed_logo')
-      ->setHash('abcdefg')
       ->setEtag('hijklmn')
       ->setLastModified(123456789)
       ->save();
@@ -127,11 +126,6 @@ abstract class FeedResourceTestBase extends EntityResourceTestBase {
       'image' => [
         [
           'value' => 'http://example.com/feed_logo',
-        ],
-      ],
-      'hash' => [
-        [
-          'value' => 'abcdefg',
         ],
       ],
       'etag' => [

@@ -26,8 +26,6 @@ class MigrateAggregatorSettingsTest extends MigrateDrupal7TestBase {
     $this->assertSame('aggregator', $config['fetcher']);
     $this->assertSame('aggregator', $config['parser']);
     $this->assertSame(['aggregator'], $config['processors']);
-    $this->assertSame('<p> <div> <a>', $config['items']['allowed_html']);
-    $this->assertSame(500, $config['items']['teaser_length']);
     $this->assertSame(86400, $config['items']['expire']);
     $this->assertSame(6, $config['source']['list_max']);
   }

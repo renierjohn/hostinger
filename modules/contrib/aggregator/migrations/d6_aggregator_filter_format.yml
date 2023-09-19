@@ -1,0 +1,39 @@
+id: d6_aggregator_filter_format
+label: Aggregator filter format configuration
+migration_tags:
+  - Drupal 6
+  - Configuration
+source:
+  plugin: variable
+  variables:
+    - aggregator_allowed_html_tags
+  source_module: aggregator
+process:
+  format:
+    plugin: default_value
+    default_value: aggregator_html
+  name:
+    plugin: default_value
+    default_value: 'Aggregator HTML'
+  status:
+    plugin: default_value
+    default_value: true
+  weight:
+    plugin: default_value
+    default_value: 0
+  'filters/filter_html/id':
+    plugin: default_value
+    default_value: filter_html
+  'filters/filter_html/provider':
+    plugin: default_value
+    default_value: filter
+  'filters/filter_html/settings/allowed_html': aggregator_allowed_html_tags
+  'filters/filter_html/status':
+    plugin: default_value
+    default_value: true
+  'filters/filter_html/weight':
+    plugin: default_value
+    default_value: 0
+destination:
+  plugin: entity:filter_format
+  no_stub: true

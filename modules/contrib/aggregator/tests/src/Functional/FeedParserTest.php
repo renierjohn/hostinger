@@ -98,13 +98,44 @@ class FeedParserTest extends AggregatorTestBase {
    * Tests that a redirected feed is tracked to its target.
    */
   public function testRedirectFeed() {
-    $redirect_url = Url::fromRoute('aggregator_test.redirect')->setAbsolute()->toString();
-    $feed = Feed::create(['url' => $redirect_url, 'title' => $this->randomMachineName()]);
-    $feed->save();
-    $feed->refreshItems();
+    $test_cases = [
+      '301' => [
+        'route' => 'aggregator_test.feed',
+        'parameters' => [],
+      ],
+      '302' => [
+        'route' => 'aggregator_test.redirect',
+        'parameters' => ['status_code' => 302],
+      ],
+      '307' => [
+        'route' => 'aggregator_test.redirect',
+        'parameters' => ['status_code' => 307],
+      ],
+      '308' => [
+        'route' => 'aggregator_test.feed',
+        'parameters' => [],
+      ],
+    ];
 
-    // Make sure that the feed URL was updated correctly.
-    $this->assertEquals(Url::fromRoute('aggregator_test.feed', [], ['absolute' => TRUE])->toString(), $feed->getUrl());
+    foreach ($test_cases as $status_code => $expected_url_params) {
+      $parameters = ['status_code' => $status_code];
+      $redirect_url = Url::fromRoute('aggregator_test.redirect', $parameters)->setAbsolute()->toString();
+      $feed = Feed::create([
+        'url' => $redirect_url,
+        'title' => $this->randomMachineName(),
+      ]);
+      $feed->save();
+      $feed->refreshItems();
+
+      // The feed URL should be updated in the case of a 301 or 308 status, but
+      // not in the case of 302 or 307.
+      $expected_url = Url::fromRoute(
+        $expected_url_params['route'],
+        $expected_url_params['parameters'],
+        ['absolute' => TRUE]
+      )->toString();
+      $this->assertSame($expected_url, $feed->getUrl());
+    }
   }
 
   /**
@@ -112,14 +143,14 @@ class FeedParserTest extends AggregatorTestBase {
    */
   public function testInvalidFeed() {
     // Simulate a typo in the URL to force a curl exception.
-    $invalid_url = 'http:/www.drupal.org';
+    $invalid_url = 'https:/www.drupal.org';
     $feed = Feed::create(['url' => $invalid_url, 'title' => $this->randomMachineName()]);
     $feed->save();
 
     // Update the feed. Use the UI to be able to check the message easily.
     $this->drupalGet('admin/config/services/aggregator');
     $this->clickLink('Update items');
-    $this->assertSession()->pageTextContains('The feed from ' . $feed->label() . ' seems to be broken because of error');
+    $this->assertSession()->pageTextContains('The feed from ' . $feed->getUrl() . ' seems to be broken because of error');
   }
 
 }
