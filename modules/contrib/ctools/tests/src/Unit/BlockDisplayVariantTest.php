@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\ctools\Unit;
 
-use Prophecy\PhpUnit\ProphecyTrait;
 use Drupal\Component\Uuid\UuidInterface;
 use Drupal\Core\Block\BlockManager;
 use Drupal\Core\Condition\ConditionManager;
@@ -22,7 +21,6 @@ use Drupal\Tests\UnitTestCase;
  */
 class BlockDisplayVariantTest extends UnitTestCase {
 
-  use ProphecyTrait;
   /**
    * Tests the submitConfigurationForm() method.
    *

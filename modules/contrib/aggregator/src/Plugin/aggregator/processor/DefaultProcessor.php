@@ -11,11 +11,13 @@ use Drupal\aggregator\Plugin\ProcessorInterface;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\ConfigFormBaseTrait;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -62,6 +64,13 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
   protected $messenger;
 
   /**
+   * The logger.channel.aggregator service.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs a DefaultProcessor object.
    *
    * @param array $configuration
@@ -78,12 +87,15 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    *   The date formatter service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   The logger.channel.aggregator logger service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config, ItemStorageInterface $item_storage, DateFormatterInterface $date_formatter, MessengerInterface $messenger) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config, ItemStorageInterface $item_storage, DateFormatterInterface $date_formatter, MessengerInterface $messenger, LoggerInterface $logger) {
     $this->configFactory = $config;
     $this->itemStorage = $item_storage;
     $this->dateFormatter = $date_formatter;
     $this->messenger = $messenger;
+    $this->logger = $logger;
     // @todo Refactor aggregator plugins to ConfigEntity so merging
     //   the configuration here is not needed.
     parent::__construct($configuration + $this->getConfiguration(), $plugin_id, $plugin_definition);
@@ -100,7 +112,8 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       $container->get('config.factory'),
       $container->get('entity_type.manager')->getStorage('aggregator_item'),
       $container->get('date.formatter'),
-      $container->get('messenger')
+      $container->get('messenger'),
+      $container->get('logger.channel.aggregator')
     );
   }
 
@@ -153,18 +166,6 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       '#description' => $this->t('Requires a correctly configured <a href=":cron">cron maintenance task</a>.', [':cron' => Url::fromRoute('system.status')->toString()]),
     ];
 
-    $lengths = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
-    $options = array_map(function ($length) {
-      return ($length == 0) ? $this->t('Unlimited') : $this->formatPlural($length, '1 character', '@count characters');
-    }, array_combine($lengths, $lengths));
-
-    $form['processors'][$info['id']]['aggregator_teaser_length'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Length of trimmed description'),
-      '#default_value' => $config->get('items.teaser_length'),
-      '#options' => $options,
-      '#description' => $this->t('The maximum number of characters used in the trimmed version of content.'),
-    ];
     return $form;
   }
 
@@ -173,7 +174,6 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     $this->configuration['items']['expire'] = $form_state->getValue('aggregator_clear');
-    $this->configuration['items']['teaser_length'] = $form_state->getValue('aggregator_teaser_length');
     $this->configuration['source']['list_max'] = $form_state->getValue('aggregator_summary_items');
     // @todo Refactor aggregator plugins to ConfigEntity so this is not needed.
     $this->setConfiguration($this->configuration);
@@ -232,7 +232,16 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       }
       $entry->setDescription($description);
 
-      $entry->save();
+      try {
+        $entry->save();
+      }
+      catch (EntityStorageException $e) {
+        $this->logger->error("There was a problem while saving an item from the %feed_title feed.  The item's GUID was %item_guid.  Error message: @message", [
+          '%feed_title' => $feed->label(),
+          '%item_guid' => $item['guid'],
+          '@message' => $e->getMessage(),
+        ]);
+      }
     }
   }
 

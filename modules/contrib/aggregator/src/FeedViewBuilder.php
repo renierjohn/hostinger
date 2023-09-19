@@ -106,8 +106,9 @@ class FeedViewBuilder extends EntityViewBuilder {
       $component = $display->getComponent('description');
       if ($component && !isset($component['type'])) {
         $build[$id]['description'] = [
-          '#markup' => $entity->getDescription(),
-          '#allowed_tags' => _aggregator_allowed_tags(),
+          '#type' => 'processed_text',
+          '#text' => $entity->getDescription() ?? '',
+          '#format' => 'aggregator_html',
           '#prefix' => '<div class="feed-description">',
           '#suffix' => '</div>',
         ];
@@ -142,7 +143,7 @@ class FeedViewBuilder extends EntityViewBuilder {
         $build[$id]['feed_icon'] = [
           '#theme' => 'feed_icon',
           '#url' => $entity->getUrl(),
-          '#title' => t('@title feed', ['@title' => $entity->label()]),
+          '#title' => $this->t('@title feed', ['@title' => $entity->label()]),
         ];
       }
 
@@ -150,7 +151,7 @@ class FeedViewBuilder extends EntityViewBuilder {
         $title_stripped = strip_tags($entity->label());
         $build[$id]['more_link'] = [
           '#type' => 'link',
-          '#title' => t('More<span class="visually-hidden"> posts about @title</span>', [
+          '#title' => $this->t('More<span class="visually-hidden"> posts about @title</span>', [
             '@title' => $title_stripped,
           ]),
           '#url' => Url::fromRoute('entity.aggregator_feed.canonical', ['aggregator_feed' => $entity->id()]),

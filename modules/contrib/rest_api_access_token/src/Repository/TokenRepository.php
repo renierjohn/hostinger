@@ -55,7 +55,11 @@ class TokenRepository {
     if (empty($tokenRaw)) {
       throw new TokenNotFoundException($token);
     }
-    return new Token($tokenRaw->public_token, $tokenRaw->secret, $tokenRaw->user_id);
+    $createdAt = new \DateTime();
+    $createdAt->setTimestamp((int) $tokenRaw->created_at);
+    $refreshedAt = new \DateTime();
+    $refreshedAt->setTimestamp((int) $tokenRaw->refreshed_at);
+    return new Token($tokenRaw->public_token, $tokenRaw->secret, $tokenRaw->user_id, $createdAt, $refreshedAt);
   }
 
   /**
@@ -77,6 +81,8 @@ class TokenRepository {
         'user_id' => $accessToken->getUserId(),
         'public_token' => $accessToken->getPublic(),
         'secret' => $accessToken->getSecret(),
+        'created_at' => time(),
+        'refreshed_at' => time(),
       ])
       ->execute();
   }
@@ -108,6 +114,47 @@ class TokenRepository {
   public function removeByUser(User $user) {
     return $this->connection->delete(Token::TABLE_NAME)
       ->condition('user_id', $user->id())
+      ->execute();
+  }
+
+  /**
+   * Remove other user tokens.
+   *
+   * @param \Drupal\rest_api_access_token\Model\Token $accessToken
+   *
+   * @return int
+   */
+  public function removeOtherUserTokens(Token $accessToken) {
+    return $this->connection->delete(Token::TABLE_NAME)
+      ->condition('user_id', $accessToken->getUserId())
+      ->condition('public_token', $accessToken->getPublic(), '<>')
+      ->execute();
+  }
+
+  /**
+   * @param \Drupal\rest_api_access_token\Model\Token $accessToken
+   *
+   * @return int
+   */
+  public function refresh(Token $accessToken) {
+    return (int) $this->connection
+      ->update(Token::TABLE_NAME)
+      ->fields([
+        'refreshed_at' => time(),
+      ])
+      ->condition('public_token', $accessToken->getPublic())
+      ->condition('user_id', $accessToken->getUserId())
+      ->execute();
+  }
+
+  /**
+   * @param \DateTime $date
+   *
+   * @return int
+   */
+  public function removeExpired(\DateTime $date) {
+    return $this->connection->delete(Token::TABLE_NAME)
+      ->condition('refreshed_at', $date->getTimestamp(), '<')
       ->execute();
   }
 

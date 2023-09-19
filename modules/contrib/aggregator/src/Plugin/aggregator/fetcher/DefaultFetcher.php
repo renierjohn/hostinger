@@ -83,7 +83,7 @@ class DefaultFetcher implements FetcherInterface, ContainerFactoryPluginInterfac
    */
   public function fetch(FeedInterface $feed) {
     $request = new Request('GET', $feed->getUrl());
-    $feed->source_string = FALSE;
+    $feed->source_string = '';
 
     // Generate conditional GET headers.
     if ($feed->getEtag()) {
@@ -94,13 +94,15 @@ class DefaultFetcher implements FetcherInterface, ContainerFactoryPluginInterfac
     }
 
     try {
-
-      /** @var \Psr\Http\Message\UriInterface $actual_uri */
-      $actual_uri = NULL;
       $response = $this->httpClientFactory->fromOptions([
         'allow_redirects' => [
-          'on_redirect' => function (RequestInterface $request, ResponseInterface $response, UriInterface $uri) use (&$actual_uri) {
+          'on_redirect' => function (RequestInterface $request, ResponseInterface $response, UriInterface $uri) use ($feed) {
             $actual_uri = (string) $uri;
+            // Update the feed URL in case of a 301 or 308 (permanent) redirect.
+            // Do not update the URL for temporary redirects (302, 307, etc).
+            if (in_array($response->getStatusCode(), [301, 308]) && $actual_uri !== $feed->getUrl()) {
+              $feed->setUrl($actual_uri);
+            }
           },
         ],
       ])->send($request);
@@ -118,17 +120,17 @@ class DefaultFetcher implements FetcherInterface, ContainerFactoryPluginInterfac
       if ($response->hasHeader('Last-Modified')) {
         $feed->setLastModified(strtotime($response->getHeaderLine('Last-Modified')));
       }
-      $feed->http_headers = $response->getHeaders();
-
-      // Update the feed URL in case of a 301 redirect.
-      if ($actual_uri && $actual_uri !== $feed->getUrl()) {
-        $feed->setUrl($actual_uri);
-      }
       return TRUE;
     }
     catch (TransferException $e) {
-      $this->logger->warning('The feed from %site seems to be broken because of error "%error".', ['%site' => $feed->label(), '%error' => $e->getMessage()]);
-      $this->messenger->addWarning(new TranslatableMarkup('The feed from %site seems to be broken because of error "%error".', ['%site' => $feed->label(), '%error' => $e->getMessage()]));
+      $this->logger->warning('The feed from %url seems to be broken because of error "%error".', [
+        '%url' => $feed->getUrl(),
+        '%error' => $e->getMessage(),
+      ]);
+      $this->messenger->addWarning(new TranslatableMarkup('The feed from %url seems to be broken because of error "%error".', [
+        '%url' => $feed->getUrl(),
+        '%error' => $e->getMessage(),
+      ]));
       return FALSE;
     }
   }

@@ -30,7 +30,7 @@ abstract class ContextDelete extends ConfirmFormBase {
   /**
    * The static context's machine name.
    *
-   * @var string|array
+   * @var array
    */
   protected $context_id;
 

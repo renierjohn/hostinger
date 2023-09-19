@@ -37,3 +37,29 @@ function rest_api_access_token_schema() {
 
   return $schema;
 }
+
+/**
+ * Add created_at and refreshed_at fields to rest_api_access_token table.
+ */
+function rest_api_access_token_update_8021() {
+  $database = \Drupal::database();
+  $schema = $database->schema();
+  $spec1 = [
+    'description' => 'Created time.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => time(),
+  ];
+
+  $spec2 = [
+    'description' => 'Updated time.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => time()
+  ];
+
+  $schema->addField('rest_api_access_token', 'created_at', $spec1);
+  $schema->addField('rest_api_access_token', 'refreshed_at', $spec2);
+}

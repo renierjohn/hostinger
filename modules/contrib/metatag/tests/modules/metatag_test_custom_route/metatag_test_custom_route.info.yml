@@ -4,8 +4,3 @@ description: Support module for testing handling of a custom route that only inh
 package: Testing
 dependencies:
   - metatag:metatag
-
-# Information added by Drupal.org packaging script on 2022-09-29
-version: '8.x-1.22'
-project: 'metatag'
-datestamp: 1664472821

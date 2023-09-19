@@ -5,8 +5,3 @@ package: Core
 core_version_requirement: '>=9.4'
 test_dependencies:
   - bartik:bartik
-
-# Information added by Drupal.org packaging script on 2022-09-15
-version: '1.0.3'
-project: 'color'
-datestamp: 1663234626

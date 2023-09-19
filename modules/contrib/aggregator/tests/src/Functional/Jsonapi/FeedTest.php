@@ -84,7 +84,6 @@ class FeedTest extends ResourceTestBase {
       ->setQueuedTime(123456789)
       ->setWebsiteUrl('http://example.com')
       ->setImage('http://example.com/feed_logo')
-      ->setHash('abcdefg')
       ->setEtag('hijklmn')
       ->setLastModified(123456789)
       ->save();
@@ -136,7 +135,6 @@ class FeedTest extends ResourceTestBase {
           'link' => 'http://example.com',
           'description' => 'Feed Resource Test 1',
           'image' => 'http://example.com/feed_logo',
-          'hash' => 'abcdefg',
           'etag' => 'hijklmn',
           'modified' => '1973-11-29T21:33:09+00:00',
           'langcode' => 'en',

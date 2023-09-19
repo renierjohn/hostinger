@@ -3,6 +3,7 @@
 namespace Drupal\Tests\aggregator\Kernel;
 
 use Drupal\aggregator\Entity\Feed;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 
 /**
@@ -55,9 +56,9 @@ class FeedValidationTest extends EntityKernelTestBase {
 
     $this->assertCount(2, $violations);
     $this->assertEquals('title', $violations[0]->getPropertyPath());
-    $this->assertEquals(t('A feed named %value already exists. Enter a unique title.', ['%value' => $feed->label()]), $violations[0]->getMessage());
+    $this->assertEquals(new FormattableMarkup('A feed named %value already exists. Enter a unique title.', ['%value' => $feed->label()]), $violations[0]->getMessage());
     $this->assertEquals('url', $violations[1]->getPropertyPath());
-    $this->assertEquals(t('A feed with this URL %value already exists. Enter a unique URL.', ['%value' => $feed->getUrl()]), $violations[1]->getMessage());
+    $this->assertEquals(new FormattableMarkup('A feed with this URL %value already exists. Enter a unique URL.', ['%value' => $feed->getUrl()]), $violations[1]->getMessage());
   }
 
 }

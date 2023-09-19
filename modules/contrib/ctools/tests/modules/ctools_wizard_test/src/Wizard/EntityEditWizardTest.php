@@ -4,9 +4,7 @@ namespace Drupal\ctools_wizard_test\Wizard;
 
 use Drupal\ctools\Wizard\EntityFormWizardBase;
 
-/**
- *
- */
+
 class EntityEditWizardTest extends EntityFormWizardBase {
 
   /**

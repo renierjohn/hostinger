@@ -110,10 +110,7 @@ abstract class ManageContext extends FormBase {
       '#empty' => $this->t('No contexts or relationships have been added.'),
     ];
     foreach ($this->typedDataManager->getDefinitions() as $type => $definition) {
-      $types[$type] = $definition['label'] . " ($type)";
-      if ($definition['id'] === 'entity_revision') {
-        $types[$type] .= ' (' . $this->t('Revision') . ')';
-      }
+      $types[$type] = $definition['label'];
     }
     if (isset($types['entity'])) {
       unset($types['entity']);

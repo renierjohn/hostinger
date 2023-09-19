@@ -8,6 +8,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,6 +39,13 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
   protected $itemStorage;
 
   /**
+   * The logger service.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
    * Constructs an AggregatorFeedBlock object.
    *
    * @param array $configuration
@@ -50,11 +58,14 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
    *   The entity storage for feeds.
    * @param \Drupal\aggregator\ItemStorageInterface $item_storage
    *   The entity storage for feed items.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
+   *   Logger factory.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, FeedStorageInterface $feed_storage, ItemStorageInterface $item_storage) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FeedStorageInterface $feed_storage, ItemStorageInterface $item_storage, LoggerChannelFactoryInterface $logger_factory = NULL) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->feedStorage = $feed_storage;
     $this->itemStorage = $item_storage;
+    $this->logger = $logger_factory->get('aggregator');
   }
 
   /**
@@ -66,7 +77,8 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
       $plugin_id,
       $plugin_definition,
       $container->get('entity_type.manager')->getStorage('aggregator_feed'),
-      $container->get('entity_type.manager')->getStorage('aggregator_item')
+      $container->get('entity_type.manager')->getStorage('aggregator_item'),
+      $container->get('logger.factory')
     );
   }
 
@@ -104,7 +116,7 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
       '#default_value' => $this->configuration['feed'],
       '#options' => $options,
     ];
-    $range = range(2, 20);
+    $range = range(1, 20);
     $form['block_count'] = [
       '#type' => 'select',
       '#title' => $this->t('Number of news items in block'),
@@ -147,11 +159,20 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
         '#items' => [],
       ];
       foreach ($items as $item) {
-        $build['list']['#items'][$item->id()] = [
-          '#type' => 'link',
-          '#url' => $item->toUrl(),
-          '#title' => $item->label(),
-        ];
+        try {
+          $build['list']['#items'][$item->id()] = [
+            '#type' => 'link',
+            '#url' => $item->toUrl(),
+            '#title' => $item->label(),
+          ];
+        }
+        catch (\InvalidArgumentException $exception) {
+          // Handle invalid item URLs.
+          $this->logger->notice("Received an invalid URL for aggregator item %item in feed %url", [
+            '%item' => $item->label(),
+            '%url' => $feed->getUrl(),
+          ]);
+        }
       }
       $build['more_link'] = [
         '#type' => 'more_link',
@@ -160,6 +181,7 @@ class AggregatorFeedBlock extends BlockBase implements ContainerFactoryPluginInt
       ];
       return $build;
     }
+    return [];
   }
 
   /**

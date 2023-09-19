@@ -56,6 +56,67 @@ use Drupal\aggregator\FeedInterface;
 class Feed extends ContentEntityBase implements FeedInterface {
 
   /**
+   * The parsed items that are downloaded from the feed source.
+   *
+   * @var array
+   *   The parsed items.
+   */
+  protected $items;
+
+  /**
+   * The last fetched content of the feed.
+   *
+   * @var string
+   *   The content of feed response.
+   */
+  protected $source_string = '';
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __set($name, $value) {
+    if ($name == 'items') {
+      @trigger_error('The $items property is deprecated in 2.1.0 and will be removed from 3.0.0. See https://www.drupal.org/node/3386012.', E_USER_DEPRECATED);
+      $this->items = $value;
+      return;
+    }
+    if ($name == 'source_string') {
+      @trigger_error('The $source_string property is deprecated in 2.1.0 and will be removed from 3.0.0. See https://www.drupal.org/node/3386012.', E_USER_DEPRECATED);
+      $this->source_string = $value;
+      return;
+    }
+    parent::__set($name, $value);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function &__get($name) {
+    if ($name == 'items') {
+      @trigger_error('The $items property is deprecated in 2.1.0 and will be removed from 3.0.0. See https://www.drupal.org/node/3386012.', E_USER_DEPRECATED);
+      return $this->items;
+    }
+    if ($name == 'source_string') {
+      @trigger_error('The $source_string property is deprecated in 2.1.0 and will be removed from 3.0.0. See https://www.drupal.org/node/3386012.', E_USER_DEPRECATED);
+      return $this->source_string;
+    }
+    return parent::__get($name);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __isset($name) {
+    if ($name == 'items') {
+      return isset($this->items);
+    }
+    elseif ($name == 'source_string') {
+      return isset($this->source_string);
+    }
+    return parent::__isset($name);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function label() {
@@ -70,7 +131,6 @@ class Feed extends ContentEntityBase implements FeedInterface {
 
     // Reset feed.
     $this->setLastCheckedTime(0);
-    $this->setHash('');
     $this->setEtag('');
     $this->setLastModified(0);
     $this->save();
@@ -220,11 +280,6 @@ class Feed extends ContentEntityBase implements FeedInterface {
       ->setLabel(t('Image'))
       ->setDescription(t('An image representing the feed.'));
 
-    $fields['hash'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Hash'))
-      ->setSetting('is_ascii', TRUE)
-      ->setDescription(t('Calculated hash of the feed data, used for validating cache.'));
-
     $fields['etag'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Etag'))
       ->setDescription(t('Entity tag HTTP response header, used for validating cache.'));
@@ -291,7 +346,8 @@ class Feed extends ContentEntityBase implements FeedInterface {
    * {@inheritdoc}
    */
   public function getHash() {
-    return $this->get('hash')->value;
+    @trigger_error('Feed::getHash() is deprecated in aggregator:2.1.0 and is removed from aggregator:3.0.0. Use \Drupal::service("aggregator.items.importer")->getHash($feed); instead. See https://www.drupal.org/node/3386907.', E_USER_DEPRECATED);
+    return \Drupal::service('aggregator.items.importer')->getHash($this);
   }
 
   /**
@@ -376,7 +432,8 @@ class Feed extends ContentEntityBase implements FeedInterface {
    * {@inheritdoc}
    */
   public function setHash($hash) {
-    $this->set('hash', $hash);
+    @trigger_error('Feed::setHash() is deprecated in aggregator:2.1.0 and is removed from aggregator:3.0.0. Use \Drupal::service("aggregator.items.importer")->setHash($feed, $hash); instead. See https://www.drupal.org/node/3386907.', E_USER_DEPRECATED);
+    \Drupal::service('aggregator.items.importer')->setHash($this, $hash);
     return $this;
   }
 

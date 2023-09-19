@@ -29,8 +29,8 @@ class MetatagFieldBuilder extends FieldDiffBuilderBase {
       if (!$field_item->isEmpty()) {
         $values = $field_item->getValue();
         if (isset($values['value'])) {
-          // Metatag data store as serialize string
-          $metatag_data = unserialize($values['value']);
+          // Metatag data store as serialize string.
+          $metatag_data = unserialize($values['value'], ['allowed_classes' => FALSE]);
 
           foreach ($metatag_data as $key => $value) {
             $result[$field_key][] = (string) $value;
