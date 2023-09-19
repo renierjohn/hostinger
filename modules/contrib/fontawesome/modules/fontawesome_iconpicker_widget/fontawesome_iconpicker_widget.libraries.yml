@@ -56,5 +56,5 @@ fontawesome-iconpicker:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/once
+    - core/jquery.once
     - fontawesome_iconpicker_widget/fonticonpicker

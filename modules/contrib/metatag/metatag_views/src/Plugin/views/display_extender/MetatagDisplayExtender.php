@@ -102,11 +102,7 @@ class MetatagDisplayExtender extends DisplayExtenderPluginBase {
       $metatags = $form_state->cleanValues()->getValues();
       $this->options['tokenize'] = $metatags['tokenize'] ?? FALSE;
       unset($metatags['tokenize']);
-      $available_tags = array_keys($this->metatagTagManager->getDefinitions());
       foreach ($metatags as $tag_id => $tag_value) {
-        if (!in_array($tag_id, $available_tags)) {
-          continue;
-        }
         // Some plugins need to process form input before storing it.
         // Hence, we set it and then get it.
         $tag = $this->metatagTagManager->createInstance($tag_id);
@@ -239,8 +235,8 @@ class MetatagDisplayExtender extends DisplayExtenderPluginBase {
     }
 
     if ($this->options['tokenize'] && !$raw) {
-      if (!empty(self::$firstRowTokens[$view->current_display])) {
-        self::setFirstRowTokensOnStylePlugin($view, self::$firstRowTokens[$view->current_display]);
+      if (self::$firstRowTokens) {
+        self::setFirstRowTokensOnStylePlugin($view, self::$firstRowTokens);
       }
       // This is copied from TokenizeAreaPluginBase::tokenizeValue().
       $style = $view->getStyle();
@@ -270,7 +266,7 @@ class MetatagDisplayExtender extends DisplayExtenderPluginBase {
    * avoid rebuilding and re-rendering it, preserve the first row tokens.
    */
   public function setFirstRowTokens(array $first_row_tokens) {
-    self::$firstRowTokens[$this->view->current_display] = $first_row_tokens;
+    self::$firstRowTokens = $first_row_tokens;
   }
 
   /**

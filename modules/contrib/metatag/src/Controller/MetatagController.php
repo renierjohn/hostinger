@@ -32,13 +32,13 @@ class MetatagController extends ControllerBase {
   /**
    * Constructs a new \Drupal\views_ui\Controller\ViewsUIController object.
    *
-   * @param \Drupal\metatag\MetatagTagPluginManager $tag_manager
+   * @param \Drupal\metatag\MetatagTagPluginManager $tag_manaager
    *   The tag manager object.
    * @param \Drupal\metatag\MetatagGroupPluginManager $group_manager
    *   The group manager object.
    */
-  public function __construct(MetatagTagPluginManager $tag_manager, MetatagGroupPluginManager $group_manager) {
-    $this->tagManager = $tag_manager;
+  public function __construct(MetatagTagPluginManager $tag_manaager, MetatagGroupPluginManager $group_manager) {
+    $this->tagManager = $tag_manaager;
     $this->groupManager = $group_manager;
   }
 

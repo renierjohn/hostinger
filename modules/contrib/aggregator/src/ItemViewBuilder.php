@@ -26,9 +26,8 @@ class ItemViewBuilder extends EntityViewBuilder {
       $component = $display->getComponent('description');
       if ($component && !isset($component['type'])) {
         $build[$id]['description'] = [
-          '#type' => 'processed_text',
-          '#text' => $entity->getDescription() ?? '',
-          '#format' => 'aggregator_html',
+          '#markup' => $entity->getDescription(),
+          '#allowed_tags' => _aggregator_allowed_tags(),
           '#prefix' => '<div class="item-description">',
           '#suffix' => '</div>',
         ];

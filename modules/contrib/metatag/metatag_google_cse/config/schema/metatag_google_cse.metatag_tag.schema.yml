@@ -3,17 +3,17 @@
 # textfield.
 
 metatag.metatag_tag.thumbnail:
-  type: text
+  type: label
   label: 'Thumbnail'
 metatag.metatag_tag.department:
-  type: text
+  type: label
   label: 'Department'
 metatag.metatag_tag.audience:
-  type: text
+  type: label
   label: 'Content audience'
 metatag.metatag_tag.doc_status:
-  type: text
+  type: label
   label: 'Document status'
 metatag.metatag_tag.google_rating:
-  type: text
+  type: label
   label: 'google_rating'

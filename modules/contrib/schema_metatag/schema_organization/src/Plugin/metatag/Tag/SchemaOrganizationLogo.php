@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_organization\Plugin\metatag\Tag;
 
-use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaImageObjectBase;
+use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
 /**
  * Provides a plugin for the 'logo' meta tag.
@@ -28,6 +28,6 @@ use Drupal\schema_metatag\Plugin\metatag\Tag\SchemaImageObjectBase;
  *   tree_depth = -1,
  * )
  */
-class SchemaOrganizationLogo extends SchemaImageObjectBase {
+class SchemaOrganizationLogo extends SchemaNameBase {
 
 }

@@ -114,11 +114,6 @@ class LoginService {
 
     $this->tokenRepository->insert($token);
 
-    try {
-      $this->tokenRepository->removeOtherUserTokens($token);
-    } catch (\Throwable $e) {
-    }
-
     return $token;
   }
 

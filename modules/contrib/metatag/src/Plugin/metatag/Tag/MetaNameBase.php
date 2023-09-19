@@ -392,25 +392,6 @@ abstract class MetaNameBase extends PluginBase {
       $form['#description'] .= ' ' . $this->t('Any URLs which start with "http://" will be converted to "https://".');
     }
 
-    $settings = \Drupal::config('metatag.settings');
-    $trimlengths = $settings->get('tag_trim_maxlength') ?? [];
-    if (!empty($trimlengths['metatag_maxlength_' . $this->id])) {
-      $maxlength = intval($trimlengths['metatag_maxlength_' . $this->id]);
-      if (is_numeric($maxlength) && $maxlength > 0) {
-        $form['#description'] .= ' ' . $this->t('This will be truncated to a maximum of %max characters after any tokens are processsed.', array('%max' => $maxlength));
-
-        // Optional support for the Maxlength module.
-        if (\Drupal::moduleHandler()->moduleExists('maxlength')) {
-          if ($settings->get('use_maxlength') ?? TRUE) {
-            $form['#attributes']['class'][] = 'maxlength';
-            $form['#attached']['library'][] = 'maxlength/maxlength';
-            $form['#maxlength_js'] = TRUE;
-            $form['#attributes']['data-maxlength'] = $maxlength;
-          }
-        }
-      }
-    }
-
     return $form;
   }
 
@@ -448,10 +429,6 @@ abstract class MetaNameBase extends PluginBase {
    *   The meta tag value after processing.
    */
   protected function tidy($value) {
-    if (is_null($value) || $value == '') {
-      return '';
-    }
-
     $value = str_replace(["\r\n", "\n", "\r", "\t"], ' ', $value);
     $value = preg_replace('/\s+/', ' ', $value);
     return trim($value);
@@ -464,8 +441,8 @@ abstract class MetaNameBase extends PluginBase {
    *   A render array or an empty string.
    */
   public function output() {
-    // If there is no value, just return either an empty array or empty string.
-    if (is_null($this->value) || $this->value == '') {
+    if (empty($this->value)) {
+      // If there is no value, we don't want a tag output.
       return $this->multiple() ? [] : '';
     }
 
@@ -481,7 +458,7 @@ abstract class MetaNameBase extends PluginBase {
     $elements = [];
     foreach ($values as $value) {
       $value = $this->tidy($value);
-      if ($value != '' && $this->requiresAbsoluteUrl()) {
+      if ($this->requiresAbsoluteUrl()) {
         // Relative URL.
         if (parse_url($value, PHP_URL_HOST) == NULL) {
           $value = $this->request->getSchemeAndHttpHost() . $value;
@@ -533,13 +510,6 @@ abstract class MetaNameBase extends PluginBase {
    */
   protected function parseImageUrl($value) {
     global $base_root;
-
-    // Skip all logic if the string is empty. Unlike other scenarios, the logic
-    // in this method is predicated on the value being a legitimate string, so
-    // it's ok to skip all possible "empty" values, including the number 0, etc.
-    if (empty($value)) {
-      return '';
-    }
 
     // If image tag src is relative (starts with /), convert to an absolute
     // link; ignore protocol-relative URLs.

@@ -80,6 +80,7 @@ class AggregatorPluginSettingsBaseTest extends UnitTestCase {
     // Emulate a form state of a submitted form.
     $form_state = (new FormState())->setValues([
       'dummy_length' => '',
+      'aggregator_allowed_html_tags' => '',
     ]);
 
     $test_processor = $this->getMockBuilder('Drupal\aggregator_test\Plugin\aggregator\processor\TestProcessor')

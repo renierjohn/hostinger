@@ -134,10 +134,6 @@ class TaxonomyTest extends KernelTestBase {
       'name' => 'german-parent-term',
     ])->save();
 
-    // Check translation source tokens.
-    $this->assertTokens('term', ['term' => $parent_term], ['source:name' => 'english-parent-term']);
-    $this->assertTokens('term', ['term' => $parent_term], ['source:name' => 'english-parent-term'], ['langcode' => 'de']);
-
     // Create a term related to the parent term.
     $child_term = $this->addTerm($this->vocab, [
       'name' => 'english-child-term',

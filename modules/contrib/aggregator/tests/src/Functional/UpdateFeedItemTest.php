@@ -67,6 +67,7 @@ class UpdateFeedItemTest extends AggregatorTestBase {
     sleep(3);
     $feed
       ->setLastCheckedTime(0)
+      ->setHash('')
       ->setEtag('')
       ->setLastModified(0)
       ->save();

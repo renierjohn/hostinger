@@ -18,25 +18,15 @@ class TokenBlockTest extends TokenTestBase {
   protected static $modules = ['block', 'node', 'views', 'block_content'];
 
   /**
-   * Admin user.
-   *
-   * @var \Drupal\user\UserInterface
-   */
-  protected $adminUser;
-
-  /**
    * {@inheritdoc}
    */
   public function setUp(): void {
     parent::setUp();
-    $this->adminUser = $this->drupalCreateUser(['access content', 'administer blocks']);
-    $this->drupalLogin($this->adminUser);
+    $this->admin_user = $this->drupalCreateUser(['access content', 'administer blocks']);
+    $this->drupalLogin($this->admin_user);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function testBlockTitleTokens(): void {
+  public function testBlockTitleTokens() {
     $label = 'tokenblock';
     $bundle = BlockContentType::create([
       'id' => $label,

@@ -8,9 +8,9 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\rest_api_access_token\Authentication\Provider\AccessTokenProvider;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -79,10 +79,10 @@ class CacheEndpointSubscriber implements EventSubscriberInterface {
   /**
    * Get cached request.
    *
-   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
    *   Response event.
    */
-  public function onKernelRequest(RequestEvent $event) {
+  public function onKernelRequest(GetResponseEvent $event) {
     if (!$event->isMasterRequest()) {
       return;
     }
@@ -108,10 +108,10 @@ class CacheEndpointSubscriber implements EventSubscriberInterface {
   /**
    * Store request response in cache.
    *
-   * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
    *   Response event.
    */
-  public function onKernelResponse(ResponseEvent $event) {
+  public function onKernelResponse(FilterResponseEvent $event) {
     $response = $event->getResponse();
     $request = $event->getRequest();
     $requestId = (string) $request->headers->get(AccessTokenProvider::REQUEST_ID);

@@ -7,3 +7,8 @@ configure: redirect_404.fix_404
 dependencies:
  - redirect:redirect
  - drupal:views
+
+# Information added by Drupal.org packaging script on 2022-08-29
+version: '8.x-1.8'
+project: 'redirect'
+datestamp: 1661806957

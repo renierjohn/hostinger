@@ -126,7 +126,7 @@ class FontAwesomeIconFormatter extends FormatterBase implements ContainerFactory
     $icons = [];
     foreach ($items as $item) {
       // Get the icon settings.
-      $iconSettings = unserialize($item->get('settings')->getValue(), ['allowed_classes' => FALSE]);
+      $iconSettings = unserialize($item->get('settings')->getValue());
       $cssStyles = [];
 
       // Format mask.
@@ -161,17 +161,19 @@ class FontAwesomeIconFormatter extends FormatterBase implements ContainerFactory
         if (!empty($iconSettings['duotone']['opacity']['secondary'])) {
           $cssStyles[] = '--fa-secondary-opacity: ' . $iconSettings['duotone']['opacity']['secondary'] . ';';
         }
-        // Check if we are inheriting color or not.
-        if (empty($iconSettings['duotone']['inherit-color']) || $iconSettings['duotone']['inherit-color'] != 1) {
-          if (!empty($iconSettings['duotone']['color']['primary'])) {
-            $cssStyles[] = '--fa-primary-color: ' . $iconSettings['duotone']['color']['primary'] . ';';
-          }
-          if (!empty($iconSettings['duotone']['color']['secondary'])) {
-            $cssStyles[] = '--fa-secondary-color: ' . $iconSettings['duotone']['color']['secondary'] . ';';
-          }
+        if (!empty($iconSettings['duotone']['color']['primary'])) {
+          $cssStyles[] = '--fa-primary-color: ' . $iconSettings['duotone']['color']['primary'] . ';';
+        }
+        if (!empty($iconSettings['duotone']['color']['secondary'])) {
+          $cssStyles[] = '--fa-secondary-color: ' . $iconSettings['duotone']['color']['secondary'] . ';';
         }
 
         unset($iconSettings['duotone']);
+      }
+
+      // Add additional CSS styles if needed.
+      if (isset($iconSettings['additional_classes'])) {
+        $cssStyles[] = $iconSettings['additional_classes'];
       }
 
       // Get the iconset.

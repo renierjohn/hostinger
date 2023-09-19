@@ -2,7 +2,7 @@
 
 namespace Drupal\aggregator\Plugin\QueueWorker;
 
-use Drupal\aggregator\Entity\Feed;
+use Drupal\aggregator\FeedInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 
 /**
@@ -20,9 +20,8 @@ class AggregatorRefresh extends QueueWorkerBase {
    * {@inheritdoc}
    */
   public function processItem($data) {
-    $feed = Feed::load($data);
-    if ($feed) {
-      $feed->refreshItems();
+    if ($data instanceof FeedInterface) {
+      $data->refreshItems();
     }
   }
 

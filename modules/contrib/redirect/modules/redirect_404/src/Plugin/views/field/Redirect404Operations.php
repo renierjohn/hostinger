@@ -34,13 +34,6 @@ class Redirect404Operations extends FieldPluginBase {
   protected $renderer;
 
   /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
    * Constructor for the redirect operations view field.
    *
    * @param array $configuration
@@ -102,7 +95,7 @@ class Redirect404Operations extends FieldPluginBase {
       'url' => Url::fromRoute('redirect.add', [], $query),
     ];
 
-    if ($this->currentUser->hasPermission('administer redirect settings') || $this->currentUser->hasPermission('ignore 404 requests')) {
+    if ($this->currentUser->hasPermission('administer redirect settings')) {
       $links['ignore'] = [
         'title' => $this->t('Ignore'),
         'url' => Url::fromRoute('redirect_404.ignore_404', [

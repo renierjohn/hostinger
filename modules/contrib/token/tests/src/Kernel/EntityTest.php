@@ -20,28 +20,23 @@ class EntityTest extends KernelTestBase {
   protected static $modules = ['node', 'taxonomy', 'text'];
 
   /**
-   * Vocabulary for testing chained token support.
-   *
-   * @var \Drupal\taxonomy\VocabularyInterface
-   */
-  protected $vocabulary;
-
-  /**
    * {@inheritdoc}
    */
   public function setUp(): void {
     parent::setUp();
 
     // Create the default tags vocabulary.
-    $this->vocabulary = Vocabulary::create([
+    $vocabulary = Vocabulary::create([
       'name' => 'Tags',
       'vid' => 'tags',
     ]);
-    $this->vocabulary->save();
+    $vocabulary->save();
 
     $this->installEntitySchema('taxonomy_term');
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
+
+    $this->vocab = $vocabulary;
   }
 
   function testEntityMapping() {

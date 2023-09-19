@@ -6,7 +6,9 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Configure what entities will be included in sitemap.
@@ -111,7 +113,8 @@ class XmlSitemapLinkBundleSettingsForm extends ConfigFormBase {
     }
 
     $xmlsitemap = $form_state->getValue('xmlsitemap');
-    xmlsitemap_link_bundle_settings_save($this->entity_type, $this->bundle_type, $xmlsitemap);
+    xmlsitemap_link_bundle_settings_save($this->entity_type, $this->bundle_type, $xmlsitemap, TRUE);
+    $this->state->set('xmlsitemap_regenerate_needed', TRUE);
 
     $entity_info = $form['xmlsitemap']['#entity_info'];
     if (!empty($form['xmlsitemap']['#show_message'])) {

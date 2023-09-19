@@ -126,13 +126,8 @@ class AccessTokenProvider implements AuthenticationProviderInterface {
 
     try {
       $token = $this->tokenRepository->getByPublicToken($publicToken);
-      $now = new \DateTime('now');
-      $cacheTimeSec = 60;
-      if ($now->getTimestamp() - $token->getRefreshedAt()
-          ->getTimestamp() >= $cacheTimeSec) {
-        $this->tokenRepository->refresh($token);
-      }
-    } catch (TokenNotFoundException $exception) {
+    }
+    catch (TokenNotFoundException $exception) {
       throw new AccessDeniedException($this->translator->translate('Invalid X-AUTH-TOKEN'));
     }
 

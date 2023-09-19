@@ -3,104 +3,104 @@
 # textfield.
 
 metatag.metatag_tag.alternate_handheld:
-  type: text
+  type: label
   label: 'Handheld URL'
 metatag.metatag_tag.android_app_link_alternative:
-  type: text
+  type: label
   label: 'Android Mobile: Android App Link Alternative'
 metatag.metatag_tag.android_manifest:
-  type: text
+  type: label
   label: 'Android Mobile: Manifest'
 metatag.metatag_tag.apple_itunes_app:
-  type: text
+  type: label
   label: 'Apple Mobile: iTunes App'
 metatag.metatag_tag.apple_mobile_web_app_capable:
-  type: text
+  type: label
   label: 'Apple Mobile: Web App Capable'
 metatag.metatag_tag.apple_mobile_web_app_status_bar_style:
-  type: text
+  type: label
   label: 'Apple Mobile: Web App Status bar color'
 metatag.metatag_tag.apple_mobile_web_app_title:
   type: text
   label: 'Apple Mobile: Web App Title'
 metatag.metatag_tag.application_name:
-  type: text
+  type: label
   label: 'Application name'
 metatag.metatag_tag.cleartype:
-  type: text
+  type: label
   label: 'Mobile: Cleartype'
 metatag.metatag_tag.format_detection:
-  type: text
+  type: label
   label: 'Apple Mobile: Format Detection'
 metatag.metatag_tag.handheldfriendly:
-  type: text
+  type: label
   label: 'Mobile: Handheld-Friendly'
 metatag.metatag_tag.ios_app_link_alternative:
-  type: text
+  type: label
   label: 'Apple Mobile: iOS App Link Alternative'
 metatag.metatag_tag.mobileoptimized:
-  type: text
+  type: label
   label: 'Mobile: Mobile Optimized'
 metatag.metatag_tag.msapplication_allowDomainApiCalls:
-  type: text
+  type: label
   label: 'MSApplication - Allow domain API calls'
 metatag.metatag_tag.msapplication_allowDomainMetaTags:
-  type: text
+  type: label
   label: 'MSApplication - Allow domain meta tags'
 metatag.metatag_tag.msapplication_badge:
-  type: text
+  type: label
   label: 'MSApplication - Badge'
 metatag.metatag_tag.msapplication_config:
-  type: text
+  type: label
   label: 'MSApplication - Config'
 metatag.metatag_tag.msapplication_navbutton_color:
-  type: text
+  type: label
   label: 'MSApplication - Nav button color'
 metatag.metatag_tag.msapplication_notification:
-  type: text
+  type: label
   label: 'MSApplication - Notification'
 metatag.metatag_tag.msapplication_square150x150logo:
-  type: text
+  type: label
   label: 'MSApplication - Square logo, 150px x 150px'
 metatag.metatag_tag.msapplication_square310x310logo:
-  type: text
+  type: label
   label: 'MSApplication - Square logo, 310px x 310px'
 metatag.metatag_tag.msapplication_square70x70logo:
-  type: text
+  type: label
   label: 'MSApplication - Square logo, 70px x 70px'
 metatag.metatag_tag.msapplication_starturl:
-  type: text
+  type: label
   label: 'MSApplication - Start URL'
 metatag.metatag_tag.msapplication_task:
-  type: text
+  type: label
   label: 'MSApplication - Task'
 metatag.metatag_tag.msapplication_task_separator:
-  type: text
+  type: label
   label: 'MSApplication - Task separator'
 metatag.metatag_tag.msapplication_tilecolor:
-  type: text
+  type: label
   label: 'MSApplication - Tile color'
 metatag.metatag_tag.msapplication_tileimage:
-  type: text
+  type: label
   label: 'MSApplication - Tile image'
 metatag.metatag_tag.msapplication_tooltip:
-  type: text
+  type: label
   label: 'MSApplication - Tooltip'
 metatag.metatag_tag.msapplication_wide310x150logo:
-  type: text
+  type: label
   label: 'MSApplication - Wide logo, 310px x 150px'
 metatag.metatag_tag.msapplication_window:
-  type: text
+  type: label
   label: 'MSApplication - Window'
 metatag.metatag_tag.theme_color:
-  type: text
+  type: label
   label: 'Mobile: Theme Color'
 metatag.metatag_tag.viewport:
-  type: text
+  type: label
   label: 'Mobile: Viewport'
 metatag.metatag_tag.web_manifest:
-  type: text
+  type: label
   label: 'Mobile: Web Manifest'
 metatag.metatag_tag.x_ua_compatible:
-  type: text
+  type: label
   label: 'X-UA-Compatible'

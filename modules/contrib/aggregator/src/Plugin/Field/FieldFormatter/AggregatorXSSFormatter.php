@@ -28,9 +28,9 @@ class AggregatorXSSFormatter extends FormatterBase {
 
     foreach ($items as $delta => $item) {
       $elements[$delta] = [
-        '#type' => 'processed_text',
-        '#text' => $item->value,
-        '#format' => 'aggregator_html',
+        '#type' => 'markup',
+        '#markup' => $item->value,
+        '#allowed_tags' => _aggregator_allowed_tags(),
       ];
     }
     return $elements;
