@@ -19,6 +19,17 @@ function data_router_preprocess_page(&$variables){
     unset($conf['apiKey']);
    }
    $variables['#attached']['drupalSettings']['firebase'] = $conf;
+
+   // Adsense Manager account verification ownership.
+   $googleAdsense01 = [
+    '#attributes' => [
+      'src' => 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7062341063801103',
+      'crossorigin' => 'anonymous',
+      'async' => TRUE,
+    ],
+  '#tag' => 'script',
+  ];
+  $variables['page']['#attached']['html_head'][] = [$googleAdsense01, 'googleAdsense.01'];
 }
 
 function data_router_form_alter(&$form,&$form_state,&$form_id){
