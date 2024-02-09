@@ -101,11 +101,13 @@ class Imce {
     }
     // Set root uri and url.
     $conf['root_uri'] = $conf['scheme'] . '://';
-    // file_create_url requires a filepath for some schemes like private:// .
-    $conf['root_url'] = preg_replace('@/(?:%2E|\.)$@i', '', file_create_url($conf['root_uri'] . '.'));
+    // We use a dumb path to generate an absolute url and remove the dumb part.
+    $url_gen = \Drupal::service('file_url_generator');
+    $abs_url = $url_gen->generateAbsoluteString($conf['root_uri'] . 'imce123');
+    $conf['root_url'] = preg_replace('/\/imce123.*$/', '', $abs_url);
     // Convert to relative.
     if (!\Drupal::config('imce.settings')->get('abs_urls')) {
-      $conf['root_url'] = file_url_transform_relative($conf['root_url']);
+      $conf['root_url'] = $url_gen->transformRelative($conf['root_url']);
     }
     $conf['token'] = $user->isAnonymous() ? 'anon' : \Drupal::csrfToken()->get('imce');
     // Process folders.
@@ -124,7 +126,14 @@ class Imce {
     $meta = new BubbleableMetadata();
     $token_data = ['user' => User::load($user->id())];
     foreach ($folders as $folder) {
-      $path = $token_service->replace($folder['path'], $token_data, [], $meta);
+      $path = $folder['path'];
+      if (strpos($path, '[') !== FALSE) {
+        $path = $token_service->replace($path, $token_data, [], $meta);
+        // Unable to resolve a token.
+        if (strpos($path, ':') !== FALSE) {
+          continue;
+        }
+      }
       if (static::regularPath($path)) {
         $ret[$path] = $folder;
         unset($ret[$path]['path']);
@@ -293,6 +302,9 @@ class Imce {
    * Returns a managed file entity by uri.
    *
    * Optionally creates it.
+   *
+   * @return \Drupal\file\FileInterface
+   *   Drupal File entity.
    */
   public static function getFileEntity($uri, $create = FALSE, $save = FALSE) {
     $file = FALSE;
@@ -307,6 +319,9 @@ class Imce {
 
   /**
    * Creates a file entity with an uri.
+   *
+   * @return \Drupal\file\FileInterface
+   *   Drupal File entity.
    */
   public static function createFileEntity($uri, $save = FALSE) {
     $values = [
@@ -315,7 +330,7 @@ class Imce {
       'status' => 1,
       'filesize' => filesize($uri),
       'filename' => \Drupal::service('file_system')->basename($uri),
-      'filemime' => \Drupal::service('file.mime_type.guesser')->guess($uri),
+      'filemime' => \Drupal::service('file.mime_type.guesser')->guessMimeType($uri),
     ];
     $file = \Drupal::entityTypeManager()->getStorage('file')->create($values);
     if ($save) {
@@ -347,6 +362,28 @@ class Imce {
   public static function accessFileUri($uri, AccountProxyInterface $user = NULL) {
     list($scheme, $path) = explode('://', $uri, 2);
     return $scheme && $path && Imce::accessFilePaths([$path], $user, $scheme);
+  }
+
+  /**
+   * Validates a file name.
+   */
+  public static function validateFileName($filename, $filter = '') {
+    if ($filename === '.' || $filename === '..') {
+      return FALSE;
+    }
+    $len = strlen($filename);
+    if (!$len || $len > 240) {
+      return FALSE;
+    }
+    // Chars forbidden in various operating systems.
+    if (preg_match('@^\s|\s$|[/\\\\:\*\?"<>\|\x00-\x1F]@', $filename)) {
+      return FALSE;
+    }
+    // Custom regex filter.
+    if ($filter && preg_match($filter, $filename)) {
+      return FALSE;
+    }
+    return TRUE;
   }
 
 }

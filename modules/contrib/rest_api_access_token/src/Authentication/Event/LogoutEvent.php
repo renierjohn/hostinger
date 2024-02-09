@@ -3,7 +3,7 @@
 namespace Drupal\rest_api_access_token\Authentication\Event;
 
 use Drupal\user\Entity\User;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
