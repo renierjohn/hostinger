@@ -1,6 +1,0 @@
-rest_api_access_token.config_form:
-  title: 'REST API Access Token'
-  route_name: rest_api_access_token.config_form
-  description: 'Configures the REST API Access Token module'
-  parent: system.admin_config_system
-  weight: 101
