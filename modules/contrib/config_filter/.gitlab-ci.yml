@@ -1,2 +1,0 @@
-include:
-  - remote: 'https://gitlab.com/drupalspoons/composer-plugin/-/raw/2.9.4/templates/.gitlab-ci.yml'
