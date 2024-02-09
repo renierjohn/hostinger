@@ -201,16 +201,28 @@ abstract class AggregatorTestBase extends BrowserTestBase {
     $this->clickLink('Update items');
 
     // Ensure we have the right number of items.
-    $item_ids = \Drupal::entityQuery('aggregator_item')
+    $item_ids = $this->getFeedItemIds($feed);
+
+    if ($expected_count !== NULL) {
+      $item_count = count($item_ids);
+      $this->assertEquals($expected_count, $item_count, new FormattableMarkup('Total items in feed equal to the total items in database (@val1 != @val2)', ['@val1' => $expected_count, '@val2' => $feed->item_count]));
+    }
+  }
+
+  /**
+   * Returns the Item IDs from a feed.
+   *
+   * @param \Drupal\aggregator\FeedInterface $feed
+   *   The feed from which Items will be queried.
+   *
+   * @return array|int
+   *   The IDs of Items.
+   */
+  protected function getFeedItemIds($feed) {
+    return \Drupal::entityQuery('aggregator_item')
       ->accessCheck(FALSE)
       ->condition('fid', $feed->id())
       ->execute();
-    $feed->items = array_values($item_ids);
-
-    if ($expected_count !== NULL) {
-      $feed->item_count = count($feed->items);
-      $this->assertEquals($expected_count, $feed->item_count, new FormattableMarkup('Total items in feed equal to the total items in database (@val1 != @val2)', ['@val1' => $expected_count, '@val2' => $feed->item_count]));
-    }
   }
 
   /**

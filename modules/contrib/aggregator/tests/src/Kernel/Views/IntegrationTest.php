@@ -6,6 +6,7 @@ use Drupal\Component\Utility\Xss;
 use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\views\Kernel\ViewsKernelTestBase;
 use Drupal\views\Views;
 use Drupal\views\Tests\ViewTestData;
@@ -27,6 +28,7 @@ class IntegrationTest extends ViewsKernelTestBase {
     'aggregator_test_views',
     'system',
     'field',
+    'filter',
     'options',
     'user',
   ];
@@ -58,7 +60,7 @@ class IntegrationTest extends ViewsKernelTestBase {
   protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
 
-    $this->installConfig(['aggregator']);
+    $this->installConfig(['filter', 'aggregator']);
     $this->installEntitySchema('aggregator_item');
     $this->installEntitySchema('aggregator_feed');
 
@@ -117,6 +119,11 @@ class IntegrationTest extends ViewsKernelTestBase {
     ];
     $this->assertIdenticalResultset($view, $expected, $column_map);
 
+    /** @var \Drupal\filter\FilterFormatInterface $format */
+    $format = FilterFormat::load('aggregator_html');
+    $config = $format->filters('filter_html')->getConfiguration();
+    $html_tags = preg_split('/\s+|<|>/', $config['settings']['allowed_html'], -1, PREG_SPLIT_NO_EMPTY);
+
     // Ensure that the rendering of the linked title works as expected.
     foreach ($view->result as $row) {
       $iid = $view->field['iid']->getValue($row);
@@ -126,13 +133,13 @@ class IntegrationTest extends ViewsKernelTestBase {
       });
       $this->assertEquals($expected_link->getGeneratedLink(), $output, 'Ensure the right link is generated');
 
-      $expected_author = Xss::filter($items[$iid]->getAuthor(), _aggregator_allowed_tags());
+      $expected_author = Xss::filter($items[$iid]->getAuthor(), $html_tags);
       $output = $renderer->executeInRenderContext(new RenderContext(), function () use ($view, $row) {
         return $view->field['author']->advancedRender($row);
       });
       $this->assertEquals($expected_author, $output, 'Ensure the author got filtered');
 
-      $expected_description = Xss::filter($items[$iid]->getDescription(), _aggregator_allowed_tags());
+      $expected_description = Xss::filter($items[$iid]->getDescription(), $html_tags);
       $output = $renderer->executeInRenderContext(new RenderContext(), function () use ($view, $row) {
         return $view->field['description']->advancedRender($row);
       });

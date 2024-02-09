@@ -42,7 +42,7 @@ class UpgradeTest extends MigrateUpgradeExecuteTestBase {
     return [
       'aggregator_feed' => 1,
       'aggregator_item' => 1,
-      'block' => 36,
+      'block' => 37,
       'entity_view_display' => 58,
       'entity_view_mode' => 14,
       'view' => 16,

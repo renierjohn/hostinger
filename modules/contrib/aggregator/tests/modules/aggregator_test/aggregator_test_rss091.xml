@@ -58,5 +58,11 @@
       <author></author>
       <description>We've tested items with no author, but what about an empty author tag?</description>
     </item>
+    <item>
+      <title>laminas-feed compatible author</title>
+      <link>http://example.com/compatible/author</link>
+      <author>john.doe@example.com (John Doe)</author>
+      <description>The laminas-feed library expects author fields to contain data in the format "email@domain.extension (author name)" which is parses into email and name array keys. Arbitrary data not matching this format is discarded.</description>
+    </item>
   </channel>
 </rss>

@@ -38,6 +38,7 @@ use Drupal\Core\Url;
  *     "id" = "iid",
  *     "label" = "title",
  *     "langcode" = "langcode",
+ *     "uuid" = "uuid",
  *   }
  * )
  */
@@ -110,8 +111,9 @@ class Item extends ContentEntityBase implements ItemInterface {
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-    // @todo Convert to a real UUID field in
-    //   https://www.drupal.org/node/2149851.
+    // This field should not be confused with the standard UUID field that most
+    // content entity types have. The GUID is an external property of the feed
+    // item that is not generated nor managed by us.
     $fields['guid'] = BaseFieldDefinition::create('string_long')
       ->setLabel(t('GUID'))
       ->setDescription(t('Unique identifier for the feed item.'));
@@ -240,10 +242,26 @@ class Item extends ContentEntityBase implements ItemInterface {
   }
 
   /**
+   * Builds a Url object from the Item's link property.
+   *
+   * @return \Drupal\Core\Url
+   *   The Url.
+   */
+  public function buildItemUri() {
+    return Url::fromUri($this->getLink());
+  }
+
+  /**
    * Entity URI callback.
+   *
+   * @deprecated in aggregator:2.2.0 and is removed from aggregator:3.0.0. Use
+   *   Item::buildItemUri() instead.
+   *
+   * @see https://www.drupal.org/node/3415597
    */
   public static function buildUri(ItemInterface $item) {
-    return Url::fromUri($item->getLink());
+    @trigger_error('Item::buildUri() is deprecated in aggregator:2.2.0 and is removed from aggregator:3.0.0. Use Item::buildItemUri() instead.');
+    return $item->buildItemUri();
   }
 
 }

@@ -18,6 +18,7 @@ abstract class MigrateDrupal6TestBase extends MigrateDrupalTestBase {
    */
   protected static $modules = [
     'aggregator',
+    'filter',
   ];
 
   /**

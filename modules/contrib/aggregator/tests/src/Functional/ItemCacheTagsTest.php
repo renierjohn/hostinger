@@ -4,6 +4,7 @@ namespace Drupal\Tests\aggregator\Functional;
 
 use Drupal\aggregator\Entity\Feed;
 use Drupal\aggregator\Entity\Item;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Tests\system\Functional\Entity\EntityCacheTagsTestBase;
 use Drupal\user\Entity\Role;
@@ -72,7 +73,7 @@ class ItemCacheTagsTest extends EntityCacheTagsTestBase {
     \Drupal::cache('render')->set('foo', 'bar', CacheBackendInterface::CACHE_PERMANENT, $this->entity->getCacheTags());
 
     // Verify a cache hit.
-    $this->verifyRenderCache('foo', ['aggregator_feed:1']);
+    $this->verifyRenderCache(['foo'], ['aggregator_feed:1'], (new CacheableMetadata())->setCacheContexts($this->entity->getCacheContexts()));
 
     // Now create a feed item in that feed.
     Item::create([

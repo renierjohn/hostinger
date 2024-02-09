@@ -5,12 +5,20 @@ namespace Drupal\aggregator;
 use Drupal\aggregator\Plugin\AggregatorPluginManager;
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
  * Defines an importer of aggregator items.
  */
 class ItemsImporter implements ItemsImporterInterface {
+
+  /**
+   * The prefix to identify State API keys for feed hashes.
+   *
+   * @var string
+   */
+  const AGGREGATOR_HASH_KEY = 'feed_hash';
 
   /**
    * The aggregator fetcher manager.
@@ -48,6 +56,13 @@ class ItemsImporter implements ItemsImporterInterface {
   protected $logger;
 
   /**
+   * The keyvalue.aggregator service.
+   *
+   * @var \Drupal\Core\KeyValueStore\KeyValueFactoryInterface
+   */
+  protected $keyValue;
+
+  /**
    * Constructs an Importer object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -60,13 +75,16 @@ class ItemsImporter implements ItemsImporterInterface {
    *   The aggregator processor plugin manager.
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
+   * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value
+   *   The keyvalue.aggregator service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, AggregatorPluginManager $fetcher_manager, AggregatorPluginManager $parser_manager, AggregatorPluginManager $processor_manager, LoggerInterface $logger) {
+  public function __construct(ConfigFactoryInterface $config_factory, AggregatorPluginManager $fetcher_manager, AggregatorPluginManager $parser_manager, AggregatorPluginManager $processor_manager, LoggerInterface $logger, KeyValueFactoryInterface $key_value) {
     $this->fetcherManager = $fetcher_manager;
     $this->processorManager = $processor_manager;
     $this->parserManager = $parser_manager;
     $this->config = $config_factory->get('aggregator.settings');
     $this->logger = $logger;
+    $this->keyValue = $key_value;
   }
 
   /**
@@ -76,6 +94,7 @@ class ItemsImporter implements ItemsImporterInterface {
     foreach ($this->processorManager->getDefinitions() as $id => $definition) {
       $this->processorManager->createInstance($id)->delete($feed);
     }
+    $this->deleteHash($feed);
   }
 
   /**
@@ -109,7 +128,7 @@ class ItemsImporter implements ItemsImporterInterface {
     // feed we compare stored hash and new hash calculated from downloaded
     // data. If both are equal we say that feed is not updated.
     $hash = $success ? hash('sha256', $feed->source_string) : '';
-    $has_new_content = $success && ($feed->getHash() != $hash);
+    $has_new_content = $success && ($this->getHash($feed) != $hash);
 
     if ($has_new_content) {
       // Parse the feed.
@@ -118,7 +137,7 @@ class ItemsImporter implements ItemsImporterInterface {
           if (!$feed->getWebsiteUrl()) {
             $feed->setWebsiteUrl($feed->getUrl());
           }
-          $feed->setHash($hash);
+          $this->setHash($feed, $hash);
           // Update feed with parsed data.
           $feed->save();
 
@@ -150,4 +169,39 @@ class ItemsImporter implements ItemsImporterInterface {
     return $has_new_content;
   }
 
+  /**
+   * Deletes the hash for a feed from state.
+   *
+   * @param \Drupal\aggregator\FeedInterface $feed
+   *   The feed whose hash is being cleared.
+   */
+  public function deleteHash(FeedInterface $feed) {
+    $this->keyValue->get($feed->id())->delete(self::AGGREGATOR_HASH_KEY);
+  }
+
+  /**
+   * Returns the calculated hash of the feed data, used for validating cache.
+   *
+   * @param \Drupal\aggregator\FeedInterface $feed
+   *   The feed whose hash is being retrieved.
+   *
+   * @return string
+   *   The calculated hash of the feed data.
+   */
+  public function getHash(FeedInterface $feed) {
+    return $this->keyValue->get($feed->id())->get(self::AGGREGATOR_HASH_KEY);
+  }
+
+  /**
+   * Sets the calculated hash of the feed data, used for validating cache.
+   *
+   * @param \Drupal\aggregator\FeedInterface $feed
+   *   The feed for which the hash has been calculated.
+   * @param string $hash
+   *   A string containing the calculated hash of the feed. Must contain
+   *   US ASCII characters only.
+   */
+  public function setHash(FeedInterface $feed, $hash) {
+    $this->keyValue->get($feed->id())->set(self::AGGREGATOR_HASH_KEY, $hash);
+  }
 }

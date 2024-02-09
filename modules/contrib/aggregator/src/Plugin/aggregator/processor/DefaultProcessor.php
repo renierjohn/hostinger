@@ -5,17 +5,21 @@ namespace Drupal\aggregator\Plugin\aggregator\processor;
 use Drupal\aggregator\Entity\Item;
 use Drupal\aggregator\FeedInterface;
 use Drupal\aggregator\FeedStorageInterface;
-use Drupal\aggregator\ItemStorageInterface;
+use Drupal\aggregator\ItemsImporter;
 use Drupal\aggregator\Plugin\AggregatorPluginSettingsBase;
 use Drupal\aggregator\Plugin\ProcessorInterface;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBaseTrait;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Url;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -41,11 +45,11 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
   protected $configFactory;
 
   /**
-   * The entity storage for items.
+   * The entity_type.manager service.
    *
-   * @var \Drupal\aggregator\ItemStorageInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $itemStorage;
+  protected $entityTypeManager;
 
   /**
    * The date formatter service.
@@ -62,6 +66,20 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
   protected $messenger;
 
   /**
+   * The logger.channel.aggregator service.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
+   * The keyvalue.aggregator service.
+   *
+   * @var \Drupal\Core\KeyValueStore\KeyValueFactoryInterface
+   */
+  protected $keyValue;
+
+  /**
    * Constructs a DefaultProcessor object.
    *
    * @param array $configuration
@@ -72,18 +90,24 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    *   The plugin implementation definition.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config
    *   The configuration factory object.
-   * @param \Drupal\aggregator\ItemStorageInterface $item_storage
-   *   The entity storage for feed items.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity_type.manager service.
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   The logger.channel.aggregator logger service.
+   * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface
+   *   The keyvalue.aggregator service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config, ItemStorageInterface $item_storage, DateFormatterInterface $date_formatter, MessengerInterface $messenger) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config, EntityTypeManagerInterface $entity_type_manager, DateFormatterInterface $date_formatter, MessengerInterface $messenger, LoggerInterface $logger, KeyValueFactoryInterface $key_value) {
     $this->configFactory = $config;
-    $this->itemStorage = $item_storage;
+    $this->entityTypeManager = $entity_type_manager;
     $this->dateFormatter = $date_formatter;
     $this->messenger = $messenger;
+    $this->logger = $logger;
+    $this->keyValue = $key_value;
     // @todo Refactor aggregator plugins to ConfigEntity so merging
     //   the configuration here is not needed.
     parent::__construct($configuration + $this->getConfiguration(), $plugin_id, $plugin_definition);
@@ -98,9 +122,11 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       $plugin_id,
       $plugin_definition,
       $container->get('config.factory'),
-      $container->get('entity_type.manager')->getStorage('aggregator_item'),
+      $container->get('entity_type.manager'),
       $container->get('date.formatter'),
-      $container->get('messenger')
+      $container->get('messenger'),
+      $container->get('logger.channel.aggregator'),
+      $container->get('keyvalue.aggregator')
     );
   }
 
@@ -153,18 +179,6 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       '#description' => $this->t('Requires a correctly configured <a href=":cron">cron maintenance task</a>.', [':cron' => Url::fromRoute('system.status')->toString()]),
     ];
 
-    $lengths = [0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
-    $options = array_map(function ($length) {
-      return ($length == 0) ? $this->t('Unlimited') : $this->formatPlural($length, '1 character', '@count characters');
-    }, array_combine($lengths, $lengths));
-
-    $form['processors'][$info['id']]['aggregator_teaser_length'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Length of trimmed description'),
-      '#default_value' => $config->get('items.teaser_length'),
-      '#options' => $options,
-      '#description' => $this->t('The maximum number of characters used in the trimmed version of content.'),
-    ];
     return $form;
   }
 
@@ -172,11 +186,26 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    $this->configuration['items']['expire'] = $form_state->getValue('aggregator_clear');
-    $this->configuration['items']['teaser_length'] = $form_state->getValue('aggregator_teaser_length');
-    $this->configuration['source']['list_max'] = $form_state->getValue('aggregator_summary_items');
+    $config = [];
+    if ($this->configuration['items']['expire'] !== $form_state->getValue('aggregator_clear')) {
+      $this->deleteFeedHashes();
+      $config['items']['expire'] = $form_state->getValue('aggregator_clear');
+    }
+
+    $config['source']['list_max'] = $form_state->getValue('aggregator_summary_items');
     // @todo Refactor aggregator plugins to ConfigEntity so this is not needed.
-    $this->setConfiguration($this->configuration);
+    $this->setConfiguration($config);
+  }
+
+  /**
+   * Deletes the hashes for all feeds from state.
+   */
+  protected function deleteFeedHashes() {
+    $query = $this->entityTypeManager->getStorage('aggregator_feed')->getQuery();
+    $feed_ids = $query->accessCheck(FALSE)->execute();
+    foreach ($feed_ids as $id) {
+      $this->keyValue->get($id)->delete(ItemsImporter::AGGREGATOR_HASH_KEY);
+    }
   }
 
   /**
@@ -208,7 +237,7 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       }
 
       // Try to load an existing entry.
-      if ($entry = $this->itemStorage->loadByProperties($values)) {
+      if ($entry = $this->entityTypeManager->getStorage('aggregator_item')->loadByProperties($values)) {
         $entry = reset($entry);
       }
       else {
@@ -232,7 +261,16 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
       }
       $entry->setDescription($description);
 
-      $entry->save();
+      try {
+        $entry->save();
+      }
+      catch (EntityStorageException $e) {
+        $this->logger->error("There was a problem while saving an item from the %feed_title feed.  The item's GUID was %item_guid.  Error message: @message", [
+          '%feed_title' => $feed->label(),
+          '%item_guid' => $item['guid'],
+          '@message' => $e->getMessage(),
+        ]);
+      }
     }
   }
 
@@ -240,8 +278,9 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    * {@inheritdoc}
    */
   public function delete(FeedInterface $feed) {
-    if ($items = $this->itemStorage->loadByFeed($feed->id())) {
-      $this->itemStorage->delete($items);
+    $item_storage = $this->entityTypeManager->getStorage('aggregator_item');
+    if ($items = $item_storage->loadByFeed($feed->id())) {
+      $item_storage->delete($items);
     }
     // @todo This should be moved out to caller with a different message maybe.
     $this->messenger->addStatus($this->t('The news items from %site have been deleted.', ['%site' => $feed->label()]));
@@ -253,19 +292,20 @@ class DefaultProcessor extends AggregatorPluginSettingsBase implements Processor
    * Expires items from a feed depending on expiration settings.
    */
   public function postProcess(FeedInterface $feed) {
+    $item_storage = $this->entityTypeManager->getStorage('aggregator_item');
     $aggregator_clear = $this->configuration['items']['expire'];
 
     if ($aggregator_clear != FeedStorageInterface::CLEAR_NEVER) {
       // Delete all items that are older than flush item timer.
       $age = REQUEST_TIME - $aggregator_clear;
-      $result = $this->itemStorage->getQuery()
+      $result = $item_storage->getQuery()
         ->accessCheck(FALSE)
         ->condition('fid', $feed->id())
         ->condition('timestamp', $age, '<')
         ->execute();
       if ($result) {
-        $entities = $this->itemStorage->loadMultiple($result);
-        $this->itemStorage->delete($entities);
+        $entities = $item_storage->loadMultiple($result);
+        $item_storage->delete($entities);
       }
     }
   }

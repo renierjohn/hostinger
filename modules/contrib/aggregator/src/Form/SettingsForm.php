@@ -106,16 +106,6 @@ class SettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('aggregator.settings');
 
-    // Global aggregator settings.
-    $form['aggregator_allowed_html_tags'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Allowed HTML tags'),
-      '#size' => 80,
-      '#maxlength' => 255,
-      '#default_value' => $config->get('items.allowed_html'),
-      '#description' => $this->t('A space-separated list of HTML tags allowed in the content of feed items. Disallowed tags are stripped from the content.'),
-    ];
-
     // Only show basic configuration if there are actually options.
     $basic_conf = [];
     if (count($this->definitions['fetcher']) > 1) {
@@ -211,7 +201,6 @@ class SettingsForm extends ConfigFormBase {
       $instance->submitConfigurationForm($form, $form_state);
     }
 
-    $config->set('items.allowed_html', $form_state->getValue('aggregator_allowed_html_tags'));
     if ($form_state->hasValue('aggregator_fetcher')) {
       $config->set('fetcher', $form_state->getValue('aggregator_fetcher'));
     }

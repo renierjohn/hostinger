@@ -1,3 +1,7 @@
+parameters:
+  factory.keyvalue.aggregator:
+    default: keyvalue.aggregator.database
+
 services:
   plugin.manager.aggregator.fetcher:
     class: Drupal\aggregator\Plugin\AggregatorPluginManager
@@ -10,7 +14,7 @@ services:
     arguments: [processor, '@container.namespaces', '@cache.discovery', '@module_handler']
   aggregator.items.importer:
     class: Drupal\aggregator\ItemsImporter
-    arguments: ['@config.factory', '@plugin.manager.aggregator.fetcher', '@plugin.manager.aggregator.parser', '@plugin.manager.aggregator.processor', '@logger.channel.aggregator']
+    arguments: ['@config.factory', '@plugin.manager.aggregator.fetcher', '@plugin.manager.aggregator.parser', '@plugin.manager.aggregator.processor', '@logger.channel.aggregator', '@keyvalue.aggregator']
   logger.channel.aggregator:
     parent: logger.channel_base
     arguments: ['aggregator']
@@ -20,3 +24,11 @@ services:
       - [setContainer, ['@service_container']]
       - [setStandalone, ['\Laminas\Feed\Reader\StandaloneExtensionManager']]
     arguments: ['feed.reader.']
+  feed.reader.aggregatorentry:
+    class: Drupal\aggregator\ReaderExtension\Entry
+  keyvalue.aggregator:
+    class: Drupal\aggregator\KeyValueStore\KeyValueAggregatorFactory
+    arguments: ['@service_container', '%factory.keyvalue.aggregator%']
+  keyvalue.aggregator.database:
+    class: Drupal\aggregator\KeyValueStore\KeyValueDatabaseAggregatorFactory
+    arguments: ['@serialization.phpserialize', '@database']

@@ -15,13 +15,14 @@ class AggregatorLocalTasksTest extends LocalTaskIntegrationTestBase {
    * {@inheritdoc}
    */
   protected function setUp(): void {
-    // Find core directory.
-    $core_dir = __DIR__;
-    while (!file_exists($core_dir . '/index.php')) {
-      $core_dir = dirname($core_dir);
-    }
     $this_dir = dirname(__DIR__, 4);
-    $relative_path_to_module = substr($this_dir, strlen($core_dir));
+    // Support GitLab CI's module directory.
+    if ($project_name = getenv('CI_PROJECT_NAME')) {
+      $relative_path_to_module = 'modules/custom/' . $project_name;
+    }
+    else {
+      $relative_path_to_module = substr($this_dir, strlen(DRUPAL_ROOT));
+    }
     $this->directoryList = ['aggregator' => $relative_path_to_module];
     parent::setUp();
   }
