@@ -19,6 +19,7 @@
         "drupal/admin_toolbar": "^3.2",
         "drupal/adminimal_theme": "^1.7",
         "drupal/aggregator": "^2.0",
+        "drupal/captcha": "^2.0",
         "drupal/color": "^1.0",
         "drupal/config_ignore": "^2.4",
         "drupal/core-composer-scaffold": "10.2.3",
@@ -44,8 +45,10 @@
         "drupal/schema_metatag": "^2.4",
         "drupal/stage_file_proxy": "^2.0",
         "drupal/twig_tweak": "^3.2",
+        "drupal/upgrade_status": "^4.0",
         "drupal/viewsreference": "^2.0@beta",
         "drupal/xmlsitemap": "^1.4",
+        "drush/drush": "^12.4",
         "kint-php/kint": "^5.0",
         "phpmailer/phpmailer": "^6.6",
         "symfony/dotenv": "^6.0"
