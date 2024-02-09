@@ -2,3 +2,5 @@ core/*
 
 vendor/*
 sites/*
+composer.json
+composer.lock
