@@ -57,13 +57,13 @@ class AccountService
   public function getCapchaSiteKey(){
      $configs = file_get_contents(self::CONFIGS_PATH);
      $configs = json_decode($configs,TRUE);
-     return $configs['SITE_KEY'];
+     return $_ENV['SITE_KEY'];
   }
 
   public function getCapchaSecretKey(){
      $configs = file_get_contents(self::CONFIGS_PATH);
      $configs = json_decode($configs,TRUE);
-     return $configs['SECRET_KEY'];
+     return $_ENV['SECRET_KEY'];
   }
 
   public function checkCaptcha(){
@@ -72,7 +72,7 @@ class AccountService
     $configs = json_decode($configs,TRUE);
 
     $token       = $this->token;
-    $secret_key  = $configs['SECRET_KEY'];
+    $secret_key  = $_ENV['SECRET_KEY'];
     $response    = \Drupal::httpClient()->post('https://www.google.com/recaptcha/api/siteverify?secret='.$secret_key.'&response='.$token,[]);
     $data        = $response->getBody()->getContents();
     $data        = json_decode($data,TRUE);
