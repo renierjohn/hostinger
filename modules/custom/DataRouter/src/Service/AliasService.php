@@ -117,6 +117,7 @@ class AliasService
     $nid    = $node->id();
     $bundle = $node->bundle();
     
+    $query->accessCheck(FALSE);
     $hasCocaliong  = $node->field_has_cocaliong_route->value;
     $bus_routes    = $node->field_tx_table_route;
     $vessel_routes = $node->field_vessel_destination;
@@ -151,7 +152,6 @@ class AliasService
     }
     $query->condition($or);
     $nids    = $query->execute();
-    $query->accessCheck(FALSE);
     if(empty($nids)){
       return $list;
     }
