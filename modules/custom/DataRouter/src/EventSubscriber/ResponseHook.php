@@ -7,8 +7,8 @@ use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -80,7 +80,7 @@ class ResponseHook implements EventSubscriberInterface {
     return $events;
   }
 
-  public function getRequestHook(GetResponseEvent $event){
+  public function getRequestHook(RequestEvent $event){
 
     $routeName  = $this->routeMatch->getRouteName();
     $request    = $event->getRequest();
@@ -110,7 +110,7 @@ class ResponseHook implements EventSubscriberInterface {
     }
   }
 
-  public function setCookie(FilterResponseEvent $event){
+  public function setCookie(ResponseEvent $event){
     $routeMatch = $this->routeMatch;
     $routeName  = $routeMatch->getRouteName();
     if($routeName == 'entity.node.canonical' || $routeName ==  'view.cocaliong.main'){

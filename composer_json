@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.2",
         "drupal/adminimal_theme": "^1.7",
         "drupal/aggregator": "^2.0",
@@ -27,7 +28,7 @@
         "drupal/core-recommended": "10.2.3",
         "drupal/core-vendor-hardening": "^9.5.9",
         "drupal/ctools": "^4.0",
-        "drupal/devel": "5.1.1",
+        "drupal/devel": "^5.1",
         "drupal/field_group": "^3.4",
         "drupal/fontawesome": "^2.25",
         "drupal/google_analytics": "^4.0",
@@ -64,7 +65,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "drupal/core-vendor-hardening": true
+            "drupal/core-vendor-hardening": true,
+            "cweagans/composer-patches": true
         },
         "sort-packages": true
     },
@@ -77,7 +79,6 @@
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
         ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
             "cp composer.json composer_json",
             "cp composer.lock composer_lock"
         ],
@@ -121,6 +122,11 @@
         },
         "drupal-core-vendor-hardening": {
             "vendor/package": ["test", "documentation"]
+        },
+        "patches": {
+            "drupal/rest_api_access_token": {
+                "Error: Call to undefined method Symfony\\Component\\HttpKernel\\Event\\RequestEvent::isMasterRequest()": "patches/rest_api_access_token-remove-error.patch"
+            }
         }
     }
 }

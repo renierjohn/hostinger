@@ -1,0 +1,14 @@
+diff --git a/src/EventSubscriber/CacheEndpointSubscriber.php b/src/EventSubscriber/CacheEndpointSubscriber.php
+index 291de76..f327789 100755
+--- a/src/EventSubscriber/CacheEndpointSubscriber.php
++++ b/src/EventSubscriber/CacheEndpointSubscriber.php
+@@ -83,9 +83,6 @@ class CacheEndpointSubscriber implements EventSubscriberInterface {
+    *   Response event.
+    */
+   public function onKernelRequest(RequestEvent $event) {
+-    if (!$event->isMasterRequest()) {
+-      return;
+-    }
+ 
+     $request = $event->getRequest();
+     $requestId = (string) $request->headers->get(AccessTokenProvider::REQUEST_ID);

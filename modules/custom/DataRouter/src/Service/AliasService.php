@@ -44,6 +44,7 @@ class AliasService
     $nids   = $nid->condition('type',$this->bundle)
                   // ->condition('field_category',[1,4,3],'IN')
                   ->condition('status',1)
+                  ->accessCheck(FALSE)
                   ->execute();
     return array_values($nids);
   }
@@ -150,7 +151,7 @@ class AliasService
     }
     $query->condition($or);
     $nids    = $query->execute();
-
+    $query->accessCheck(FALSE);
     if(empty($nids)){
       return $list;
     }

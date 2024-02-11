@@ -10,8 +10,7 @@ use GuzzleHttp\Exception\ClientException;
 
 
 function data_router_preprocess_page(&$variables){
-   $json = file_get_contents('private://auth/firebase.json');
-   // TEST
+   $json = $_ENV['firebase'];
    $conf = json_decode($json,TRUE);
 
    $roles = \Drupal::currentUser()->getRoles();
