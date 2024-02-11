@@ -904,6 +904,57 @@
             "install-path": "../consolidation/site-process"
         },
         {
+            "name": "cweagans/composer-patches",
+            "version": "1.7.3",
+            "version_normalized": "1.7.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
+                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "~1.0 || ~2.0",
+                "phpunit/phpunit": "~4.6"
+            },
+            "time": "2022-12-20T22:53:13+00:00",
+            "type": "composer-plugin",
+            "extra": {
+                "class": "cweagans\\Composer\\Patches"
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-patches/issues",
+                "source": "https://github.com/cweagans/composer-patches/tree/1.7.3"
+            },
+            "install-path": "../cweagans/composer-patches"
+        },
+        {
             "name": "dflydev/dot-access-data",
             "version": "v3.0.2",
             "version_normalized": "3.0.2.0",
@@ -1916,7 +1967,7 @@
                     }
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
                 "GPL-2.0-or-later"
@@ -2439,18 +2490,18 @@
         },
         {
             "name": "drupal/devel",
-            "version": "5.1.1",
-            "version_normalized": "5.1.1.0",
+            "version": "5.1.2",
+            "version_normalized": "5.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel.git",
-                "reference": "5.1.1"
+                "reference": "5.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel-5.1.1.zip",
-                "reference": "5.1.1",
-                "shasum": "d7423dfe9c2333508618975c37f3b63026adca50"
+                "url": "https://ftp.drupal.org/files/projects/devel-5.1.2.zip",
+                "reference": "5.1.2",
+                "shasum": "9b35e38bf2043bf87f88585b3d9100f38da8f07f"
             },
             "require": {
                 "doctrine/common": "^2.7 || ^3.4",
@@ -2470,8 +2521,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "5.1.1",
-                    "datestamp": "1671644739",
+                    "version": "5.1.2",
+                    "datestamp": "1686161028",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2755,10 +2806,6 @@
                 {
                     "name": "mglaman",
                     "homepage": "https://www.drupal.org/user/2416470"
-                },
-                {
-                    "name": "pfaocle",
-                    "homepage": "https://www.drupal.org/user/9740"
                 },
                 {
                     "name": "roberto.rivera.ixis",
@@ -3458,6 +3505,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Error: Call to undefined method Symfony\\Component\\HttpKernel\\Event\\RequestEvent::isMasterRequest()": "patches/rest_api_access_token-remove-error.patch"
                 }
             },
             "installation-source": "dist",
@@ -4043,6 +4093,10 @@
                 {
                     "name": "pifagor",
                     "homepage": "https://www.drupal.org/user/2375692"
+                },
+                {
+                    "name": "poker10",
+                    "homepage": "https://www.drupal.org/user/272316"
                 },
                 {
                     "name": "RenatoG",

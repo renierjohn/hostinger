@@ -40,6 +40,10 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         array (
             'mglaman\\PHPStanDrupal\\' => 22,
         ),
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -180,6 +184,10 @@ class ComposerStaticInitb9bca40ff0618965845332d10c781e61
         'mglaman\\PHPStanDrupal\\' => 
         array (
             0 => __DIR__ . '/..' . '/mglaman/phpstan-drupal/src',
+        ),
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
         ),
         'Twig\\' => 
         array (
