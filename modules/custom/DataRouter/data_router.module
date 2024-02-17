@@ -83,6 +83,7 @@ function data_router_form_alter(&$form,&$form_state,&$form_id){
 
   if($form_id == 'user_register_form'){
     $form['#validate'][] = 'updateHash';
+    $form['#validate'][] ='validate_captcha';
   }
 
 }
