@@ -22,7 +22,8 @@
         "drupal/aggregator": "^2.0",
         "drupal/captcha": "^2.0",
         "drupal/color": "^1.0",
-        "drupal/config_ignore": "^2.4",
+        "drupal/config_filter": "2.6",
+        "drupal/config_ignore": "3.2",
         "drupal/core-composer-scaffold": "10.2.3",
         "drupal/core-project-message": "10.2.3",
         "drupal/core-recommended": "10.2.3",
@@ -57,7 +58,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": false,
     "config": {
         "allow-plugins": {
