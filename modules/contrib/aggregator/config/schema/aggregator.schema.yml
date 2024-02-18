@@ -1,0 +1,54 @@
+# Schema for the configuration files of the aggregator module.
+
+aggregator.settings:
+  type: config_object
+  label: 'Aggregator settings'
+  mapping:
+    fetcher:
+      type: string
+      label: 'Fetcher'
+    parser:
+      type: string
+      label: 'Parser'
+    processors:
+      type: sequence
+      label: 'Processors'
+      sequence:
+        type: string
+        label: 'Processor'
+    items:
+      type: mapping
+      label: 'Items'
+      mapping:
+        expire:
+          type: integer
+          label: 'Discard items older than'
+    source:
+      type: mapping
+      label: 'Source'
+      mapping:
+        list_max:
+          type: integer
+          label: 'Number of items shown in listing pages'
+    normalize_post_dates:
+      type: boolean
+      label: 'Normalize item post dates'
+
+block.settings.aggregator_feed_block:
+  type: block_settings
+  label: 'Aggregator feed block'
+  mapping:
+    block_count:
+      type: integer
+      label: 'Block count'
+    feed:
+      type: string
+      label: 'Feed'
+
+field.formatter.settings.aggregator_title:
+  type: mapping
+  label: 'Formatter settings'
+  mapping:
+    display_as_link:
+      type: boolean
+      label: 'Display as link'

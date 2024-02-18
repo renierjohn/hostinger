@@ -1,0 +1,15 @@
+name: Aggregator
+type: module
+description: 'Gathers and displays syndicated content (RSS, RDF, and Atom feeds) from external sources.'
+package: Web services
+core_version_requirement: '>=10.0'
+configure: aggregator.admin_settings
+dependencies:
+  - drupal:file
+  - drupal:filter
+  - drupal:options
+
+# Information added by Drupal.org packaging script on 2024-01-19
+version: '2.2.0'
+project: 'aggregator'
+datestamp: 1705643393

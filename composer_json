@@ -57,7 +57,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": false,
     "config": {
         "allow-plugins": {

@@ -1,0 +1,5 @@
+administer news feeds:
+  title: 'Administer news feeds'
+  restrict access: TRUE
+access news feeds:
+  title: 'View news feeds'

@@ -1,0 +1,189 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the aggregator module.
+ */
+
+/**
+ * Implements hook_update_last_removed().
+ */
+function aggregator_update_last_removed() {
+  return 8501;
+}
+
+/**
+ * Update views.view.aggregator_rss_feed.
+ */
+function aggregator_update_8601() {
+  if (!aggregator_rss_view_config_is_default()) {
+    return t("The Aggregator RSS feed view was updated in version 2.0.x.
+    Unfortunately, this site's view has been modified from the original and
+    cannot be updated automatically. If you want to get the latest changes to
+    the view, then you will need to manually import the configuration at
+    aggregator/config/optional/views.view.aggregator_rss_feed.yml.");
+  }
+
+  $view_config = \Drupal::configFactory()->getEditable('views.view.aggregator_rss_feed');
+  $view_config->set('dependencies.config', [
+    'core.entity_view_mode.aggregator_item.summary',
+  ]);
+  $view_config->set('display.default.display_options.fields', []);
+  $view_config->set('display.default.display_options.sorts', [
+    'timestamp' => [
+      'id' => 'timestamp',
+      'table' => 'aggregator_item',
+      'field' => 'timestamp',
+      'relationship' => 'none',
+      'group_type' => 'group',
+      'admin_label' => '',
+      'entity_type' => 'aggregator_item',
+      'entity_field' => 'timestamp',
+      'plugin_id' => 'date',
+      'order' => 'DESC',
+      'expose' => [
+        'label' => '',
+        'field_identifier' => '',
+      ],
+      'exposed' => FALSE,
+      'granularity' => 'second',
+    ],
+  ]);
+  $view_config->set('display.feed_items.display_options.row', [
+    'type' => 'aggregator_rss',
+    'options' => [
+      'relationship' => 'none',
+      'view_mode' => 'summary',
+    ],
+  ]);
+  $view_config->save();
+}
+
+/**
+ * Remove the teaser_length admin setting.
+ */
+function aggregator_update_8602() {
+  $settings = \Drupal::configFactory()->getEditable('aggregator.settings');
+  $settings->clear('items.teaser_length')
+    ->save();
+}
+
+/**
+ * Migrates the allowed_html setting to filter.format.aggregator_html config.
+ */
+function aggregator_update_8603() {
+  $settings = \Drupal::configFactory()->getEditable('aggregator.settings');
+
+  $format = \Drupal\filter\Entity\FilterFormat::create([
+    'name' => 'Aggregator HTML',
+    'format' => 'aggregator_html',
+    'status' => TRUE,
+    'weight' => 0,
+  ]);
+  $format->setFilterConfig('filter_html', [
+    'settings' => [
+      'allowed_html' => $settings->get('items.allowed_html'),
+    ],
+    'status' => TRUE,
+    'weight' => 0,
+  ]);
+  $format->save();
+
+  $settings->clear('items.allowed_html')
+    ->save(TRUE);
+}
+
+/**
+ * Add a UUID field to the Aggregator Item entity.
+ */
+function aggregator_update_8604() {
+  $field_storage_definition = \Drupal\Core\Field\BaseFieldDefinition::create('uuid')
+    ->setLabel(new \Drupal\Core\StringTranslation\TranslatableMarkup('UUID'))
+    ->setReadOnly(TRUE);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('uuid', 'aggregator_item', 'aggregator', $field_storage_definition);
+}
+
+/**
+ * Delete the Feed hash base field.
+ */
+function aggregator_update_8605() {
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition = $update_manager->getFieldStorageDefinition('hash', 'aggregator_feed');
+  $update_manager->uninstallFieldStorageDefinition($definition);
+}
+
+/**
+ * Restore RSS view display options.
+ */
+function aggregator_update_8606(): void {
+  $view_config = \Drupal::configFactory()->getEditable('views.view.aggregator_rss_feed');
+
+  // Make certain we're fixing a feed display just to be safe.
+  if ($view_config->get('display.feed_items.display_plugin') != 'feed') {
+    return;
+  }
+
+  // The original aggregator_update_8601() update unset all keys in the
+  // display_options, including the path. Restore them if they don't exist.  We
+  // can't assume that some weren't edited somehow, so check each individually.
+  $has_updates = FALSE;
+  $display_options = $view_config->get('display.feed_items.display_options');
+  if (!isset($display_options['defaults']['arguments'])) {
+    $display_options['defaults']['arguments'] = TRUE;
+    $has_updates = TRUE;
+  }
+  if (!isset($display_options['display_description'])) {
+    $display_options['display_description'] = '';
+    $has_updates = TRUE;
+  }
+  if (!isset($display_options['display_extenders'])) {
+    $display_options['display_extenders'] = [];
+    $has_updates = TRUE;
+  }
+  if (!isset($display_options['path'])) {
+    $display_options['path'] = 'aggregator/rss';
+    $has_updates = TRUE;
+  }
+  if ($has_updates) {
+    $view_config->set('display.feed_items.display_options', $display_options);
+    $view_config->save();
+  }
+}
+
+/**
+ * Set a value for the normalize_post_dates admin setting.
+ */
+function aggregator_update_8607() {
+  $settings = \Drupal::configFactory()->getEditable('aggregator.settings');
+  if ($settings->get('normalize_post_dates') === NULL) {
+    $settings->set('normalize_post_dates', FALSE)
+      ->save();
+  }
+}
+
+/**
+ * Determines whether the RSS view config has been altered from the default.
+ *
+ * @return bool
+ *   TRUE if the hash of the current config matches the value of the
+ *   default_config_hash, FALSE if the hash key does not exist or does not
+ *   match.
+ */
+function aggregator_rss_view_config_is_default() {
+  // Get an editable config object here so that properties can be cleared before
+  // serialization. Just be sure to not save()!
+  $view_config = \Drupal::configFactory()->getEditable('views.view.aggregator_rss_feed');
+  $default_config_hash = $view_config->get('_core.default_config_hash');
+  // If the default config hash doesn't exist, then the config was overridden.
+  if ($default_config_hash == NULL) {
+    return FALSE;
+  }
+
+  // Clear properties that are not part of the original file.
+  $view_config->clear('uuid')
+    ->clear('_core');
+  $config_string = serialize($view_config->getRawData());
+  return \Drupal\Component\Utility\Crypt::hashBase64($config_string) == $default_config_hash;
+}
