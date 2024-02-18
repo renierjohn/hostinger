@@ -1,0 +1,9 @@
+name: 'Aggregator module tests'
+type: module
+description: 'Support module for aggregator related testing.'
+package: Testing
+
+# Information added by Drupal.org packaging script on 2024-01-19
+version: '2.2.0'
+project: 'aggregator'
+datestamp: 1705643393

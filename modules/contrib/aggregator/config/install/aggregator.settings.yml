@@ -1,0 +1,9 @@
+fetcher: aggregator
+parser: aggregator
+processors:
+  - aggregator
+items:
+  expire: 9676800
+source:
+  list_max: 3
+normalize_post_dates: false
