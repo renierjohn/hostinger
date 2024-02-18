@@ -6,17 +6,74 @@
  */
 function rboot_engine_form_alter(&$form, &$form_state, &$form_id) {
   if ($form_id === 'devel_admin_settings_form') {
-    $paragraph_type = 'banner_cta';
 
-    $settings = \Drupal::entityTypeManager()->getStorage('entity_view_display')->load('paragraph.' . $paragraph_type . '.default')->toArray();
-    $id = $settings['bundle'];
-    $fields = $settings['content'];
-    $field_group = $settings['third_party_settings']['field_group'];
+// =================================
+// GET PARAGRAPH FIELDS
+    // $paragraph_type = 'banner_cta';
+    // $settings = \Drupal::entityTypeManager()->getStorage('entity_view_display')->load('paragraph.' . $paragraph_type . '.default')->toArray();
+    // $id = $settings['bundle'];
+    // $fields = $settings['content'];
+    // $field_group = $settings['third_party_settings']['field_group'];
+    // ksm($fields,$field_group);
+// =================================
+// GET NODE FIELDS
+    // $settings = \Drupal::entityTypeManager()->getStorage('entity_view_display')->load('node.landing_pages.default');
+    // ksm($settings);
+// =================================
+// GET NODE FIELD
+   $json_node = \Drupal::service('rboot_engine.data')->setID(755)->getNodeData();
+   // ksm($json_node);
+   $groups = [];
+   $group_array = [];
+   foreach ($json_node['component_body'] as $component) {
+     $components = \Drupal::service('rboot_engine.data')->getParagraphData($component['id']);
+     // ksm($components, $components['machine_name']);
+     foreach ($components['attributes'] as $attribute) {
+      $class_name = $attribute['attributes']['class'];
+      $machine_name = $attribute['machine_key'];
+      $children = $attribute['children'];
+      foreach ($children as $child) {
+        if(str_contains($child, 'group_') && !str_contains($child, '_group_')) {
+           $groups[$components['machine_name']][$child] = TRUE;
+        }
+        if(str_contains($child, 'field_')) {
+           $groups[$components['machine_name']][$child] = $components['entity']->$child;
+        }
+      }
+      // ksm($machine_name, $class_name, $children);
+      $group_array[$machine_name] = [
+        'class_name' => $class_name,
+        'children' => $children,
+      ];
+     }
+   }
+   ksm($groups);
+   ksm($group_array);
 
-    ksm($fields,$field_group);
+   $group_result = [];
+   foreach ($group_array as $machine_name => $value) {
+      $childs = [];
+      foreach ($value['children'] as $child) {
+        if (in_array($child, array_keys($group_array))) {
+          $childs[$child] = $group_array[$child];
+        } else {
+          $childs[$child] = $child;
+        }
+        $group_result[$machine_name]['child'] = $childs;
+      }
+      $group_result[$machine_name]['parent'] = $value;
+    }
+    ksm($group_result);
   }
 }
 
+function _detectWrapper($children) {
+  $flag = FALSE;
+  foreach ($children as $child) {
+    $flag = !str_contains($child, 'field_');
+  }
+  return $flag;
+}
 /**
  * Implements hook_entity_bundle_info_alter().
  */

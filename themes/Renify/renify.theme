@@ -64,7 +64,7 @@ function renify_preprocess_block(&$variables){
   $variables['#cache']             = 
     [
         'max-age' => 0,
-        'contexts' => ['url.path.is_front '],
+        // 'contexts' => ['url.path.is_front '],
     ];
 
   if ($node instanceof \Drupal\node\NodeInterface) {

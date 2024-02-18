@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
+// import { AccordionData } from '../api/AccordionData';
+import RestData from '../api/RestData';
 
-import { AccordionData } from '../api/AccordionData';
 import Modal from './ModalCore';
 import * as modal_fn from '../functions/ModalFunction'
 import * as drag_fn from '../functions/DragFunction'
 
+import { useState, useEffect, useRef } from 'react'
 
 function Accordion(props) {
 
@@ -20,6 +21,8 @@ function Accordion(props) {
 
   const onSaveHandler = modal_fn.default.onSaveHandler;
 
+  const { restData, restLoading } = RestData({ key: props.type, id: props.id });
+
   const _fn = {
     setData: setData,
     setModalOpen: setModalOpen,
@@ -30,15 +33,11 @@ function Accordion(props) {
   };
 
   useEffect( () => {
-    const [dataObj] = AccordionData.list.filter( (item, index) => {
-      return item.id === props.id
-    });
-
-    setData(dataObj)
-    return(() => {
-      // console.log('unmount', props.id)
-    })
-  },[props.id, data]);
+    if (!restLoading) {
+      setData(restData)
+    }
+    return(() => {})
+  },[restLoading, props.id, data]);
 
   return (
     <>
@@ -47,33 +46,33 @@ function Accordion(props) {
            className="accordion-button"
            type="button"
            data-bs-toggle= { data ? `collapse` : ``}
-           data-bs-target={ data.id }
+           data-bs-target={ data['id'] && data['id'][0]['value'] }
            aria-expanded= { data ? true : false}
            aria-controls="collapse-${ data.id}"
            r_name = { `Accordion Title` }
-           r_value = { data.title }
+           r_value = { restLoading ? 'loading' : restData['field_accordion_title'][0] ? restData['field_accordion_title'][0]['value'] : '' }
            r_key = { `title` }
            r_type = { `text` }
            onClick = { (e) => onClickHandler(e, _fn) }
          >
-          { data && data.title }
+          { restLoading ? 'loading' :  restData['field_accordion_title'][0] ? restData['field_accordion_title'][0]['value'] : 'N/A' }
         </button>
       </h2>
 
       <div
         className="accordion-collapse collapse show "
-        aria-labelledby = { data.id}
+        aria-labelledby = { restData['id'] && restData['id'][0]['value'] }
         data-bs-parent="#accordionExample"
       >
         <div
           className="accordion-body"
           r_name = { `Accordion Body` }
-          r_value = { data.body }
+          r_value = { restLoading ? 'loading' :  restData['field_accordion_body'] ? restData['field_accordion_body'][0]['value'] : '' }
           r_key = { `body` }
           r_type = { `text` }
           onClick = { (e) => onClickHandler(e, _fn) }
         >
-         { data.body }
+         { restLoading ? 'Loading...' :  restData['field_accordion_body'] ? restData['field_accordion_body'][0]['value'] : 'N/A'}
         </div>
       </div>
 

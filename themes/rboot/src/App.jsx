@@ -1,8 +1,8 @@
-
-import { GroupData } from './api/GroupData';
-import { AccordionData } from './api/AccordionData';
 import { NodeData } from './api/NodeData';
+import RestData from './api/RestData';
+import RestNodeData from './api/RestNodeData';
 
+import Wrapper from './components/Wrapper'
 import CardGroup from './components/CardGroupDrag'
 import Group from './components/GroupDrag'
 import Modal from './components/ModalCore'
@@ -41,6 +41,14 @@ function App() {
 
   const onBeforeCapture = drag_fn.default.onBeforeCapture;
 
+  const { restData, restLoading } = RestData({ key: `node/754` });
+
+  // const { restNodeData, restNodeLoading } = RestNodeData({ uuid: `31bde1ab-780f-4a39-a69e-ca33f0e27ad7` });
+
+  const attribs = [
+    'second-level-class',
+    'first-level-class',
+  ]
   const _fn = {
     setVisible: setVisible,
     setDragType: setDragType,
@@ -50,39 +58,49 @@ function App() {
     visible: visible,
   };
 
-  useEffect(() =>{
-    const render = components.map((item, index) => {
-      if (item.key === 'group') {
-        return <Group { ...item } dragType = { dragType.group } key = { index } ><EmptySection index = { index } /></Group>
-      }
-      if (item.key === 'card_group') {
-        return <CardGroup { ...item } dragType = { dragType.card_group } key = { index } ><EmptySection index = { index } /></CardGroup>
-      }
-    });
-    setRenderComponents(render);
+  useEffect(() => {
+//     if (!restLoading) {
+//       const banner = restNodeData['data']['relationships']['field_component_banner'];
+//       const components = restNodeData['data']['relationships']['field_components'];
+// console.log(banner, components)
+//     }
 
-  },[dragType])
+    if (!restLoading) {
+      const render = components.map((item, index) => {
+        if (item.machine_name === 'group') {
+          return <Group { ...item }  dragType = { dragType.group } key = { index } ><EmptySection index = { index } /></Group>
+        }
+        if (item.machine_name === 'card_group') {
+          return <CardGroup { ...item }  dragType = { dragType.card_group } key = { index } ><EmptySection index = { index } /></CardGroup>
+        }
+      });
+
+      setRenderComponents(render);
+    }
+
+  },[restLoading, dragType])
 
   return (
+    <Wrapper attribs = { attribs } >
     <div className="container">
-    {/* OFF CANVAS BUTTON */}
-    <Core.CButton className = "mt-2 mb-2" onClick={() => setVisible(true)}>
-      Show Components
-    </Core.CButton>
+      {/* OFF CANVAS BUTTON */}
+      <Core.CButton className = "mt-2 mb-2" onClick={() => setVisible(true)}>
+        Show Components
+      </Core.CButton>
 
-    <DragDropContext
-      onDragStart = { (e) => onDragStart(e, _fn)}
-      onDragEnd = { (e) => onDragEnd(e, _fn) }
-      onDragUpdate = { (e) => onDragUpdate(e, _fn) }
-      onBeforeDragStart = { (e) => onBeforeDragStart(e, _fn) }
-      onBeforeCapture = { (e) => onBeforeCapture(e, _fn) }
+      <DragDropContext
+        onDragStart = { (e) => onDragStart(e, _fn)}
+        onDragEnd = { (e) => onDragEnd(e, _fn) }
+        onDragUpdate = { (e) => onDragUpdate(e, _fn) }
+        onBeforeDragStart = { (e) => onBeforeDragStart(e, _fn) }
+        onBeforeCapture = { (e) => onBeforeCapture(e, _fn) }
 
-    >
-      <OffCanvas visible = { visible } setVisible = { setVisible } />
-      { renderComponents }
-    </DragDropContext >
-
+      >
+        <OffCanvas visible = { visible } setVisible = { setVisible } />
+        { restLoading ? <h2 className="display-3">Loading Components...</h2> : renderComponents }
+      </DragDropContext >
     </div>
+    </Wrapper>
   )
 }
 

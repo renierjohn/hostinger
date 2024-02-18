@@ -6,6 +6,7 @@ module:
   admin_toolbar_links_access_filter: 0
   admin_toolbar_search: 0
   admin_toolbar_tools: 0
+  advance_importer: 0
   automated_cron: 0
   big_pipe: 0
   block: 0
@@ -59,6 +60,7 @@ module:
   path: 0
   path_alias: 0
   quickedit: 0
+  rboot_engine: 0
   rdf: 0
   renify_commander: 0
   rest: 0

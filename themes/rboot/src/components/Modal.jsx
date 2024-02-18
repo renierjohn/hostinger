@@ -9,7 +9,7 @@ function Modal(props) {
 
   const onValueChanged = (e) => {
     const val = e.target.value;
-    setValue(val);
+    setValue(val.toString());
   }
 
   const onKeyDown = (e) => {
@@ -46,7 +46,7 @@ function Modal(props) {
                     className = "form-control"
                     aria-label = "Sizing example input"
                     aria-describedby = "inputGroup-sizing-lg"
-                    r_data = { value }
+                    r_data = { value.toStringg() }
                     r_type = { props.type }
                     r_key = { props.rkey }
                     onChange = { onValueChanged }
@@ -57,11 +57,11 @@ function Modal(props) {
               <div className="p-2 pt-4 mt-2 border">
               {
                 props.type == 'file' && props.rkey == 'img' &&
-                <img src = { props.value } className="w-25 mt-2" />
+                <img src = { props.value.toStringg() } className="w-25 mt-2" />
               }
               {
                 props.type == 'text' &&
-                <p>{ props.value }</p>
+                <p>{ props.value.toStringg() }</p>
               }
               </div>
 

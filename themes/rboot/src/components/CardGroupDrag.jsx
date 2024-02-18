@@ -1,10 +1,14 @@
+// import { CardGroupData } from '../api/CardGroupData';
+import  RestData  from '../api/RestData';
+
 import * as modal_fn from '../functions/ModalFunction'
 import * as drag_fn from '../functions/DragFunction'
 import CardSimple from './CardSimple'
 import CardSimpleBase from './CardSimpleBase'
 import CardAdvance from './CardAdvance'
 import Modal from './ModalCore';
-import { CardGroupData } from '../api/CardGroupData';
+
+import Wrapper from './Wrapper'
 
 import { useState, useEffect, useRef } from 'react'
 import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd';
@@ -16,11 +20,11 @@ function CardGroupDrag(props) {
 
   const [count, setCount] = useState(0)
 
-  const [data, setData] = useState(CardGroupData);
+  const [data, setData] = useState([]);
 
   const [items, setItems] = useState([]);
 
-  const [itemsData, setItemsData] = useState(CardGroupData.list);
+  const [itemsData, setItemsData] = useState([]);
 
   const [isDragged, setIsDragged] = useState(false);
 
@@ -42,13 +46,14 @@ function CardGroupDrag(props) {
 
   const getListStyle = drag_fn.default.getListStyle;
 
+  const { restData, restLoading } = RestData({ key: props.machine_name, id: props.id });
+
   const _fn = {
     setItems:setItems,
     setItemsData: setItemsData,
     setData: setData,
     setModalOpen: setModalOpen,
     setModalAttr: setModalAttr,
-    data: data,
     modalAttr: modalAttr,
     isModalOpen: isModalOpen,
     itemsData: itemsData,
@@ -56,34 +61,44 @@ function CardGroupDrag(props) {
   };
 
   useEffect(() => {
-    const datas = itemsData.map((item, index) => {
-      return <CardSimple id = { item.id } isDragged = { item.isDragged ? true : false } />
-    });
-    setItems(datas)
-  },[itemsData]);
+   console.log(restLoading, restData);
+    if (!restLoading) {
+      const datas = restData['field_card_type'].map((item, index) => {
+        return <CardSimple id = { item.target_uuid } type = { `component` } isDragged = { item.isDragged ? true : false } />
+      });
+      setItems(datas);
+    }
+
+  },[props.id, restLoading]);
+
+
+  const attribs = ['bg-light pt-5 pb-5 shadow-sm dnd', 'custom-class-wrap'];
 
   return (
     <>
-      <div className="bg-light mt-4 mb-4 shadow-sm dnd">
+     {/* <div className="bg-light mt-4 mb-4 shadow-sm dnd">*/}
+    <Wrapper attribs={attribs}>
         <div className="container">
           <div className="row pt-5">
             <div className="col-12 text-center">
-              <h3
-                className="text-uppercase border-bottom mb-4"
-                r_name = { `Card Group Title` }
-                r_value = { data.title }
-                r_type = { `text` }
-                r_key = { `title` }
-                onClick = { (e) => onClickHandler(e, _fn) }
-              >{ data.title }</h3>
-              <p
-                r_name = { `Card Group Sub-Title` }
-                r_value = { data.subtitle }
-                r_type = { `text` }
-                r_key = { `subtitle` }
-                onClick = { (e) => onClickHandler(e, _fn) }
-              >
-              { data.subtitle }</p>
+                <h3
+                  className="text-uppercase border-bottom mb-4"
+                  r_name = { `Card Group Title` }
+                  r_value = { restLoading ? `Loading...` : restData['field_card_group_title'][0] ? restData['field_card_group_title'][0]['value'] : 'N/A' }
+                  r_type = { `text` }
+                  r_key = { `title` }
+                  onClick = { (e) => onClickHandler(e, _fn) }
+                >{ restLoading ? `Loading...` : restData['field_card_group_title'][0] ? restData['field_card_group_title'][0]['value'] : 'N/A' }
+                </h3>
+                <p
+                  r_name = { `Card Group Sub-Title` }
+                  r_value = { restLoading ? `Loading...` : restData['field_card_group_sub_title'][0] ? restData['field_card_group_sub_title'][0]['value'] : 'N/A' }
+                  r_type = { `text` }
+                  r_key = { `subtitle` }
+                  onClick = { (e) => onClickHandler(e, _fn) }
+                >
+                { restLoading ? `Loading...` : restData['field_card_group_sub_title'][0] ? restData['field_card_group_sub_title'][0]['value'] : 'N/A' }
+                </p>
             </div>
           </div>
 
@@ -124,9 +139,8 @@ function CardGroupDrag(props) {
         currentState = { isModalOpen }
         _fn = { _fn }
       />
-
-      </div>
-      { props.children }
+        { props.children }
+      </Wrapper>
       </>
   )
 }

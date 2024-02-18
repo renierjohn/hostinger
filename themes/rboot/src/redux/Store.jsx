@@ -6,10 +6,9 @@ const store = configureStore({
   reducer: Dragstates.reducer
 })
 
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => {})
 
 export const ComponentBaseData = (param) => {
-  console.log(param)
   store.dispatch(Dragstates.actions.addState(param))
   return param;
 }
@@ -26,5 +25,5 @@ export const ComponentState = (param) => {
 export default {
     ComponentState,
     ComponentBaseData,
-    ComponentBaseSideBarData
+    ComponentBaseSideBarData,
 }

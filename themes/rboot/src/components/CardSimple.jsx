@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
-import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd';
+// import { CardSimpleData } from '../api/CardSimpleData';
+import  RestData  from '../api/RestData';
 
-import { CardSimpleData } from '../api/CardSimpleData';
 import Modal from './ModalCore';
 import * as modal_fn from '../functions/ModalFunction'
 import * as drag_fn from '../functions/DragFunction'
 
+import { useState, useEffect, useRef } from 'react'
+import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd';
 
 
 function CardSimple(props) {
@@ -31,27 +32,24 @@ function CardSimple(props) {
     isModalOpen: isModalOpen,
   };
 
+  const { restData, restLoading } = RestData({key: props.type, id: props.id});
+
   useEffect( () => {
-    const [dataObj] = CardSimpleData.list.filter( (item, index) => {
-      return item.id === props.id
-    });
-
-    setData(dataObj)
-
-    return(() => {
-      // console.log('unmount', props.id)
-    })
-  },[props.id, data]);
+    if (!restLoading) {
+      setData(restData)
+    }
+    return(() => {})
+  },[restLoading, props.id, data]);
 
   return (
     <>
       <div className="card" r_id = { data.id } >
-        <img src = { data.img && data.img.url }
-          alt = { data.img && data.img.alt }
+        <img src = { data['field_card_image'] && data['field_card_image']['0']['url'] }
+          alt = { data['field_card_image'] && data['field_card_image']['0']['alt'] }
           className = "card-img-top component-img"
           r_name = { `Card Image` }
-          r_value = { data.img && data.img.url }
-          r_subval = { data.img && data.img.alt }
+          r_value = { data['field_card_image'] && data['field_card_image']['0']['url'] }
+          r_subval = { data['field_card_image'] && data['field_card_image']['0']['alt'] }
           r_type = { `file` }
           r_key = { `img` }
           onClick = { (e) => onClickHandler(e, _fn) }
@@ -62,10 +60,10 @@ function CardSimple(props) {
                 r_name = { `Card Title` }
                 r_type = { `text` }
                 r_key = { `title` }
-                r_value = { data.title }
+                r_value = { data['field_card_title'] && data['field_card_title'][0]['value'] }
                 onClick = { (e) => onClickHandler(e, _fn) }
               >
-                { data.title }
+                { data['field_card_title'] && data['field_card_title'][0]['value'] }
               </h5>
               <span
                 className="text-end"
@@ -84,22 +82,22 @@ function CardSimple(props) {
             r_name = { `Card Body` }
             r_type = { `text` }
             r_key = { `body` }
-            r_value = { data.body }
+            r_value = { data['field_card_body'] && data['field_card_body'][0]['value'] }
             onClick = { (e) => onClickHandler(e, _fn) }
           >
-            { data.body }
+            { data['field_card_body'] && data['field_card_body'][0]['value'] }
           </p>
           <a
             href="#"
-            className="btn btn-primary mt-auto align-self-start"
-            r_name = { data.link && data.link.name }
+            className= { data['field_card_cta'] && data['field_card_cta'][0]['options']['attributes']['class'] }
+            r_name = { data['field_card_cta'] && data['field_card_cta'][0]['title'] }
             r_type = { `link` }
             r_key = { `link` }
-            r_value = { data.link && data.link.url }
-            r_subval = { data.link && data.link.name }
+            r_value = { data['field_card_cta'] && data['field_card_cta'][0]['uri'] }
+            r_subval = { data['field_card_cta'] && data['field_card_cta'][0]['title'] }
             onClick = { (e) => onClickHandler(e, _fn) }
           >
-            { data.link && data.link.name }
+            { data['field_card_cta'] && data['field_card_cta'][0]['title'] }
           </a>
         </div>
       </div>

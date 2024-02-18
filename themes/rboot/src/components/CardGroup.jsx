@@ -3,6 +3,8 @@ import CardSimple from './CardSimple'
 import CardSimpleBase from './CardSimpleBase'
 import CardAdvance from './CardAdvance'
 import Modal from './Modal';
+import Wrapper from './Wrapper'
+
 import { CardGroupData } from '../api/CardGroupData';
 
 import { useState, useEffect, useRef } from 'react'
@@ -110,8 +112,12 @@ function CardGroup() {
     // return (() => {return datas})
   },[itemsData]);
 
+  const attribs = ['bg-light pt-5 pb-5 shadow-sm dnd'];
+
   return (
-      <div className="bg-light pt-5 pb-5 shadow-sm dnd">
+      <>
+      <Wrapper attribs={attribs} >
+      // <div className="bg-light pt-5 pb-5 shadow-sm dnd">
         <DragDropContext onDragEnd={onDragEnd}>
         <div className="container">
           <div className="row pt-5">
@@ -172,7 +178,9 @@ function CardGroup() {
       />
 
           </DragDropContext>
-      </div>
+      // </div>
+          </Wrapper>
+      </>
   )
 }
 

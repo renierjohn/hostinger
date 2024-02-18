@@ -100,7 +100,7 @@ third_party_settings:
         - group_image
       label: 'Row Wrapper'
       parent_name: group_main_wrapper
-      region: hidden
+      region: content
       weight: 20
       format_type: html_element
       format_settings:

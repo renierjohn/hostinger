@@ -25,6 +25,9 @@ const onCloseHandler = (e, fn) => {
 }
 // FOR MODAL
 const onSaveHandler = (e, fn) => {
+
+console.log(fn)
+
   e.preventDefault()
   const modalValue = e.target.attributes.r_data.value;
   const modalSubValue = e.target.attributes.r_subval.value;

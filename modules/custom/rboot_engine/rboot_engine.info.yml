@@ -1,6 +1,6 @@
-name: RbooT Engine
+name: RBooT Engine
 type: module
-description: Provides data for drag and drop.
+description: Provides content editor to drag and drop components.
 package: Other
 core_version_requirement: ^9 || ^10
 dependencies:
