@@ -21,40 +21,41 @@ settings:
   handler: 'default:view'
   handler_settings:
     target_bundles: null
-    auto_create: 0
+    auto_create: false
   plugin_types:
     block: block
-    default: 0
-    page: 0
-    rest_export: 0
-    feed: 0
-    attachment: 0
+    default: '0'
+    page: '0'
+    rest_export: '0'
+    feed: '0'
+    attachment: '0'
   preselect_views:
     barkota_v2: barkota_v2
     routes_v2: routes_v2
-    banner: 0
-    barkota_lists: 0
-    block_content: 0
-    cocaliong: 0
-    comment: 0
-    comments_recent: 0
-    content: 0
-    dashboard: 0
-    dashboard_content: 0
-    debug: 0
-    files: 0
-    frontpage: 0
-    glossary: 0
-    messages: 0
-    myplace: 0
-    places: 0
-    product_category: 0
-    product_list_json: 0
-    product_owner: 0
-    related_places: 0
-    routes: 0
-    store: 0
-    table_routes: 0
-    user_admin_people: 0
-    watchdog: 0
+    banner: '0'
+    barkota_lists: '0'
+    block_content: '0'
+    cocaliong: '0'
+    comment: '0'
+    comments_recent: '0'
+    content: '0'
+    dashboard: '0'
+    dashboard_content: '0'
+    debug: '0'
+    files: '0'
+    frontpage: '0'
+    glossary: '0'
+    messages: '0'
+    myplace: '0'
+    places: '0'
+    product_category: '0'
+    product_list_json: '0'
+    product_owner: '0'
+    related_places: '0'
+    routes: '0'
+    store: '0'
+    table_routes: '0'
+    user_admin_people: '0'
+    watchdog: '0'
+  enabled_settings: {  }
 field_type: viewsreference

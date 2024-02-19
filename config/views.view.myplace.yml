@@ -382,7 +382,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'You Haven''t Created Yet. Please Add Place'
+            value: "You Haven't Created Yet. Please Add Place"
             format: basic_html
           tokenize: false
       sorts:
