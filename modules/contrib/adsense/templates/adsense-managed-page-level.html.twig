@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * AdSense auto ads HTML code.
+ */
+#}
+{% if not defer %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-{{ client }}"
+     crossorigin="anonymous"></script>
+{% else %}
+  {{ attach_library('adsense/adsense.adsbygoogle') }}
+{% endif %}
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-{{ client }}",
+    enable_page_level_ads: true
+  });
+</script>

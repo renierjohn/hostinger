@@ -1,0 +1,4 @@
+adsense_revenue_sharing_basic.settings:
+  route_name: adsense_revenue_sharing_basic.settings
+  title: 'Revenue Sharing'
+  base_route: adsense.main_settings

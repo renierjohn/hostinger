@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install file of the adsense_adstxt module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function adsense_adstxt_requirements($phase) {
+  $requirements = [];
+  switch ($phase) {
+    // At runtime, make sure there is no existing ads.txt.
+    case 'runtime':
+      if (file_exists(DRUPAL_ROOT . '/ads.txt')) {
+        $requirements['adstxt_file'] = [
+          'title' => t('AdSense ads.txt'),
+          'value' => t('Existing ads.txt file detected.'),
+          'description' => t('This module can only provide an auto-generated version if you remove the existing file. To keep using it, disable this module.'),
+          'severity' => REQUIREMENT_WARNING,
+        ];
+      }
+      break;
+  }
+  return $requirements;
+}

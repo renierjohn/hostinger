@@ -1,0 +1,18 @@
+adsense.css:
+  version: 1.x
+  css:
+    component:
+      css/adsense.module.css: {}
+
+adsense.unblock:
+  version: 1.x
+  js:
+    js/unblock.js: {}
+  dependencies:
+    - core/drupal
+
+adsense.adsbygoogle:
+  version: 1.x
+  header: true
+  js:
+    https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js: { type: external, minified: true, attributes: { defer: true, crossorigin: anonymous } }

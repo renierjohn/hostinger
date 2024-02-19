@@ -1,0 +1,10 @@
+name: 'Revenue sharing basic (old)'
+type: module
+description: 'Revenue sharing for the Google Adsense module'
+package: Adsense
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: adsense_revenue_sharing_basic.settings
+dependencies:
+  - adsense:adsense
+  - adsense:adsense_oldcode

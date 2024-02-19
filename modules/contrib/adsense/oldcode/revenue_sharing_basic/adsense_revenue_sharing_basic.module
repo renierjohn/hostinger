@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Main file of the adsense_revenue_sharing_basic module.
+ */
+
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+
+// @codingStandardsIgnoreStart
+define('ADSENSE_REVENUE_SHARING_BASIC_PERCENTAGE_ROLE_DEFAULT', 0);
+define('ADSENSE_REVENUE_SHARING_BASIC_NODE_TYPE_DEFAULT', 1);
+// @codingStandardsIgnoreEnd
+
+/**
+ * Interface of the Publisher ID modules.
+ *
+ * This is the function that handles the calls by the adsense core to the
+ * Publisher ID modules.
+ *
+ * @param string $op
+ *   Operation being performed, can be one of the following:
+ *   'settings' : access to this module's settings form;
+ *   'client_id': fetch the user's Publisher ID.
+ * @param string $args
+ *   For the 'client_id' operation, this can be the format of the ad being
+ *   generated, in case there is a need to return a user-configured Slot ID.
+ *
+ * @return array|string
+ *   This depends on the operation being performed:
+ *   'settings':   return array with two fields, the name field contains the
+ *                 name of this module, and the desc field a description.
+ *   'client_id' : this can be a string with the publisher ID, when the
+ *                 $args parameter wasn't defined, or an array with two
+ *                 fields, the 'slot' field for the Slot ID and the 'client'
+ *                 field for the Publisher ID
+ */
+function adsense_revenue_sharing_basic_adsense($op, $args = '') {
+  static $client_id = NULL;
+
+  switch ($op) {
+    case 'settings':
+      return [
+        'name' => 'Revenue sharing',
+        'desc' => 'DOES NOT WORK with new code ad units, such as "Managed Ads" or "Custom Search".',
+      ];
+
+    case 'client_id':
+      if (!$client_id) {
+        // We cache the client ID on this page load, to make sure all of the
+        // client IDs on one page are the same.
+        $client_id = adsense_revenue_sharing_basic_choose_client($args);
+      }
+
+      return $client_id;
+  }
+  return '';
+}
+
+/**
+ * Provide the applicable Publisher ID, based on the configured probabilities.
+ *
+ * @param string $format
+ *   Format of the ad.
+ *
+ * @return string|null
+ *   If format is set, returns NULL. Otherwise, based on the configured
+ *   percentage, returns either the Publisher ID of the current page's author
+ *   or of the owner of the site.
+ */
+function adsense_revenue_sharing_basic_choose_client($format = '') {
+  if (!empty($format)) {
+    // This module can't handle the selection of an appropriate Slot ID
+    // Give up!
+    return NULL;
+  }
+
+  $user = Drupal::currentUser();
+  $site_client = Drupal::config('adsense.settings')->get('adsense_basic_id');
+  $config = Drupal::config('adsense_revenue_sharing_basic.settings');
+
+  $info = adsense_revenue_sharing_basic_get_node_info();
+  if (empty($info) || !$config->get('node_type.' . $info['type'])) {
+    return $site_client;
+  }
+
+  $percents[0] = $config->get('percentage_author');
+
+  /** @var \Drupal\user\Entity\User $author_user */
+  $author_user = User::load($info['uid']);
+  foreach ($author_user->getRoles(TRUE) as $role) {
+    $percents[$role] = $config->get('percentage_role.' . $role);
+  }
+  arsort($percents);
+  $percent_author = array_shift($percents);
+
+  // Toss the dice and see who gets their ad displayed.
+  $random = mt_rand(1, 100);
+  if ($random <= $percent_author) {
+    $client = adsense_revenue_sharing_basic_get_profile_client_id($info['uid']);
+  }
+  else {
+    $client = $site_client;
+  }
+
+  // Last check to see that we have a valid client.
+  // Check that the current user doesn't view ads with it's own Publisher ID.
+  if ((!$client) || ($client == adsense_revenue_sharing_basic_get_profile_client_id($user->id()))) {
+    $client = $site_client;
+  }
+
+  return $client;
+}
+
+/**
+ * Provide the Publisher ID of the the specified user.
+ *
+ * @param int $uid
+ *   User ID.
+ *
+ * @return string|null
+ *   Publisher ID of the specified user in case it applies, otherwise NULL.
+ */
+function adsense_revenue_sharing_basic_get_profile_client_id($uid) {
+  $client_id = NULL;
+
+  $config = Drupal::config('adsense_revenue_sharing_basic.settings');
+
+  // Get the profile field for a certain user.
+  $profile_field = explode(':', $config->get('client_id_profile_field'));
+  if ($uid && (count($profile_field) > 1)) {
+    /** @var \Drupal\user\Entity\User $user */
+    $user = User::load($uid);
+
+    switch ($profile_field[0]) {
+      case 'field':
+        $client_id = $user->get($profile_field[1])->getString();
+        break;
+
+      case 'profile':
+        // @todo adapt this to the profile module.
+        /* @codingStandardsIgnoreStart
+        $client_id = isset($user->{$profile_field[1]}) ? $user->{$profile_field[1]} : NULL;
+        @codingStandardsIgnoreEnd */
+        break;
+    }
+  }
+
+  return $client_id;
+}
+
+/**
+ * Provide the node type and the User ID of the author of the current page.
+ *
+ * @return array|null
+ *   User ID of author, or NULL if it wasn't possible to discover one.
+ */
+function adsense_revenue_sharing_basic_get_node_info() {
+  static $info = [];
+
+  if (!$info) {
+    $node = Drupal::routeMatch()->getParameter('node');
+    /** @var \Drupal\node\NodeInterface $node */
+    if ($node instanceof NodeInterface) {
+      // Cache the results.
+      $info = [
+        'uid' => $node->getRevisionUser()->id(),
+        'type' => $node->bundle(),
+      ];
+    }
+    else {
+      return NULL;
+    }
+  }
+
+  return $info;
+}

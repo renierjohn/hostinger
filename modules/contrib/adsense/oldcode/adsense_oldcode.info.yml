@@ -1,0 +1,13 @@
+name: 'AdSense pre-2007 code'
+type: module
+description: 'Generates AdSense ad units using the pre-2007 code (deprecated by Google).'
+package: Adsense
+core_version_requirement: ^9.3 || ^10
+configure: adsense_oldcode.settings
+dependencies:
+  - adsense:adsense
+
+# Information added by Drupal.org packaging script on 2024-01-19
+version: '8.x-1.4'
+project: 'adsense'
+datestamp: 1705662872
