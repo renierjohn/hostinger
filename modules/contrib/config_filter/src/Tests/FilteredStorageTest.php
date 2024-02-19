@@ -7,9 +7,9 @@ use Drupal\config_filter\Config\FilteredStorageInterface;
 use Drupal\config_filter\Config\ReadOnlyStorage;
 use Drupal\config_filter\Config\StorageFilterInterface;
 use Drupal\config_filter\Exception\InvalidStorageFilterException;
-use Drupal\Core\Config\MemoryStorage;
+use Drupal\Core\Config\CachedStorage;
 use Drupal\Core\Config\StorageInterface;
-use Drupal\KernelTests\Core\Config\Storage\MemoryStorageTest;
+use Drupal\KernelTests\Core\Config\Storage\CachedStorageTest;
 use Prophecy\Argument;
 
 /**
@@ -17,7 +17,7 @@ use Prophecy\Argument;
  *
  * @group config_filter
  */
-class FilteredStorageTest extends MemoryStorageTest {
+class FilteredStorageTest extends CachedStorageTest {
 
   /**
    * {@inheritdoc}
@@ -44,7 +44,7 @@ class FilteredStorageTest extends MemoryStorageTest {
       $storageProperty = $readonlyReflection->getProperty('storage');
       $storageProperty->setAccessible(TRUE);
       $source = $storageProperty->getValue($readonly);
-      $this->assertInstanceOf(MemoryStorage::class, $source);
+      $this->assertInstanceOf(CachedStorage::class, $source);
 
       // Assert that the filter gets the storage.
       $this->assertEquals($this->storage, $filter->getPrivateFilteredStorage());
@@ -218,7 +218,7 @@ class FilteredStorageTest extends MemoryStorageTest {
     $interim = is_array($interim) ? $interim : [];
     $filterB->filterWrite($name, $interim)->willReturn($expected);
 
-    if (is_array($expected)) {
+    if ($expected) {
       $source->write($name, $expected)->willReturn(TRUE);
     }
     else {
@@ -242,33 +242,10 @@ class FilteredStorageTest extends MemoryStorageTest {
       [$this->randomArray(), $this->randomArray()],
       [NULL, $this->randomArray()],
       [[], $this->randomArray()],
-      [$this->randomArray(), []],
       [$this->randomArray(), NULL, FALSE],
-      [$this->randomArray(), FALSE, FALSE],
+      [$this->randomArray(), [], FALSE],
       [$this->randomArray(), NULL, TRUE],
     ];
-  }
-
-  /**
-   * Test the write method invokes the filterWrite in filters.
-   */
-  public function testWriteFilterDeleting() {
-    $name = $this->randomString();
-    $data = $this->randomArray();
-    $source = $this->prophesize(StorageInterface::class);
-    $filterA = $this->prophesizeFilter();
-    $filterB = new TransparentFilter();
-
-    $filterA->filterWrite($name, $data)->willReturn(FALSE);
-
-    $source->write(Argument::any())->shouldNotBeCalled();
-    $source->exists($name)->willReturn(TRUE);
-
-    $filterA->filterWriteEmptyIsDelete($name)->willReturn(TRUE);
-    $source->delete($name)->willReturn(TRUE);
-
-    $storage = new FilteredStorage($source->reveal(), [$filterA->reveal(), $filterB]);
-    $this->assertTrue($storage->write($name, $data));
   }
 
   /**

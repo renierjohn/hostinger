@@ -6,7 +6,7 @@ package: Testing
 dependencies:
   - config_filter:config_filter
 
-# Information added by Drupal.org packaging script on 2023-10-26
-version: '8.x-2.6'
+# Information added by Drupal.org packaging script on 2022-07-04
+version: '8.x-2.4'
 project: 'config_filter'
-datestamp: 1698308581
+datestamp: 1656936803
