@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * AdSense asynchronous managed ad HTML code.
+ */
+#}
+{% if not defer %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-{{ client }}"
+     crossorigin="anonymous"></script>
+{% else %}
+  {{ attach_library('adsense/adsense.adsbygoogle') }}
+{% endif %}
+<!-- {{ format }} -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:{{ width }}px;height:{{ height }}px"
+     data-ad-client="ca-{{ client }}"
+     data-ad-slot="{{ slot }}"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Generates an ads.txt file suitable for use with Google AdSense.
+ *
+ * This is the core module of the AdSense ads.txt submodule, with the Drupal
+ * hooks and other administrative functions.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function adsense_adstxt_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.adsense_adstxt':
+      $url = Url::fromUri('https://iabtechlab.com/ads-txt');
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module creates an ads.txt file compliant with the <a href="@link">ads.txt specification</a>.', ['@link' => $url->toString()]) . '</p>';
+  }
+  return $output;
+}

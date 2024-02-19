@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * AdSense CSE v1 (with watermark) search box HTML code.
+ */
+#}
+<script type="text/javascript">
+<!--
+drupal_adsense_cse_lang = '{{ language }}';
+//-->
+</script>
+<form action="{{ results_path }}" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-{{ client }}:{{ slot }}" />
+    <input type="hidden" name="cof" value="FORID:{{ forid }}" />
+    <input type="hidden" name="ie" value="{{ encoding }}" />
+    <input type="text" name="q" size="{{ qsize }}" />
+    <input type="submit" name="sa" value="{{ search }}" />
+  </div>
+</form>
+<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang={{ language }}">

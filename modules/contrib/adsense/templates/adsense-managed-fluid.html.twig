@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * AdSense fluid managed ad HTML code.
+ */
+#}
+{% if not defer %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-{{ client }}"
+     crossorigin="anonymous"></script>
+{% else %}
+  {{ attach_library('adsense/adsense.adsbygoogle') }}
+{% endif %}
+<ins class="adsbygoogle"
+     style="{{ style }}"
+     {% if not layout_key %}
+     data-ad-layout="{{ format }}"
+     {% endif %}
+     data-ad-format="fluid"
+     {% if layout_key %}
+     data-ad-layout-key="{{ layout_key }}"
+     {% endif %}
+     data-ad-client="ca-{{ client }}"
+     data-ad-slot="{{ slot }}"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

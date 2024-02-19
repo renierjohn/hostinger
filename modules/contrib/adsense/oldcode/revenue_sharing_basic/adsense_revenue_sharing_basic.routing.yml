@@ -1,0 +1,7 @@
+adsense_revenue_sharing_basic.settings:
+  path: '/admin/config/services/adsense/publisher/revenue_sharing_basic'
+  defaults:
+    _title: 'Revenue Sharing'
+    _form: '\Drupal\adsense_revenue_sharing_basic\Form\AdsenseRevenueSharingBasicSettings'
+  requirements:
+    _permission: 'administer adsense'

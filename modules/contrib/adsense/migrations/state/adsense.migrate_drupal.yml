@@ -1,0 +1,12 @@
+# @file
+# Detail the upgrade support for Drupal 6 and 7 modules to Drupal 8.
+
+# This file will be kept current as changes are made.
+
+not_finished:
+  6:
+    # Missing both the settings migration and the block migration.
+    adsense: adsense
+  7:
+    # Missing the block migration.
+    adsense: adsense

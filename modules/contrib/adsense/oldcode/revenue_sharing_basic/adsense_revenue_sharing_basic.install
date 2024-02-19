@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install file of the adsense_revenue_sharing_basic module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function adsense_revenue_sharing_basic_requirements($phase) {
+  $requirements = [];
+  $t = 't';
+  switch ($phase) {
+    // At runtime, make sure that we have a publisher ID.
+    case 'runtime':
+      if (Drupal::moduleHandler()->moduleExists('page_cache') || Drupal::moduleHandler()->moduleExists('dynamic_page_cache')) {
+        $requirements['revenue_sharing_nocache'] = [
+          'title' => $t('Revenue Sharing'),
+          'value' => $t('Drupal page cache is enabled.'),
+          'description' => $t('This causes conflicts with revenue sharing, since the pages are stored in the cache and are not dynamically generated. If you experience issues with revenue sharing, then disable the page cache modules.'),
+          'severity' => REQUIREMENT_WARNING,
+        ];
+      }
+      break;
+  }
+  return $requirements;
+}

@@ -1,0 +1,30 @@
+adsense_revenue_sharing_basic.settings:
+  type: config_object
+  label: 'AdSense Revenue sharing basic settings'
+  mapping:
+    client_id_profile_field:
+      type: string
+      label: 'Google AdSense client ID profile field'
+    percentage_author:
+      type: integer
+      label: 'Percentage of node views going to author'
+    percentage_role:
+      type: mapping
+      label: 'Percentage of node views going to author with the following roles'
+      mapping:
+        id:
+          type: string
+          label: 'Role ID'
+        value:
+          type: integer
+          label: 'Percentage for authors with respective role'
+    node_type:
+      type: mapping
+      label: 'Enable revenue sharing for selected content types'
+      mapping:
+        id:
+          type: string
+          label: 'Node type'
+        value:
+          type: boolean
+          label: 'Revenue sharing activation flag'

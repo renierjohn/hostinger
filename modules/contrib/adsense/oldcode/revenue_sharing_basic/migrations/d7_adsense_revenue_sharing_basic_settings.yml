@@ -1,0 +1,21 @@
+id: d7_adsense_revenue_sharing_basic_settings
+label: AdSense revenue sharing basic configuration
+migration_tags:
+  - Drupal 7
+  - Configuration
+source:
+  plugin: variable
+  variables:
+    - revenue_sharing_basic_client_id_profile_field
+    - revenue_sharing_basic_percentage_author
+#   - revenue_sharing_basic_percentage_role_*
+#   - revenue_sharing_basic_node_type_*
+  source_module: adsense_revenue_sharing_basic
+process:
+  client_id_profile_field: revenue_sharing_basic_client_id_profile_field
+  percentage_author: revenue_sharing_basic_percentage_author
+# percentage_role: revenue_sharing_basic_percentage_role_*
+# node_type: revenue_sharing_basic_node_type_*
+destination:
+  plugin: config
+  config_name: adsense_revenue_sharing_basic.settings
